@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Berber Randevu">
+<title>Berber Randevu</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#0b1220;--muted:#667085;--line:#e6e9ef;--primary:#0b1220;--soft:#eef2f6;--ok:#14804a;--danger:#b42318;--warn:#b54708;--r:18px;}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 100px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:0 6px 22px rgba(15,23,42,.05)}
+.brand{font-size:28px;font-weight:900;letter-spacing:-.03em}
+.muted{color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center}
+.between{justify-content:space-between}
+.grid{display:grid;gap:12px}
+.grid2{grid-template-columns:1fr 1fr}
+label{display:grid;gap:6px;font-size:13px;font-weight:750;color:#344054}
+input,select,textarea{width:100%;padding:13px 12px;border:1px solid #d0d5dd;border-radius:13px;background:white;color:var(--ink)}
+textarea{min-height:78px;resize:vertical}
+.btn{border:0;border-radius:13px;padding:13px 15px;font-weight:800;background:var(--soft);color:var(--ink)}
+.btn.primary{background:var(--primary);color:#fff}
+.btn.ok{background:#e9f7ef;color:var(--ok)}
+.btn.danger{background:#fff0ee;color:var(--danger)}
+.btn.warn{background:#fff4e5;color:var(--warn)}
+.btn.small{padding:9px 11px;font-size:13px}
+.auth{min-height:100dvh;display:grid;place-items:center;padding:22px}
+.auth .card{width:min(100%,440px)}
+.top{position:sticky;top:0;z-index:20;background:rgba(244,246,248,.9);backdrop-filter:blur(16px);padding:12px 0 10px}
+.top h1{font-size:23px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:13px}
+.stat b{display:block;font-size:22px}
+.slot{background:white;border:1px solid var(--line);border-radius:15px;padding:13px;display:grid;gap:9px}
+.slot.break{background:#f8fafc}
+.slot .time{font-weight:900;font-size:15px}
+.slot .name{font-weight:850}
+.badge{display:inline-flex;width:max-content;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:800;background:var(--soft)}
+.badge.completed{background:#e9f7ef;color:var(--ok)}
+.badge.no_show,.badge.cancelled{background:#fff0ee;color:var(--danger)}
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:30;width:min(100%,760px);background:rgba(255,255,255,.96);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+.nav button{border:0;background:transparent;padding:10px 2px;font-size:11px;font-weight:800;color:#667085}
+.nav button.active{color:#0b1220}
+.fab{position:fixed;right:max(18px,calc((100vw - 760px)/2 + 18px));bottom:86px;border:0;border-radius:50%;width:58px;height:58px;background:#0b1220;color:#fff;font-size:28px;box-shadow:0 10px 30px rgba(15,23,42,.25)}
+.page{display:none}
+.page.active{display:block}
+.section-title{font-size:18px;font-weight:900;margin:20px 0 10px}
+.list{display:grid;gap:10px}
+.person{background:white;border:1px solid var(--line);border-radius:15px;padding:13px}
+dialog{border:0;padding:0;background:transparent;width:min(calc(100% - 20px),620px);max-height:92dvh}
+dialog::backdrop{background:rgba(15,23,42,.52);backdrop-filter:blur(3px)}
+.sheet{background:white;border-radius:22px;padding:18px;max-height:92dvh;overflow:auto}
+.sheet h2{margin:0 0 14px}
+.service{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);padding:12px;border-radius:13px}
+.service input{width:auto}
+.notice{border-radius:14px;padding:12px;background:#fffaeb;color:#7a2e0e;font-size:13px}
+.success{background:#ecfdf3;color:#067647}
+.error{background:#fef3f2;color:#b42318}
+.weekday{background:white;border:1px solid var(--line);border-radius:15px;padding:14px}
+.report{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.big{font-size:28px;font-weight:950}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+@media(max-width:520px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr 1fr}}
+@media print{.nav,.fab,.top .toolbar,.no-print{display:none!important}body{background:white}.wrap{padding:0;max-width:none}.card,.slot,.weekday{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<section id="authView" class="auth">
+  <div class="card grid">
+    <div>
+      <div class="brand">✂️ Berber Randevu</div>
+      <div class="muted" style="margin-top:6px">Randevu, tıraş kaydı ve ücret takibi</div>
+    </div>
+    <div id="authMsg" class="notice hidden"></div>
+    <form id="loginForm" class="grid">
+      <label>E-posta<input id="loginEmail" type="email" autocomplete="email" required></label>
+      <label>Şifre<input id="loginPassword" type="password" autocomplete="current-password" minlength="6" required></label>
+      <button class="btn primary" type="submit">Giriş Yap</button>
+      <button class="btn" id="signupBtn" type="button">İlk Hesabı Oluştur</button>
+    </form>
+  </div>
+</section>
+
+<section id="claimView" class="auth hidden">
+  <div class="card grid">
+    <div>
+      <div class="brand">Yönetici Kurulumu</div>
+      <div class="muted" style="margin-top:6px">Bu hesap henüz Berber Randevu sistemine yetkili değil.</div>
+    </div>
+    <div class="notice">ChatGPT'nin sana verdiği tek kullanımlık kurulum kodunu gir.</div>
+    <label>Kurulum Kodu<input id="claimCode" autocapitalize="characters" autocomplete="off"></label>
+    <button id="claimBtn" class="btn primary">Yönetici Olarak Etkinleştir</button>
+    <button id="claimLogout" class="btn">Çıkış Yap</button>
+    <div id="claimMsg" class="notice hidden"></div>
+  </div>
+</section>
+
+<div id="appView" class="hidden">
+<div class="wrap">
+  <header class="top">
+    <div class="row between">
+      <div>
+        <h1 id="pageTitle">Bugün</h1>
+        <div id="dateLabel" class="muted"></div>
+      </div>
+      <div class="toolbar">
+        <button id="shareBtn" class="btn small">Paylaş</button>
+        <button id="logoutBtn" class="btn small">Çıkış</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="homePage" class="page active">
+      <div class="stats">
+        <div class="stat"><span class="muted">Randevu</span><b id="stTotal">0</b></div>
+        <div class="stat"><span class="muted">Tamam</span><b id="stDone">0</b></div>
+        <div class="stat"><span class="muted">Toplam</span><b id="stMoney">0 ₺</b></div>
+      </div>
+      <div class="row between no-print" style="margin:8px 0 12px">
+        <button id="prevDay" class="btn small">‹ Önceki</button>
+        <input id="dayPicker" type="date" style="max-width:180px">
+        <button id="nextDay" class="btn small">Sonraki ›</button>
+      </div>
+      <div id="schedule" class="list"></div>
+    </section>
+
+    <section id="weekPage" class="page">
+      <div class="card no-print">
+        <label>Haftanın içindeki bir gün<input id="weekPicker" type="date"></label>
+      </div>
+      <div id="weekList" class="list" style="margin-top:12px"></div>
+    </section>
+
+    <section id="recordsPage" class="page">
+      <div class="card no-print grid">
+        <label>Kayıtlarda ara<input id="recordSearch" placeholder="Ad soyad, rütbe veya birlik"></label>
+        <div class="toolbar">
+          <button id="csvBtn" class="btn small">CSV İndir</button>
+          <button id="printBtn" class="btn small">PDF / Yazdır</button>
+        </div>
+      </div>
+      <div id="recordList" class="list" style="margin-top:12px"></div>
+    </section>
+
+    <section id="reportPage" class="page">
+      <div class="card grid no-print">
+        <div class="grid grid2">
+          <label>Başlangıç<input id="repStart" type="date"></label>
+          <label>Bitiş<input id="repEnd" type="date"></label>
+        </div>
+        <button id="runReport" class="btn primary">Raporu Oluştur</button>
+      </div>
+      <div id="reportOut" class="card" style="margin-top:12px"></div>
+    </section>
+
+    <section id="settingsPage" class="page">
+      <div class="section-title">İşlem ve Fiyatlar</div>
+      <div id="serviceSettings" class="list"></div>
+      <div class="section-title">Rütbeler</div>
+      <div id="rankSettings" class="card"></div>
+    </section>
+  </main>
+</div>
+
+<button id="fab" class="fab">+</button>
+
+<nav class="nav">
+  <button class="active" data-page="homePage">Bugün</button>
+  <button data-page="weekPage">Hafta</button>
+  <button data-page="recordsPage">Kayıtlar</button>
+  <button data-page="reportPage">Rapor</button>
+  <button data-page="settingsPage">Ayarlar</button>
+</nav>
+</div>
+
+<dialog id="appointmentDialog">
+  <div class="sheet">
+    <div class="row between">
+      <h2>Yeni Randevu</h2>
+      <button id="closeDialog" class="btn small">Kapat</button>
+    </div>
+    <form id="appointmentForm" class="grid">
+      <div class="grid grid2">
+        <label>Rütbe<select id="rankSelect" required></select></label>
+        <label>Adı Soyadı<input id="personName" required autocomplete="off"></label>
+      </div>
+      <label>Birliği<input id="unitName" autocomplete="off"></label>
+      <div class="grid grid2">
+        <label>Tarih<input id="apptDate" type="date" required></label>
+        <label>Saat<select id="slotSelect" required></select></label>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:800;margin-bottom:7px">İşlem</div>
+        <div id="servicesBox" class="grid"></div>
+      </div>
+      <label>Açıklama<textarea id="notes"></textarea></label>
+      <div class="row between">
+        <b>Toplam</b><span id="newTotal" class="big">0 ₺</span>
+      </div>
+      <button class="btn primary" type="submit">Randevuyu Kaydet</button>
+      <div id="formMsg" class="notice hidden"></div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="detailDialog">
+  <div class="sheet">
+    <div class="row between">
+      <h2>Randevu</h2>
+      <button id="closeDetail" class="btn small">Kapat</button>
+    </div>
+    <div id="detailBody"></div>
+  </div>
+</dialog>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://styxdbndyzkbawwrthzw.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_l2qxOCeQoVcSDFhY6tBkrg_nxNBqkWM';
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const $ = id => document.getElementById(id);
+const state = {user:null, ranks:[], groups:[], services:[], slots:[], appointments:[], people:[], records:[], selectedDate:''};
+const trMoney = n => new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(Number(n||0));
+const isoDate = d => { const x=new Date(d); x.setMinutes(x.getMinutes()-x.getTimezoneOffset()); return x.toISOString().slice(0,10); };
+const today = () => isoDate(new Date());
+const trDate = s => new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(s+'T12:00:00'));
+const time5 = t => (t||'').slice(0,5);
+const statusName = s => ({scheduled:'Bekliyor',arrived:'Geldi',in_service:'İşlemde',completed:'Tamamlandı',no_show:'Gelmedi',cancelled:'İptal'}[s]||s);
+
+function msg(el,text,type=''){ el.textContent=text; el.className='notice '+type; el.classList.remove('hidden'); }
+function hideMsg(el){el.classList.add('hidden')}
+
+async function init(){
+  state.selectedDate=today();
+  $('dayPicker').value=state.selectedDate;
+  $('weekPicker').value=state.selectedDate;
+  $('repStart').value=state.selectedDate.slice(0,8)+'01';
+  $('repEnd').value=state.selectedDate;
+  const {data:{session}}=await db.auth.getSession();
+  if(session) await enter(session.user);
+  db.auth.onAuthStateChange(async (_e,s)=>{ if(s?.user) await enter(s.user); else showAuth(); });
+  bind();
+}
+
+async function enter(user){
+  state.user=user;
+  const {data,error}=await db.from('app_members').select('user_id,role,active').eq('user_id',user.id).maybeSingle();
+  if(error) console.error(error);
+  if(!data?.active){
+    $('authView').classList.add('hidden'); $('appView').classList.add('hidden'); $('claimView').classList.remove('hidden'); return;
+  }
+  $('authView').classList.add('hidden'); $('claimView').classList.add('hidden'); $('appView').classList.remove('hidden');
+  await loadBase();
+  await loadDay();
+  await loadWeek();
+  await loadRecords();
+  renderSettings();
+}
+
+function showAuth(){
+  state.user=null;
+  $('appView').classList.add('hidden'); $('claimView').classList.add('hidden'); $('authView').classList.remove('hidden');
+}
+
+async function loadBase(){
+  const [ranks,groups,services,slots]=await Promise.all([
+    db.from('ranks').select('*').eq('active',true).order('sort_order'),
+    db.from('rank_groups').select('*').eq('active',true).order('sort_order'),
+    db.from('service_items').select('*').eq('active',true).order('sort_order'),
+    db.from('weekly_slots').select('*').eq('active',true).order('day_of_week').order('sort_order')
+  ]);
+  if(ranks.error||groups.error||services.error||slots.error) throw new Error('Temel veriler alınamadı');
+  state.ranks=ranks.data||[]; state.groups=groups.data||[]; state.services=services.data||[]; state.slots=slots.data||[];
+  fillRankSelect(); fillServices();
+}
+
+function rankLabel(id){
+  const r=state.ranks.find(x=>x.id===id); return r ? (r.abbreviation||r.name) : '';
+}
+function groupName(id){ return state.groups.find(g=>g.id===id)?.name||''; }
+
+function fillRankSelect(){
+  $('rankSelect').innerHTML=state.groups.map(g=>`<optgroup label="${g.name}">${state.ranks.filter(r=>r.group_id===g.id).map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}</optgroup>`).join('');
+}
+function fillServices(){
+  $('servicesBox').innerHTML=state.services.map(s=>`<label class="service"><span><input type="checkbox" class="svc" value="${s.id}" data-price="${s.current_price}"> ${s.name}</span><b>${trMoney(s.current_price)}</b></label>`).join('');
+  document.querySelectorAll('.svc').forEach(x=>x.addEventListener('change',calcNewTotal));
+}
+function calcNewTotal(){
+  const n=[...document.querySelectorAll('.svc:checked')].reduce((a,x)=>a+Number(x.dataset.price),0); $('newTotal').textContent=trMoney(n);
+}
+
+function dayOfWeek(dateStr){ const d=new Date(dateStr+'T12:00:00').getDay(); return d===0?7:d; }
+function availableSlots(dateStr){
+  return state.slots.filter(s=>s.day_of_week===dayOfWeek(dateStr));
+}
+function fillSlotSelect(dateStr,preferred=''){
+  const booked=new Set(state.appointments.filter(a=>a.appointment_date===dateStr && a.status!=='cancelled' && !a.deleted_at).map(a=>time5(a.start_time)));
+  $('slotSelect').innerHTML=availableSlots(dateStr).map(s=>{
+    const t=time5(s.start_time), isAppt=s.slot_type==='appointment', isBooked=booked.has(t);
+    const disabled=!isAppt||isBooked;
+    const label=isAppt?(isBooked?`${t} – DOLU`:`${t} – ${time5(s.end_time)}`):`${t} – ${s.label||s.slot_type}`;
+    return `<option value="${t}" data-end="${time5(s.end_time)}" ${disabled?'disabled':''} ${preferred===t?'selected':''}>${label}</option>`;
+  }).join('');
+}
+
+async function loadDay(){
+  $('dateLabel').textContent=trDate(state.selectedDate); $('dayPicker').value=state.selectedDate;
+  const {data,error}=await db.from('appointments')
+    .select('*,people(id,full_name,unit_name,rank_id),appointment_services(id,quantity,unit_price,line_total,service_id,service_items(name))')
+    .eq('appointment_date',state.selectedDate).is('deleted_at',null).order('start_time');
+  if(error){console.error(error); return;}
+  state.appointments=data||[];
+  renderDay();
+}
+
+function renderDay(){
+  const a=state.appointments.filter(x=>x.status!=='cancelled');
+  $('stTotal').textContent=a.length;
+  $('stDone').textContent=a.filter(x=>x.status==='completed').length;
+  $('stMoney').textContent=trMoney(a.filter(x=>x.status==='completed').reduce((s,x)=>s+Number(x.total_amount||0),0));
+  const apptByTime=new Map(state.appointments.map(x=>[time5(x.start_time),x]));
+  const slots=availableSlots(state.selectedDate);
+  $('schedule').innerHTML=slots.map(s=>{
+    const t=time5(s.start_time);
+    if(s.slot_type!=='appointment') return `<div class="slot break"><div class="time">${t} – ${time5(s.end_time)}</div><div class="name">${s.label||s.slot_type}</div></div>`;
+    const x=apptByTime.get(t);
+    if(!x) return `<button class="slot" data-empty="${t}" style="text-align:left"><div class="time">${t} – ${time5(s.end_time)}</div><div class="muted">+ Boş randevu</div></button>`;
+    const p=x.people||{};
+    return `<button class="slot" data-id="${x.id}" style="text-align:left">
+      <div class="row between"><div class="time">${t} – ${time5(x.end_time)}</div><span class="badge ${x.status}">${statusName(x.status)}</span></div>
+      <div class="name">${rankLabel(p.rank_id)} ${p.full_name||''}</div>
+      <div class="row between"><span class="muted">${p.unit_name||''}</span><b>${trMoney(x.total_amount)}</b></div>
+    </button>`;
+  }).join('');
+  document.querySelectorAll('[data-empty]').forEach(b=>b.onclick=()=>openNew(b.dataset.empty));
+  document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>openDetail(b.dataset.id));
+}
+
+function openNew(time=''){
+  $('appointmentForm').reset(); hideMsg($('formMsg'));
+  $('apptDate').value=state.selectedDate; fillSlotSelect(state.selectedDate,time); fillServices(); calcNewTotal();
+  $('appointmentDialog').showModal();
+}
+
+async function saveAppointment(e){
+  e.preventDefault(); hideMsg($('formMsg'));
+  const name=$('personName').value.trim(), unit=$('unitName').value.trim(), rank_id=Number($('rankSelect').value);
+  const date=$('apptDate').value, start=$('slotSelect').value;
+  if(!name||!date||!start) return msg($('formMsg'),'Eksik bilgi var.','error');
+  const opt=$('slotSelect').selectedOptions[0], end=opt?.dataset.end;
+  const selected=[...document.querySelectorAll('.svc:checked')];
+  if(!selected.length) return msg($('formMsg'),'En az bir işlem seç.','error');
+
+  let {data:people,error:pe}=await db.from('people').select('id').ilike('full_name',name).is('deleted_at',null).limit(1);
+  if(pe) return msg($('formMsg'),pe.message,'error');
+  let personId=people?.[0]?.id;
+  if(!personId){
+    const ins=await db.from('people').insert({full_name:name,unit_name:unit||null,rank_id,created_by:state.user.id}).select('id').single();
+    if(ins.error) return msg($('formMsg'),ins.error.message,'error'); personId=ins.data.id;
+  } else {
+    await db.from('people').update({rank_id,unit_name:unit||null}).eq('id',personId);
+  }
+  const ins=await db.from('appointments').insert({person_id:personId,appointment_date:date,start_time:start,end_time:end,status:'scheduled',notes:$('notes').value.trim()||null,created_by:state.user.id}).select('id').single();
+  if(ins.error) return msg($('formMsg'),ins.error.message.includes('duplicate')?'Bu saat dolu.':ins.error.message,'error');
+  const rows=selected.map(x=>({appointment_id:ins.data.id,service_id:x.value,quantity:1,unit_price:Number(x.dataset.price)}));
+  const srv=await db.from('appointment_services').insert(rows);
+  if(srv.error) return msg($('formMsg'),srv.error.message,'error');
+  $('appointmentDialog').close(); state.selectedDate=date; await loadDay(); await loadWeek(); await loadRecords();
+}
+
+function openDetail(id){
+  const x=state.appointments.find(a=>a.id===id); if(!x)return;
+  const p=x.people||{}, sv=(x.appointment_services||[]).map(s=>s.service_items?.name||'İşlem').join(', ');
+  $('detailBody').innerHTML=`<div class="grid">
+    <div class="card"><div class="big" style="font-size:22px">${rankLabel(p.rank_id)} ${p.full_name||''}</div><div class="muted">${p.unit_name||''}</div></div>
+    <div><b>${x.appointment_date} · ${time5(x.start_time)}–${time5(x.end_time)}</b></div>
+    <div>${sv}</div><div class="big">${trMoney(x.total_amount)}</div>
+    <label class="service"><span>İmza alındı</span><input id="sigCheck" type="checkbox" ${x.signature_received?'checked':''}></label>
+    <div class="toolbar">
+      <button class="btn ok" data-act="complete">✓ Tıraş Tamamlandı</button>
+      <button class="btn" data-act="paid">₺ Ödendi</button>
+      <button class="btn warn" data-act="no_show">Gelmedi</button>
+      <button class="btn danger" data-act="cancelled">İptal</button>
+    </div>
+    <div class="muted">${x.notes||''}</div>
+  </div>`;
+  $('sigCheck').onchange=async e=>{await db.from('appointments').update({signature_received:e.target.checked}).eq('id',id); await loadDay();};
+  $('detailBody').querySelectorAll('[data-act]').forEach(b=>b.onclick=async()=>{
+    const act=b.dataset.act;
+    let patch={};
+    if(act==='complete') patch={status:'completed',completed_at:new Date().toISOString()};
+    if(act==='paid') patch={payment_status:'paid',payment_method:'cash',amount_paid:Number(x.total_amount||0)};
+    if(act==='no_show') patch={status:'no_show'};
+    if(act==='cancelled') patch={status:'cancelled'};
+    const u=await db.from('appointments').update(patch).eq('id',id); if(u.error) alert(u.error.message);
+    $('detailDialog').close(); await loadDay(); await loadWeek(); await loadRecords();
+  });
+  $('detailDialog').showModal();
+}
+
+async function loadWeek(){
+  const pivot=$('weekPicker').value||state.selectedDate;
+  const d=new Date(pivot+'T12:00:00'), js=d.getDay(), diff=(js===0?-6:1-js);
+  const mon=new Date(d); mon.setDate(d.getDate()+diff);
+  const dates=[0,1,2,3,4].map(i=>{const x=new Date(mon);x.setDate(mon.getDate()+i);return isoDate(x)});
+  const q=await db.from('appointments').select('appointment_date,status,total_amount').gte('appointment_date',dates[0]).lte('appointment_date',dates[4]).is('deleted_at',null);
+  const arr=q.data||[];
+  $('weekList').innerHTML=dates.map(date=>{
+    const a=arr.filter(x=>x.appointment_date===date&&x.status!=='cancelled');
+    return `<button class="weekday" data-weekdate="${date}" style="text-align:left"><div class="row between"><b>${trDate(date)}</b><span>${a.length} randevu</span></div><div class="muted">${a.filter(x=>x.status==='completed').length} tamamlandı · ${trMoney(a.filter(x=>x.status==='completed').reduce((s,x)=>s+Number(x.total_amount||0),0))}</div></button>`;
+  }).join('');
+  document.querySelectorAll('[data-weekdate]').forEach(b=>b.onclick=()=>{state.selectedDate=b.dataset.weekdate;switchPage('homePage');loadDay();});
+}
+
+async function loadRecords(){
+  const q=await db.from('appointments')
+    .select('*,people(full_name,unit_name,rank_id),appointment_services(service_items(name))')
+    .is('deleted_at',null).order('appointment_date',{ascending:false}).order('start_time',{ascending:false}).limit(500);
+  state.records=q.data||[]; renderRecords();
+}
+function renderRecords(){
+  const term=$('recordSearch').value.trim().toLocaleLowerCase('tr-TR');
+  const arr=state.records.filter(x=>{
+    const p=x.people||{}, r=rankLabel(p.rank_id);
+    return !term || `${p.full_name||''} ${p.unit_name||''} ${r}`.toLocaleLowerCase('tr-TR').includes(term);
+  });
+  $('recordList').innerHTML=arr.map(x=>{
+    const p=x.people||{}; return `<div class="person"><div class="row between"><b>${rankLabel(p.rank_id)} ${p.full_name||''}</b><span class="badge ${x.status}">${statusName(x.status)}</span></div><div class="muted">${x.appointment_date} · ${time5(x.start_time)} · ${p.unit_name||''}</div><div class="row between" style="margin-top:6px"><span>${(x.appointment_services||[]).map(s=>s.service_items?.name||'').join(', ')}</span><b>${trMoney(x.total_amount)}</b></div></div>`;
+  }).join('')||'<div class="card muted">Kayıt bulunamadı.</div>';
+}
+
+async function runReport(){
+  const a=$('repStart').value,b=$('repEnd').value;
+  const q=await db.from('appointments').select('status,total_amount,payment_status,appointment_services(service_id,service_items(name))').gte('appointment_date',a).lte('appointment_date',b).is('deleted_at',null);
+  if(q.error)return alert(q.error.message);
+  const x=q.data||[], valid=x.filter(i=>i.status!=='cancelled'), done=valid.filter(i=>i.status==='completed');
+  const counts={};
+  done.forEach(i=>(i.appointment_services||[]).forEach(s=>{const n=s.service_items?.name||'İşlem';counts[n]=(counts[n]||0)+1;}));
+  $('reportOut').innerHTML=`<div class="report">
+    <div><span class="muted">Randevu</span><div class="big">${valid.length}</div></div>
+    <div><span class="muted">Tamamlanan</span><div class="big">${done.length}</div></div>
+    <div><span class="muted">Gelmedi</span><div class="big">${valid.filter(i=>i.status==='no_show').length}</div></div>
+    <div><span class="muted">Toplam İşlem</span><div class="big">${trMoney(done.reduce((s,i)=>s+Number(i.total_amount||0),0))}</div></div>
+  </div><hr>${Object.entries(counts).map(([k,v])=>`<div class="row between"><span>${k}</span><b>${v}</b></div>`).join('')}`;
+}
+
+function renderSettings(){
+  $('serviceSettings').innerHTML=state.services.map(s=>`<div class="card row between"><div><b>${s.name}</b><div class="muted">Güncel fiyat</div></div><div class="row"><input data-priceid="${s.id}" type="number" min="0" step="1" value="${Number(s.current_price)} " style="width:100px"><button class="btn small" data-saveprice="${s.id}">Kaydet</button></div></div>`).join('');
+  document.querySelectorAll('[data-saveprice]').forEach(b=>b.onclick=async()=>{
+    const id=b.dataset.saveprice, inp=document.querySelector(`[data-priceid="${id}"]`), val=Number(inp.value);
+    const u=await db.from('service_items').update({current_price:val}).eq('id',id); if(u.error)alert(u.error.message); else {await loadBase();renderSettings();alert('Fiyat güncellendi.');}
+  });
+  $('rankSettings').innerHTML=state.groups.map(g=>`<div style="margin-bottom:12px"><b>${g.name}</b><div class="muted">${state.ranks.filter(r=>r.group_id===g.id).map(r=>r.name).join(' · ')}</div></div>`).join('');
+}
+
+async function shareDay(){
+  const lines=state.appointments.filter(x=>x.status!=='cancelled').sort((a,b)=>a.start_time.localeCompare(b.start_time)).map(x=>`${time5(x.start_time)} – ${rankLabel(x.people?.rank_id)} ${x.people?.full_name||''}`);
+  const text=`BERBER RANDEVU LİSTESİ\n${trDate(state.selectedDate).toLocaleUpperCase('tr-TR')}\n\n${lines.join('\n')}`;
+  if(navigator.share) await navigator.share({title:'Berber Randevu Listesi',text}); else {await navigator.clipboard.writeText(text);alert('Liste panoya kopyalandı.');}
+}
+
+function exportCsv(){
+  const rows=[['Tarih','Saat','Rütbe','Ad Soyad','Birlik','Durum','Tutar']];
+  state.records.forEach(x=>rows.push([x.appointment_date,time5(x.start_time),rankLabel(x.people?.rank_id),x.people?.full_name||'',x.people?.unit_name||'',statusName(x.status),x.total_amount||0]));
+  const csv='\ufeff'+rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(';')).join('\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})), a=document.createElement('a'); a.href=url;a.download='berber-kayitlari.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function switchPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+  const titles={homePage:'Bugün',weekPage:'Haftalık Plan',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar'};
+  $('pageTitle').textContent=titles[id]||'Berber Randevu';
+  $('fab').classList.toggle('hidden',id!=='homePage');
+  if(id==='weekPage')loadWeek(); if(id==='recordsPage')loadRecords();
+}
+
+function bind(){
+  $('loginForm').onsubmit=async e=>{e.preventDefault();hideMsg($('authMsg'));const r=await db.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});if(r.error)msg($('authMsg'),r.error.message,'error');};
+  $('signupBtn').onclick=async()=>{hideMsg($('authMsg'));const email=$('loginEmail').value.trim(),password=$('loginPassword').value;if(!email||password.length<6)return msg($('authMsg'),'E-posta ve en az 6 karakterli şifre gir.','error');const r=await db.auth.signUp({email,password});if(r.error)msg($('authMsg'),r.error.message,'error');else if(r.data.session) await enter(r.data.user); else msg($('authMsg'),'Hesap oluşturuldu. E-postana doğrulama geldiyse onayla, sonra giriş yap.','success');};
+  $('claimBtn').onclick=async()=>{hideMsg($('claimMsg'));const r=await db.rpc('bootstrap_admin',{claim_code:$('claimCode').value.trim()});if(r.error)msg($('claimMsg'),'Kod kabul edilmedi: '+r.error.message,'error');else {msg($('claimMsg'),'Yönetici hesabı etkinleştirildi.','success');setTimeout(()=>enter(state.user),500);}};
+  $('claimLogout').onclick=()=>db.auth.signOut();
+  $('logoutBtn').onclick=()=>db.auth.signOut();
+  $('fab').onclick=()=>openNew();
+  $('closeDialog').onclick=()=>$('appointmentDialog').close();
+  $('closeDetail').onclick=()=>$('detailDialog').close();
+  $('appointmentForm').onsubmit=saveAppointment;
+  $('apptDate').onchange=()=>fillSlotSelect($('apptDate').value);
+  $('dayPicker').onchange=async e=>{state.selectedDate=e.target.value;await loadDay();};
+  $('prevDay').onclick=async()=>{let d=new Date(state.selectedDate+'T12:00:00');d.setDate(d.getDate()-1);state.selectedDate=isoDate(d);await loadDay();};
+  $('nextDay').onclick=async()=>{let d=new Date(state.selectedDate+'T12:00:00');d.setDate(d.getDate()+1);state.selectedDate=isoDate(d);await loadDay();};
+  $('weekPicker').onchange=loadWeek;
+  $('recordSearch').oninput=renderRecords;
+  $('runReport').onclick=runReport;
+  $('shareBtn').onclick=shareDay;
+  $('csvBtn').onclick=exportCsv;
+  $('printBtn').onclick=()=>window.print();
+  document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>switchPage(b.dataset.page));
+}
+
+init().catch(e=>{console.error(e);alert('Uygulama başlatılamadı: '+e.message);});
+</script>
+</body>
+</html>
