@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi">
+<title>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.0</title>
+<meta name="application-version" content="4.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta name="format-detection" content="telephone=no">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://styxdbndyzkbawwrthzw.supabase.co wss://styxdbndyzkbawwrthzw.supabase.co; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'self' blob:;">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#0b1220;--muted:#667085;--line:#e6e9ef;--primary:#0b1220;--soft:#eef2f6;--ok:#14804a;--danger:#b42318;--warn:#b54708;--r:18px;}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app-logo{width:64px;height:64px;border-radius:18px;display:block;box-shadow:0 10px 24px rgba(11,18,32,.18)}
+.brand-row{display:flex;align-items:center;gap:14px}
+@media (max-width:560px){.brand-row{align-items:flex-start}.app-logo{width:56px;height:56px;border-radius:16px}}
+.hidden{display:none!important}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 100px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:0 6px 22px rgba(15,23,42,.05)}
+.brand{font-size:28px;font-weight:900;letter-spacing:-.03em}
+.muted{color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center}
+.between{justify-content:space-between}
+.grid{display:grid;gap:12px}
+.grid2{grid-template-columns:1fr 1fr}
+label{display:grid;gap:6px;font-size:13px;font-weight:750;color:#344054}
+input,select,textarea{width:100%;padding:13px 12px;border:1px solid #d0d5dd;border-radius:13px;background:white;color:var(--ink)}
+textarea{min-height:78px;resize:vertical}
+.btn{border:0;border-radius:13px;padding:13px 15px;font-weight:800;background:var(--soft);color:var(--ink)}
+.btn.primary{background:var(--primary);color:#fff}
+.btn.ok{background:#e9f7ef;color:var(--ok)}
+.btn.danger{background:#fff0ee;color:var(--danger)}
+.btn.warn{background:#fff4e5;color:var(--warn)}
+.btn.small{padding:9px 11px;font-size:13px}
+.auth{min-height:100dvh;display:grid;place-items:center;padding:22px}
+.auth .card{width:min(100%,440px)}
+.top{position:sticky;top:0;z-index:20;background:rgba(244,246,248,.9);backdrop-filter:blur(16px);padding:12px 0 10px}
+.top h1{font-size:23px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:13px}
+.stat b{display:block;font-size:22px}
+.slot{background:white;border:1px solid var(--line);border-radius:15px;padding:13px;display:grid;gap:9px}
+.slot.break{background:#f8fafc}
+.slot-actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:4px}
+.slot-action{border:0;border-radius:11px;padding:10px 12px;font-weight:900;font-size:12px}
+.slot-action.book{background:#eef4ff;color:#175cd3}
+.slot-action.full{background:#e9f7ef;color:#067647;border:1px solid #abefc6}
+.slot.manual-block{border-color:#86efac;background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);box-shadow:0 6px 18px rgba(22,163,74,.10)}
+.slot.manual-block .time{color:#166534}
+.manual-full-badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:#16a34a;color:white;font-size:11px;font-weight:950}
+.slot .time{font-weight:900;font-size:15px}
+.slot .name{font-weight:850}
+.badge{display:inline-flex;width:max-content;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:800;background:var(--soft)}
+.badge.completed{background:#e9f7ef;color:var(--ok)}
+.badge.no_show,.badge.cancelled{background:#fff0ee;color:var(--danger)}
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:30;width:min(100%,760px);background:rgba(255,255,255,.96);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+.nav button{border:0;background:transparent;padding:10px 2px;font-size:11px;font-weight:800;color:#667085}
+.nav button.active{color:#0b1220}
+.fab{position:fixed;right:max(18px,calc((100vw - 760px)/2 + 18px));bottom:86px;border:0;border-radius:50%;width:58px;height:58px;background:#0b1220;color:#fff;font-size:28px;box-shadow:0 10px 30px rgba(15,23,42,.25)}
+.page{display:none}
+.page.active{display:block}
+.section-title{font-size:18px;font-weight:900;margin:20px 0 10px}
+.list{display:grid;gap:10px}
+.person{background:white;border:1px solid var(--line);border-radius:15px;padding:13px}
+dialog{border:0;padding:0;background:transparent;width:min(calc(100% - 20px),620px);max-height:92dvh}
+dialog::backdrop{background:rgba(15,23,42,.52);backdrop-filter:blur(3px)}
+.sheet{background:white;border-radius:22px;padding:18px;max-height:92dvh;overflow:auto}
+.sheet h2{margin:0 0 14px}
+.service{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);padding:12px;border-radius:13px}
+.service input{width:auto}
+.notice{border-radius:14px;padding:12px;background:#fffaeb;color:#7a2e0e;font-size:13px}
+.success{background:#ecfdf3;color:#067647}
+.error{background:#fef3f2;color:#b42318}
+.weekday{background:white;border:1px solid var(--line);border-radius:15px;padding:14px}
+.report{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.money-strip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+.money-box{background:white;border:1px solid var(--line);border-radius:15px;padding:13px}
+.money-box.paid-box{background:#f0fdf4;border-color:#bbf7d0}.money-box.paid-box b{color:#15803d}
+.money-box.unpaid-box{background:#fff7ed;border-color:#fed7aa}.money-box.unpaid-box b{color:#c2410c}
+.security-card{background:#ecfdf3;border:1px solid #abefc6;color:#067647;border-radius:15px;padding:14px}
+.danger-zone{border:1px solid #fecdca;background:#fffafa}
+.report-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.report-kpi{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}
+.report-kpi .value{font-size:26px;font-weight:950;margin-top:4px}
+.report-section{margin-top:16px}
+.report-section h3{margin:0 0 10px;font-size:17px}
+.report-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}
+.report-table{width:100%;border-collapse:collapse;min-width:560px}
+.report-table th,.report-table td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:top}
+.report-table th{background:#f8fafc;font-weight:850;color:#344054;position:sticky;top:0}
+.report-table tr:last-child td{border-bottom:0}
+.report-doc-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.report-doc-title{font-weight:950;font-size:22px}
+.emergency-card{border-color:#f5c26b;background:#fffbeb}
+.emergency-badge{background:#fff4e5;color:#b54708}
+.override-info{background:#fffaeb;color:#7a2e0e;border:1px solid #fedf89;border-radius:13px;padding:11px}
+.emergency-slot{border:1px solid #fdb022;background:linear-gradient(135deg,#fffaf0 0%,#fff2cc 100%);box-shadow:0 7px 24px rgba(245,158,11,.12)}
+.emergency-slot .time{color:#92400e}
+.emergency-slot .emergency-action{display:inline-flex;align-items:center;justify-content:center;width:max-content;margin-top:4px;padding:8px 11px;border-radius:11px;background:#f79009;color:#fff;font-size:12px;font-weight:900;box-shadow:0 5px 14px rgba(247,144,9,.22)}
+.payment-badge{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:950;white-space:nowrap;border:1px solid transparent}
+.payment-badge.paid{background:#eafaf1;color:#067647;border-color:#abefc6}
+.payment-badge.unpaid{background:#fff1e8;color:#c4320a;border-color:#f9dbaf;box-shadow:0 0 0 1px rgba(196,50,10,.02)}
+.payment-badge.free{background:#eef4ff;color:#1849a9;border-color:#b2ccff}
+.slot.payment-unpaid{border-color:#fdb022;background:linear-gradient(135deg,#fff 0%,#fff9ed 100%);box-shadow:0 6px 18px rgba(247,144,9,.10)}
+.person.payment-unpaid{border-color:#fdb022;background:linear-gradient(135deg,#fff 0%,#fff8eb 100%)}
+.slot.payment-paid{border-color:#75e0a7;background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%);box-shadow:0 6px 18px rgba(20,128,74,.09)}
+.person.payment-paid{border-color:#75e0a7;background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%)}
+.payment-strip{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px;padding-top:7px;border-top:1px dashed #e4e7ec}
+.pay-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:2px}
+.pay-action{border:1px solid #d0d5dd;border-radius:13px;padding:12px 10px;font-weight:900;background:#fff}
+.pay-action.paid{color:#067647}
+.pay-action.unpaid{color:#c4320a}
+.pay-action.paid.active{background:#eafaf1;border-color:#75e0a7;box-shadow:0 0 0 2px rgba(20,128,74,.08)}
+.pay-action.unpaid.active{background:#fff1e8;border-color:#fdb022;box-shadow:0 0 0 2px rgba(196,50,10,.07)}
+.record-filters{display:flex;gap:7px;flex-wrap:wrap}
+.record-filter{border:1px solid #d0d5dd;background:#fff;color:#475467;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:850}
+.record-filter.active{background:#0b1220;color:#fff;border-color:#0b1220}
+.record-filter.unpaid-filter.active{background:#c4320a;border-color:#c4320a}
+.record-filter.paid-filter.active{background:#14804a;border-color:#14804a}
+
+.report-shell{background:#f5f7fb;border:1px solid #dfe5ef;border-radius:22px;overflow:hidden;box-shadow:0 12px 36px rgba(15,23,42,.08)}
+.report-hero{padding:22px;background:linear-gradient(135deg,#0b1220 0%,#173b6c 56%,#2859a5 100%);color:#fff;position:relative;overflow:hidden}
+.report-hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-60px;top:-75px;background:rgba(255,255,255,.09)}
+.report-hero .eyebrow{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;opacity:.78}
+.report-hero h2{font-size:25px;line-height:1.05;margin:7px 0 7px;font-weight:950;letter-spacing:-.02em}
+.report-hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.report-chip{display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);font-size:11px;font-weight:800}
+.report-body{padding:16px}
+.report-overview{display:grid;grid-template-columns:132px 1fr;gap:12px;align-items:stretch}
+.report-ring{--pct:0;display:grid;place-items:center;min-height:132px;border-radius:18px;background:conic-gradient(#16a34a calc(var(--pct)*1%),#e8edf5 0);position:relative}
+.report-ring:after{content:"";position:absolute;inset:13px;border-radius:50%;background:#fff}
+.report-ring-content{position:relative;z-index:1;text-align:center}
+.report-ring-content b{display:block;font-size:31px;line-height:1;font-weight:950;color:#0b1220}
+.report-ring-content span{display:block;margin-top:5px;color:#667085;font-size:11px;font-weight:800}
+.report-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.report-mini{border-radius:16px;padding:13px;color:#fff;min-height:82px;display:flex;flex-direction:column;justify-content:space-between}
+.report-mini span{font-size:11px;font-weight:800;opacity:.86}
+.report-mini b{font-size:24px;line-height:1;font-weight:950}
+.report-mini.blue{background:linear-gradient(135deg,#2563eb,#3b82f6)}
+.report-mini.green{background:linear-gradient(135deg,#15803d,#22c55e)}
+.report-mini.orange{background:linear-gradient(135deg,#c2410c,#f97316)}
+.report-mini.red{background:linear-gradient(135deg,#b91c1c,#ef4444)}
+.report-finance{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.report-fin-card{border-radius:16px;padding:14px;border:1px solid #e2e8f0;background:#fff}
+.report-fin-card .label{font-size:11px;color:#667085;font-weight:800}
+.report-fin-card .amount{font-size:22px;font-weight:950;margin-top:4px}
+.report-fin-card.total{border-color:#bfdbfe;background:#eff6ff}.report-fin-card.total .amount{color:#1d4ed8}
+.report-fin-card.paid{border-color:#bbf7d0;background:#f0fdf4}.report-fin-card.paid .amount{color:#15803d}
+.report-fin-card.wait{border-color:#fed7aa;background:#fff7ed}.report-fin-card.wait .amount{color:#c2410c}
+.report-section-card{margin-top:13px;background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:15px}
+.report-section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.report-section-head h3{margin:0;font-size:16px}
+.report-section-head .hint{font-size:11px;color:#667085}
+.report-bar-list{display:grid;gap:11px}
+.report-bar-row{display:grid;gap:6px}
+.report-bar-top{display:flex;justify-content:space-between;gap:10px;font-size:12px}
+.report-bar-top b{font-size:12px}
+.report-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}
+.report-fill{height:100%;min-width:3px;border-radius:999px;background:linear-gradient(90deg,#2563eb,#60a5fa)}
+.report-fill.green{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.report-fill.orange{background:linear-gradient(90deg,#ea580c,#fb923c)}
+.report-fill.purple{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.report-insight{margin-top:13px;border-radius:17px;padding:15px;background:linear-gradient(135deg,#f0f9ff,#eef2ff);border:1px solid #c7d2fe}
+.report-insight-title{font-size:13px;font-weight:950;color:#3730a3;margin-bottom:7px}
+.report-insight ul{margin:0;padding-left:19px;color:#344054;font-size:12px;line-height:1.55}
+.report-table.pro td,.report-table.pro th{font-size:12px}
+.report-table.pro thead th{background:#0f2748;color:#fff;border-bottom:0}
+.report-table.pro tbody tr:nth-child(even){background:#f8fafc}
+.report-status{display:inline-flex;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:850}
+.report-status.good{background:#dcfce7;color:#166534}.report-status.warn{background:#ffedd5;color:#9a3412}
+.report-footer{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;color:#667085;font-size:10px}
+.big{font-size:28px;font-weight:950}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+.mfa-panel{background:linear-gradient(135deg,#eff6ff,#f5f3ff);border:1px solid #c7d2fe;border-radius:18px;padding:15px}
+.mfa-panel.ok{background:linear-gradient(135deg,#ecfdf3,#f0fdf4);border-color:#abefc6}
+.mfa-status{display:flex;align-items:center;gap:8px;font-weight:950}
+.mfa-dot{width:10px;height:10px;border-radius:50%;background:#f79009;box-shadow:0 0 0 4px rgba(247,144,9,.12)}
+.mfa-dot.ok{background:#12b76a;box-shadow:0 0 0 4px rgba(18,183,106,.12)}
+.mfa-code{font-size:24px;letter-spacing:.22em;text-align:center;font-weight:900}
+.qr-wrap{display:grid;place-items:center;padding:14px;background:#fff;border:1px solid var(--line);border-radius:16px}
+.qr-wrap img{width:min(240px,80vw);height:auto}
+.secret-box{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;background:#f8fafc;border:1px dashed #98a2b3;border-radius:12px;padding:10px;font-size:12px}
+.restore-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.restore-count{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px}
+.restore-count b{display:block;font-size:20px}
+.official-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.official-btn{background:linear-gradient(135deg,#0f2748,#2859a5);color:#fff}
+#officialPrint{display:none;background:#fff;color:#111}
+.official-doc{font-family:Arial,Helvetica,sans-serif;color:#111}
+.official-doc .od-head{text-align:center;margin-bottom:10px}
+.official-doc .od-unit{font-size:11px;font-weight:700;letter-spacing:.02em}
+.official-doc .od-title{font-size:16px;font-weight:900;margin-top:4px;text-decoration:underline}
+.official-doc .od-meta{display:flex;justify-content:space-between;gap:20px;font-size:11px;margin:12px 0 8px}
+.official-doc table{width:100%;border-collapse:collapse;table-layout:fixed}
+.official-doc th,.official-doc td{border:1px solid #111;padding:5px 5px;font-size:10px;vertical-align:middle}
+.official-doc th{font-weight:800;text-align:center;background:#eee}
+.official-doc .center{text-align:center}
+.official-doc .od-footer{margin-top:22px;display:flex;justify-content:flex-end;font-size:11px}
+.restore-warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:13px;padding:11px;font-size:12px}
+.security-line{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)}
+.security-line:last-child{border-bottom:0}
+.online-banner{display:none}
+body.offline .online-banner{display:block;position:fixed;z-index:100;left:50%;transform:translateX(-50%);top:6px;background:#b42318;color:#fff;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:900;box-shadow:0 5px 18px rgba(180,35,24,.25)}
+@media(max-width:520px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr 1fr}}
+@page{size:A4;margin:10mm}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .nav,.fab,.top,.no-print,.online-banner{display:none!important}
+  body{background:white}
+  .wrap{padding:0;max-width:none}
+  body.print-report .page{display:none!important}
+  body.print-report #reportPage{display:block!important}
+  body.print-records .page{display:none!important}
+  body.print-records #recordsPage{display:block!important}
+  body.print-official #appView{display:none!important}
+  body.print-official #authView,body.print-official #mfaView{display:none!important}
+  body.print-official #officialPrint{display:block!important}
+  .report-shell{box-shadow:none;border:0;border-radius:0}
+  .report-hero{border-radius:0}
+  .report-body{padding:12px 0}
+  .report-table-wrap{overflow:visible}
+  .report-table{min-width:0}
+  .report-table th{position:static}
+  .report-section-card,.report-fin-card,.report-mini,.report-ring{break-inside:avoid}
+  .report-section-card{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.0 - professional final build -->
+<div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
+
+<section id="authView" class="auth">
+  <div class="card grid">
+    <div class="brand-row">
+      <img src="./icon-192.png" alt="KKK MEBS Berber Logo" class="app-logo">
+      <div>
+        <div class="brand" style="font-size:22px;line-height:1.15">KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi</div>
+        <div class="muted" style="margin-top:6px">Randevu verme, tıraş kaydı ve ücret takibi</div>
+      </div>
+    </div>
+    <div class="security-card">
+      🔒 Kayıt kapalıdır. Yalnızca yetkilendirilmiş yönetici hesabı giriş yapabilir.
+    </div>
+    <div id="authMsg" class="notice hidden"></div>
+    <form id="loginForm" class="grid">
+      <label>E-posta<input id="loginEmail" type="email" autocomplete="email" required></label>
+      <label>Şifre<input id="loginPassword" type="password" autocomplete="current-password" minlength="8" required></label>
+      <button class="btn primary" type="submit">Giriş Yap</button>
+    </form>
+  </div>
+</section>
+
+<section id="mfaView" class="auth hidden">
+  <div class="card grid">
+    <div>
+      <div class="brand" style="font-size:22px;line-height:1.15">🔐 İki Aşamalı Doğrulama</div>
+      <div id="mfaGateText" class="muted" style="margin-top:6px">Güvenli giriş doğrulanıyor.</div>
+    </div>
+    <div id="mfaGateSetup" class="grid hidden">
+      <div class="mfa-panel">
+        <div class="mfa-status"><span class="mfa-dot"></span>2FA kurulumu zorunlu</div>
+        <div class="muted" style="margin-top:7px;font-size:12px">Bu final sürümde yönetici verilerine erişmeden önce Authenticator doğrulaması kurulur. iPhone Parolalar'daki doğrulama kodlarını veya bir Authenticator uygulamasını kullanabilirsin.</div>
+      </div>
+      <button id="mfaGateEnrollBtn" class="btn primary">2FA Kurulumunu Başlat</button>
+    </div>
+    <form id="mfaChallengeForm" class="grid hidden">
+      <div class="security-card">Şifren doğrulandı. Şimdi Authenticator uygulamandaki 6 haneli kodu gir.</div>
+      <label id="mfaFactorWrap" class="hidden">Doğrulama Cihazı<select id="mfaFactorSelect"></select></label>
+      <label>Doğrulama Kodu<input id="mfaCode" class="mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="000000" required></label>
+      <button class="btn primary" type="submit">Güvenli Girişi Tamamla</button>
+    </form>
+    <div id="mfaMsg" class="notice hidden"></div>
+    <button id="mfaLogoutBtn" class="btn">Çıkış Yap</button>
+  </div>
+</section>
+
+<div id="appView" class="hidden">
+<div class="wrap">
+  <header class="top">
+    <div class="row between">
+      <div>
+        <h1 id="pageTitle">Bugün</h1>
+        <div id="dateLabel" class="muted"></div>
+      </div>
+      <div class="toolbar">
+        <button id="shareBtn" class="btn small">Paylaş</button>
+        <button id="logoutBtn" class="btn small">Çıkış</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="homePage" class="page active">
+      <div class="stats">
+        <div class="stat"><span class="muted">Randevu</span><b id="stTotal">0</b></div>
+        <div class="stat"><span class="muted">Tamam</span><b id="stDone">0</b></div>
+        <div class="stat"><span class="muted">İşlem</span><b id="stMoney">0 ₺</b></div>
+      </div>
+      <div class="money-strip">
+        <div class="money-box paid-box"><span class="muted">Tahsil Edilen</span><b id="stPaid" style="display:block;font-size:21px;margin-top:3px">0 ₺</b></div>
+        <div class="money-box unpaid-box"><span class="muted">Ödenmeyen / Bekleyen</span><b id="stUnpaid" style="display:block;font-size:21px;margin-top:3px">0 ₺</b></div>
+      </div>
+      <div class="row between no-print" style="margin:8px 0 12px">
+        <button id="prevDay" class="btn small">‹ Önceki</button>
+        <input id="dayPicker" type="date" style="max-width:180px">
+        <button id="nextDay" class="btn small">Sonraki ›</button>
+      </div>
+      <div id="schedule" class="list"></div>
+    </section>
+
+    <section id="weekPage" class="page">
+      <div class="card no-print">
+        <label>Haftanın içindeki bir gün<input id="weekPicker" type="date"></label>
+      </div>
+      <div id="weekList" class="list" style="margin-top:12px"></div>
+    </section>
+
+    <section id="recordsPage" class="page">
+      <div class="card no-print grid">
+        <label>Kayıtlarda ara<input id="recordSearch" placeholder="Ad soyad, rütbe veya birlik"></label>
+        <div class="record-filters" id="recordFilters">
+          <button class="record-filter active" data-record-filter="all">Tümü</button>
+          <button class="record-filter paid-filter" data-record-filter="paid">✓ Ödendi</button>
+          <button class="record-filter unpaid-filter" data-record-filter="unpaid">₺ Ödenmedi</button>
+          <button class="record-filter" data-record-filter="emergency">🚨 Acil</button>
+        </div>
+        <div class="toolbar">
+          <button id="csvBtn" class="btn small">CSV İndir</button>
+          <button id="printBtn" class="btn small">PDF / Yazdır</button>
+        </div>
+      </div>
+      <div id="recordList" class="list" style="margin-top:12px"></div>
+    </section>
+
+    <section id="reportPage" class="page">
+      <div class="card grid no-print">
+        <div class="toolbar">
+          <button class="btn small" data-report-preset="today">Bugün</button>
+          <button class="btn small" data-report-preset="week">Bu Hafta</button>
+          <button class="btn small" data-report-preset="month">Bu Ay</button>
+          <button class="btn small" data-report-preset="30">Son 30 Gün</button>
+        </div>
+        <div class="grid grid2">
+          <label>Başlangıç<input id="repStart" type="date"></label>
+          <label>Bitiş<input id="repEnd" type="date"></label>
+        </div>
+        <div class="toolbar">
+          <button id="runReport" class="btn primary">Renkli Yönetici Raporu Oluştur</button>
+          <button id="printReportBtn" class="btn">PDF / Yazdır</button>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:900;margin-bottom:7px">Resmî Çizelgeler</div>
+          <div class="official-actions">
+            <button id="officialDailyBtn" class="btn official-btn" type="button">Günlük Randevu Listesi</button>
+            <button id="officialRegisterBtn" class="btn official-btn" type="button">Tıraş Kayıt Çizelgesi</button>
+          </div>
+          <div class="muted" style="font-size:11px;margin-top:6px">Günlük liste başlangıç tarihini; kayıt çizelgesi seçili tarih aralığını kullanır.</div>
+        </div>
+      </div>
+      <div class="notice no-print" style="margin-top:12px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff"><b>📊 Profesyonel rapor:</b> Gerçekleşme, tahsilat, acil randevu, işlem ve rütbe dağılımını renkli yönetici formatında gösterir. PDF çıktısında renkler korunur.</div><div id="reportOut" style="margin-top:12px"></div>
+    </section>
+
+    <section id="settingsPage" class="page">
+      <div class="section-title">Güvenlik</div>
+      <div id="securitySettings" class="security-card"></div>
+
+      <div class="section-title">İki Aşamalı Doğrulama (2FA)</div>
+      <div id="mfaSettings" class="card"></div>
+
+      <div class="section-title">Son Güvenli İşlemler</div>
+      <div id="auditSettings" class="card"></div>
+
+      <div class="section-title">Veri Güvenliği / Yedek</div>
+      <div class="card grid">
+        <div class="muted">Randevu, kişi, işlem, çalışma saatleri ve DOLU işaretlerinin tam JSON yedeğini iPhone'a indir.</div>
+        <div class="grid grid2">
+          <button id="backupBtn" class="btn primary">Tam Yedek İndir</button>
+          <button id="restoreBtn" class="btn">Yedekten Geri Yükle</button>
+        </div>
+        <input id="restoreFile" type="file" accept=".json,application/json" class="hidden">
+        <div class="restore-warning"><b>Güvenli geri yükleme:</b> Mevcut yeni kayıtları silmez. Yedekteki kayıtları aynı kimliklerle geri getirir/günceller. İşlem sunucuda tek transaction olarak tamamlanır veya tamamen geri alınır.</div>
+        <div class="muted" style="font-size:12px">Yedek dosyasını güvenli bir yerde sakla. Kişi ve randevu bilgileri içerir.</div>
+      </div>
+
+      <div class="section-title">Çöp Kutusu</div>
+      <div id="trashSettings" class="list"></div>
+
+      <div class="section-title">İşlem ve Fiyatlar</div>
+      <div id="serviceSettings" class="list"></div>
+
+      <div class="section-title">Çalışma Düzeni</div>
+      <div id="scheduleSettings" class="card"></div>
+
+      <div class="section-title">Rütbeler</div>
+      <div id="rankSettings" class="card"></div>
+    </section>
+  </main>
+</div>
+
+<button id="fab" class="fab">+</button>
+
+<nav class="nav">
+  <button class="active" data-page="homePage">Bugün</button>
+  <button data-page="weekPage">Hafta</button>
+  <button data-page="recordsPage">Kayıtlar</button>
+  <button data-page="reportPage">Rapor</button>
+  <button data-page="settingsPage">Ayarlar</button>
+</nav>
+</div>
+
+<section id="officialPrint"></section>
+
+<dialog id="mfaEnrollDialog">
+  <div class="sheet">
+    <div class="row between">
+      <h2>🔐 2FA Kurulumu</h2>
+      <button id="closeMfaEnroll" class="btn small">Kapat</button>
+    </div>
+    <div class="grid">
+      <div class="notice">QR kodu Authenticator uygulamanla tara. Aynı iPhone'daysan aşağıdaki kurulum anahtarını elle ekleyebilirsin.</div>
+      <div class="qr-wrap"><img id="mfaQr" alt="2FA QR Kodu"></div>
+      <div>
+        <div class="muted" style="font-size:11px;font-weight:800;margin-bottom:5px">Kurulum Anahtarı</div>
+        <div id="mfaSecret" class="secret-box"></div>
+      </div>
+      <label>Authenticator Kodu<input id="mfaEnrollCode" class="mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="000000"></label>
+      <button id="verifyMfaEnrollBtn" class="btn primary">2FA'yı Doğrula ve Etkinleştir</button>
+      <div id="mfaEnrollMsg" class="notice hidden"></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="restoreDialog">
+  <div class="sheet">
+    <div class="row between">
+      <h2>Yedekten Geri Yükle</h2>
+      <button id="closeRestore" class="btn small">Kapat</button>
+    </div>
+    <div class="grid">
+      <div id="restoreInfo" class="restore-summary"></div>
+      <div class="restore-warning">Bu işlem <b>silme yapmaz</b>. Aynı kimlikteki kayıtları yedekteki hâline getirir. Çakışma veya doğrulama hatasında veritabanı işlemi tamamen iptal edilir.</div>
+      <label>Onay için <b>GERİ YÜKLE</b> yaz<input id="restoreConfirmText" autocomplete="off" placeholder="GERİ YÜKLE"></label>
+      <button id="confirmRestoreBtn" class="btn primary" disabled>Güvenli Geri Yüklemeyi Başlat</button>
+      <div id="restoreMsg" class="notice hidden"></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="appointmentDialog">
+  <div class="sheet">
+    <div class="row between">
+      <h2 id="appointmentTitle">Yeni Randevu</h2>
+      <button id="closeDialog" class="btn small">Kapat</button>
+    </div>
+    <form id="appointmentForm" class="grid">
+      <div class="grid grid2">
+        <label>Rütbe<select id="rankSelect" required></select></label>
+        <label>Adı Soyadı<input id="personName" required autocomplete="off" list="peopleList"><datalist id="peopleList"></datalist></label>
+      </div>
+      <label>Birliği<input id="unitName" autocomplete="off"></label>
+      <div class="grid grid2">
+        <label>Tarih<input id="apptDate" type="date" required></label>
+        <label>Saat<select id="slotSelect" required></select></label>
+      </div>
+      <label class="service">
+        <span><b>🚨 Acil / İstisnai Randevu</b><div class="muted" style="font-size:12px;margin-top:3px">Dinlenme veya temizlik saatini gerektiğinde kullanılabilir yapar.</div></span>
+        <input id="emergencyCheck" type="checkbox">
+      </label>
+      <div id="overrideReasonWrap" class="hidden">
+        <label>Acil / İstisna Açıklaması<textarea id="overrideReason" placeholder="Örn. Acil görev öncesi tıraş"></textarea></label>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:800;margin-bottom:7px">İşlem</div>
+        <div id="servicesBox" class="grid"></div>
+      </div>
+      <label>Açıklama<textarea id="notes"></textarea></label>
+      <div class="row between">
+        <b>Toplam</b><span id="newTotal" class="big">0 ₺</span>
+      </div>
+      <button id="saveAppointmentBtn" class="btn primary" type="submit">Randevuyu Kaydet</button>
+      <div id="formMsg" class="notice hidden"></div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="detailDialog">
+  <div class="sheet">
+    <div class="row between">
+      <h2>Randevu</h2>
+      <button id="closeDetail" class="btn small">Kapat</button>
+    </div>
+    <div id="detailBody"></div>
+  </div>
+</dialog>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://styxdbndyzkbawwrthzw.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_l2qxOCeQoVcSDFhY6tBkrg_nxNBqkWM';
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
+const APP_VERSION = "4.0";
+const MFA_REQUIRED = true;
+
+const $ = id => document.getElementById(id);
+const state = {
+  user:null, ranks:[], groups:[], services:[], slots:[], appointments:[], people:[], records:[],
+  trash:[], audit:[], manualBlocks:[], selectedDate:'', currentPage:'homePage', editAppointmentId:null,
+  weekDates:[], lastReport:null, recordFilter:'all',
+  mfa:{verified:[],currentLevel:'aal1',nextLevel:'aal1'},
+  mfaEnrollFactorId:null, mfaChallengeFactorId:null, restorePayload:null
+};
+const IDLE_MS = 30 * 60 * 1000;
+let lastActivity = Date.now();
+let idleTimer = null;
+let entering = false;
+const trMoney = n => new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(Number(n||0));
+const isoDate = d => { const x=new Date(d); x.setMinutes(x.getMinutes()-x.getTimezoneOffset()); return x.toISOString().slice(0,10); };
+const today = () => isoDate(new Date());
+const trDate = s => new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(s+'T12:00:00'));
+const time5 = t => (t||'').slice(0,5);
+const statusName = s => ({scheduled:'Bekliyor',arrived:'Geldi',in_service:'İşlemde',completed:'Tamamlandı',no_show:'Gelmedi',cancelled:'İptal'}[s]||s);
+const esc = v => String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+
+function msg(el,text,type=''){ el.textContent=text; el.className='notice '+type; el.classList.remove('hidden'); }
+function hideMsg(el){el.classList.add('hidden')}
+function updateConnectionState(){document.body.classList.toggle('offline',!navigator.onLine);}
+function cleanupPrintMode(){document.body.classList.remove('print-report','print-records','print-official');}
+function startPrint(mode){cleanupPrintMode();document.body.classList.add(mode);setTimeout(()=>window.print(),60);}
+window.addEventListener('afterprint',cleanupPrintMode);
+
+async function init(){
+  state.selectedDate=today();
+  $('dayPicker').value=state.selectedDate;
+  $('weekPicker').value=state.selectedDate;
+  $('repStart').value=state.selectedDate.slice(0,8)+'01';
+  $('repEnd').value=state.selectedDate;
+  bind();
+  startIdleGuard();
+  updateConnectionState();
+  window.addEventListener('online',updateConnectionState);
+  window.addEventListener('offline',updateConnectionState);
+  const {data:{session}}=await db.auth.getSession();
+  if(session) await enter(session.user);
+  db.auth.onAuthStateChange(async (_e,s)=>{
+    if(s?.user) await enter(s.user);
+    else showAuth();
+  });
+}
+
+async function getMfaState(){
+  const [factorsRes,aalRes]=await Promise.all([
+    db.auth.mfa.listFactors(),
+    db.auth.mfa.getAuthenticatorAssuranceLevel()
+  ]);
+  if(factorsRes.error) throw factorsRes.error;
+  if(aalRes.error) throw aalRes.error;
+  const all=[...(factorsRes.data?.totp||[]),...(factorsRes.data?.phone||[])];
+  const verified=all.filter(f=>f.status==='verified');
+  return {
+    verified,
+    currentLevel:aalRes.data?.currentLevel||'aal1',
+    nextLevel:aalRes.data?.nextLevel||'aal1'
+  };
+}
+
+async function enter(user){
+  if(entering) return;
+  entering=true;
+  try{
+    state.user=user;
+    const {data,error}=await db.from('app_members').select('user_id,role,active').eq('user_id',user.id).maybeSingle();
+    if(error) console.error(error);
+
+    if(!data?.active || data?.role!=='admin'){
+      await db.auth.signOut();
+      showAuth();
+      msg($('authMsg'),'Bu hesap bu sisteme yetkili değil.','error');
+      return;
+    }
+
+    try{ state.mfa=await getMfaState(); }
+    catch(e){
+      console.error(e);
+      showAuth();
+      msg($('authMsg'),'2FA güvenlik durumu doğrulanamadı. İnternet bağlantısını kontrol edip yeniden giriş yap.','error');
+      return;
+    }
+
+    if(MFA_REQUIRED && !state.mfa.verified.length){
+      showMfaSetupGate();
+      return;
+    }
+    if(state.mfa.verified.length && state.mfa.currentLevel!=='aal2'){
+      showMfaChallengeGate(state.mfa.verified[0]);
+      return;
+    }
+
+    $('authView').classList.add('hidden');
+    $('mfaView').classList.add('hidden');
+    $('appView').classList.remove('hidden');
+    resetActivity();
+    await loadBase();
+    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
+    renderSettings();
+  } finally {
+    entering=false;
+  }
+}
+
+function showMfaSetupGate(){
+  $('authView').classList.add('hidden');
+  $('appView').classList.add('hidden');
+  $('mfaView').classList.remove('hidden');
+  $('mfaGateText').textContent='İlk güvenli giriş için 2FA kurulumu tamamlanmalıdır.';
+  $('mfaGateSetup').classList.remove('hidden');
+  $('mfaChallengeForm').classList.add('hidden');
+  hideMsg($('mfaMsg'));
+}
+
+function showMfaChallengeGate(factor){
+  state.mfaChallengeFactorId=factor?.id||null;
+  $('authView').classList.add('hidden');
+  $('appView').classList.add('hidden');
+  $('mfaView').classList.remove('hidden');
+  $('mfaGateText').textContent='Şifre doğrulandı · İkinci güvenlik adımı gerekli.';
+  $('mfaGateSetup').classList.add('hidden');
+  $('mfaChallengeForm').classList.remove('hidden');
+  const factors=state.mfa.verified||[];
+  $('mfaFactorSelect').innerHTML=factors.map((f,i)=>`<option value="${f.id}">${esc(f.friendly_name||('Authenticator '+(i+1)))}</option>`).join('');
+  $('mfaFactorWrap').classList.toggle('hidden',factors.length<=1);
+  if(state.mfaChallengeFactorId) $('mfaFactorSelect').value=state.mfaChallengeFactorId;
+  $('mfaCode').value='';
+  hideMsg($('mfaMsg'));
+  setTimeout(()=>$('mfaCode').focus(),100);
+}
+
+function showAuth(){
+  state.user=null;
+  state.mfa={verified:[],currentLevel:'aal1',nextLevel:'aal1'};
+  ['appointmentDialog','detailDialog','mfaEnrollDialog','restoreDialog'].forEach(id=>{const d=$(id);if(d?.open)d.close();});
+  $('appView').classList.add('hidden');
+  $('mfaView').classList.add('hidden');
+  $('authView').classList.remove('hidden');
+}
+
+function resetActivity(){ lastActivity=Date.now(); }
+
+function startIdleGuard(){
+  ['click','touchstart','keydown','scroll'].forEach(ev=>document.addEventListener(ev,resetActivity,{passive:true}));
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) checkIdle(); });
+  clearInterval(idleTimer);
+  idleTimer=setInterval(checkIdle,60000);
+}
+
+async function checkIdle(){
+  if(!state.user) return;
+  if(Date.now()-lastActivity >= IDLE_MS){
+    await db.auth.signOut();
+    alert('30 dakika işlem yapılmadığı için güvenlik amacıyla oturum kapatıldı.');
+  }
+}
+
+async function startMfaEnrollment(){
+  hideMsg($('mfaEnrollMsg'));
+  try{
+    const list=await db.auth.mfa.listFactors();
+    if(list.error) throw list.error;
+    // Yarım kalmış, doğrulanmamış TOTP kurulumlarını temizle.
+    for(const f of (list.data?.totp||[]).filter(x=>x.status!=='verified')){
+      await db.auth.mfa.unenroll({factorId:f.id});
+    }
+    const r=await db.auth.mfa.enroll({factorType:'totp',friendlyName:`KKK MEBS Authenticator ${new Date().toLocaleDateString('tr-TR')}`});
+    if(r.error) throw r.error;
+    state.mfaEnrollFactorId=r.data.id;
+    $('mfaQr').src=r.data.totp?.qr_code||'';
+    $('mfaSecret').textContent=r.data.totp?.secret||'';
+    $('mfaEnrollCode').value='';
+    $('mfaEnrollDialog').showModal();
+    setTimeout(()=>$('mfaEnrollCode').focus(),150);
+  }catch(e){
+    const target=$('mfaView').classList.contains('hidden')?$('mfaSettings'):$('mfaMsg');
+    if(target===$('mfaMsg')) msg(target,'2FA kurulumu başlatılamadı: '+e.message,'error');
+    else alert('2FA kurulumu başlatılamadı: '+e.message);
+  }
+}
+
+async function verifyMfaEnrollment(){
+  hideMsg($('mfaEnrollMsg'));
+  const code=$('mfaEnrollCode').value.replace(/\D/g,'');
+  if(code.length<6) return msg($('mfaEnrollMsg'),'6 haneli Authenticator kodunu gir.','error');
+  if(!state.mfaEnrollFactorId) return msg($('mfaEnrollMsg'),'Kurulum oturumu bulunamadı. Kurulumu yeniden başlat.','error');
+  try{
+    const challenge=await db.auth.mfa.challenge({factorId:state.mfaEnrollFactorId});
+    if(challenge.error) throw challenge.error;
+    const verify=await db.auth.mfa.verify({factorId:state.mfaEnrollFactorId,challengeId:challenge.data.id,code});
+    if(verify.error) throw verify.error;
+    state.mfaEnrollFactorId=null;
+    $('mfaEnrollDialog').close();
+    state.mfa=await getMfaState();
+    const {data:{user}}=await db.auth.getUser();
+    if(user) await enter(user);
+  }catch(e){
+    msg($('mfaEnrollMsg'),'Kod doğrulanamadı. Authenticator uygulamasındaki güncel kodu yeniden dene.','error');
+  }
+}
+
+async function verifyMfaChallenge(e){
+  e.preventDefault();
+  hideMsg($('mfaMsg'));
+  const code=$('mfaCode').value.replace(/\D/g,'');
+  if(code.length<6) return msg($('mfaMsg'),'6 haneli Authenticator kodunu gir.','error');
+  const factorId=$('mfaFactorSelect')?.value||state.mfaChallengeFactorId||state.mfa.verified?.[0]?.id;
+  if(!factorId) return msg($('mfaMsg'),'2FA cihazı bulunamadı.','error');
+  try{
+    const challenge=await db.auth.mfa.challenge({factorId});
+    if(challenge.error) throw challenge.error;
+    const verify=await db.auth.mfa.verify({factorId,challengeId:challenge.data.id,code});
+    if(verify.error) throw verify.error;
+    state.mfa=await getMfaState();
+    const {data:{user}}=await db.auth.getUser();
+    if(user) await enter(user);
+  }catch(e){
+    msg($('mfaMsg'),'Doğrulama kodu kabul edilmedi. Yeni kodu kontrol edip tekrar dene.','error');
+  }
+}
+
+async function refreshMfaStatus(){
+  try{
+    state.mfa=await getMfaState();
+    renderMfaSettings();
+  }catch(e){
+    $('mfaSettings').innerHTML='<div class="notice error">2FA durumu okunamadı.</div>';
+  }
+}
+
+function renderMfaSettings(){
+  const el=$('mfaSettings');
+  if(!el) return;
+  const active=state.mfa.verified.length>0;
+  const aal2=state.mfa.currentLevel==='aal2';
+  if(active){
+    el.innerHTML=`<div class="mfa-panel ok">
+      <div class="mfa-status"><span class="mfa-dot ok"></span>2FA AKTİF</div>
+      <div class="muted" style="margin-top:7px;font-size:12px">Authenticator faktörü doğrulanmış. Bu oturum: <b>${aal2?'AAL2 / iki aşamalı':'AAL1 / yeniden doğrulama gerekli'}</b>.</div>
+      <div class="muted" style="margin-top:5px;font-size:11px">2FA kurulduktan sonra veritabanı RLS politikaları AAL2 olmadan randevu/personel verilerine erişimi reddeder.</div>
+    </div>
+    <div class="toolbar" style="margin-top:10px">
+      <button class="btn small" id="refreshMfaBtn">2FA Durumunu Yenile</button>
+      <button class="btn small" id="addMfaBtn">Yedek Authenticator Ekle</button>
+    </div>`;
+  }else{
+    el.innerHTML=`<div class="mfa-panel">
+      <div class="mfa-status"><span class="mfa-dot"></span>2FA KURULUMU BEKLİYOR</div>
+      <div class="muted" style="margin-top:7px;font-size:12px">Final sürümde 2FA zorunludur. Kurulumu tamamlamadan uygulama verileri açılmaz.</div>
+    </div>
+    <button class="btn primary" id="startMfaBtn" style="margin-top:10px">2FA Kurulumunu Başlat</button>`;
+  }
+  $('refreshMfaBtn')?.addEventListener('click',refreshMfaStatus);
+  $('addMfaBtn')?.addEventListener('click',startMfaEnrollment);
+  $('startMfaBtn')?.addEventListener('click',startMfaEnrollment);
+}
+
+async function loadBase(){
+  const [ranks,groups,services,slots,people,manualBlocks]=await Promise.all([
+    db.from('ranks').select('*').eq('active',true).order('sort_order'),
+    db.from('rank_groups').select('*').eq('active',true).order('sort_order'),
+    db.from('service_items').select('*').eq('active',true).order('sort_order'),
+    db.from('weekly_slots').select('*').eq('active',true).order('day_of_week').order('sort_order'),
+    db.from('people').select('id,full_name,unit_name,rank_id').eq('active',true).is('deleted_at',null).order('full_name'),
+    db.from('manual_slot_blocks').select('*').order('block_date').order('start_time')
+  ]);
+  if(ranks.error||groups.error||services.error||slots.error||people.error||manualBlocks.error) throw new Error('Temel veriler alınamadı');
+  state.ranks=ranks.data||[];
+  state.groups=groups.data||[];
+  state.services=services.data||[];
+  state.slots=slots.data||[];
+  state.people=people.data||[];
+  state.manualBlocks=manualBlocks.data||[];
+  fillRankSelect();
+  fillPeopleList();
+  fillServices();
+}
+
+function rankLabel(id){
+  const r=state.ranks.find(x=>x.id===id); return r ? (r.abbreviation||r.name) : '';
+}
+function groupName(id){ return state.groups.find(g=>g.id===id)?.name||''; }
+
+function fillRankSelect(){
+  // v4.0: Er/Onbaşı/Çavuş ve sözleşmeli karşılıkları randevu menüsünde gösterilmez.
+  const hiddenRanks=new Set(['Er','Onbaşı','Çavuş','Sözleşmeli Er','Sözleşmeli Onbaşı','Sözleşmeli Çavuş']);
+  const groupOrder=new Map(state.groups.map((g,i)=>[g.id,i]));
+  const ranks=state.ranks.filter(r=>!hiddenRanks.has(r.name)).sort((a,b)=>{
+    const ga=groupOrder.get(a.group_id)??999, gb=groupOrder.get(b.group_id)??999;
+    return ga-gb || Number(a.sort_order||0)-Number(b.sort_order||0) || a.name.localeCompare(b.name,'tr');
+  });
+  $('rankSelect').innerHTML=ranks.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
+}
+function fillPeopleList(){
+  $('peopleList').innerHTML=state.people.map(p=>`<option value="${esc(p.full_name)}">${esc(rankLabel(p.rank_id))} · ${esc(p.unit_name)}</option>`).join('');
+}
+
+function applyKnownPerson(){
+  const name=$('personName').value.trim().toLocaleLowerCase('tr-TR');
+  const p=state.people.find(x=>x.full_name.trim().toLocaleLowerCase('tr-TR')===name);
+  if(!p) return;
+  $('rankSelect').value=String(p.rank_id||'');
+  $('unitName').value=p.unit_name||'';
+}
+function fillServices(){
+  $('servicesBox').innerHTML=state.services.map(s=>`<label class="service"><span><input type="checkbox" class="svc" value="${s.id}" data-price="${s.current_price}"> ${esc(s.name)}</span><b>${trMoney(s.current_price)}</b></label>`).join('');
+  document.querySelectorAll('.svc').forEach(x=>x.addEventListener('change',calcNewTotal));
+}
+function calcNewTotal(){
+  const n=[...document.querySelectorAll('.svc:checked')].reduce((a,x)=>a+Number(x.dataset.price),0); $('newTotal').textContent=trMoney(n);
+}
+
+function dayOfWeek(dateStr){ const d=new Date(dateStr+'T12:00:00').getDay(); return d===0?7:d; }
+function availableSlots(dateStr){
+  return state.slots.filter(s=>s.day_of_week===dayOfWeek(dateStr));
+}
+function fillSlotSelect(dateStr,preferred=''){
+  const booked=new Set(state.appointments
+    .filter(a=>a.id!==state.editAppointmentId && a.appointment_date===dateStr && a.status!=='cancelled' && !a.deleted_at)
+    .map(a=>time5(a.start_time)));
+  const manualBlocked=new Set(state.manualBlocks.filter(b=>b.block_date===dateStr).map(b=>time5(b.start_time)));
+  const emergency=!!$('emergencyCheck')?.checked;
+  $('slotSelect').innerHTML=availableSlots(dateStr).map(s=>{
+    const t=time5(s.start_time), isAppt=s.slot_type==='appointment', isOverride=['break','cleaning'].includes(s.slot_type);
+    const isAllowed=isAppt || (emergency && isOverride);
+    const isBooked=booked.has(t);
+    const isManualBlocked=manualBlocked.has(t);
+    const disabled=!isAllowed||isBooked||isManualBlocked;
+    let label='';
+    if(isAppt) label=isManualBlocked?`${t} – DOLU`:isBooked?`${t} – RANDEVULU`:`${t} – ${time5(s.end_time)}`;
+    else if(isOverride) label=isBooked?`${t} – ${s.label||s.slot_type} / DOLU`:`${t} – ${s.label||s.slot_type}${emergency?' / ACİL KULLANILABİLİR':''}`;
+    else label=`${t} – ${s.label||s.slot_type}`;
+    return `<option value="${t}" data-end="${time5(s.end_time)}" data-slot-type="${s.slot_type}" ${disabled?'disabled':''} ${preferred===t?'selected':''}>${label}</option>`;
+  }).join('');
+  const selected=$('slotSelect').selectedOptions[0];
+  if(!selected || selected.disabled){
+    const first=[...$('slotSelect').options].find(o=>!o.disabled);
+    if(first) first.selected=true;
+  }
+}
+
+async function refreshManualBlocks(){
+  const q=await db.from('manual_slot_blocks').select('*').order('block_date').order('start_time');
+  if(q.error){console.error(q.error);return false;}
+  state.manualBlocks=q.data||[];
+  return true;
+}
+
+async function markSlotFull(time,endTime){
+  const existsAppt=state.appointments.some(a=>a.status!=='cancelled'&&!a.deleted_at&&time5(a.start_time)===time);
+  if(existsAppt) return alert('Bu saatte zaten randevu var.');
+  const already=state.manualBlocks.find(b=>b.block_date===state.selectedDate&&time5(b.start_time)===time);
+  if(already) return;
+  const q=await db.from('manual_slot_blocks').insert({
+    block_date:state.selectedDate,start_time:time,end_time:endTime,label:'DOLU',created_by:state.user.id
+  });
+  if(q.error) return alert('Saat dolu işaretlenemedi: '+q.error.message);
+  await refreshManualBlocks();
+  renderDay();
+}
+
+async function clearSlotFull(blockId){
+  if(!confirm('Bu saati yeniden boş randevuya açmak istiyor musun?')) return;
+  const q=await db.from('manual_slot_blocks').delete().eq('id',blockId);
+  if(q.error) return alert('Dolu işareti kaldırılamadı: '+q.error.message);
+  await refreshManualBlocks();
+  renderDay();
+}
+
+async function loadDay(){
+  $('dateLabel').textContent=trDate(state.selectedDate); $('dayPicker').value=state.selectedDate;
+  const {data,error}=await db.from('appointments')
+    .select('*,people(id,full_name,unit_name,rank_id),appointment_services(id,quantity,unit_price,line_total,service_id,service_items(name))')
+    .eq('appointment_date',state.selectedDate).is('deleted_at',null).order('start_time');
+  if(error){console.error(error); return;}
+  state.appointments=data||[];
+  renderDay();
+}
+
+function renderDay(){
+  const a=state.appointments.filter(x=>x.status!=='cancelled');
+  $('stTotal').textContent=a.length;
+  $('stDone').textContent=a.filter(x=>x.status==='completed').length;
+  const done=a.filter(x=>x.status==='completed');
+  $('stMoney').textContent=trMoney(done.reduce((s,x)=>s+Number(x.total_amount||0),0));
+  $('stPaid').textContent=trMoney(done.filter(x=>x.payment_status==='paid').reduce((s,x)=>s+Number(x.amount_paid||x.total_amount||0),0));
+  $('stUnpaid').textContent=trMoney(done.filter(x=>x.payment_status!=='paid'&&x.payment_status!=='free').reduce((s,x)=>s+Number(x.total_amount||0),0));
+  const apptByTime=new Map(state.appointments.filter(x=>x.status!=='cancelled').map(x=>[time5(x.start_time),x]));
+  const blockByTime=new Map(state.manualBlocks.filter(b=>b.block_date===state.selectedDate).map(b=>[time5(b.start_time),b]));
+  const slots=availableSlots(state.selectedDate);
+  $('schedule').innerHTML=slots.map(s=>{
+    const t=time5(s.start_time), x=apptByTime.get(t), block=blockByTime.get(t);
+    if(x){
+      const p=x.people||{}, emergency=x.is_emergency||x.slot_override;
+      const paid=x.payment_status==='paid';
+      const free=x.payment_status==='free';
+      const unpaid=!paid&&!free;
+      const paymentClass=paid?'payment-paid':unpaid?'payment-unpaid':'';
+      const paymentBadge=paid
+        ? '<span class="payment-badge paid">✓ ÖDENDİ</span>'
+        : free
+          ? '<span class="payment-badge free">ÜCRETSİZ</span>'
+          : '<span class="payment-badge unpaid">₺ ÖDENMEDİ</span>';
+      return `<button class="slot ${emergency?'emergency-card':''} ${paymentClass}" data-id="${x.id}" style="text-align:left">
+        <div class="row between"><div class="time">${t} – ${time5(x.end_time)}</div><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 ACİL':statusName(x.status)}</span></div>
+        <div class="name">${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</div>
+        <div class="row between"><span class="muted">${esc(p.unit_name)}${x.slot_override?' · '+esc(s.label||'İstisna'):''}</span><b>${trMoney(x.total_amount)}</b></div>
+        ${paymentBadge?`<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme Durumu</span>${paymentBadge}</div>`:''}
+      </button>`;
+    }
+    if(block){
+      return `<button class="slot manual-block" data-block-id="${block.id}" style="text-align:left">
+        <div class="row between"><div class="time">${t} – ${time5(s.end_time)}</div><span class="manual-full-badge">✓ DOLU</span></div>
+        <div class="name">Saat Dolu</div>
+        <div class="muted" style="font-size:11px">Dokunarak yeniden boşa çıkarabilirsin.</div>
+      </button>`;
+    }
+    if(s.slot_type==='appointment') return `<div class="slot" style="text-align:left">
+      <div class="time">${t} – ${time5(s.end_time)}</div>
+      <div class="muted">Boş randevu saati</div>
+      <div class="slot-actions">
+        <button class="slot-action book" type="button" data-empty="${t}">+ Randevu Ver</button>
+        <button class="slot-action full" type="button" data-mark-full="${t}" data-mark-full-end="${time5(s.end_time)}">✓ Dolu</button>
+      </div>
+    </div>`;
+    if(['break','cleaning'].includes(s.slot_type)) return `<button class="slot emergency-slot" data-emergency-empty="${t}" style="text-align:left"><div class="row between"><div><div class="time">${t} – ${time5(s.end_time)}</div><div class="name">${s.label||s.slot_type}</div></div><span class="badge emergency-badge">İSTİSNA</span></div><div class="emergency-action">🚨 Acil Randevu Ver</div><div class="muted" style="font-size:11px">Bu saat normalde kapalıdır; yalnız gerektiğinde açılır.</div></button>`;
+    return `<div class="slot break"><div class="time">${t} – ${time5(s.end_time)}</div><div class="name">${s.label||s.slot_type}</div></div>`;
+  }).join('');
+  document.querySelectorAll('[data-empty]').forEach(b=>b.onclick=e=>{e.stopPropagation();openNew(b.dataset.empty);});
+  document.querySelectorAll('[data-mark-full]').forEach(b=>b.onclick=e=>{e.stopPropagation();markSlotFull(b.dataset.markFull,b.dataset.markFullEnd);});
+  document.querySelectorAll('[data-block-id]').forEach(b=>b.onclick=()=>clearSlotFull(b.dataset.blockId));
+  document.querySelectorAll('[data-emergency-empty]').forEach(b=>b.onclick=()=>openNew(b.dataset.emergencyEmpty,null,true));
+  document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>openDetail(b.dataset.id));
+}
+
+function openNew(time='', editId=null, forceEmergency=false){
+  $('appointmentForm').reset();
+  hideMsg($('formMsg'));
+  state.editAppointmentId=editId;
+  fillServices();
+  $('emergencyCheck').checked=!!forceEmergency;
+  $('overrideReason').value='';
+  $('overrideReasonWrap').classList.toggle('hidden',!$('emergencyCheck').checked);
+
+  if(editId){
+    const x=state.appointments.find(a=>a.id===editId) || state.records.find(a=>a.id===editId);
+    if(!x) return;
+    const p=x.people||{};
+    $('appointmentTitle').textContent='Randevuyu Düzenle';
+    $('saveAppointmentBtn').textContent='Değişiklikleri Kaydet';
+    $('rankSelect').value=String(p.rank_id||'');
+    $('personName').value=p.full_name||'';
+    $('unitName').value=p.unit_name||'';
+    $('apptDate').value=x.appointment_date;
+    $('notes').value=x.notes||'';
+    $('emergencyCheck').checked=!!(x.is_emergency||x.slot_override);
+    $('overrideReason').value=x.override_reason||'';
+    $('overrideReasonWrap').classList.toggle('hidden',!$('emergencyCheck').checked);
+    fillSlotSelect(x.appointment_date,time5(x.start_time));
+    const selectedIds=new Set((x.appointment_services||[]).map(s=>String(s.service_id)));
+    document.querySelectorAll('.svc').forEach(cb=>cb.checked=selectedIds.has(cb.value));
+    calcNewTotal();
+  }else{
+    $('appointmentTitle').textContent=forceEmergency?'🚨 Acil Randevu':'Yeni Randevu';
+    $('saveAppointmentBtn').textContent=forceEmergency?'Acil Randevuyu Kaydet':'Randevuyu Kaydet';
+    $('apptDate').value=state.selectedDate;
+    fillSlotSelect(state.selectedDate,time);
+    if(forceEmergency && !$('overrideReason').value){
+      $('overrideReason').placeholder='Örn: Acil görev / zorunlu ihtiyaç / komutanlık talebi';
+    }
+    calcNewTotal();
+  }
+  $('appointmentDialog').showModal();
+}
+
+async function saveAppointment(e){
+  e.preventDefault();
+  hideMsg($('formMsg'));
+  const name=$('personName').value.trim(), unit=$('unitName').value.trim(), rank_id=Number($('rankSelect').value);
+  const date=$('apptDate').value, start=$('slotSelect').value;
+  if(!name||!date||!start) return msg($('formMsg'),'Eksik bilgi var.','error');
+  if(state.manualBlocks.some(b=>b.block_date===date&&time5(b.start_time)===start)) return msg($('formMsg'),'Bu saat manuel olarak DOLU işaretlenmiş. Önce dolu işaretini kaldır.','error');
+
+  const opt=$('slotSelect').selectedOptions[0], end=opt?.dataset.end;
+  const slotType=opt?.dataset.slotType||'appointment';
+  const slotOverride=slotType!=='appointment';
+  const isEmergency=!!$('emergencyCheck').checked || slotOverride;
+  const overrideReason=$('overrideReason').value.trim()||null;
+  if(slotOverride && !['break','cleaning'].includes(slotType)) return msg($('formMsg'),'Bu zaman dilimi randevuya açılamaz.','error');
+  const selected=[...document.querySelectorAll('.svc:checked')];
+  if(!selected.length) return msg($('formMsg'),'En az bir işlem seç.','error');
+
+  let {data:people,error:pe}=await db.from('people').select('id').ilike('full_name',name).is('deleted_at',null).limit(1);
+  if(pe) return msg($('formMsg'),pe.message,'error');
+
+  let personId=people?.[0]?.id;
+  if(!personId){
+    const ins=await db.from('people').insert({full_name:name,unit_name:unit||null,rank_id,created_by:state.user.id}).select('id').single();
+    if(ins.error) return msg($('formMsg'),ins.error.message,'error');
+    personId=ins.data.id;
+  }else{
+    const pu=await db.from('people').update({rank_id,unit_name:unit||null}).eq('id',personId);
+    if(pu.error) return msg($('formMsg'),pu.error.message,'error');
+  }
+
+  let appointmentId=state.editAppointmentId;
+  if(appointmentId){
+    const up=await db.from('appointments').update({
+      person_id:personId,
+      appointment_date:date,
+      start_time:start,
+      end_time:end,
+      notes:$('notes').value.trim()||null,
+      is_emergency:isEmergency,
+      slot_override:slotOverride,
+      override_slot_type:slotOverride?slotType:null,
+      override_reason:overrideReason
+    }).eq('id',appointmentId);
+    if(up.error) return msg($('formMsg'),up.error.message.includes('duplicate')?'Bu saat dolu.':up.error.message,'error');
+
+    const del=await db.from('appointment_services').delete().eq('appointment_id',appointmentId);
+    if(del.error) return msg($('formMsg'),del.error.message,'error');
+  }else{
+    const ins=await db.from('appointments').insert({
+      person_id:personId,appointment_date:date,start_time:start,end_time:end,status:'scheduled',
+      notes:$('notes').value.trim()||null,created_by:state.user.id,
+      is_emergency:isEmergency,slot_override:slotOverride,override_slot_type:slotOverride?slotType:null,override_reason:overrideReason
+    }).select('id').single();
+    if(ins.error) return msg($('formMsg'),ins.error.message.includes('duplicate')?'Bu saat dolu.':ins.error.message,'error');
+    appointmentId=ins.data.id;
+  }
+
+  const rows=selected.map(x=>({appointment_id:appointmentId,service_id:x.value,quantity:1,unit_price:Number(x.dataset.price)}));
+  const srv=await db.from('appointment_services').insert(rows);
+  if(srv.error) return msg($('formMsg'),srv.error.message,'error');
+
+  state.editAppointmentId=null;
+  $('appointmentDialog').close();
+  state.selectedDate=date;
+  await loadBase();
+  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
+  renderSettings();
+}
+
+function openDetail(id){
+  const x=state.appointments.find(a=>a.id===id) || state.records.find(a=>a.id===id);
+  if(!x)return;
+  const p=x.people||{}, sv=(x.appointment_services||[]).map(s=>s.service_items?.name||'İşlem').join(', ');
+  const paid=x.payment_status==='paid';
+  const free=x.payment_status==='free';
+  const unpaid=!paid&&!free;
+  const emergency=x.is_emergency||x.slot_override;
+
+  $('detailBody').innerHTML=`<div class="grid">
+    <div class="card">
+      <div class="big" style="font-size:22px">${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</div>
+      <div class="muted">${esc(p.unit_name)}</div>
+    </div>
+    <div><b>${x.appointment_date} · ${time5(x.start_time)}–${time5(x.end_time)}</b></div>
+    ${emergency?`<div class="override-info"><b>🚨 Acil / İstisnai Randevu</b>${x.slot_override?`<div>${x.override_slot_type==='break'?'Dinlenme':x.override_slot_type==='cleaning'?'Temizlik':'İstisna'} saati kullanıldı.</div>`:''}${x.override_reason?`<div>${esc(x.override_reason)}</div>`:''}</div>`:''}
+    <div>${esc(sv)}</div>
+    <div class="row between"><span class="big">${trMoney(x.total_amount)}</span><span class="payment-badge ${paid?'paid':free?'free':'unpaid'}">${paid?'✓ ÖDENDİ':free?'ÜCRETSİZ':'₺ ÖDENMEDİ'}</span></div>
+    <div>
+      <div class="muted" style="font-size:12px;font-weight:800;margin-bottom:7px">Ödeme Durumu</div>
+      <div class="pay-actions">
+        <button type="button" class="pay-action paid ${paid?'active':''}" data-act="paid">✓ ÖDENDİ</button>
+        <button type="button" class="pay-action unpaid ${unpaid?'active':''}" data-act="unpaid">₺ ÖDENMEDİ</button>
+      </div>
+    </div>
+    <label class="service"><span>İmza alındı</span><input id="sigCheck" type="checkbox" ${x.signature_received?'checked':''}></label>
+    <div class="toolbar">
+      <button class="btn ok" data-act="complete">✓ Tıraş Tamamlandı</button>
+      <button class="btn" data-act="edit">Düzenle</button>
+      <button class="btn warn" data-act="no_show">Gelmedi</button>
+      <button class="btn danger" data-act="cancelled">İptal</button>
+      <button class="btn danger" data-act="delete">Çöp Kutusuna Taşı</button>
+    </div>
+    <div class="muted">${esc(x.notes)}</div>
+  </div>`;
+
+  $('sigCheck').onchange=async e=>{
+    await db.from('appointments').update({signature_received:e.target.checked}).eq('id',id);
+    await loadDay();
+  };
+
+  $('detailBody').querySelectorAll('[data-act]').forEach(b=>b.onclick=async()=>{
+    const act=b.dataset.act;
+    if(act==='edit'){
+      $('detailDialog').close();
+      openNew(time5(x.start_time),id);
+      return;
+    }
+    if(act==='delete'){
+      if(!confirm('Bu randevu çöp kutusuna taşınsın mı?')) return;
+      const u=await db.from('appointments').update({deleted_at:new Date().toISOString()}).eq('id',id);
+      if(u.error) return alert(u.error.message);
+    }else{
+      let patch={};
+      if(act==='complete') patch={status:'completed',completed_at:new Date().toISOString()};
+      if(act==='paid') patch={payment_status:'paid',payment_method:'cash',amount_paid:Number(x.total_amount||0)};
+      if(act==='unpaid') patch={payment_status:'unpaid',payment_method:null,amount_paid:0};
+      if(act==='no_show') patch={status:'no_show'};
+      if(act==='cancelled') patch={status:'cancelled'};
+      const u=await db.from('appointments').update(patch).eq('id',id);
+      if(u.error) return alert(u.error.message);
+    }
+
+    $('detailDialog').close();
+    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
+    renderSettings();
+  });
+  $('detailDialog').showModal();
+}
+
+async function loadWeek(){
+  const pivot=$('weekPicker').value||state.selectedDate;
+  const d=new Date(pivot+'T12:00:00'), js=d.getDay(), diff=(js===0?-6:1-js);
+  const mon=new Date(d); mon.setDate(d.getDate()+diff);
+  const dates=[0,1,2,3,4].map(i=>{const x=new Date(mon);x.setDate(mon.getDate()+i);return isoDate(x)});
+  state.weekDates=dates;
+  const q=await db.from('appointments').select('appointment_date,status,total_amount,payment_status,amount_paid').gte('appointment_date',dates[0]).lte('appointment_date',dates[4]).is('deleted_at',null);
+  const arr=q.data||[];
+  $('weekList').innerHTML=dates.map(date=>{
+    const a=arr.filter(x=>x.appointment_date===date&&x.status!=='cancelled');
+    const blocks=state.manualBlocks.filter(x=>x.block_date===date).length;
+    const done=a.filter(x=>x.status==='completed');
+    const paid=done.filter(x=>x.payment_status==='paid').reduce((s,x)=>s+Number(x.amount_paid||x.total_amount||0),0);
+    return `<button class="weekday" data-weekdate="${date}" style="text-align:left"><div class="row between"><b>${trDate(date)}</b><span>${a.length} randevu${blocks?` · ${blocks} DOLU`:''}</span></div><div class="muted">${done.length} tamamlandı · ${trMoney(done.reduce((s,x)=>s+Number(x.total_amount||0),0))} · Tahsil ${trMoney(paid)}</div></button>`;
+  }).join('');
+  document.querySelectorAll('[data-weekdate]').forEach(b=>b.onclick=()=>{state.selectedDate=b.dataset.weekdate;switchPage('homePage');loadDay();});
+}
+
+async function loadRecords(){
+  const q=await db.from('appointments')
+    .select('*,people(id,full_name,unit_name,rank_id),appointment_services(service_id,service_items(name))')
+    .is('deleted_at',null).order('appointment_date',{ascending:false}).order('start_time',{ascending:false}).limit(500);
+  state.records=q.data||[]; renderRecords();
+}
+function renderRecords(){
+  const term=$('recordSearch').value.trim().toLocaleLowerCase('tr-TR');
+  const arr=state.records.filter(x=>{
+    const p=x.people||{}, r=rankLabel(p.rank_id);
+    const textOk=!term || `${p.full_name||''} ${p.unit_name||''} ${r}`.toLocaleLowerCase('tr-TR').includes(term);
+    const paid=x.payment_status==='paid', free=x.payment_status==='free';
+    let filterOk=true;
+    if(state.recordFilter==='paid') filterOk=paid;
+    if(state.recordFilter==='unpaid') filterOk=!paid&&!free;
+    if(state.recordFilter==='emergency') filterOk=!!(x.is_emergency||x.slot_override);
+    return textOk&&filterOk;
+  });
+  $('recordList').innerHTML=arr.map(x=>{
+    const p=x.people||{};
+    const emergency=!!(x.is_emergency||x.slot_override);
+    const paid=x.payment_status==='paid', free=x.payment_status==='free';
+    const unpaid=!paid&&!free;
+    const paymentBadge=paid
+      ? '<span class="payment-badge paid">✓ ÖDENDİ</span>'
+      : free
+        ? '<span class="payment-badge free">ÜCRETSİZ</span>'
+        : '<span class="payment-badge unpaid">₺ ÖDENMEDİ</span>';
+    return `<button class="person ${emergency?'emergency-card':''} ${paid?'payment-paid':unpaid?'payment-unpaid':''}" data-recordid="${x.id}" style="text-align:left;width:100%">
+      <div class="row between"><b>${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</b><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 Acil':esc(statusName(x.status))}</span></div>
+      <div class="muted">${esc(x.appointment_date)} · ${time5(x.start_time)} · ${esc(p.unit_name)}</div>
+      <div class="row between" style="margin-top:6px"><span>${(x.appointment_services||[]).map(s=>esc(s.service_items?.name||'')).join(', ')}</span><b>${trMoney(x.total_amount)}</b></div>
+      ${paymentBadge?`<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme</span>${paymentBadge}</div>`:''}
+    </button>`;
+  }).join('')||'<div class="card muted">Bu filtrede kayıt bulunamadı.</div>';
+  document.querySelectorAll('[data-recordid]').forEach(b=>b.onclick=()=>openDetail(b.dataset.recordid));
+}
+
+async function runReport(){
+  const a=$('repStart').value,b=$('repEnd').value;
+  if(!a||!b) return alert('Başlangıç ve bitiş tarihini seç.');
+  if(a>b) return alert('Başlangıç tarihi bitiş tarihinden sonra olamaz.');
+
+  const q=await db.from('appointments')
+    .select('appointment_date,start_time,end_time,status,total_amount,payment_status,amount_paid,is_emergency,slot_override,override_slot_type,people(rank_id),appointment_services(service_id,unit_price,line_total,service_items(name))')
+    .gte('appointment_date',a).lte('appointment_date',b).is('deleted_at',null).order('appointment_date').order('start_time');
+  if(q.error)return alert(q.error.message);
+
+  const all=q.data||[];
+  const valid=all.filter(i=>i.status!=='cancelled');
+  const done=valid.filter(i=>i.status==='completed');
+  const noShow=valid.filter(i=>i.status==='no_show').length;
+  const cancelled=all.filter(i=>i.status==='cancelled').length;
+  const emergency=all.filter(i=>i.is_emergency||i.slot_override).length;
+  const total=done.reduce((s,i)=>s+Number(i.total_amount||0),0);
+  const paid=done.filter(i=>i.payment_status==='paid').reduce((s,i)=>s+Number(i.amount_paid||i.total_amount||0),0);
+  const freeAmount=done.filter(i=>i.payment_status==='free').reduce((s,i)=>s+Number(i.total_amount||0),0);
+  const unpaid=Math.max(0,total-paid-freeAmount);
+  const completionRate=valid.length?Math.round(done.length/valid.length*100):0;
+  const collectibleTotal=Math.max(0,total-freeAmount);
+  const collectionRate=collectibleTotal?Math.round(paid/collectibleTotal*100):100;
+
+  const services={};
+  done.forEach(i=>(i.appointment_services||[]).forEach(s=>{
+    const n=s.service_items?.name||'İşlem';
+    services[n]??={count:0,revenue:0};
+    services[n].count++;
+    services[n].revenue+=Number(s.line_total||s.unit_price||0);
+  }));
+
+  const rankGroups={};
+  done.forEach(i=>{
+    const r=state.ranks.find(x=>x.id===i.people?.rank_id);
+    const g=groupName(r?.group_id)||'Diğer';
+    rankGroups[g]=(rankGroups[g]||0)+1;
+  });
+
+  const dayMap={};
+  all.forEach(i=>{
+    const d=i.appointment_date;
+    dayMap[d]??={appointments:0,done:0,noShow:0,cancelled:0,emergency:0,total:0,paid:0};
+    const o=dayMap[d];
+    if(i.status!=='cancelled')o.appointments++;
+    if(i.status==='completed'){
+      o.done++;
+      o.total+=Number(i.total_amount||0);
+      if(i.payment_status==='paid')o.paid+=Number(i.amount_paid||i.total_amount||0);
+    }
+    if(i.status==='no_show')o.noShow++;
+    if(i.status==='cancelled')o.cancelled++;
+    if(i.is_emergency||i.slot_override)o.emergency++;
+  });
+
+  const activeDays=Object.values(dayMap).filter(v=>v.appointments>0).length;
+  const dailyAverage=activeDays?(done.length/activeDays):0;
+  const busiestEntry=Object.entries(dayMap).sort((x,y)=>y[1].appointments-x[1].appointments)[0];
+  const busiestDate=busiestEntry?.[0]||null;
+  const busiestCount=busiestEntry?.[1]?.appointments||0;
+
+  state.lastReport={start:a,end:b,total:valid.length,done:done.length,noShow,cancelled,emergency,totalAmount:total,paid,freeAmount,unpaid,completionRate,collectionRate,services,rankGroups,dayMap};
+
+  const maxService=Math.max(1,...Object.values(services).map(v=>v.count));
+  const serviceBars=Object.entries(services).sort((x,y)=>y[1].count-x[1].count).map(([name,v],idx)=>{
+    const pct=Math.max(4,Math.round(v.count/maxService*100));
+    const cls=['','green','orange','purple'][idx%4];
+    return `<div class="report-bar-row">
+      <div class="report-bar-top"><span><b>${name}</b> · ${v.count} işlem</span><b>${trMoney(v.revenue)}</b></div>
+      <div class="report-track"><div class="report-fill ${cls}" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('')||'<div class="muted">Tamamlanan işlem yok.</div>';
+
+  const maxRank=Math.max(1,...Object.values(rankGroups));
+  const rankBars=Object.entries(rankGroups).sort((a,b)=>b[1]-a[1]).map(([name,count],idx)=>{
+    const pct=Math.max(4,Math.round(count/maxRank*100));
+    const cls=['purple','green','orange',''][idx%4];
+    return `<div class="report-bar-row">
+      <div class="report-bar-top"><span><b>${esc(name)}</b></span><span>${count} kişi · %${done.length?Math.round(count/done.length*100):0}</span></div>
+      <div class="report-track"><div class="report-fill ${cls}" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('')||'<div class="muted">Rütbe dağılımı için veri yok.</div>';
+
+  const dayRows=Object.entries(dayMap).map(([date,v])=>{
+    const rate=v.appointments?Math.round(v.done/v.appointments*100):0;
+    return `<tr>
+      <td><b>${new Intl.DateTimeFormat('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(date+'T12:00:00'))}</b></td>
+      <td>${v.appointments}</td>
+      <td>${v.done}</td>
+      <td><span class="report-status ${rate>=80?'good':'warn'}">%${rate}</span></td>
+      <td>${v.noShow}</td>
+      <td>${v.emergency}</td>
+      <td>${trMoney(v.total)}</td>
+      <td>${trMoney(v.paid)}</td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="8" class="muted">Seçilen tarih aralığında kayıt bulunmuyor.</td></tr>';
+
+  const insightItems=[];
+  insightItems.push(`Seçilen dönemde ${valid.length} geçerli randevunun ${done.length} tanesi tamamlandı; gerçekleşme oranı %${completionRate}.`);
+  insightItems.push(`Toplam ${trMoney(total)} işlem tutarının ${trMoney(paid)} bölümü tahsil edildi; tahsilat oranı %${collectionRate}.`);
+  if(unpaid>0) insightItems.push(`Bekleyen tahsilat ${trMoney(unpaid)}. Kasa kapanışında kontrol edilmesi önerilir.`);
+  else if(total>0) insightItems.push('Tamamlanan işlemlerde bekleyen tahsilat bulunmuyor.');
+  if(emergency>0) insightItems.push(`${emergency} adet acil/istisnai randevu dinlenme veya temizlik saatlerinde ya da acil işaretli olarak kaydedildi.`);
+  if(busiestDate) insightItems.push(`En yoğun gün ${trDate(busiestDate)}: ${busiestCount} randevu.`);
+  if(activeDays) insightItems.push(`Aktif çalışma günü başına ortalama ${dailyAverage.toLocaleString('tr-TR',{maximumFractionDigits:1})} tamamlanan işlem gerçekleşti.`);
+
+  $('reportOut').innerHTML=`<article class="report-shell">
+    <header class="report-hero">
+      <div class="eyebrow">Yönetici Raporu · KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi</div>
+      <h2>Faaliyet, Performans ve Tahsilat Raporu</h2>
+      <div style="opacity:.86;font-size:13px">Randevu akışı, gerçekleşen tıraşlar ve mali durum tek raporda.</div>
+      <div class="report-hero-meta">
+        <span class="report-chip">📅 ${trDate(a)} – ${trDate(b)}</span>
+        <span class="report-chip">🔒 Yetkili yönetici</span>
+        <span class="report-chip">🕒 ${new Date().toLocaleString('tr-TR')}</span>
+      </div>
+    </header>
+
+    <div class="report-body">
+      <div class="report-overview">
+        <div class="report-ring" style="--pct:${completionRate}">
+          <div class="report-ring-content"><b>%${completionRate}</b><span>GERÇEKLEŞME</span></div>
+        </div>
+        <div class="report-mini-grid">
+          <div class="report-mini blue"><span>TOPLAM RANDEVU</span><b>${valid.length}</b></div>
+          <div class="report-mini green"><span>TAMAMLANAN</span><b>${done.length}</b></div>
+          <div class="report-mini orange"><span>ACİL / İSTİSNAİ</span><b>${emergency}</b></div>
+          <div class="report-mini red"><span>GELMEDİ / İPTAL</span><b>${noShow} / ${cancelled}</b></div>
+        </div>
+      </div>
+
+      <div class="report-finance">
+        <div class="report-fin-card total"><div class="label">İşlem Toplamı</div><div class="amount">${trMoney(total)}</div></div>
+        <div class="report-fin-card paid"><div class="label">Tahsil Edilen · %${collectionRate}</div><div class="amount">${trMoney(paid)}</div></div>
+        <div class="report-fin-card wait"><div class="label">Bekleyen</div><div class="amount">${trMoney(unpaid)}</div></div>
+      </div>
+
+      <section class="report-section-card">
+        <div class="report-section-head"><h3>✂️ İşlem Dağılımı</h3><span class="hint">Adet ve işlem tutarı</span></div>
+        <div class="report-bar-list">${serviceBars}</div>
+      </section>
+
+      <section class="report-section-card">
+        <div class="report-section-head"><h3>🎖️ Rütbe Grubu Dağılımı</h3><span class="hint">Tamamlanan işlemlere göre</span></div>
+        <div class="report-bar-list">${rankBars}</div>
+      </section>
+
+      <section class="report-section-card">
+        <div class="report-section-head"><h3>📆 Günlük Performans</h3><span class="hint">${activeDays} aktif çalışma günü</span></div>
+        <div class="report-table-wrap">
+          <table class="report-table pro">
+            <thead><tr><th>Tarih</th><th>Randevu</th><th>Tamam</th><th>Oran</th><th>Gelmedi</th><th>Acil</th><th>İşlem</th><th>Tahsil</th></tr></thead>
+            <tbody>${dayRows}</tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="report-insight">
+        <div class="report-insight-title">📌 Yönetici Değerlendirmesi</div>
+        <ul>${insightItems.map(x=>`<li>${x}</li>`).join('')}</ul>
+      </section>
+
+      <footer class="report-footer">
+        <span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.0</span>
+        <span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span>
+      </footer>
+    </div>
+  </article>`;
+}
+async function loadTrash(){
+  const q=await db.from('appointments')
+    .select('id,appointment_date,start_time,deleted_at,people(full_name,rank_id)')
+    .not('deleted_at','is',null).order('deleted_at',{ascending:false}).limit(50);
+  state.trash=q.data||[];
+}
+
+async function loadAudit(){
+  const q=await db.from('audit_logs').select('table_name,action,created_at').order('created_at',{ascending:false}).limit(12);
+  state.audit=q.data||[];
+}
+
+async function restoreTrash(id){
+  const u=await db.from('appointments').update({deleted_at:null}).eq('id',id);
+  if(u.error) return alert(u.error.message);
+  await Promise.all([loadTrash(),loadRecords(),loadDay(),loadWeek()]);
+  renderSettings();
+}
+
+async function backupJson(){
+  const [people,appointments,services,appointmentServices,slots,settings,manualBlocks,rankGroups,ranks,dailyClosures]=await Promise.all([
+    db.from('people').select('*'),
+    db.from('appointments').select('*'),
+    db.from('service_items').select('*'),
+    db.from('appointment_services').select('*'),
+    db.from('weekly_slots').select('*'),
+    db.from('app_settings').select('*'),
+    db.from('manual_slot_blocks').select('*'),
+    db.from('rank_groups').select('*'),
+    db.from('ranks').select('*'),
+    db.from('daily_closures').select('*')
+  ]);
+  const all=[people,appointments,services,appointmentServices,slots,settings,manualBlocks,rankGroups,ranks,dailyClosures];
+  const failed=all.find(x=>x.error);
+  if(failed) return alert('Yedek alınamadı: '+failed.error.message);
+
+  const payload={
+    schema_version:4,
+    generated_at:new Date().toISOString(),
+    app:APP_NAME,
+    version:APP_VERSION,
+    integrity:{
+      people:(people.data||[]).length,
+      appointments:(appointments.data||[]).length,
+      appointment_services:(appointmentServices.data||[]).length,
+      manual_slot_blocks:(manualBlocks.data||[]).length
+    },
+    data:{
+      rank_groups:rankGroups.data||[],
+      ranks:ranks.data||[],
+      people:people.data||[],
+      appointments:appointments.data||[],
+      services:services.data||[],
+      appointment_services:appointmentServices.data||[],
+      weekly_slots:slots.data||[],
+      app_settings:settings.data||[],
+      manual_slot_blocks:manualBlocks.data||[],
+      daily_closures:dailyClosures.data||[]
+    }
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url;
+  a.download=`KKK_MEBS_Berber_Yedek_v${APP_VERSION.replace('.','_')}_${today()}.json`;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function validateBackupPayload(payload){
+  if(!payload || typeof payload!=='object') throw new Error('Yedek JSON nesnesi okunamadı.');
+  if(payload.app!==APP_NAME) throw new Error('Bu dosya farklı bir sisteme ait.');
+  if(!payload.data || typeof payload.data!=='object') throw new Error('Yedek veri bölümü eksik.');
+  const arrays=['people','appointments','services','appointment_services','weekly_slots','manual_slot_blocks'];
+  arrays.forEach(k=>{if(payload.data[k]!=null&&!Array.isArray(payload.data[k])) throw new Error(`${k} bölümü geçersiz.`);});
+  const raw=JSON.stringify(payload.data);
+  if(/<\s*script|javascript\s*:|onerror\s*=|onload\s*=/i.test(raw)) throw new Error('Yedekte güvenli olmayan HTML/komut içeriği tespit edildi.');
+  if(raw.length>25_000_000) throw new Error('Yedek dosyası izin verilen boyuttan büyük.');
+  return true;
+}
+
+function showRestorePreview(payload){
+  state.restorePayload=payload;
+  const d=payload.data||{};
+  const items=[
+    ['Kişi',(d.people||[]).length],
+    ['Randevu',(d.appointments||[]).length],
+    ['İşlem Satırı',(d.appointment_services||[]).length],
+    ['DOLU Saat',(d.manual_slot_blocks||[]).length],
+    ['Hizmet',(d.services||[]).length],
+    ['Çalışma Saati',(d.weekly_slots||[]).length]
+  ];
+  $('restoreInfo').innerHTML=items.map(([label,count])=>`<div class="restore-count"><span class="muted">${label}</span><b>${count}</b></div>`).join('');
+  $('restoreConfirmText').value='';
+  $('confirmRestoreBtn').disabled=true;
+  hideMsg($('restoreMsg'));
+  $('restoreDialog').showModal();
+}
+
+async function handleRestoreFile(file){
+  if(!file) return;
+  if(file.size>25_000_000) return alert('Yedek dosyası çok büyük.');
+  try{
+    const payload=JSON.parse(await file.text());
+    validateBackupPayload(payload);
+    showRestorePreview(payload);
+  }catch(e){
+    alert('Yedek açılamadı: '+e.message);
+  }finally{
+    $('restoreFile').value='';
+  }
+}
+
+async function restoreBackup(){
+  hideMsg($('restoreMsg'));
+  if($('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE') return;
+  if(!state.restorePayload) return msg($('restoreMsg'),'Yedek dosyası bulunamadı.','error');
+  $('confirmRestoreBtn').disabled=true;
+  $('confirmRestoreBtn').textContent='Geri yükleniyor…';
+  try{
+    validateBackupPayload(state.restorePayload);
+    const r=await db.rpc('restore_app_backup',{payload:state.restorePayload});
+    if(r.error) throw r.error;
+    state.restorePayload=null;
+    $('restoreDialog').close();
+    await loadBase();
+    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
+    renderSettings();
+    alert(`Geri yükleme tamamlandı. ${r.data?.appointments??0} randevu ve ${r.data?.people??0} kişi kaydı işlendi.`);
+  }catch(e){
+    msg($('restoreMsg'),'Geri yükleme iptal edildi: '+e.message,'error');
+  }finally{
+    $('confirmRestoreBtn').textContent='Güvenli Geri Yüklemeyi Başlat';
+    $('confirmRestoreBtn').disabled=$('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';
+  }
+}
+
+function renderSettings(){
+  const lastSignIn=state.user?.last_sign_in_at?new Date(state.user.last_sign_in_at).toLocaleString('tr-TR'):'—';
+  const mfaActive=state.mfa.verified.length>0;
+  const mfaSession=state.mfa.currentLevel==='aal2';
+  $('securitySettings').innerHTML=`<b>🔒 Tek Kullanıcı / Yüksek Güvenlik Modu</b>
+    <div style="margin-top:8px">Sistem: <strong>${esc(APP_NAME)}</strong></div>
+    <div style="margin-top:4px">Yetkili hesap: <strong>${esc(state.user?.email||'Yönetici')}</strong></div>
+    <div style="margin-top:4px">Yeni kullanıcı kaydı: <strong>SUNUCU SEVİYESİNDE KAPALI</strong></div>
+    <div style="margin-top:4px">Veri erişimi: <strong>RLS / Yalnız aktif yönetici</strong></div>
+    <div style="margin-top:4px">2FA: <strong>${mfaActive?'AKTİF':'KURULUM ZORUNLU'}</strong> · Oturum: <strong>${mfaSession?'AAL2':'AAL1'}</strong></div>
+    <div style="margin-top:4px">Kurulum kodu: <strong>DEVRE DIŞI</strong></div>
+    <div style="margin-top:4px">Otomatik oturum kilidi: <strong>30 dakika</strong></div>
+    <div style="margin-top:4px">Son giriş: <strong>${lastSignIn}</strong></div>
+    <div style="margin-top:4px">Uygulama sürümü: <strong>${APP_VERSION} FINAL</strong></div>
+    <div style="margin-top:7px;font-size:11px;opacity:.88">Supabase Free planda sızdırılmış parola kontrolü sunucu özelliği kullanılamaz; bu nedenle final sürümde Authenticator 2FA ve AAL2 veri politikası zorunlu tutulur.</div>`;
+
+  renderMfaSettings();
+
+  $('auditSettings').innerHTML=state.audit.length
+    ? state.audit.map(x=>`<div class="row between" style="padding:7px 0;border-bottom:1px solid var(--line)"><span><b>${esc(x.action)}</b> · ${esc(x.table_name)}</span><span class="muted" style="font-size:12px">${new Date(x.created_at).toLocaleString('tr-TR')}</span></div>`).join('')
+    : '<div class="muted">Henüz işlem kaydı yok.</div>';
+
+  $('trashSettings').innerHTML=state.trash.length
+    ? state.trash.map(x=>`<div class="card row between"><div><b>${esc(rankLabel(x.people?.rank_id))} ${esc(x.people?.full_name)}</b><div class="muted">${esc(x.appointment_date)} · ${time5(x.start_time)}</div></div><button class="btn small" data-restore="${x.id}">Geri Yükle</button></div>`).join('')
+    : '<div class="card muted">Çöp kutusu boş.</div>';
+  document.querySelectorAll('[data-restore]').forEach(b=>b.onclick=()=>restoreTrash(b.dataset.restore));
+
+  $('serviceSettings').innerHTML=state.services.map(s=>`<div class="card row between">
+    <div><b>${esc(s.name)}</b><div class="muted">Güncel fiyat</div></div>
+    <div class="row"><input data-priceid="${s.id}" type="number" min="0" step="1" value="${Number(s.current_price)}" style="width:100px"><button class="btn small" data-saveprice="${s.id}">Kaydet</button></div>
+  </div>`).join('');
+
+  document.querySelectorAll('[data-saveprice]').forEach(b=>b.onclick=async()=>{
+    const id=b.dataset.saveprice, inp=document.querySelector(`[data-priceid="${id}"]`), val=Number(inp.value);
+    if(!Number.isFinite(val)||val<0) return alert('Geçerli bir fiyat gir.');
+    const u=await db.from('service_items').update({current_price:val}).eq('id',id);
+    if(u.error)alert(u.error.message);
+    else{await loadBase();renderSettings();alert('Fiyat güncellendi. Eski kayıtların fiyatı değişmedi.');}
+  });
+
+  const dayNames={1:'Pazartesi',2:'Salı',3:'Çarşamba',4:'Perşembe',5:'Cuma',6:'Cumartesi',7:'Pazar'};
+  const grouped={};
+  state.slots.forEach(x=>(grouped[x.day_of_week]??=[]).push(x));
+  $('scheduleSettings').innerHTML=Object.entries(grouped).map(([d,arr])=>`<div style="margin-bottom:12px"><b>${dayNames[d]||d}</b><div class="muted">${arr.map(x=>`${time5(x.start_time)}–${time5(x.end_time)} ${esc(x.label||x.slot_type)}`).join(' · ')}</div></div>`).join('');
+
+  const hiddenRankNames=new Set(['Er','Onbaşı','Çavuş','Sözleşmeli Er','Sözleşmeli Onbaşı','Sözleşmeli Çavuş']);
+  $('rankSettings').innerHTML=state.groups.map(g=>{
+    const visible=state.ranks.filter(r=>r.group_id===g.id&&!hiddenRankNames.has(r.name));
+    if(!visible.length) return '';
+    return `<div style="margin-bottom:12px"><b>${esc(g.name)}</b><div class="muted">${visible.map(r=>esc(r.name)).join(' · ')}</div></div>`;
+  }).join('');
+}
+
+function officialHeader(title,meta=''){
+  return `<div class="od-head">
+    <div class="od-unit">${esc(APP_NAME.toLocaleUpperCase('tr-TR'))}</div>
+    <div class="od-title">${esc(title)}</div>
+    ${meta?`<div style="font-size:10px;margin-top:5px">${meta}</div>`:''}
+  </div>`;
+}
+
+async function printOfficialDaily(){
+  const date=$('repStart').value||state.selectedDate;
+  const q=await db.from('appointments')
+    .select('appointment_date,start_time,end_time,status,notes,is_emergency,slot_override,override_slot_type,people(full_name,rank_id,unit_name)')
+    .eq('appointment_date',date).is('deleted_at',null).neq('status','cancelled').order('start_time');
+  if(q.error) return alert(q.error.message);
+  const appts=q.data||[];
+  const byTime=new Map(appts.map(x=>[time5(x.start_time),x]));
+  const blocks=new Map(state.manualBlocks.filter(b=>b.block_date===date).map(b=>[time5(b.start_time),b]));
+  const slots=availableSlots(date);
+  const rows=slots.map(s=>{
+    const t=time5(s.start_time), a=byTime.get(t), block=blocks.get(t);
+    let person='', note='';
+    if(a){
+      person=`${rankLabel(a.people?.rank_id)} ${a.people?.full_name||''}`.trim();
+      const flags=[];
+      if(a.is_emergency||a.slot_override) flags.push('ACİL / İSTİSNAİ');
+      if(a.notes) flags.push(a.notes);
+      note=flags.join(' · ');
+    }else if(block){
+      person='DOLU';
+      note='MANUEL DOLU';
+    }else if(s.slot_type==='break'){
+      note='DİNLENME';
+    }else if(s.slot_type==='lunch'){
+      note='ÖĞLE ARASI';
+    }else if(s.slot_type==='cleaning'){
+      note='TEMİZLİK';
+    }else if(s.slot_type==='closed'){
+      note=s.label||'KAPALI';
+    }
+    return `<tr><td class="center" style="width:20%"><b>${t}–${time5(s.end_time)}</b></td><td style="width:45%">${esc(person)}</td><td style="width:35%">${esc(note)}</td></tr>`;
+  }).join('');
+  const dayName=new Intl.DateTimeFormat('tr-TR',{weekday:'long'}).format(new Date(date+'T12:00:00'));
+  $('officialPrint').innerHTML=`<div class="official-doc">
+    ${officialHeader('BERBER RANDEVU LİSTESİ')}
+    <div class="od-meta"><span><b>TARİH:</b> ${esc(new Intl.DateTimeFormat('tr-TR').format(new Date(date+'T12:00:00')))}</span><span><b>GÜN:</b> ${esc(dayName.toLocaleUpperCase('tr-TR'))}</span></div>
+    <table><thead><tr><th>SAAT</th><th>RÜTBESİ VE ADI SOYADI</th><th>AÇIKLAMA</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="od-footer"><div style="text-align:center;min-width:180px">BERBER<br><br>İmza</div></div>
+  </div>`;
+  startPrint('print-official');
+}
+
+async function printOfficialRegister(){
+  const a=$('repStart').value,b=$('repEnd').value;
+  if(!a||!b) return alert('Başlangıç ve bitiş tarihini seç.');
+  if(a>b) return alert('Başlangıç tarihi bitiş tarihinden sonra olamaz.');
+  const q=await db.from('appointments')
+    .select('appointment_date,start_time,status,completed_at,signature_received,people(full_name,rank_id,unit_name)')
+    .gte('appointment_date',a).lte('appointment_date',b).is('deleted_at',null).neq('status','cancelled')
+    .order('appointment_date').order('start_time');
+  if(q.error) return alert(q.error.message);
+  const rows=(q.data||[]).map((x,i)=>{
+    const completed=x.status==='completed'&&x.completed_at;
+    const dt=completed?new Date(x.completed_at):null;
+    return `<tr>
+      <td class="center">${i+1}</td>
+      <td>${esc(rankLabel(x.people?.rank_id))}</td>
+      <td>${esc(x.people?.full_name)}</td>
+      <td>${esc(x.people?.unit_name)}</td>
+      <td class="center">${esc(new Intl.DateTimeFormat('tr-TR').format(new Date(x.appointment_date+'T12:00:00')))}</td>
+      <td class="center">${time5(x.start_time)}</td>
+      <td class="center">${dt?esc(new Intl.DateTimeFormat('tr-TR').format(dt)):''}</td>
+      <td class="center">${dt?esc(dt.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})):''}</td>
+      <td class="center">${x.signature_received?'ALINDI':''}</td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="9" class="center">Kayıt bulunmuyor.</td></tr>';
+  $('officialPrint').innerHTML=`<div class="official-doc">
+    ${officialHeader('BERBER KAYIT ÇİZELGESİ',`${esc(trDate(a))} – ${esc(trDate(b))}`)}
+    <table>
+      <thead><tr><th style="width:4%">S.NO</th><th style="width:10%">RÜTBESİ</th><th style="width:18%">ADI VE SOYADI</th><th style="width:14%">BİRLİĞİ</th><th style="width:11%">RANDEVU TARİHİ</th><th style="width:9%">RANDEVU SAATİ</th><th style="width:11%">TIRAŞ OLDUĞU TARİH</th><th style="width:9%">TIRAŞ OLDUĞU SAAT</th><th style="width:14%">TIRAŞ OLANIN İMZASI</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="od-footer"><div style="text-align:center;min-width:180px">BERBER<br><br>İmza</div></div>
+  </div>`;
+  startPrint('print-official');
+}
+
+async function shareCurrent(){
+  if(state.currentPage==='weekPage') return shareWeek();
+  if(state.currentPage==='reportPage') return shareReport();
+  return shareDay();
+}
+
+async function shareDay(){
+  const lines=state.appointments.filter(x=>x.status!=='cancelled').map(x=>({time:time5(x.start_time),text:`${time5(x.start_time)} – ${rankLabel(x.people?.rank_id)} ${x.people?.full_name||''}`}));
+  state.manualBlocks.filter(b=>b.block_date===state.selectedDate).forEach(b=>lines.push({time:time5(b.start_time),text:`${time5(b.start_time)} – DOLU`}));
+  lines.sort((a,b)=>a.time.localeCompare(b.time));
+  const text=`${APP_NAME.toLocaleUpperCase('tr-TR')}\nGÜNLÜK RANDEVU LİSTESİ\n${trDate(state.selectedDate).toLocaleUpperCase('tr-TR')}\n\n${lines.length?lines.map(x=>x.text).join('\n'):'Randevu bulunmuyor.'}`;
+  if(navigator.share) await navigator.share({title:APP_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Liste panoya kopyalandı.');}
+}
+
+async function shareWeek(){
+  const dates=state.weekDates||[];
+  if(!dates.length) return;
+  const q=await db.from('appointments').select('appointment_date,start_time,status,people(full_name,rank_id)')
+    .gte('appointment_date',dates[0]).lte('appointment_date',dates[dates.length-1]).is('deleted_at',null).neq('status','cancelled').order('appointment_date').order('start_time');
+  if(q.error) return alert(q.error.message);
+  const lines=[];
+  dates.forEach(d=>{
+    lines.push(`\n${trDate(d).toLocaleUpperCase('tr-TR')}`);
+    const items=[];
+    (q.data||[]).filter(x=>x.appointment_date===d).forEach(x=>items.push({
+      time:time5(x.start_time),
+      text:`${time5(x.start_time)} – ${rankLabel(x.people?.rank_id)} ${x.people?.full_name||''}`
+    }));
+    state.manualBlocks.filter(b=>b.block_date===d).forEach(b=>items.push({
+      time:time5(b.start_time),
+      text:`${time5(b.start_time)} – DOLU`
+    }));
+    items.sort((a,b)=>a.time.localeCompare(b.time));
+    if(!items.length) lines.push('Randevu yok');
+    else items.forEach(x=>lines.push(x.text));
+  });
+  const text=`${APP_NAME.toLocaleUpperCase('tr-TR')}\nHAFTALIK RANDEVU PLANI\n${lines.join('\n')}`;
+  if(navigator.share) await navigator.share({title:APP_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Haftalık liste panoya kopyalandı.');}
+}
+
+async function shareReport(){
+  if(!state.lastReport) await runReport();
+  const r=state.lastReport; if(!r)return;
+  const text=`${APP_NAME.toLocaleUpperCase('tr-TR')}\nFAALİYET VE TAHSİLAT RAPORU
+${r.start} – ${r.end}
+
+Toplam Randevu: ${r.total}
+Tamamlanan: ${r.done} (%${r.completionRate})
+Gelmedi: ${r.noShow}
+İptal: ${r.cancelled}
+Acil / İstisnai: ${r.emergency}
+
+İşlem Toplamı: ${trMoney(r.totalAmount)}
+Tahsil Edilen: ${trMoney(r.paid)}
+Bekleyen: ${trMoney(r.unpaid)}`;
+  if(navigator.share) await navigator.share({title:APP_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Rapor panoya kopyalandı.');}
+}
+
+function exportCsv(){
+  const rows=[['Tarih','Saat','Rütbe','Ad Soyad','Birlik','Durum','Ödeme','Acil/İstisna','Tutar']];
+  state.records.forEach(x=>rows.push([
+    x.appointment_date,time5(x.start_time),rankLabel(x.people?.rank_id),x.people?.full_name||'',x.people?.unit_name||'',
+    statusName(x.status),
+    x.payment_status==='paid'?'Ödendi':x.payment_status==='free'?'Ücretsiz':'Ödenmedi',
+    (x.is_emergency||x.slot_override)?'Evet':'Hayır',
+    x.total_amount||0
+  ]));
+  const csv='\ufeff'+rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(';')).join('\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})), a=document.createElement('a'); a.href=url;a.download='kkk-mebs-berber-kayitlari.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function setReportPreset(type){
+  const now=new Date(); let start=new Date(now), end=new Date(now);
+  if(type==='week'){const js=now.getDay();const diff=(js===0?-6:1-js);start.setDate(now.getDate()+diff);end=new Date(start);end.setDate(start.getDate()+4);}
+  else if(type==='month'){start=new Date(now.getFullYear(),now.getMonth(),1);end=new Date(now);}
+  else if(type==='30'){start=new Date(now);start.setDate(now.getDate()-29);end=new Date(now);}
+  $('repStart').value=isoDate(start);$('repEnd').value=isoDate(end);runReport();
+}
+
+function switchPage(id){
+  state.currentPage=id;
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+  const titles={homePage:'Bugün',weekPage:'Haftalık Plan',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar'};
+  $('pageTitle').textContent=titles[id]||APP_NAME;
+  $('fab').classList.toggle('hidden',id!=='homePage');
+  if(id==='weekPage')loadWeek(); if(id==='recordsPage')loadRecords(); if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),getMfaState().then(x=>state.mfa=x)]).then(renderSettings);}
+}
+
+function bind(){
+  $('loginForm').onsubmit=async e=>{
+    e.preventDefault();
+    hideMsg($('authMsg'));
+    const email=$('loginEmail').value.trim(), password=$('loginPassword').value;
+    if(!email||password.length<8) return msg($('authMsg'),'E-posta ve şifreni kontrol et.','error');
+    const btn=e.submitter;
+    if(btn){btn.disabled=true;btn.textContent='Giriş yapılıyor…';}
+    try{
+      const r=await db.auth.signInWithPassword({email,password});
+      if(r.error) msg($('authMsg'),'Giriş başarısız. E-posta veya şifre hatalı.','error');
+    }finally{
+      if(btn){btn.disabled=false;btn.textContent='Giriş Yap';}
+      $('loginPassword').value='';
+    }
+  };
+
+  $('mfaChallengeForm').onsubmit=verifyMfaChallenge;
+  $('mfaFactorSelect').onchange=e=>{state.mfaChallengeFactorId=e.target.value;};
+  $('mfaLogoutBtn').onclick=()=>db.auth.signOut();
+  $('mfaGateEnrollBtn').onclick=startMfaEnrollment;
+  $('verifyMfaEnrollBtn').onclick=verifyMfaEnrollment;
+  $('closeMfaEnroll').onclick=()=>$('mfaEnrollDialog').close();
+
+  $('logoutBtn').onclick=()=>db.auth.signOut();
+  $('fab').onclick=()=>openNew();
+  $('closeDialog').onclick=()=>{state.editAppointmentId=null;$('appointmentDialog').close();};
+  $('closeDetail').onclick=()=>$('detailDialog').close();
+  $('appointmentForm').onsubmit=saveAppointment;
+  $('apptDate').onchange=()=>fillSlotSelect($('apptDate').value);
+  $('emergencyCheck').onchange=()=>{
+    $('overrideReasonWrap').classList.toggle('hidden',!$('emergencyCheck').checked);
+    fillSlotSelect($('apptDate').value,$('slotSelect').value);
+  };
+  $('personName').addEventListener('change',applyKnownPerson);
+  $('personName').addEventListener('blur',applyKnownPerson);
+
+  $('dayPicker').onchange=async e=>{state.selectedDate=e.target.value;await loadDay();};
+  $('prevDay').onclick=async()=>{let d=new Date(state.selectedDate+'T12:00:00');d.setDate(d.getDate()-1);state.selectedDate=isoDate(d);await loadDay();};
+  $('nextDay').onclick=async()=>{let d=new Date(state.selectedDate+'T12:00:00');d.setDate(d.getDate()+1);state.selectedDate=isoDate(d);await loadDay();};
+
+  $('weekPicker').onchange=loadWeek;
+  $('recordSearch').oninput=renderRecords;
+  document.querySelectorAll('[data-record-filter]').forEach(b=>b.onclick=()=>{
+    state.recordFilter=b.dataset.recordFilter;
+    document.querySelectorAll('[data-record-filter]').forEach(x=>x.classList.toggle('active',x===b));
+    renderRecords();
+  });
+
+  $('runReport').onclick=runReport;
+  $('printReportBtn').onclick=async()=>{state.lastReport=null;await runReport();if(state.lastReport)startPrint('print-report');};
+  $('officialDailyBtn').onclick=printOfficialDaily;
+  $('officialRegisterBtn').onclick=printOfficialRegister;
+  document.querySelectorAll('[data-report-preset]').forEach(b=>b.onclick=()=>setReportPreset(b.dataset.reportPreset));
+  $('repStart').onchange=()=>{state.lastReport=null;};
+  $('repEnd').onchange=()=>{state.lastReport=null;};
+
+  $('shareBtn').onclick=shareCurrent;
+  $('csvBtn').onclick=exportCsv;
+  $('printBtn').onclick=()=>startPrint('print-records');
+  $('backupBtn').onclick=backupJson;
+
+  $('restoreBtn').onclick=()=>$('restoreFile').click();
+  $('restoreFile').onchange=e=>handleRestoreFile(e.target.files?.[0]);
+  $('closeRestore').onclick=()=>{state.restorePayload=null;$('restoreDialog').close();};
+  $('restoreConfirmText').oninput=e=>{
+    $('confirmRestoreBtn').disabled=e.target.value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';
+  };
+  $('confirmRestoreBtn').onclick=restoreBackup;
+
+  document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>switchPage(b.dataset.page));
+}
+
+init().catch(e=>{console.error(e);alert('Uygulama başlatılamadı: '+e.message);});
+</script>
+</body>
+</html>
