@@ -1,7 +1,7 @@
 {
-  "name": "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi",
-  "short_name": "KKK MEBS Berber",
-  "description": "Randevu verme, tıraş kaydı, ücret takibi ve raporlama sistemi",
+  "name": "Okan Vural Randevu Sistemi",
+  "short_name": "Okan Vural Randevu",
+  "description": "Okan Vural Randevu Sistemi v4.2 · güvenli randevu, kayıt, ödeme ve raporlama",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
