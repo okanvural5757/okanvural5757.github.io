@@ -1,7 +1,7 @@
 {
   "name": "Okan Vural Randevu Sistemi",
   "short_name": "Okan Vural Randevu",
-  "description": "Okan Vural Randevu Sistemi v4.2 · güvenli randevu, kayıt, ödeme ve raporlama",
+  "description": "Randevu verme, tıraş kaydı, ücret takibi ve raporlama sistemi",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
