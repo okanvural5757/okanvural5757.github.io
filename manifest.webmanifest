@@ -2,7 +2,7 @@
   "name": "Okan Vural Randevu Sistemi",
   "short_name": "Okan Vural",
   "description": "Randevu verme, tıraş kaydı, ücret takibi ve raporlama sistemi",
-  "start_url": "./index.html?v=4.4",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f4f6f8",
