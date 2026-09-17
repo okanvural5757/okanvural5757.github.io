@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Okan Vural Randevu Sistemi">
-<title>Okan Vural Randevu Sistemi v4.6</title>
-<meta name="application-version" content="4.6">
+<title>Okan Vural Randevu Sistemi v4.7.1</title>
+<meta name="application-version" content="4.7.1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -287,6 +287,43 @@ img,svg,canvas{max-width:100%;height:auto}
   .money-strip{grid-template-columns:1fr}
 }
 
+
+/* v4.7 Pro mobile / warning / backup center */
+.pro-contact{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+.pro-contact .btn{min-width:96px;height:48px;align-self:end}
+.person-alert{border-radius:15px;padding:12px;border:1px solid #fdb022;background:#fff8eb;color:#93370d;font-size:12px;display:grid;gap:7px}
+.person-alert.safe{border-color:#abefc6;background:#ecfdf3;color:#067647}
+.person-alert .alert-title{font-size:13px;font-weight:950}
+.person-alert .alert-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
+.overdue-card{border-color:#f04438!important;background:linear-gradient(135deg,#fff 0%,#fff1f0 100%)!important;box-shadow:0 7px 20px rgba(217,45,32,.12)!important}
+.overdue-warning{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:11px;background:#fee4e2;color:#b42318;font-size:11px;font-weight:900}
+.debt-card{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;border-radius:15px;padding:13px}
+.debt-amount{font-size:28px;font-weight:950;color:#c2410c}
+.sticky-save{position:sticky;bottom:-14px;z-index:6;padding:10px 0 calc(4px + env(safe-area-inset-bottom));background:linear-gradient(to bottom,rgba(255,255,255,0),#fff 28%)}
+.backup-list{display:grid;gap:9px}
+.backup-item{border:1px solid var(--line);border-radius:15px;padding:12px;background:#fff;display:grid;gap:8px}
+.backup-meta{display:flex;gap:6px;flex-wrap:wrap}
+.backup-chip{display:inline-flex;padding:5px 7px;border-radius:999px;background:#f2f4f7;color:#344054;font-size:10px;font-weight:850}
+.backup-chip.ok{background:#ecfdf3;color:#067647}
+.backup-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.finance-grid-v47{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}
+.finance-kpi-v47{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:13px;min-width:0}
+.finance-kpi-v47 .label{font-size:10px;font-weight:850;color:#667085;letter-spacing:.02em;text-transform:uppercase}
+.finance-kpi-v47 .amount{font-size:22px;font-weight:950;margin-top:4px;overflow-wrap:anywhere}
+.finance-kpi-v47.cash{background:#ecfdf3;border-color:#abefc6}.finance-kpi-v47.cash .amount{color:#067647}
+.finance-kpi-v47.debt{background:#fff7ed;border-color:#fed7aa}.finance-kpi-v47.debt .amount{color:#c2410c}
+.finance-kpi-v47.prior{background:#eef4ff;border-color:#b2ccff}.finance-kpi-v47.prior .amount{color:#1849a9}
+.finance-note{font-size:11px;color:#667085;margin-top:9px;line-height:1.45}
+.call-link{display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:9px 11px;border-radius:11px;background:#ecfdf3;color:#067647;font-weight:900;font-size:12px}
+@media(max-width:640px){
+  #appointmentDialog{width:100%;max-width:none;max-height:100dvh;margin:0}
+  #appointmentDialog .sheet{border-radius:18px 18px 0 0;max-height:96dvh;margin-top:4dvh;padding:14px 12px calc(14px + env(safe-area-inset-bottom))}
+  #appointmentDialog .grid{gap:10px}
+  #appointmentDialog textarea{min-height:64px}
+  .finance-grid-v47{grid-template-columns:1fr 1fr}
+}
+@media(max-width:390px){.pro-contact{grid-template-columns:1fr}.pro-contact .btn{width:100%}.finance-grid-v47{grid-template-columns:1fr}.backup-actions{grid-template-columns:1fr}}
+
 @page{size:A4;margin:10mm}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -312,7 +349,7 @@ img,svg,canvas{max-width:100%;height:auto}
 </style>
 </head>
 <body>
-<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.6 - professional final build -->
+<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.1 - professional final build -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -423,6 +460,7 @@ img,svg,canvas{max-width:100%;height:auto}
         <div class="toolbar">
           <button class="btn small" data-report-preset="today">Bugün</button>
           <button class="btn small" data-report-preset="week">Bu Hafta</button>
+          <button class="btn small" data-report-preset="15">Son 15 Gün</button>
           <button class="btn small" data-report-preset="month">Bu Ay</button>
           <button class="btn small" data-report-preset="30">Son 30 Gün</button>
         </div>
@@ -443,7 +481,7 @@ img,svg,canvas{max-width:100%;height:auto}
           <div class="muted" style="font-size:11px;margin-top:6px">Günlük liste başlangıç tarihini; kayıt çizelgesi seçili tarih aralığını kullanır.</div>
         </div>
       </div>
-      <div class="notice no-print" style="margin-top:12px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff"><b>📊 Profesyonel rapor:</b> Gerçekleşme, tahsilat, acil randevu, işlem ve rütbe dağılımını renkli yönetici formatında gösterir. PDF çıktısında renkler korunur.</div><div id="reportStatus" class="report-status-box hidden"></div><div id="reportOut" style="margin-top:12px"></div>
+      <div class="notice no-print" style="margin-top:12px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff"><b>📊 Profesyonel rapor:</b> Haftalık, 15 günlük, aylık veya özel tarih aralığında gerçek tahsilat, hizmet bedeli, önceki borç tahsilatı, kalan borç, gelmedi ve işlem dağılımını gösterir.</div><div id="reportStatus" class="report-status-box hidden"></div><div id="reportOut" style="margin-top:12px"></div>
     </section>
 
     <section id="settingsPage" class="page">
@@ -456,16 +494,20 @@ img,svg,canvas{max-width:100%;height:auto}
       <div class="section-title">Son Güvenli İşlemler</div>
       <div id="auditSettings" class="card"></div>
 
-      <div class="section-title">Veri Güvenliği / Yedek</div>
+      <div class="section-title">Veri Güvenliği / Yedek Merkezi</div>
       <div class="card grid">
-        <div class="muted">Randevu, kişi, işlem, çalışma saatleri ve DOLU işaretlerinin tam JSON yedeğini iPhone'a indir.</div>
+        <div class="muted">Tam yedek hem Yedek Merkezi'ne güvenli sunucu kopyası olarak kaydedilir hem de iPhone'a JSON dosyası olarak indirilir. v4.6 ve v4.7 yedekleri desteklenir.</div>
         <div class="grid grid2">
-          <button id="backupBtn" class="btn primary">Tam Yedek İndir</button>
-          <button id="restoreBtn" class="btn">Yedekten Geri Yükle</button>
+          <button id="backupBtn" class="btn primary">Yeni Tam Yedek Al</button>
+          <button id="importBackupBtn" class="btn">Eski Yedeği Merkeze Ekle</button>
         </div>
+        <button id="restoreBtn" class="btn">Dosyadan Güvenli Geri Yükle</button>
         <input id="restoreFile" type="file" accept=".json,application/json" class="hidden">
-        <div class="restore-warning"><b>Güvenli geri yükleme:</b> Mevcut yeni kayıtları silmez. Yedekteki kayıtları aynı kimliklerle geri getirir/günceller. İşlem sunucuda tek transaction olarak tamamlanır veya tamamen geri alınır.</div>
-        <div class="muted" style="font-size:12px">Yedek dosyasını güvenli bir yerde sakla. Kişi ve randevu bilgileri içerir.</div>
+        <input id="importBackupFile" type="file" accept=".json,application/json" class="hidden">
+        <div class="restore-warning"><b>Güvenli geri yükleme:</b> Geri yükleme başlamadan hemen önce otomatik güvenlik yedeği alınır. İşlem tek transaction olarak tamamlanır veya tamamen geri alınır.</div>
+        <div id="backupCenterStatus" class="notice hidden"></div>
+        <div id="backupCenterList" class="backup-list"><div class="muted">Yedek listesi yükleniyor…</div></div>
+        <div class="muted" style="font-size:11px">Yedekler personel ve randevu bilgileri içerir. Program içindeki sunucu kopyalarına doğrudan tablo erişimi kapalıdır; yalnız yetkili güvenli oturum RPC üzerinden erişebilir.</div>
       </div>
 
       <div class="section-title">Çöp Kutusu</div>
@@ -545,8 +587,12 @@ img,svg,canvas{max-width:100%;height:auto}
       </div>
       <div class="grid grid2">
         <label>Birliği<input id="unitName" autocomplete="off"></label>
-        <label>Telefon Numarası<input id="phoneNumber" type="tel" inputmode="tel" autocomplete="tel" placeholder="05xx xxx xx xx"></label>
+        <div class="pro-contact">
+          <label>Telefon Numarası<input id="phoneNumber" type="tel" inputmode="tel" autocomplete="tel" placeholder="05xx xxx xx xx"></label>
+          <button id="callPersonBtn" class="btn ok hidden" type="button">📞 Ara</button>
+        </div>
       </div>
+      <div id="personAlertBox" class="person-alert hidden"></div>
       <div class="grid grid2">
         <label>Tarih<input id="apptDate" type="date" required></label>
         <label>Saat<select id="slotSelect" required></select></label>
@@ -566,7 +612,7 @@ img,svg,canvas{max-width:100%;height:auto}
       <div class="row between">
         <b>Toplam</b><span id="newTotal" class="big">0 ₺</span>
       </div>
-      <button id="saveAppointmentBtn" class="btn primary" type="submit">Randevuyu Kaydet</button>
+      <div class="sticky-save"><button id="saveAppointmentBtn" class="btn primary" type="submit" style="width:100%">Randevuyu Kaydet</button></div>
       <div id="formMsg" class="notice hidden"></div>
     </form>
   </div>
@@ -582,6 +628,22 @@ img,svg,canvas{max-width:100%;height:auto}
   </div>
 </dialog>
 
+<dialog id="debtDialog">
+  <div class="sheet">
+    <div class="row between">
+      <h2>₺ Önceki Borç Tahsilatı</h2>
+      <button id="closeDebt" class="btn small" type="button">Kapat</button>
+    </div>
+    <div class="grid">
+      <div class="debt-card"><div class="muted">Kalan önceki borç</div><div id="debtTotal" class="debt-amount">0 ₺</div><div id="debtPerson" class="muted" style="margin-top:4px"></div></div>
+      <label>Alınan Tutar<input id="debtAmount" type="number" min="1" step="1" inputmode="decimal"></label>
+      <label>Açıklama (isteğe bağlı)<textarea id="debtNotes" placeholder="Örn. Önceki borcun bir kısmı alındı"></textarea></label>
+      <button id="collectDebtBtn" class="btn primary" type="button">Tahsilatı Kaydet</button>
+      <div id="debtMsg" class="notice hidden"></div>
+    </div>
+  </div>
+</dialog>
+
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
@@ -590,7 +652,7 @@ const SUPABASE_KEY = 'sb_publishable_l2qxOCeQoVcSDFhY6tBkrg_nxNBqkWM';
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
-const APP_VERSION = "4.6";
+const APP_VERSION = "4.7.1";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -600,7 +662,8 @@ const state = {
   weekDates:[], lastReport:null, recordFilter:'all',
   mfa:{verified:[],currentLevel:'aal1',nextLevel:'aal1'},
   mfaEnrollFactorId:null, mfaChallengeFactorId:null, restorePayload:null, slotDateAppointments:[], slotDateKey:'',
-  currentClosure:null, dayLoadSeq:0, weekLoadSeq:0, slotLoadSeq:0
+  currentClosure:null, dayLoadSeq:0, weekLoadSeq:0, slotLoadSeq:0,
+  selectedPersonId:null, personAlerts:null, debtPersonId:null, debtBeforeAppointmentId:null, debtMax:0, backups:[], pendingSensitiveAction:null
 };
 const IDLE_MS = 24 * 60 * 60 * 1000;
 const SESSION_CHECK_MS = 15 * 1000;
@@ -690,6 +753,9 @@ async function enter(user){
       return;
     }
 
+    // Arka plandaki token yenilemeleri açık uygulamayı yeniden MFA ekranına göndermesin.
+    if(!$('appView').classList.contains('hidden')) return;
+
     try{ state.mfa=await getMfaState(); }
     catch(e){
       console.error(e);
@@ -702,21 +768,17 @@ async function enter(user){
       showMfaSetupGate();
       return;
     }
-    if(state.mfa.verified.length && state.mfa.currentLevel!=='aal2'){
-      showMfaChallengeGate(state.mfa.verified[0]);
-      return;
-    }
 
-    // TOKEN_REFRESHED gibi arka plan Auth olayları 24 saatlik hareketsizlik süresini sıfırlamasın.
-    if(!$('appView').classList.contains('hidden')) return;
-    if(!(await activateAppSession())) return;
+    // v4.7: Önce sunucudaki aynı session_id + cihaz için 24 saatlik güveni kontrol et.
+    // Yeni cihaz/session AAL2 olmadan etkinleşemez; aynı güvenilir oturum gereksiz kod istemez.
+    if(!(await activateAppSession(true))) return;
 
     $('authView').classList.add('hidden');
     $('mfaView').classList.add('hidden');
     $('appView').classList.remove('hidden');
     resetActivity();
     await loadBase();
-    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
+    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter()]);
     renderSettings();
   } finally {
     entering=false;
@@ -775,15 +837,23 @@ async function handleSessionLost(reason='another_session_active'){
   showAuth();
   const text=reason==='idle_expired'
     ? '24 saat işlem yapılmadığı için güvenlik amacıyla oturum kapatıldı.'
-    : 'Bu oturum kapatıldı. Hesap başka bir cihaz veya tarayıcıda etkinleştirildi.';
+    : reason==='mfa_trust_expired'
+      ? '24 saatlik güven süresi doldu. Yeniden giriş ve Authenticator doğrulaması gerekli.'
+      : reason==='device_mismatch'
+        ? 'Bu güvenli oturum farklı bir cihaz kimliğiyle kullanılamaz.'
+        : 'Bu oturum kapatıldı. Hesap başka bir cihaz veya tarayıcıda etkinleştirildi.';
   alert(text);
   sessionLossHandling=false;
 }
 
-async function activateAppSession(){
-  const r=await db.rpc('activate_app_session_v46',{p_device_id:getDeviceId()});
+async function activateAppSession(challengeOnMfa=false){
+  const r=await db.rpc('activate_app_session_v47',{p_device_id:getDeviceId()});
   if(r.error){
     const text=r.error.message||'Güvenli oturum etkinleştirilemedi.';
+    if(challengeOnMfa && /2FA|doğrulama gerekli|güven süresi/i.test(text)){
+      showMfaChallengeGate(state.mfa.verified?.[0]);
+      return false;
+    }
     try{ await db.auth.signOut({scope:'local'}); }catch(e){ console.warn(e); }
     showAuth();
     msg($('authMsg'),text,'error');
@@ -798,7 +868,7 @@ async function activateAppSession(){
 async function checkRemoteSession(){
   if(!state.user || document.hidden || sessionLossHandling) return;
   try{
-    const r=await db.rpc('check_app_session_v46');
+    const r=await db.rpc('check_app_session_v47',{p_device_id:getDeviceId()});
     if(r.error){ console.warn('Oturum kontrolü yapılamadı',r.error); return; }
     if(r.data?.active===false) await handleSessionLost(r.data?.reason||'another_session_active');
   }catch(e){ console.warn('Oturum kontrolü bağlantı hatası',e); }
@@ -807,7 +877,7 @@ async function checkRemoteSession(){
 async function touchServerActivity(){
   if(!state.user || sessionLossHandling) return;
   try{
-    const r=await db.rpc('touch_app_session_v46');
+    const r=await db.rpc('touch_app_session_v47',{p_device_id:getDeviceId()});
     if(r.error){ console.warn('Oturum aktivitesi güncellenemedi',r.error); return; }
     if(r.data?.active===false) await handleSessionLost(r.data?.reason||'another_session_active');
   }catch(e){ console.warn('Oturum aktivitesi bağlantı hatası',e); }
@@ -823,9 +893,9 @@ function resetActivity(){
 
 function startIdleGuard(){
   ['click','touchstart','keydown','scroll'].forEach(ev=>document.addEventListener(ev,resetActivity,{passive:true}));
-  document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ checkIdle(); checkRemoteSession(); } });
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ checkIdle(); checkRemoteSession(); if(state.selectedDate===today())renderDay(); } });
   clearInterval(idleTimer);
-  idleTimer=setInterval(checkIdle,60000);
+  idleTimer=setInterval(()=>{checkIdle();if(state.user&&state.selectedDate===today()&&!document.hidden)renderDay();},60000);
 }
 
 async function checkIdle(){
@@ -894,6 +964,9 @@ async function verifyMfaChallenge(e){
     state.mfa=await getMfaState();
     const {data:{user}}=await db.auth.getUser();
     if(user) await enter(user);
+    if(state.pendingSensitiveAction==='restore' && state.restorePayload){
+      state.pendingSensitiveAction=null; showRestorePreview(state.restorePayload); msg($('restoreMsg'),'2FA doğrulandı. Geri yüklemeyi başlatmak için GERİ YÜKLE onayını yeniden yaz.','success');
+    }
   }catch(e){
     msg($('mfaMsg'),'Doğrulama kodu kabul edilmedi. Yeni kodu kontrol edip tekrar dene.','error');
   }
@@ -917,7 +990,7 @@ function renderMfaSettings(){
     el.innerHTML=`<div class="mfa-panel ok">
       <div class="mfa-status"><span class="mfa-dot ok"></span>2FA AKTİF</div>
       <div class="muted" style="margin-top:7px;font-size:12px">Authenticator faktörü doğrulanmış. Bu oturum: <b>${aal2?'AAL2 / iki aşamalı':'AAL1 / yeniden doğrulama gerekli'}</b>.</div>
-      <div class="muted" style="margin-top:5px;font-size:11px">2FA kurulduktan sonra veritabanı RLS politikaları AAL2 olmadan randevu/personel verilerine erişimi reddeder.</div>
+      <div class="muted" style="margin-top:5px;font-size:11px">Başarılı Authenticator doğrulamasından sonra aynı güvenli oturum 24 saat boyunca yeniden kod istemeden kullanılabilir. Yeni cihaz veya farklı oturum yine 2FA gerektirir.</div>
     </div>
     <div class="toolbar" style="margin-top:10px">
       <button class="btn small" id="refreshMfaBtn">2FA Durumunu Yenile</button>
@@ -1041,13 +1114,59 @@ function fillPeopleList(){
   $('peopleList').innerHTML=state.people.map(p=>`<option value="${esc(p.full_name)}">${esc(rankLabel(p.rank_id))} · ${esc(p.unit_name)}${p.phone?' · '+esc(formatPhone(p.phone)):''}</option>`).join('');
 }
 
-function applyKnownPerson(){
+function updateCallButton(){
+  const phone=normalizePhoneClient($('phoneNumber').value);
+  $('callPersonBtn').classList.toggle('hidden',!phone);
+  $('callPersonBtn').dataset.phone=phone||'';
+}
+
+function renderPersonAlertBox(alerts,person){
+  const box=$('personAlertBox');
+  if(!alerts || !person){box.classList.add('hidden');box.innerHTML='';return;}
+  const noShow=Number(alerts.no_show_count||0), debt=Number(alerts.debt||0);
+  if(!noShow && !debt){
+    box.className='person-alert safe';
+    box.innerHTML='<div class="alert-title">✓ Geçmiş uyarı bulunmuyor</div><div>Bu kişi için önceki borç veya gelmedi kaydı görünmüyor.</div>';
+    return;
+  }
+  const parts=[];
+  if(noShow) parts.push(`<div><b>⚠️ Daha önce ${noShow} kez randevusuna gelmedi.</b>${alerts.last_no_show?` Son kayıt: ${esc(alerts.last_no_show)}.`:''}</div>`);
+  if(debt>0) parts.push(`<div><b>₺ Önceki borç: ${trMoney(debt)}</b> · Yeni işlem öncesinde tahsilatı kontrol et.</div>`);
+  box.className='person-alert';
+  box.innerHTML=`<div class="alert-title">Kişi Geçmişi Uyarısı</div>${parts.join('')}`;
+}
+
+async function loadPersonAlerts(person,beforeAppointmentId=null){
+  if(!person?.id){state.personAlerts=null;renderPersonAlertBox(null,null);return null;}
+  try{
+    const r=await db.rpc('get_person_alerts_v47',{p_person_id:person.id,p_before_appointment_id:beforeAppointmentId||null});
+    if(r.error) throw r.error;
+    state.personAlerts=r.data||{no_show_count:0,debt:0};
+    renderPersonAlertBox(state.personAlerts,person);
+    return state.personAlerts;
+  }catch(e){
+    console.warn('Kişi uyarıları yüklenemedi',e);
+    state.personAlerts=null;
+    const box=$('personAlertBox');
+    box.className='person-alert';
+    box.innerHTML='<div class="alert-title">Geçmiş bilgisi doğrulanamadı</div><div>Randevu kaydı yapılabilir; borç ve gelmedi geçmişini daha sonra tekrar kontrol et.</div>';
+    return null;
+  }
+}
+
+async function applyKnownPerson(){
   const name=$('personName').value.trim().toLocaleLowerCase('tr-TR');
   const p=state.people.find(x=>x.full_name.trim().toLocaleLowerCase('tr-TR')===name);
-  if(!p) return;
+  if(!p){
+    state.selectedPersonId=null; state.personAlerts=null;
+    renderPersonAlertBox(null,null); updateCallButton(); return;
+  }
+  state.selectedPersonId=p.id;
   $('rankSelect').value=String(p.rank_id||'');
   $('unitName').value=p.unit_name||'';
   $('phoneNumber').value=p.phone?formatPhone(p.phone):'';
+  updateCallButton();
+  await loadPersonAlerts(p,state.editAppointmentId||null);
 }
 function fillServices(){
   $('servicesBox').innerHTML=state.services.map(s=>`<label class="service"><span><input type="checkbox" class="svc" value="${s.id}" data-price="${s.current_price}"> ${esc(s.name)}</span><b>${trMoney(s.current_price)}</b></label>`).join('');
@@ -1124,12 +1243,21 @@ async function refreshSlotSelect(dateStr,preferred=''){
   return fillSlotSelect(dateStr,preferred);
 }
 
+function appointmentIsOverdue(x){
+  if(!x || x.status!=='scheduled' || !x.appointment_date) return false;
+  const end=time5(x.end_time||x.start_time);
+  if(!end) return false;
+  const dt=new Date(`${x.appointment_date}T${end}:00`);
+  return Number.isFinite(dt.getTime()) && dt.getTime()<Date.now();
+}
+
 function appointmentCardHtml(x,slot=null){
   const p=x.people||{}, emergency=x.is_emergency||x.slot_override;
   const paid=x.payment_status==='paid', free=x.payment_status==='free', unpaid=!paid&&!free;
   const paymentClass=paid?'payment-paid':unpaid?'payment-unpaid':'';
   const paymentBadge=paid?'<span class="payment-badge paid">✓ ÖDENDİ</span>':free?'<span class="payment-badge free">ÜCRETSİZ</span>':'<span class="payment-badge unpaid">₺ ÖDENMEDİ</span>';
-  return `<button class="slot ${emergency?'emergency-card':''} ${paymentClass}" data-id="${x.id}" style="text-align:left"><div class="row between"><div class="time">${time5(x.start_time)} – ${time5(x.end_time)}</div><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 ACİL':statusName(x.status)}</span></div><div class="name">${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</div><div class="row between"><span class="muted">${esc(p.unit_name)}${x.slot_override&&slot?' · '+esc(slot.label||'İstisna'):''}</span><b>${trMoney(x.total_amount)}</b></div><div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme Durumu</span>${paymentBadge}</div></button>`;
+  const overdue=appointmentIsOverdue(x);
+  return `<button class="slot ${emergency?'emergency-card':''} ${paymentClass} ${overdue?'overdue-card':''}" data-id="${x.id}" style="text-align:left"><div class="row between"><div class="time">${time5(x.start_time)} – ${time5(x.end_time)}</div><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 ACİL':statusName(x.status)}</span></div><div class="name">${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</div><div class="row between"><span class="muted">${esc(p.unit_name)}${x.slot_override&&slot?' · '+esc(slot.label||'İstisna'):''}</span><b>${trMoney(x.total_amount)}</b></div>${overdue?'<div class="overdue-warning"><span>⚠️ Randevu saati geçti</span><span>Geldi / Gelmedi durumunu seç</span></div>':''}<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme Durumu</span>${paymentBadge}</div></button>`;
 }
 function bindDayCards(){
   document.querySelectorAll('[data-empty]').forEach(b=>b.onclick=e=>{e.stopPropagation();openNew(b.dataset.empty);});
@@ -1144,7 +1272,7 @@ function renderDay(){
   $('stTotal').textContent=active.length; $('stDone').textContent=active.filter(x=>x.status==='completed').length;
   const done=active.filter(x=>x.status==='completed');
   $('stMoney').textContent=trMoney(done.reduce((s,x)=>s+Number(x.total_amount||0),0));
-  $('stPaid').textContent=trMoney(done.filter(x=>x.payment_status==='paid').reduce((s,x)=>s+Number(x.amount_paid||x.total_amount||0),0));
+  $('stPaid').textContent=trMoney(done.filter(x=>x.payment_status==='paid').reduce((s,x)=>s+Math.min(Number(x.amount_paid||0),Number(x.total_amount||0)),0));
   $('stUnpaid').textContent=trMoney(done.filter(x=>x.payment_status!=='paid'&&x.payment_status!=='free').reduce((s,x)=>s+Number(x.total_amount||0),0));
   const slots=availableSlots(state.selectedDate), pieces=[];
   const apptByTime=new Map(state.appointments.filter(x=>x.status!=='cancelled').map(x=>[time5(x.start_time),x]));
@@ -1180,6 +1308,8 @@ async function openNew(time='', editId=null, forceEmergency=false){
   $('appointmentForm').reset();
   hideMsg($('formMsg'));
   state.editAppointmentId=editId;
+  state.selectedPersonId=null; state.personAlerts=null;
+  renderPersonAlertBox(null,null); $('callPersonBtn').classList.add('hidden');
   fillServices();
   $('emergencyCheck').checked=!!forceEmergency;
   $('overrideReason').value='';
@@ -1195,6 +1325,7 @@ async function openNew(time='', editId=null, forceEmergency=false){
     $('personName').value=p.full_name||'';
     $('unitName').value=p.unit_name||'';
     $('phoneNumber').value=p.phone?formatPhone(p.phone):'';
+    state.selectedPersonId=p.id||null; updateCallButton();
     $('apptDate').value=x.appointment_date;
     $('notes').value=x.notes||'';
     $('emergencyCheck').checked=!!(x.is_emergency||x.slot_override);
@@ -1204,6 +1335,7 @@ async function openNew(time='', editId=null, forceEmergency=false){
     const selectedIds=new Set((x.appointment_services||[]).map(s=>String(s.service_id)));
     document.querySelectorAll('.svc').forEach(cb=>cb.checked=selectedIds.has(cb.value));
     calcNewTotal();
+    await loadPersonAlerts(p,editId);
   }else{
     $('appointmentTitle').textContent=forceEmergency?'🚨 Acil Randevu':'Yeni Randevu';
     $('saveAppointmentBtn').textContent=forceEmergency?'Acil Randevuyu Kaydet':'Randevuyu Kaydet';
@@ -1274,31 +1406,39 @@ async function saveAppointment(e){
   }
 }
 
-function openDetail(id){
+async function openDetail(id){
   const x=state.appointments.find(a=>a.id===id) || state.records.find(a=>a.id===id);
   if(!x)return;
   const p=x.people||{}, sv=(x.appointment_services||[]).map(s=>s.service_items?.name||'İşlem').join(', ');
-  const paid=x.payment_status==='paid';
-  const free=x.payment_status==='free';
-  const unpaid=!paid&&!free;
+  const paid=x.payment_status==='paid', free=x.payment_status==='free', unpaid=!paid&&!free;
   const emergency=x.is_emergency||x.slot_override;
+  const appointmentTotal=Number(x.total_amount||0), amountPaid=Math.min(Number(x.amount_paid||0),appointmentTotal), remaining=Math.max(0,appointmentTotal-amountPaid);
+  let alerts={no_show_count:0,debt:0};
+  try{
+    const ar=await db.rpc('get_person_alerts_v47',{p_person_id:p.id,p_before_appointment_id:x.id});
+    if(!ar.error && ar.data) alerts=ar.data;
+  }catch(e){console.warn(e)}
 
   $('detailBody').innerHTML=`<div class="grid">
     <div class="card">
       <div class="big" style="font-size:22px">${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</div>
       <div class="muted">${esc(p.unit_name)}</div>
-      ${p.phone?`<div style="margin-top:7px"><a href="tel:${esc(p.phone)}" style="color:inherit;font-weight:800;text-decoration:none">📞 ${esc(formatPhone(p.phone))}</a></div>`:''}
+      ${p.phone?`<div style="margin-top:9px"><a class="call-link" href="tel:${esc(p.phone)}">📞 ${esc(formatPhone(p.phone))} · Ara</a></div>`:''}
     </div>
+    ${(Number(alerts.no_show_count||0)>0||Number(alerts.debt||0)>0)?`<div class="person-alert"><div class="alert-title">⚠️ Geçmiş Uyarısı</div>${Number(alerts.no_show_count||0)>0?`<div>Daha önce <b>${Number(alerts.no_show_count)} kez gelmedi</b>${alerts.last_no_show?` · Son: ${esc(alerts.last_no_show)}`:''}.</div>`:''}${Number(alerts.debt||0)>0?`<div>Önceki borç: <b>${trMoney(alerts.debt)}</b></div>`:''}</div>`:''}
     <div><b>${x.appointment_date} · ${time5(x.start_time)}–${time5(x.end_time)}</b></div>
+    ${appointmentIsOverdue(x)?'<div class="overdue-warning"><span>⚠️ Randevu saati geçti</span><span>Durumu güncelle</span></div>':''}
     ${emergency?`<div class="override-info"><b>🚨 Acil / İstisnai Randevu</b>${x.slot_override?`<div>${['break','cleaning'].includes(x.override_slot_type)?'Dinlenme ve Temizlik':'İstisna'} saati kullanıldı.</div>`:''}${x.override_reason?`<div>${esc(x.override_reason)}</div>`:''}</div>`:''}
     <div>${esc(sv)}</div>
     <div class="row between"><span class="big">${trMoney(x.total_amount)}</span><span class="payment-badge ${paid?'paid':free?'free':'unpaid'}">${paid?'✓ ÖDENDİ':free?'ÜCRETSİZ':'₺ ÖDENMEDİ'}</span></div>
+    <div class="muted" style="font-size:12px">Tahsil edilen: <b>${trMoney(amountPaid)}</b>${remaining>0?` · Kalan: <b>${trMoney(remaining)}</b>`:''}</div>
     <div>
       <div class="muted" style="font-size:12px;font-weight:800;margin-bottom:7px">Ödeme Durumu</div>
       <div class="pay-actions">
         <button type="button" class="pay-action paid ${paid?'active':''}" data-act="paid">✓ ÖDENDİ</button>
         <button type="button" class="pay-action unpaid ${unpaid?'active':''}" data-act="unpaid">₺ ÖDENMEDİ</button>
       </div>
+      ${Number(alerts.debt||0)>0?`<button type="button" class="btn warn" data-act="prior_debt" style="width:100%;margin-top:9px">₺ Önceki Borç Tahsil Et · ${trMoney(alerts.debt)}</button>`:''}
     </div>
     <label class="service"><span>İmza alındı</span><input id="sigCheck" type="checkbox" ${x.signature_received?'checked':''}></label>
     <div class="toolbar">
@@ -1312,37 +1452,66 @@ function openDetail(id){
   </div>`;
 
   $('sigCheck').onchange=async e=>{
-    await db.from('appointments').update({signature_received:e.target.checked}).eq('id',id);
-    await loadDay();
+    const u=await db.from('appointments').update({signature_received:e.target.checked}).eq('id',id);
+    if(u.error) alert(u.error.message); else await loadDay();
   };
 
   $('detailBody').querySelectorAll('[data-act]').forEach(b=>b.onclick=async()=>{
     const act=b.dataset.act;
-    if(act==='edit'){
-      $('detailDialog').close();
-      openNew(time5(x.start_time),id);
-      return;
-    }
+    if(act==='edit'){$('detailDialog').close();await openNew(time5(x.start_time),id);return;}
+    if(act==='prior_debt'){$('detailDialog').close();await openDebtDialog(p.id,x.id,p.full_name);return;}
     if(act==='delete'){
       if(!confirm('Bu randevu çöp kutusuna taşınsın mı?')) return;
       const u=await db.from('appointments').update({deleted_at:new Date().toISOString()}).eq('id',id);
       if(u.error) return alert(u.error.message);
+    }else if(act==='paid'){
+      const r=await db.rpc('record_appointment_payment_v47',{p_appointment_id:id,p_amount:null,p_notes:null});
+      if(r.error) return alert(r.error.message);
+    }else if(act==='unpaid'){
+      if(amountPaid>0 && !confirm('Bu randevuya bağlı tahsilat kayıtları geri alınacak. Devam edilsin mi?')) return;
+      const r=await db.rpc('clear_appointment_payments_v47',{p_appointment_id:id});
+      if(r.error) return alert(r.error.message);
     }else{
       let patch={};
       if(act==='complete') patch={status:'completed',completed_at:new Date().toISOString()};
-      if(act==='paid') patch={payment_status:'paid',payment_method:'cash',amount_paid:Number(x.total_amount||0)};
-      if(act==='unpaid') patch={payment_status:'unpaid',payment_method:null,amount_paid:0};
       if(act==='no_show') patch={status:'no_show'};
       if(act==='cancelled') patch={status:'cancelled'};
       const u=await db.from('appointments').update(patch).eq('id',id);
       if(u.error) return alert(u.error.message);
     }
-
     $('detailDialog').close();
     await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
     renderSettings();
   });
   $('detailDialog').showModal();
+}
+
+async function openDebtDialog(personId,beforeAppointmentId=null,personName=''){
+  state.debtPersonId=personId; state.debtBeforeAppointmentId=beforeAppointmentId||null;
+  hideMsg($('debtMsg'));
+  const r=await db.rpc('get_person_alerts_v47',{p_person_id:personId,p_before_appointment_id:beforeAppointmentId||null});
+  if(r.error) return alert('Borç bilgisi alınamadı: '+r.error.message);
+  const debt=Number(r.data?.debt||0); state.debtMax=debt;
+  if(debt<=0) return alert('Bu kişi için önceki borç bulunmuyor.');
+  $('debtTotal').textContent=trMoney(debt); $('debtPerson').textContent=personName||'';
+  $('debtAmount').value=String(Math.round(debt)); $('debtAmount').max=String(debt); $('debtNotes').value='';
+  $('debtDialog').showModal(); setTimeout(()=>$('debtAmount').focus(),100);
+}
+
+async function collectPriorDebt(){
+  hideMsg($('debtMsg'));
+  const amount=Number($('debtAmount').value);
+  if(!Number.isFinite(amount)||amount<=0||amount>state.debtMax) return msg($('debtMsg'),`1 ile ${trMoney(state.debtMax)} arasında bir tutar gir.`,'error');
+  const btn=$('collectDebtBtn'); btn.disabled=true; btn.textContent='Kaydediliyor…';
+  try{
+    const r=await db.rpc('collect_prior_debt_v47',{p_person_id:state.debtPersonId,p_amount:amount,p_before_appointment_id:state.debtBeforeAppointmentId||null,p_notes:$('debtNotes').value.trim()||null});
+    if(r.error) throw r.error;
+    $('debtDialog').close();
+    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadAudit()]);
+    alert(`Önceki borçtan ${trMoney(amount)} tahsil edildi. Kalan: ${trMoney(r.data?.remaining_debt||0)}.`);
+    if(state.debtBeforeAppointmentId) await openDetail(state.debtBeforeAppointmentId);
+  }catch(e){msg($('debtMsg'),'Tahsilat kaydedilemedi: '+e.message,'error');}
+  finally{btn.disabled=false;btn.textContent='Tahsilatı Kaydet';}
 }
 
 async function loadWeek(){
@@ -1369,7 +1538,7 @@ async function loadWeek(){
     const a=arr.filter(x=>x.appointment_date===date&&x.status!=='cancelled');
     const blocks=weekBlocks.filter(x=>x.block_date===date).length;
     const done=a.filter(x=>x.status==='completed');
-    const paid=done.filter(x=>x.payment_status==='paid').reduce((s,x)=>s+Number(x.amount_paid||x.total_amount||0),0);
+    const paid=done.filter(x=>x.payment_status==='paid').reduce((s,x)=>s+Math.min(Number(x.amount_paid||0),Number(x.total_amount||0)),0);
     return `<button class="weekday" data-weekdate="${date}" style="text-align:left"><div class="row between"><b>${trDate(date)}</b><span>${a.length} randevu${blocks?` · ${blocks} DOLU`:''}</span></div><div class="muted">${done.length} tamamlandı · ${trMoney(done.reduce((s,x)=>s+Number(x.total_amount||0),0))} · Tahsil ${trMoney(paid)}</div></button>`;
   }).join('');
   document.querySelectorAll('[data-weekdate]').forEach(b=>b.onclick=async()=>{state.selectedDate=b.dataset.weekdate;switchPage('homePage');await loadDay();});
@@ -1426,123 +1595,94 @@ async function runReport(){
   if(!a||!b){showStatus('Başlangıç ve bitiş tarihini seç.','error');return false;}
   if(a>b){showStatus('Başlangıç tarihi bitiş tarihinden sonra olamaz.','error');return false;}
   state.lastReport=null;
-  showStatus('Rapor verileri güvenli sunucudan hazırlanıyor…','loading');
+  showStatus('Rapor ve tahsilat hareketleri güvenli sunucudan hazırlanıyor…','loading');
   if(btn){btn.disabled=true;btn.textContent='Rapor hazırlanıyor…';}
   try{
-    const q=await db.rpc('get_barber_report',{p_start:a,p_end:b});
+    const q=await db.rpc('get_barber_report_v47',{p_start:a,p_end:b});
     if(q.error) throw q.error;
     const all=Array.isArray(q.data?.appointments)?q.data.appointments:[];
+    const finance=q.data?.finance||{};
+    const dailyCash=Array.isArray(q.data?.daily_cash)?q.data.daily_cash:[];
+    const debtors=Array.isArray(q.data?.debtors)?q.data.debtors:[];
     const valid=all.filter(i=>i.status!=='cancelled');
     const done=valid.filter(i=>i.status==='completed');
     const noShow=valid.filter(i=>i.status==='no_show').length;
     const cancelled=all.filter(i=>i.status==='cancelled').length;
     const emergency=all.filter(i=>i.is_emergency||i.slot_override).length;
-    const total=done.reduce((s,i)=>s+Number(i.total_amount||0),0);
-    const paid=done.filter(i=>i.payment_status==='paid').reduce((s,i)=>s+Number(i.amount_paid||i.total_amount||0),0);
-    const freeAmount=done.filter(i=>i.payment_status==='free').reduce((s,i)=>s+Number(i.total_amount||0),0);
+    const total=done.reduce((sum,i)=>sum+Number(i.total_amount||0),0);
+    const paid=done.reduce((sum,i)=>sum+Math.min(Number(i.amount_paid||0),Number(i.total_amount||0)),0);
+    const freeAmount=done.filter(i=>i.payment_status==='free').reduce((sum,i)=>sum+Number(i.total_amount||0),0);
     const unpaid=Math.max(0,total-paid-freeAmount);
     const completionRate=valid.length?Math.round(done.length/valid.length*100):0;
     const collectibleTotal=Math.max(0,total-freeAmount);
-    const collectionRate=collectibleTotal?Math.round(paid/collectibleTotal*100):100;
+    const collectionRate=collectibleTotal?Math.min(100,Math.round(paid/collectibleTotal*100)):100;
+    const cashCollected=Number(finance.cash_collected||0);
+    const serviceTotal=Number(finance.service_total??total);
+    const priorDebtCollected=Number(finance.prior_debt_collected||0);
+    const currentCollected=Number(finance.current_collected||0);
+    const legacyCollected=Number(finance.legacy_import_collected||0);
+    const legacyUnallocated=Number(finance.legacy_unallocated||0);
+    const outstanding=Number(finance.outstanding_for_period??unpaid);
 
     const services={};
     done.forEach(i=>(i.services||[]).forEach(s=>{
-      const n=s.name||'İşlem';
-      services[n]??={count:0,revenue:0};
-      services[n].count++;
-      services[n].revenue+=Number(s.line_total||s.unit_price||0);
+      const n=s.name||'İşlem'; services[n]??={count:0,revenue:0}; services[n].count++; services[n].revenue+=Number(s.line_total||s.unit_price||0);
     }));
-
     const rankGroups={};
-    done.forEach(i=>{
-      const r=state.ranks.find(x=>Number(x.id)===Number(i.rank_id));
-      const g=groupName(r?.group_id)||'Diğer';
-      rankGroups[g]=(rankGroups[g]||0)+1;
-    });
+    done.forEach(i=>{const r=state.ranks.find(x=>Number(x.id)===Number(i.rank_id));const g=groupName(r?.group_id)||'Diğer';rankGroups[g]=(rankGroups[g]||0)+1;});
 
     const dayMap={};
     all.forEach(i=>{
-      const d=i.appointment_date;
-      dayMap[d]??={appointments:0,done:0,noShow:0,cancelled:0,emergency:0,total:0,paid:0};
-      const o=dayMap[d];
+      const d=i.appointment_date; dayMap[d]??={appointments:0,done:0,noShow:0,cancelled:0,emergency:0,total:0,paid:0}; const o=dayMap[d];
       if(i.status!=='cancelled')o.appointments++;
-      if(i.status==='completed'){
-        o.done++;
-        o.total+=Number(i.total_amount||0);
-        if(i.payment_status==='paid')o.paid+=Number(i.amount_paid||i.total_amount||0);
-      }
-      if(i.status==='no_show')o.noShow++;
-      if(i.status==='cancelled')o.cancelled++;
-      if(i.is_emergency||i.slot_override)o.emergency++;
+      if(i.status==='completed'){o.done++;o.total+=Number(i.total_amount||0);o.paid+=Math.min(Number(i.amount_paid||0),Number(i.total_amount||0));}
+      if(i.status==='no_show')o.noShow++; if(i.status==='cancelled')o.cancelled++; if(i.is_emergency||i.slot_override)o.emergency++;
     });
-
     const activeDays=Object.values(dayMap).filter(v=>v.appointments>0).length;
     const dailyAverage=activeDays?(done.length/activeDays):0;
     const busiestEntry=Object.entries(dayMap).sort((x,y)=>y[1].appointments-x[1].appointments)[0];
-    const busiestDate=busiestEntry?.[0]||null;
-    const busiestCount=busiestEntry?.[1]?.appointments||0;
+    const busiestDate=busiestEntry?.[0]||null,busiestCount=busiestEntry?.[1]?.appointments||0;
 
-    state.lastReport={start:a,end:b,total:valid.length,done:done.length,noShow,cancelled,emergency,totalAmount:total,paid,freeAmount,unpaid,completionRate,collectionRate,services,rankGroups,dayMap};
+    state.lastReport={start:a,end:b,total:valid.length,done:done.length,noShow,cancelled,emergency,totalAmount:total,paid,freeAmount,unpaid,completionRate,collectionRate,services,rankGroups,dayMap,finance};
 
     const maxService=Math.max(1,...Object.values(services).map(v=>v.count));
-    const serviceBars=Object.entries(services).sort((x,y)=>y[1].count-x[1].count).map(([name,v],idx)=>{
-      const pct=Math.max(4,Math.round(v.count/maxService*100));
-      const cls=['','green','orange','purple'][idx%4];
-      return `<div class="report-bar-row"><div class="report-bar-top"><span><b>${esc(name)}</b> · ${v.count} işlem</span><b>${trMoney(v.revenue)}</b></div><div class="report-track"><div class="report-fill ${cls}" style="width:${pct}%"></div></div></div>`;
-    }).join('')||'<div class="muted">Tamamlanan işlem yok.</div>';
+    const serviceBarsHtml=Object.entries(services).sort((x,y)=>y[1].count-x[1].count).map(([name,v],idx)=>{const pct=Math.max(4,Math.round(v.count/maxService*100));const cls=['','green','orange','purple'][idx%4];return `<div class="report-bar-row"><div class="report-bar-top"><span><b>${esc(name)}</b> · ${v.count} işlem</span><b>${trMoney(v.revenue)}</b></div><div class="report-track"><div class="report-fill ${cls}" style="width:${pct}%"></div></div></div>`;}).join('')||'<div class="muted">Tamamlanan işlem yok.</div>';
 
     const maxRank=Math.max(1,...Object.values(rankGroups));
-    const rankBars=Object.entries(rankGroups).sort((x,y)=>y[1]-x[1]).map(([name,count],idx)=>{
-      const pct=Math.max(4,Math.round(count/maxRank*100));
-      const cls=['purple','green','orange',''][idx%4];
-      return `<div class="report-bar-row"><div class="report-bar-top"><span><b>${esc(name)}</b></span><span>${count} kişi · %${done.length?Math.round(count/done.length*100):0}</span></div><div class="report-track"><div class="report-fill ${cls}" style="width:${pct}%"></div></div></div>`;
-    }).join('')||'<div class="muted">Rütbe dağılımı için veri yok.</div>';
+    const rankBars=Object.entries(rankGroups).sort((x,y)=>y[1]-x[1]).map(([name,count],idx)=>{const pct=Math.max(4,Math.round(count/maxRank*100));const cls=['purple','green','orange',''][idx%4];return `<div class="report-bar-row"><div class="report-bar-top"><span><b>${esc(name)}</b></span><span>${count} kişi · %${done.length?Math.round(count/done.length*100):0}</span></div><div class="report-track"><div class="report-fill ${cls}" style="width:${pct}%"></div></div></div>`;}).join('')||'<div class="muted">Rütbe dağılımı için veri yok.</div>';
 
-    const dayRows=Object.entries(dayMap).map(([date,v])=>{
-      const rate=v.appointments?Math.round(v.done/v.appointments*100):0;
-      return `<tr><td><b>${new Intl.DateTimeFormat('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(date+'T12:00:00'))}</b></td><td>${v.appointments}</td><td>${v.done}</td><td><span class="report-status ${rate>=80?'good':'warn'}">%${rate}</span></td><td>${v.noShow}</td><td>${v.emergency}</td><td>${trMoney(v.total)}</td><td>${trMoney(v.paid)}</td></tr>`;
-    }).join('')||'<tr><td colspan="8" class="muted">Seçilen tarih aralığında kayıt bulunmuyor.</td></tr>';
+    const dayRows=Object.entries(dayMap).map(([date,v])=>{const rate=v.appointments?Math.round(v.done/v.appointments*100):0;return `<tr><td><b>${new Intl.DateTimeFormat('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(date+'T12:00:00'))}</b></td><td>${v.appointments}</td><td>${v.done}</td><td><span class="report-status ${rate>=80?'good':'warn'}">%${rate}</span></td><td>${v.noShow}</td><td>${v.emergency}</td><td>${trMoney(v.total)}</td><td>${trMoney(v.paid)}</td></tr>`;}).join('')||'<tr><td colspan="8" class="muted">Seçilen tarih aralığında kayıt bulunmuyor.</td></tr>';
+    const cashRows=dailyCash.map(v=>`<tr><td><b>${esc(v.date)}</b></td><td>${trMoney(v.cash)}</td><td>${trMoney(v.prior_debt||0)}</td><td>${trMoney(v.current||0)}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">Bu dönemde kayıtlı para girişi yok.</td></tr>';
+    const debtorRows=debtors.map(v=>`<tr><td><b>${esc(v.full_name||'')}</b></td><td>${trMoney(v.debt)}</td></tr>`).join('')||'<tr><td colspan="2" class="muted">Bu dönemde tamamlanan işlemlerden kalan borç görünmüyor.</td></tr>';
 
     const insightItems=[];
     insightItems.push(`Seçilen dönemde ${valid.length} geçerli randevunun ${done.length} tanesi tamamlandı; gerçekleşme oranı %${completionRate}.`);
-    insightItems.push(`Toplam ${trMoney(total)} işlem tutarının ${trMoney(paid)} bölümü tahsil edildi; tahsilat oranı %${collectionRate}.`);
-    if(unpaid>0) insightItems.push(`Bekleyen tahsilat ${trMoney(unpaid)}. Kasa kapanışında kontrol edilmesi önerilir.`);
-    else if(total>0) insightItems.push('Tamamlanan işlemlerde bekleyen tahsilat bulunmuyor.');
+    insightItems.push(`Kayıtlı gerçek para girişi ${trMoney(cashCollected)}; dönem hizmet bedeli ${trMoney(serviceTotal)}.`);
+    if(priorDebtCollected>0) insightItems.push(`Önceki dönem borçlarından bu dönemde ${trMoney(priorDebtCollected)} tahsil edildi.`);
+    if(outstanding>0) insightItems.push(`Bu dönemde tamamlanan işlemlerden kalan borç ${trMoney(outstanding)}.`); else if(serviceTotal>0) insightItems.push('Bu dönemde tamamlanan işlemlerden kalan borç bulunmuyor.');
+    if(noShow>0) insightItems.push(`${noShow} adet gelmedi kaydı var; yeni randevuda kişi geçmişi uyarısı gösterilir.`);
     if(emergency>0) insightItems.push(`${emergency} adet acil/istisnai randevu kaydedildi.`);
     if(busiestDate) insightItems.push(`En yoğun gün ${trDate(busiestDate)}: ${busiestCount} randevu.`);
     if(activeDays) insightItems.push(`Aktif çalışma günü başına ortalama ${dailyAverage.toLocaleString('tr-TR',{maximumFractionDigits:1})} tamamlanan işlem gerçekleşti.`);
 
     out.innerHTML=`<article class="report-shell">
-      <header class="report-hero">
-        <div class="eyebrow">Yönetici Raporu · KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi</div>
-        <h2>Faaliyet, Performans ve Tahsilat Raporu</h2>
-        <div style="opacity:.86;font-size:13px">Randevu akışı, gerçekleşen tıraşlar ve mali durum tek raporda.</div>
-        <div class="report-hero-meta"><span class="report-chip">📅 ${trDate(a)} – ${trDate(b)}</span><span class="report-chip">🔒 2FA / AAL2</span><span class="report-chip">🕒 ${new Date().toLocaleString('tr-TR')}</span></div>
-      </header>
+      <header class="report-hero"><div class="eyebrow">Yönetici Raporu · KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi</div><h2>Faaliyet, Kazanç ve Tahsilat Raporu</h2><div style="opacity:.86;font-size:13px">Gerçek para girişi, verilen hizmet, borç ve randevu performansı tek raporda.</div><div class="report-hero-meta"><span class="report-chip">📅 ${trDate(a)} – ${trDate(b)}</span><span class="report-chip">🔒 2FA / Güvenilir Oturum</span><span class="report-chip">🕒 ${new Date().toLocaleString('tr-TR')}</span></div></header>
       <div class="report-body">
-        <div class="report-overview">
-          <div class="report-ring" style="--pct:${completionRate}"><div class="report-ring-content"><b>%${completionRate}</b><span>GERÇEKLEŞME</span></div></div>
-          <div class="report-mini-grid"><div class="report-mini blue"><span>TOPLAM RANDEVU</span><b>${valid.length}</b></div><div class="report-mini green"><span>TAMAMLANAN</span><b>${done.length}</b></div><div class="report-mini orange"><span>ACİL / İSTİSNAİ</span><b>${emergency}</b></div><div class="report-mini red"><span>GELMEDİ / İPTAL</span><b>${noShow} / ${cancelled}</b></div></div>
-        </div>
-        <div class="report-finance"><div class="report-fin-card total"><div class="label">İşlem Toplamı</div><div class="amount">${trMoney(total)}</div></div><div class="report-fin-card paid"><div class="label">Tahsil Edilen · %${collectionRate}</div><div class="amount">${trMoney(paid)}</div></div><div class="report-fin-card wait"><div class="label">Bekleyen</div><div class="amount">${trMoney(unpaid)}</div></div></div>
-        <section class="report-section-card"><div class="report-section-head"><h3>✂️ İşlem Dağılımı</h3><span class="hint">Adet ve işlem tutarı</span></div><div class="report-bar-list">${serviceBars}</div></section>
+        <div class="report-overview"><div class="report-ring" style="--pct:${completionRate}"><div class="report-ring-content"><b>%${completionRate}</b><span>GERÇEKLEŞME</span></div></div><div class="report-mini-grid"><div class="report-mini blue"><span>TOPLAM RANDEVU</span><b>${valid.length}</b></div><div class="report-mini green"><span>TAMAMLANAN</span><b>${done.length}</b></div><div class="report-mini orange"><span>ACİL / İSTİSNAİ</span><b>${emergency}</b></div><div class="report-mini red"><span>GELMEDİ / İPTAL</span><b>${noShow} / ${cancelled}</b></div></div></div>
+        <div class="finance-grid-v47"><div class="finance-kpi-v47 cash"><div class="label">Gerçek Tahsilat</div><div class="amount">${trMoney(cashCollected)}</div></div><div class="finance-kpi-v47"><div class="label">Hizmet Bedeli</div><div class="amount">${trMoney(serviceTotal)}</div></div><div class="finance-kpi-v47 prior"><div class="label">Önceki Borç Tahsilatı</div><div class="amount">${trMoney(priorDebtCollected)}</div></div><div class="finance-kpi-v47 debt"><div class="label">Bu Dönem Kalan Borç</div><div class="amount">${trMoney(outstanding)}</div></div></div>
+        <div class="finance-note">Yeni v4.7 tahsilatları para alınan gerçek tarihle kaydedilir. v4.6'dan aktarılan eski tahsilatlar (${trMoney(legacyCollected)}) geçmiş randevu tarihine göre raporlanır.${legacyUnallocated>0?` Eski kayıtlardan ${trMoney(legacyUnallocated)} tutarında randevu bedelini aşan tarihsel tahsilat ayrıca korunmuştur.`:''}</div>
+        <section class="report-section-card"><div class="report-section-head"><h3>💰 Günlük Para Girişi</h3><span class="hint">Tahsilat hareketlerinin gerçek kayıt tarihi</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Tarih</th><th>Toplam Tahsilat</th><th>Önceki Borç</th><th>Güncel İşlem</th></tr></thead><tbody>${cashRows}</tbody></table></div></section>
+        <section class="report-section-card"><div class="report-section-head"><h3>₺ Borç Takibi</h3><span class="hint">Seçili dönemde tamamlanan işlemler</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Kişi</th><th>Kalan Borç</th></tr></thead><tbody>${debtorRows}</tbody></table></div></section>
+        <section class="report-section-card"><div class="report-section-head"><h3>✂️ İşlem Dağılımı</h3><span class="hint">Adet ve işlem tutarı</span></div><div class="report-bar-list">${serviceBarsHtml}</div></section>
         <section class="report-section-card"><div class="report-section-head"><h3>🎖️ Rütbe Grubu Dağılımı</h3><span class="hint">Tamamlanan işlemlere göre</span></div><div class="report-bar-list">${rankBars}</div></section>
-        <section class="report-section-card"><div class="report-section-head"><h3>📆 Günlük Performans</h3><span class="hint">${activeDays} aktif çalışma günü</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Tarih</th><th>Randevu</th><th>Tamam</th><th>Oran</th><th>Gelmedi</th><th>Acil</th><th>İşlem</th><th>Tahsil</th></tr></thead><tbody>${dayRows}</tbody></table></div></section>
-        <section class="report-insight"><div class="report-insight-title">📌 Yönetici Değerlendirmesi</div><ul>${insightItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>
-        <footer class="report-footer"><span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.6</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
-      </div>
-    </article>`;
-    showStatus(`${all.length} kayıt işlendi · Rapor hazır.`,'');
-    setTimeout(()=>status.classList.add('hidden'),1800);
-    return true;
-  }catch(e){
-    console.error('Report integration error',e);
-    out.innerHTML='';
-    showStatus('Rapor oluşturulamadı: '+(e?.message||'Bilinmeyen entegrasyon hatası'),'error');
-    return false;
-  }finally{
-    if(btn){btn.disabled=false;btn.textContent='Renkli Yönetici Raporu Oluştur';}
-  }
+        <section class="report-section-card"><div class="report-section-head"><h3>📆 Günlük Performans</h3><span class="hint">${activeDays} aktif çalışma günü</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Tarih</th><th>Randevu</th><th>Tamam</th><th>Oran</th><th>Gelmedi</th><th>Acil</th><th>İşlem</th><th>Randevu Tahsil</th></tr></thead><tbody>${dayRows}</tbody></table></div></section>
+        <section class="report-insight"><div class="report-insight-title">📌 Dönem Özeti</div><ul>${insightItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>
+        <footer class="report-footer"><span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.1</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
+      </div></article>`;
+    showStatus(`${all.length} randevu · ${Number(finance.payment_count||0)} tahsilat hareketi işlendi · Rapor hazır.`,'');
+    setTimeout(()=>status.classList.add('hidden'),1800); return true;
+  }catch(e){console.error('Report integration error',e);out.innerHTML='';showStatus('Rapor oluşturulamadı: '+(e?.message||'Bilinmeyen entegrasyon hatası'),'error');return false;}
+  finally{if(btn){btn.disabled=false;btn.textContent='Renkli Yönetici Raporu Oluştur';}}
 }
 
 async function loadTrash(){
@@ -1564,121 +1704,136 @@ async function restoreTrash(id){
   renderSettings();
 }
 
-async function backupJson(){
-  const [people,appointments,services,appointmentServices,slots,settings,manualBlocks,rankGroups,ranks,dailyClosures]=await Promise.all([
-    db.from('people').select('*'),
-    db.from('appointments').select('*'),
-    db.from('service_items').select('*'),
-    db.from('appointment_services').select('*'),
-    db.from('weekly_slots').select('*'),
-    db.from('app_settings').select('*'),
-    db.from('manual_slot_blocks').select('*'),
-    db.from('rank_groups').select('*'),
-    db.from('ranks').select('*'),
-    db.from('daily_closures').select('*')
-  ]);
-  const all=[people,appointments,services,appointmentServices,slots,settings,manualBlocks,rankGroups,ranks,dailyClosures];
-  const failed=all.find(x=>x.error);
-  if(failed) return alert('Yedek alınamadı: '+failed.error.message);
-
-  const payload={
-    schema_version:4,
-    generated_at:new Date().toISOString(),
-    app:APP_NAME,
-    version:APP_VERSION,
-    integrity:{
-      people:(people.data||[]).length,
-      appointments:(appointments.data||[]).length,
-      appointment_services:(appointmentServices.data||[]).length,
-      manual_slot_blocks:(manualBlocks.data||[]).length
-    },
-    data:{
-      rank_groups:rankGroups.data||[],
-      ranks:ranks.data||[],
-      people:people.data||[],
-      appointments:appointments.data||[],
-      services:services.data||[],
-      appointment_services:appointmentServices.data||[],
-      weekly_slots:slots.data||[],
-      app_settings:settings.data||[],
-      manual_slot_blocks:manualBlocks.data||[],
-      daily_closures:dailyClosures.data||[]
-    }
-  };
+function downloadBackupPayload(payload){
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
   const url=URL.createObjectURL(blob), a=document.createElement('a');
   a.href=url;
-  a.download=`KKK_MEBS_Berber_Yedek_v${APP_VERSION.replace('.','_')}_${today()}.json`;
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const ver=String(payload?.version||APP_VERSION).replaceAll('.','_');
+  const stamp=String(payload?.generated_at||new Date().toISOString()).slice(0,10);
+  a.download=`KKK_MEBS_Berber_Yedek_v${ver}_${stamp}.json`;
+  a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+async function loadBackupCenter(){
+  const el=$('backupCenterList'); if(!el) return;
+  try{
+    const r=await db.rpc('list_backup_snapshots_v47');
+    if(r.error) throw r.error;
+    state.backups=Array.isArray(r.data)?r.data:[]; renderBackupCenter();
+  }catch(e){
+    state.backups=[]; el.innerHTML=`<div class="notice error">Yedek Merkezi okunamadı: ${esc(e.message)}</div>`;
+  }
+}
+
+function renderBackupCenter(){
+  const el=$('backupCenterList'); if(!el) return;
+  if(!state.backups.length){el.innerHTML='<div class="muted">Program içinde kayıtlı yedek bulunmuyor.</div>';return;}
+  el.innerHTML=state.backups.map(x=>`<div class="backup-item">
+    <div class="row between"><b>${esc(x.label||'Yedek')}</b><span class="backup-chip ok">DOĞRULANDI</span></div>
+    <div class="backup-meta"><span class="backup-chip">${new Date(x.created_at).toLocaleString('tr-TR')}</span><span class="backup-chip">v${esc(x.app_version||'?')}</span><span class="backup-chip">${Number(x.people_count||0)} kişi</span><span class="backup-chip">${Number(x.appointments_count||0)} randevu</span>${Number(x.payment_transactions_count||0)?`<span class="backup-chip">${Number(x.payment_transactions_count)} ödeme</span>`:''}</div>
+    <div class="muted" style="font-size:10px;word-break:break-all">SHA-256: ${esc(String(x.sha256||'').slice(0,20))}… · ${(Number(x.payload_bytes||0)/1024).toLocaleString('tr-TR',{maximumFractionDigits:0})} KB</div>
+    <div class="backup-actions"><button class="btn small" data-backup-download="${x.id}">İndir</button><button class="btn small primary" data-backup-restore="${x.id}">Geri Yükle</button></div>
+  </div>`).join('');
+  el.querySelectorAll('[data-backup-download]').forEach(b=>b.onclick=()=>downloadBackupSnapshot(b.dataset.backupDownload));
+  el.querySelectorAll('[data-backup-restore]').forEach(b=>b.onclick=()=>restoreBackupSnapshot(b.dataset.backupRestore));
+}
+
+async function backupJson(){
+  const status=$('backupCenterStatus'); hideMsg(status); msg(status,'Tam yedek hazırlanıyor ve Yedek Merkezi’ne kaydediliyor…','');
+  try{
+    const c=await db.rpc('create_backup_snapshot_v47',{p_label:'Manuel Tam Yedek'});
+    if(c.error) throw c.error;
+    const g=await db.rpc('get_backup_snapshot_v47',{p_id:c.data?.id});
+    if(g.error) throw g.error;
+    validateBackupPayload(g.data); downloadBackupPayload(g.data);
+    await loadBackupCenter(); msg(status,'Yedek doğrulandı, Yedek Merkezi’ne kaydedildi ve indirildi.','success');
+  }catch(e){msg(status,'Yedek alınamadı: '+e.message,'error');}
 }
 
 function validateBackupPayload(payload){
   if(!payload || typeof payload!=='object') throw new Error('Yedek JSON nesnesi okunamadı.');
   if(payload.app!==APP_NAME) throw new Error('Bu dosya farklı bir sisteme ait.');
+  const schema=Number(payload.schema_version||4);
+  if(![4,5].includes(schema)) throw new Error('Desteklenmeyen yedek sürümü.');
   if(!payload.data || typeof payload.data!=='object') throw new Error('Yedek veri bölümü eksik.');
-  const arrays=['people','appointments','services','appointment_services','weekly_slots','manual_slot_blocks'];
+  const arrays=['people','appointments','services','appointment_services','weekly_slots','manual_slot_blocks','rank_groups','ranks','daily_closures'];
+  if(schema>=5) arrays.push('payment_transactions','payment_allocations');
   arrays.forEach(k=>{if(payload.data[k]!=null&&!Array.isArray(payload.data[k])) throw new Error(`${k} bölümü geçersiz.`);});
   const raw=JSON.stringify(payload.data);
   if(/<\s*script|javascript\s*:|onerror\s*=|onload\s*=/i.test(raw)) throw new Error('Yedekte güvenli olmayan HTML/komut içeriği tespit edildi.');
   if(raw.length>25_000_000) throw new Error('Yedek dosyası izin verilen boyuttan büyük.');
+  const integrity=payload.integrity||{};
+  if(integrity.people!=null && Number(integrity.people)!==(payload.data.people||[]).length) throw new Error('Kişi sayısı bütünlük kontrolü başarısız.');
+  if(integrity.appointments!=null && Number(integrity.appointments)!==(payload.data.appointments||[]).length) throw new Error('Randevu sayısı bütünlük kontrolü başarısız.');
+  if(integrity.appointment_services!=null && Number(integrity.appointment_services)!==(payload.data.appointment_services||[]).length) throw new Error('İşlem satırı bütünlük kontrolü başarısız.');
   return true;
 }
 
 function showRestorePreview(payload){
   state.restorePayload=payload;
-  const d=payload.data||{};
-  const items=[
-    ['Kişi',(d.people||[]).length],
-    ['Randevu',(d.appointments||[]).length],
-    ['İşlem Satırı',(d.appointment_services||[]).length],
-    ['DOLU Saat',(d.manual_slot_blocks||[]).length],
-    ['Hizmet',(d.services||[]).length],
-    ['Çalışma Saati',(d.weekly_slots||[]).length]
-  ];
-  $('restoreInfo').innerHTML=items.map(([label,count])=>`<div class="restore-count"><span class="muted">${label}</span><b>${count}</b></div>`).join('');
-  $('restoreConfirmText').value='';
-  $('confirmRestoreBtn').disabled=true;
-  hideMsg($('restoreMsg'));
-  $('restoreDialog').showModal();
+  const d=payload.data||{}, schema=Number(payload.schema_version||4);
+  const items=[['Yedek Sürümü',`v${payload.version||'?'} / şema ${schema}`],['Kişi',(d.people||[]).length],['Randevu',(d.appointments||[]).length],['İşlem Satırı',(d.appointment_services||[]).length],['DOLU Saat',(d.manual_slot_blocks||[]).length],['Tahsilat',(d.payment_transactions||[]).length]];
+  $('restoreInfo').innerHTML=items.map(([label,count])=>`<div class="restore-count"><span class="muted">${esc(label)}</span><b>${esc(count)}</b></div>`).join('');
+  $('restoreConfirmText').value=''; $('confirmRestoreBtn').disabled=true; hideMsg($('restoreMsg')); $('restoreDialog').showModal();
+}
+
+async function parseBackupFile(file){
+  if(!file) throw new Error('Dosya seçilmedi.');
+  if(file.size>25_000_000) throw new Error('Yedek dosyası çok büyük.');
+  const payload=JSON.parse(await file.text()); validateBackupPayload(payload); return payload;
 }
 
 async function handleRestoreFile(file){
   if(!file) return;
-  if(file.size>25_000_000) return alert('Yedek dosyası çok büyük.');
+  try{showRestorePreview(await parseBackupFile(file));}
+  catch(e){alert('Yedek açılamadı: '+e.message);}
+  finally{$('restoreFile').value='';}
+}
+
+async function importBackupFile(file){
+  if(!file) return;
+  const status=$('backupCenterStatus'); hideMsg(status);
   try{
-    const payload=JSON.parse(await file.text());
-    validateBackupPayload(payload);
-    showRestorePreview(payload);
-  }catch(e){
-    alert('Yedek açılamadı: '+e.message);
-  }finally{
-    $('restoreFile').value='';
-  }
+    const payload=await parseBackupFile(file);
+    const r=await db.rpc('store_backup_snapshot_v47',{p_payload:payload,p_label:`İçe Aktarılan · ${file.name}`,p_source:'imported'});
+    if(r.error) throw r.error;
+    await loadBackupCenter(); msg(status,`v${payload.version||'?'} yedeği doğrulandı ve Yedek Merkezi’ne eklendi. Veri geri yüklenmedi.`,'success');
+  }catch(e){msg(status,'Yedek içe aktarılamadı: '+e.message,'error');}
+  finally{$('importBackupFile').value='';}
+}
+
+async function downloadBackupSnapshot(id){
+  try{const r=await db.rpc('get_backup_snapshot_v47',{p_id:id});if(r.error)throw r.error;validateBackupPayload(r.data);downloadBackupPayload(r.data);}catch(e){alert('Yedek indirilemedi: '+e.message);}
+}
+
+async function restoreBackupSnapshot(id){
+  try{const r=await db.rpc('get_backup_snapshot_v47',{p_id:id});if(r.error)throw r.error;validateBackupPayload(r.data);showRestorePreview(r.data);}catch(e){alert('Yedek açılamadı: '+e.message);}
 }
 
 async function restoreBackup(){
   hideMsg($('restoreMsg'));
   if($('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE') return;
   if(!state.restorePayload) return msg($('restoreMsg'),'Yedek dosyası bulunamadı.','error');
-  $('confirmRestoreBtn').disabled=true;
-  $('confirmRestoreBtn').textContent='Geri yükleniyor…';
+  $('confirmRestoreBtn').disabled=true; $('confirmRestoreBtn').textContent='Güvenlik kontrolü…';
   try{
     validateBackupPayload(state.restorePayload);
-    const r=await db.rpc('restore_app_backup',{payload:state.restorePayload});
+    const m=await getMfaState(); state.mfa=m;
+    if(m.currentLevel!=='aal2'){
+      state.pendingSensitiveAction='restore';
+      $('restoreDialog').close(); showMfaChallengeGate(m.verified?.[0]);
+      return;
+    }
+    $('confirmRestoreBtn').textContent='Ön yedek alınıyor…';
+    const pre=await db.rpc('create_backup_snapshot_v47',{p_label:'Geri Yükleme Öncesi Otomatik Yedek'});
+    if(pre.error) throw new Error('Geri yükleme öncesi güvenlik yedeği alınamadı: '+pre.error.message);
+    $('confirmRestoreBtn').textContent='Geri yükleniyor…';
+    const r=await db.rpc('restore_app_backup_v47',{payload:state.restorePayload});
     if(r.error) throw r.error;
-    state.restorePayload=null;
-    $('restoreDialog').close();
-    await loadBase();
-    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
-    renderSettings();
+    state.restorePayload=null; $('restoreDialog').close();
+    await loadBase(); await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter()]); renderSettings();
     alert(`Geri yükleme tamamlandı. ${r.data?.appointments??0} randevu ve ${r.data?.people??0} kişi kaydı işlendi.`);
-  }catch(e){
-    msg($('restoreMsg'),'Geri yükleme iptal edildi: '+e.message,'error');
-  }finally{
-    $('confirmRestoreBtn').textContent='Güvenli Geri Yüklemeyi Başlat';
-    $('confirmRestoreBtn').disabled=$('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';
-  }
+  }catch(e){msg($('restoreMsg'),'Geri yükleme iptal edildi: '+e.message,'error');}
+  finally{$('confirmRestoreBtn').textContent='Güvenli Geri Yüklemeyi Başlat';$('confirmRestoreBtn').disabled=$('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';}
 }
 
 function renderSettings(){
@@ -1697,7 +1852,7 @@ function renderSettings(){
     <div style="margin-top:4px">Başka cihazda giriş: <strong>MEVCUT OTURUM OTOMATİK KAPANIR</strong></div>
     <div style="margin-top:4px">Son giriş: <strong>${lastSignIn}</strong></div>
     <div style="margin-top:4px">Uygulama sürümü: <strong>${APP_VERSION} FINAL</strong></div>
-    <div style="margin-top:7px;font-size:11px;opacity:.88">Supabase Free planda sızdırılmış parola kontrolü sunucu özelliği kullanılamaz; bu nedenle final sürümde Authenticator 2FA ve AAL2 veri politikası zorunlu tutulur.</div>`;
+    <div style="margin-top:7px;font-size:11px;opacity:.88">Authenticator 2FA zorunludur. Aynı doğrulanmış oturum için 24 saatlik güven penceresi uygulanır; farklı cihaz/oturum bu güveni kullanamaz.</div>`;
 
   renderMfaSettings();
 
@@ -1891,6 +2046,7 @@ function exportCsv(){
 async function setReportPreset(type){
   const now=new Date(); let start=new Date(now), end=new Date(now);
   if(type==='week'){const js=now.getDay();const diff=(js===0?-6:1-js);start.setDate(now.getDate()+diff);end=new Date(start);end.setDate(start.getDate()+4);}
+  else if(type==='15'){start=new Date(now);start.setDate(now.getDate()-14);end=new Date(now);}
   else if(type==='month'){start=new Date(now.getFullYear(),now.getMonth(),1);end=new Date(now);}
   else if(type==='30'){start=new Date(now);start.setDate(now.getDate()-29);end=new Date(now);}
   $('repStart').value=isoDate(start);$('repEnd').value=isoDate(end);await runReport();
@@ -1903,7 +2059,7 @@ function switchPage(id){
   const titles={weekPage:'Haftalık Plan',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar'};
   $('pageTitle').textContent=id==='homePage'?selectedDayLabel(state.selectedDate):(titles[id]||APP_NAME);
   $('fab').classList.toggle('hidden',id!=='homePage');
-  if(id==='weekPage')loadWeek(); if(id==='recordsPage')loadRecords(); if(id==='reportPage'&&!state.lastReport)runReport(); if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),getMfaState().then(x=>state.mfa=x)]).then(renderSettings);}
+  if(id==='weekPage')loadWeek(); if(id==='recordsPage')loadRecords(); if(id==='reportPage'&&!state.lastReport)runReport(); if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),getMfaState().then(x=>state.mfa=x)]).then(renderSettings);}
 }
 
 function bind(){
@@ -1942,7 +2098,9 @@ function bind(){
   };
   $('personName').addEventListener('change',applyKnownPerson);
   $('personName').addEventListener('blur',applyKnownPerson);
-  $('phoneNumber').addEventListener('blur',()=>{const n=normalizePhoneClient($('phoneNumber').value);if(n)$('phoneNumber').value=formatPhone(n);});
+  $('phoneNumber').addEventListener('input',updateCallButton);
+  $('phoneNumber').addEventListener('blur',()=>{const n=normalizePhoneClient($('phoneNumber').value);if(n)$('phoneNumber').value=formatPhone(n);updateCallButton();});
+  $('callPersonBtn').onclick=()=>{const n=normalizePhoneClient($('phoneNumber').value);if(n)location.href=`tel:${n}`;};
 
   $('dayPicker').onchange=async e=>{if(!e.target.value)return;state.selectedDate=e.target.value;await loadDay();};
   $('prevDay').onclick=async()=>{state.selectedDate=workdayFrom(state.selectedDate,-1,false);await loadDay();};
@@ -1968,6 +2126,8 @@ function bind(){
   $('csvBtn').onclick=exportCsv;
   $('printBtn').onclick=()=>startPrint('print-records');
   $('backupBtn').onclick=backupJson;
+  $('importBackupBtn').onclick=()=>$('importBackupFile').click();
+  $('importBackupFile').onchange=e=>importBackupFile(e.target.files?.[0]);
 
   $('restoreBtn').onclick=()=>$('restoreFile').click();
   $('restoreFile').onchange=e=>handleRestoreFile(e.target.files?.[0]);
@@ -1976,6 +2136,8 @@ function bind(){
     $('confirmRestoreBtn').disabled=e.target.value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';
   };
   $('confirmRestoreBtn').onclick=restoreBackup;
+  $('closeDebt').onclick=()=>$('debtDialog').close();
+  $('collectDebtBtn').onclick=collectPriorDebt;
 
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>switchPage(b.dataset.page));
 }
