@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Okan Vural Randevu Sistemi">
-<title>Okan Vural Randevu Sistemi v4.7.3</title>
-<meta name="application-version" content="4.7.3">
+<title>Okan Vural Randevu Sistemi v4.7.4</title>
+<meta name="application-version" content="4.7.4">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -351,7 +351,7 @@ img,svg,canvas{max-width:100%;height:auto}
 </style>
 </head>
 <body>
-<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.3 - professional final build -->
+<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.4 - professional final build -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -647,14 +647,14 @@ img,svg,canvas{max-width:100%;height:auto}
 </dialog>
 
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
 const SUPABASE_URL = 'https://styxdbndyzkbawwrthzw.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_l2qxOCeQoVcSDFhY6tBkrg_nxNBqkWM';
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
-const APP_VERSION = "4.7.3";
+const APP_VERSION = "4.7.4";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -806,6 +806,34 @@ async function getMfaState(){
   return {verified,currentLevel,nextLevel};
 }
 
+
+async function getTrustedSessionState(){
+  try{
+    const r=await db.rpc('check_app_session_v47',{p_device_id:getDeviceId()});
+    if(r.error) return {active:false,reason:'check_error',error:r.error};
+    return r.data||{active:false,reason:'not_activated'};
+  }catch(error){
+    return {active:false,reason:'check_error',error};
+  }
+}
+
+async function openTrustedApp(){
+  $('authView').classList.add('hidden');
+  $('mfaView').classList.add('hidden');
+  $('appView').classList.remove('hidden');
+  lastServerTouch=Date.now();
+  clearInterval(sessionCheckTimer);
+  sessionCheckTimer=setInterval(checkRemoteSession,SESSION_CHECK_MS);
+  resetActivity();
+  await loadBase();
+  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter()]);
+  renderSettings();
+
+  // 24 saat güvenilir oturum sunucu tarafından doğrulandıysa MFA API'si açılışı engellemez.
+  void getMfaState().then(x=>{state.mfa=x;if(state.currentPage==='settingsPage')renderMfaSettings();})
+    .catch(e=>console.warn('MFA durumu arka planda yenilenemedi',e));
+}
+
 async function enter(user){
   if(entering) return;
   entering=true;
@@ -813,7 +841,6 @@ async function enter(user){
     state.user=user;
     const {data,error}=await db.from('app_members').select('user_id,role,active').eq('user_id',user.id).maybeSingle();
     if(error) console.error(error);
-
     if(!data?.active || data?.role!=='admin'){
       await db.auth.signOut();
       showAuth();
@@ -821,33 +848,55 @@ async function enter(user){
       return;
     }
 
-    // Arka plandaki token yenilemeleri açık uygulamayı yeniden MFA ekranına göndermesin.
     if(!$('appView').classList.contains('hidden')) return;
 
-    try{ state.mfa=await getMfaState(); }
-    catch(e){
-      console.error(e);
-      showAuth();
-      msg($('authMsg'),'2FA güvenlik durumu doğrulanamadı. İnternet bağlantısını kontrol edip yeniden giriş yap.','error');
+    // v4.7.4: önce 24 saat güvenilir session kontrolü.
+    const trusted=await getTrustedSessionState();
+    if(trusted?.active===true){
+      await openTrustedApp();
       return;
     }
+
+    let mfaState=null;
+    try{
+      mfaState=await getMfaState();
+    }catch(firstError){
+      console.warn('İlk MFA durum kontrolü başarısız',firstError);
+      try{
+        const refreshed=await db.auth.refreshSession();
+        if(refreshed.error) throw refreshed.error;
+        mfaState=await getMfaState();
+      }catch(secondError){
+        console.error('MFA güvenlik durumu doğrulanamadı',secondError);
+        $('authView').classList.add('hidden');
+        $('appView').classList.add('hidden');
+        $('mfaView').classList.remove('hidden');
+        $('mfaGateText').textContent='Güvenli oturum doğrulanıyor.';
+        $('mfaGateSetup').classList.add('hidden');
+        $('mfaChallengeForm').classList.add('hidden');
+        msg($('mfaMsg'),'2FA servisine geçici olarak ulaşılamadı. Sayfayı yenileyip tekrar dene; mevcut oturum silinmedi.','error');
+        return;
+      }
+    }
+    state.mfa=mfaState;
 
     if(MFA_REQUIRED && !state.mfa.verified.length){
       showMfaSetupGate();
       return;
     }
 
-    // v4.7: Önce sunucudaki aynı session_id + cihaz için 24 saatlik güveni kontrol et.
-    // Yeni cihaz/session AAL2 olmadan etkinleşemez; aynı güvenilir oturum gereksiz kod istemez.
-    if(!(await activateAppSession(true))) return;
+    if(state.mfa.currentLevel==='aal2'){
+      if(!(await activateAppSession(false))) return;
+      await openTrustedApp();
+      return;
+    }
 
-    $('authView').classList.add('hidden');
-    $('mfaView').classList.add('hidden');
-    $('appView').classList.remove('hidden');
-    resetActivity();
-    await loadBase();
-    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter()]);
-    renderSettings();
+    if(state.mfa.nextLevel==='aal2'){
+      showMfaChallengeGate(state.mfa.verified?.[0]);
+      return;
+    }
+
+    showMfaSetupGate();
   } finally {
     entering=false;
   }
@@ -1040,14 +1089,26 @@ async function verifyMfaChallenge(e){
   e.preventDefault();
   hideMsg($('mfaMsg'));
   const code=$('mfaCode').value.replace(/\D/g,'');
-  if(code.length<6) return msg($('mfaMsg'),'6 haneli Authenticator kodunu gir.','error');
+  if(code.length!==6) return msg($('mfaMsg'),'6 haneli Authenticator kodunu gir.','error');
+
+  const btn=e.submitter||$('mfaChallengeForm').querySelector('button[type="submit"]');
+  if(btn){btn.disabled=true;btn.textContent='Doğrulanıyor…';}
+
   try{
     let factorId=await resolveMfaChallengeFactorId();
-    if(!factorId) return msg($('mfaMsg'),'Doğrulanmış 2FA faktörüne erişilemedi. İnternet bağlantısını kontrol edip tekrar dene.','error');
+    if(!factorId){
+      clearCachedMfaFactor();
+      const fresh=await fetchVerifiedMfaFactors(false);
+      state.mfa.verified=fresh;
+      factorId=fresh[0]?.id||null;
+    }
+    if(!factorId){
+      return msg($('mfaMsg'),'Doğrulanmış Authenticator faktörü okunamadı. Sayfayı yenileyip tekrar dene.','error');
+    }
 
-    let challenge=await db.auth.mfa.challenge({factorId});
-    if(challenge.error){
-      // Önbellekteki factor id eskidiyse temizle ve resmi listFactors ile bir kez daha tazele.
+    let result=await db.auth.mfa.challengeAndVerify({factorId,code});
+
+    if(result.error && !/invalid totp|invalid.*code/i.test(result.error.message||'')){
       clearCachedMfaFactor();
       const fresh=await fetchVerifiedMfaFactors(false);
       const freshId=fresh[0]?.id||null;
@@ -1056,23 +1117,45 @@ async function verifyMfaChallenge(e){
         state.mfa.verified=fresh;
         state.mfaChallengeFactorId=freshId;
         cacheMfaFactor(fresh[0]);
-        challenge=await db.auth.mfa.challenge({factorId});
+        result=await db.auth.mfa.challengeAndVerify({factorId,code});
       }
     }
-    if(challenge.error) throw challenge.error;
 
-    const verify=await db.auth.mfa.verify({factorId,challengeId:challenge.data.id,code});
-    if(verify.error) throw verify.error;
+    if(result.error) throw result.error;
+
     cacheMfaFactor(state.mfa.verified?.find(f=>f.id===factorId)||{id:factorId,status:'verified'});
-    state.mfa=await getMfaState();
     const {data:{user}}=await db.auth.getUser();
-    if(user) await enter(user);
-    if(state.pendingSensitiveAction==='restore' && state.restorePayload){
-      state.pendingSensitiveAction=null; showRestorePreview(state.restorePayload); msg($('restoreMsg'),'2FA doğrulandı. Geri yüklemeyi başlatmak için GERİ YÜKLE onayını yeniden yaz.','success');
+    if(!user) throw new Error('Oturum kullanıcı bilgisi alınamadı.');
+    state.user=user;
+
+    state.mfa=await getMfaState();
+    if(state.mfa.currentLevel!=='aal2'){
+      const refreshed=await db.auth.refreshSession();
+      if(refreshed.error) throw refreshed.error;
+      state.mfa=await getMfaState();
     }
-  }catch(e){
-    console.error('MFA doğrulama hatası',e);
-    msg($('mfaMsg'),'Doğrulama tamamlanamadı. Authenticator uygulamasındaki güncel kodu kontrol edip tekrar dene.','error');
+
+    if(!(await activateAppSession(false))) return;
+    await openTrustedApp();
+
+    if(state.pendingSensitiveAction==='restore' && state.restorePayload){
+      state.pendingSensitiveAction=null;
+      showRestorePreview(state.restorePayload);
+      msg($('restoreMsg'),'2FA doğrulandı. Geri yüklemeyi başlatmak için GERİ YÜKLE onayını yeniden yaz.','success');
+    }
+  }catch(error){
+    console.error('MFA doğrulama hatası',error);
+    const raw=String(error?.message||'');
+    const codeName=String(error?.code||'');
+    if(/invalid totp|invalid.*code/i.test(raw)){
+      msg($('mfaMsg'),'Kod geçersiz veya süresi dolmuş. Authenticator uygulamasında yeni oluşan 6 haneli kodu gir. iPhone Tarih ve Saat ayarının Otomatik olduğundan emin ol.','error');
+    }else{
+      const suffix=codeName?` (${codeName})`:'';
+      msg($('mfaMsg'),'2FA doğrulama servisi işlemi tamamlayamadı'+suffix+'. Sayfayı yenileyip yeniden dene.','error');
+    }
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='Güvenli Girişi Tamamla';}
+    $('mfaCode').value='';
   }
 }
 
@@ -1795,7 +1878,7 @@ async function runReport(){
         <section class="report-section-card"><div class="report-section-head"><h3>🎖️ Rütbe Grubu Dağılımı</h3><span class="hint">Tamamlanan işlemlere göre</span></div><div class="report-bar-list">${rankBars}</div></section>
         <section class="report-section-card"><div class="report-section-head"><h3>📆 Günlük Performans</h3><span class="hint">${activeDays} aktif çalışma günü</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Tarih</th><th>Randevu</th><th>Tamam</th><th>Oran</th><th>Gelmedi</th><th>Acil</th><th>İşlem</th><th>Randevu Tahsil</th></tr></thead><tbody>${dayRows}</tbody></table></div></section>
         <section class="report-insight"><div class="report-insight-title">📌 Dönem Özeti</div><ul>${insightItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>
-        <footer class="report-footer"><span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.3</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
+        <footer class="report-footer"><span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.4</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
       </div></article>`;
     showStatus(`${all.length} randevu · ${Number(finance.payment_count||0)} tahsilat hareketi işlendi · Rapor hazır.`,'');
     setTimeout(()=>status.classList.add('hidden'),1800); return true;

@@ -1,0 +1,31 @@
+OKAN VURAL RANDEVU SİSTEMİ
+v4.7.4 FINAL GÜNCEL - KRİTİK MFA / OTURUM DÜZELTME RAPORU
+Tarih: 17.09.2026
+
+CANLI TEŞHİS
+- Verified TOTP faktörü canlı Supabase Auth hesabında mevcut.
+- 21:27 denemesinde yeni mfa_challenges kaydı oluşmadı; hata TOTP verify'dan önce challenge aşamasındaydı.
+- Aynı anda auth.sessions üzerinde geçerli Safari session mevcuttu.
+- public.app_active_sessions üzerinde aynı session + cihaz için 24 saat güvenilir oturum aktifti.
+- Eski frontend buna rağmen önce MFA durumunu sorguladığı için geçici Safari/PWA MFA sorgu hatası kullanıcıyı gereksiz login/2FA ekranına düşürebiliyordu.
+
+DÜZELTME
+[PASS] Açılışta önce check_app_session_v47 ile 24 saat güvenilir session kontrol edilir.
+[PASS] Güvenilir session varsa MFA API sorgusu uygulamanın açılmasını engellemez.
+[PASS] MFA durumu ayarlar ekranı için arka planda yenilenir.
+[PASS] Güvenilir session yoksa normal AAL/MFA akışı devreye girer.
+[PASS] MFA doğrulamada resmi Supabase challengeAndVerify() yöntemi kullanılır.
+[PASS] Invalid TOTP ile servis/bağlantı hataları ayrıştırılır.
+[PASS] Submit butonu işlem sırasında kilitlenir.
+[PASS] Supabase JS sürümü 2.116.0'a sabitlendi.
+[PASS] manifest.webmanifest final pakette fiziksel olarak mevcut.
+[PASS] JavaScript syntax kontrolü.
+[PASS] Unit test: trusted session -> getMfaState çağrılmadan uygulama açılır.
+[PASS] Unit test: challengeAndVerify tek çağrı akışı.
+
+NOT
+- Supabase dokümantasyonuna göre TOTP kodları 30 saniyelik aralıklarla değişir ve bir aralık saat sapmasına tolerans vardır.
+- Eğer gerçekten "Invalid TOTP code entered" alınırsa cihaz tarih/saat senkronizasyonu kontrol edilmelidir.
+
+index.html SHA-256:
+cadee2f65b90a2c0996a92094e0548f4f98ddc8fba99fb3b9ab83e19d886c5f3

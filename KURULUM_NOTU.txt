@@ -1,0 +1,13 @@
+v4.7.4 FINAL GÜNCEL
+GitHub kök dizinine şu 7 dosyayı yükle/değiştir:
+index.html
+manifest.webmanifest
+icon-192.png
+icon-512.png
+apple-touch-icon.png
+maskable-icon-512.png
+icon-1024.png
+
+Yüklemeden sonra Safari'deki eski sekmeyi tamamen kapatıp siteyi yeniden aç.
+Aynı güvenilir session + aynı cihazdaysan 24 saat içinde Authenticator kodu istenmemelidir.
+Yeni cihaz/oturum gerçekten MFA gerektirirse challengeAndVerify akışı çalışır.
