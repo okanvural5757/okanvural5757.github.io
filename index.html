@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Okan Vural Randevu Sistemi">
-<title>Okan Vural Randevu Sistemi v4.7.1</title>
-<meta name="application-version" content="4.7.1">
+<title>Okan Vural Randevu Sistemi v4.7.3</title>
+<meta name="application-version" content="4.7.3">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -293,6 +293,8 @@ img,svg,canvas{max-width:100%;height:auto}
 .pro-contact .btn{min-width:96px;height:48px;align-self:end}
 .person-alert{border-radius:15px;padding:12px;border:1px solid #fdb022;background:#fff8eb;color:#93370d;font-size:12px;display:grid;gap:7px}
 .person-alert.safe{border-color:#abefc6;background:#ecfdf3;color:#067647}
+.person-alert.debt-alert{border:2px solid #f04438;background:linear-gradient(135deg,#fff1f0,#fff7ed);color:#b42318;box-shadow:0 0 0 3px rgba(240,68,56,.07)}
+.person-alert.debt-alert .debt-warning-amount{font-size:20px;font-weight:950;color:#b42318}
 .person-alert .alert-title{font-size:13px;font-weight:950}
 .person-alert .alert-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
 .overdue-card{border-color:#f04438!important;background:linear-gradient(135deg,#fff 0%,#fff1f0 100%)!important;box-shadow:0 7px 20px rgba(217,45,32,.12)!important}
@@ -349,7 +351,7 @@ img,svg,canvas{max-width:100%;height:auto}
 </style>
 </head>
 <body>
-<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.1 - professional final build -->
+<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.3 - professional final build -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -652,7 +654,7 @@ const SUPABASE_KEY = 'sb_publishable_l2qxOCeQoVcSDFhY6tBkrg_nxNBqkWM';
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
-const APP_VERSION = "4.7.1";
+const APP_VERSION = "4.7.3";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -722,20 +724,86 @@ async function init(){
   });
 }
 
+const MFA_FACTOR_CACHE_KEY='okan_mfa_factor_cache_v473';
+
+function normalizeMfaFactor(f){
+  if(!f) return null;
+  const id=f.id||f.factor_id||f.factorId||null;
+  if(!id) return null;
+  return {
+    ...f,
+    id,
+    factor_type:f.factor_type||f.factorType||f.type||'totp',
+    friendly_name:f.friendly_name||f.friendlyName||'',
+    status:f.status||'verified'
+  };
+}
+
+function cacheMfaFactor(f){
+  const n=normalizeMfaFactor(f);
+  if(!n?.id || !state.user?.id) return;
+  try{ localStorage.setItem(MFA_FACTOR_CACHE_KEY,JSON.stringify({user_id:state.user.id,id:n.id,factor_type:n.factor_type,friendly_name:n.friendly_name,status:'verified'})); }catch(e){}
+}
+
+function readCachedMfaFactor(){
+  try{
+    const x=JSON.parse(localStorage.getItem(MFA_FACTOR_CACHE_KEY)||'null');
+    if(x?.user_id===state.user?.id && x?.id) return normalizeMfaFactor(x);
+  }catch(e){}
+  return null;
+}
+
+function clearCachedMfaFactor(){
+  try{ localStorage.removeItem(MFA_FACTOR_CACHE_KEY); }catch(e){}
+}
+
+async function fetchVerifiedMfaFactors(allowCache=true){
+  let lastError=null;
+  for(let attempt=0;attempt<3;attempt++){
+    try{
+      const r=await db.auth.mfa.listFactors();
+      if(r.error) throw r.error;
+      const d=r.data||{};
+      const candidates=[
+        ...(Array.isArray(d)?d:[]),
+        ...(Array.isArray(d.totp)?d.totp:[]),
+        ...(Array.isArray(d.phone)?d.phone:[]),
+        ...(Array.isArray(d.all)?d.all:[])
+      ];
+      const map=new Map();
+      for(const raw of candidates){
+        const f=normalizeMfaFactor(raw);
+        if(f && f.status==='verified') map.set(f.id,f);
+      }
+      const verified=[...map.values()];
+      if(verified.length){
+        cacheMfaFactor(verified[0]);
+        return verified;
+      }
+    }catch(e){ lastError=e; }
+    if(attempt<2) await new Promise(resolve=>setTimeout(resolve,150*(attempt+1)));
+  }
+  if(allowCache){
+    const cached=readCachedMfaFactor();
+    if(cached) return [cached];
+  }
+  if(lastError) throw lastError;
+  return [];
+}
+
 async function getMfaState(){
-  const [factorsRes,aalRes]=await Promise.all([
-    db.auth.mfa.listFactors(),
+  const [verified,aalRes]=await Promise.all([
+    fetchVerifiedMfaFactors(true),
     db.auth.mfa.getAuthenticatorAssuranceLevel()
   ]);
-  if(factorsRes.error) throw factorsRes.error;
   if(aalRes.error) throw aalRes.error;
-  const all=[...(factorsRes.data?.totp||[]),...(factorsRes.data?.phone||[])];
-  const verified=all.filter(f=>f.status==='verified');
-  return {
-    verified,
-    currentLevel:aalRes.data?.currentLevel||'aal1',
-    nextLevel:aalRes.data?.nextLevel||'aal1'
-  };
+  const currentLevel=aalRes.data?.currentLevel||'aal1';
+  const nextLevel=aalRes.data?.nextLevel||'aal1';
+  if(currentLevel!=='aal2' && nextLevel!=='aal2' && verified.length){
+    clearCachedMfaFactor();
+    return {verified:[],currentLevel,nextLevel};
+  }
+  return {verified,currentLevel,nextLevel};
 }
 
 async function enter(user){
@@ -851,6 +919,9 @@ async function activateAppSession(challengeOnMfa=false){
   if(r.error){
     const text=r.error.message||'Güvenli oturum etkinleştirilemedi.';
     if(challengeOnMfa && /2FA|doğrulama gerekli|güven süresi/i.test(text)){
+      try{
+        if(!state.mfa.verified?.length) state.mfa.verified=await fetchVerifiedMfaFactors(true);
+      }catch(e){ console.warn('2FA faktörü yeniden okunamadı',e); }
       showMfaChallengeGate(state.mfa.verified?.[0]);
       return false;
     }
@@ -949,18 +1020,50 @@ async function verifyMfaEnrollment(){
   }
 }
 
+async function resolveMfaChallengeFactorId(){
+  let factorId=$('mfaFactorSelect')?.value||state.mfaChallengeFactorId||state.mfa.verified?.[0]?.id||null;
+  if(factorId) return factorId;
+  const factors=await fetchVerifiedMfaFactors(true);
+  state.mfa.verified=factors;
+  const select=$('mfaFactorSelect');
+  if(select){
+    select.innerHTML=factors.map((f,i)=>`<option value="${f.id}">${esc(f.friendly_name||('Authenticator '+(i+1)))}</option>`).join('');
+    $('mfaFactorWrap').classList.toggle('hidden',factors.length<=1);
+  }
+  factorId=factors[0]?.id||null;
+  state.mfaChallengeFactorId=factorId;
+  if(select && factorId) select.value=factorId;
+  return factorId;
+}
+
 async function verifyMfaChallenge(e){
   e.preventDefault();
   hideMsg($('mfaMsg'));
   const code=$('mfaCode').value.replace(/\D/g,'');
   if(code.length<6) return msg($('mfaMsg'),'6 haneli Authenticator kodunu gir.','error');
-  const factorId=$('mfaFactorSelect')?.value||state.mfaChallengeFactorId||state.mfa.verified?.[0]?.id;
-  if(!factorId) return msg($('mfaMsg'),'2FA cihazı bulunamadı.','error');
   try{
-    const challenge=await db.auth.mfa.challenge({factorId});
+    let factorId=await resolveMfaChallengeFactorId();
+    if(!factorId) return msg($('mfaMsg'),'Doğrulanmış 2FA faktörüne erişilemedi. İnternet bağlantısını kontrol edip tekrar dene.','error');
+
+    let challenge=await db.auth.mfa.challenge({factorId});
+    if(challenge.error){
+      // Önbellekteki factor id eskidiyse temizle ve resmi listFactors ile bir kez daha tazele.
+      clearCachedMfaFactor();
+      const fresh=await fetchVerifiedMfaFactors(false);
+      const freshId=fresh[0]?.id||null;
+      if(freshId && freshId!==factorId){
+        factorId=freshId;
+        state.mfa.verified=fresh;
+        state.mfaChallengeFactorId=freshId;
+        cacheMfaFactor(fresh[0]);
+        challenge=await db.auth.mfa.challenge({factorId});
+      }
+    }
     if(challenge.error) throw challenge.error;
+
     const verify=await db.auth.mfa.verify({factorId,challengeId:challenge.data.id,code});
     if(verify.error) throw verify.error;
+    cacheMfaFactor(state.mfa.verified?.find(f=>f.id===factorId)||{id:factorId,status:'verified'});
     state.mfa=await getMfaState();
     const {data:{user}}=await db.auth.getUser();
     if(user) await enter(user);
@@ -968,7 +1071,8 @@ async function verifyMfaChallenge(e){
       state.pendingSensitiveAction=null; showRestorePreview(state.restorePayload); msg($('restoreMsg'),'2FA doğrulandı. Geri yüklemeyi başlatmak için GERİ YÜKLE onayını yeniden yaz.','success');
     }
   }catch(e){
-    msg($('mfaMsg'),'Doğrulama kodu kabul edilmedi. Yeni kodu kontrol edip tekrar dene.','error');
+    console.error('MFA doğrulama hatası',e);
+    msg($('mfaMsg'),'Doğrulama tamamlanamadı. Authenticator uygulamasındaki güncel kodu kontrol edip tekrar dene.','error');
   }
 }
 
@@ -1123,17 +1227,25 @@ function updateCallButton(){
 function renderPersonAlertBox(alerts,person){
   const box=$('personAlertBox');
   if(!alerts || !person){box.classList.add('hidden');box.innerHTML='';return;}
-  const noShow=Number(alerts.no_show_count||0), debt=Number(alerts.debt||0);
+  const noShow=Number(alerts.no_show_count||0), debt=Number(alerts.debt||0), debtCount=Number(alerts.debt_count||0);
   if(!noShow && !debt){
     box.className='person-alert safe';
     box.innerHTML='<div class="alert-title">✓ Geçmiş uyarı bulunmuyor</div><div>Bu kişi için önceki borç veya gelmedi kaydı görünmüyor.</div>';
     return;
   }
   const parts=[];
+  if(debt>0){
+    parts.push(`<div class="alert-title">⚠️ ÖNCEKİ BORÇ VAR</div>`);
+    parts.push(`<div class="debt-warning-amount">${trMoney(debt)}</div>`);
+    parts.push(`<div>${debtCount>0?`${debtCount} tamamlanmış işlemden kalan borç. `:''}${alerts.latest_debt_date?`Son borç tarihi: ${esc(alerts.latest_debt_date)}.`:''}</div>`);
+  }
   if(noShow) parts.push(`<div><b>⚠️ Daha önce ${noShow} kez randevusuna gelmedi.</b>${alerts.last_no_show?` Son kayıt: ${esc(alerts.last_no_show)}.`:''}</div>`);
-  if(debt>0) parts.push(`<div><b>₺ Önceki borç: ${trMoney(debt)}</b> · Yeni işlem öncesinde tahsilatı kontrol et.</div>`);
-  box.className='person-alert';
-  box.innerHTML=`<div class="alert-title">Kişi Geçmişi Uyarısı</div>${parts.join('')}`;
+  box.className=debt>0?'person-alert debt-alert':'person-alert';
+  box.innerHTML=`${parts.join('')}${debt>0?`<div class="alert-actions"><button id="inlineDebtBtn" type="button" class="btn warn">₺ Önceki Borç Tahsil Et · ${trMoney(debt)}</button></div>`:''}`;
+  if(debt>0){
+    const debtBtn=$('inlineDebtBtn');
+    if(debtBtn) debtBtn.onclick=()=>openDebtDialog(person.id,state.editAppointmentId||null,person.full_name||'');
+  }
 }
 
 async function loadPersonAlerts(person,beforeAppointmentId=null){
@@ -1508,8 +1620,14 @@ async function collectPriorDebt(){
     if(r.error) throw r.error;
     $('debtDialog').close();
     await Promise.all([loadDay(),loadWeek(),loadRecords(),loadAudit()]);
-    alert(`Önceki borçtan ${trMoney(amount)} tahsil edildi. Kalan: ${trMoney(r.data?.remaining_debt||0)}.`);
-    if(state.debtBeforeAppointmentId) await openDetail(state.debtBeforeAppointmentId);
+    const remaining=Number(r.data?.remaining_debt||0);
+    alert(`Önceki borçtan ${trMoney(amount)} tahsil edildi. Kalan: ${trMoney(remaining)}.`);
+    if(state.debtBeforeAppointmentId){
+      await openDetail(state.debtBeforeAppointmentId);
+    }else if(state.selectedPersonId){
+      const selected=state.people.find(x=>x.id===state.selectedPersonId);
+      if(selected) await loadPersonAlerts(selected,null);
+    }
   }catch(e){msg($('debtMsg'),'Tahsilat kaydedilemedi: '+e.message,'error');}
   finally{btn.disabled=false;btn.textContent='Tahsilatı Kaydet';}
 }
@@ -1677,7 +1795,7 @@ async function runReport(){
         <section class="report-section-card"><div class="report-section-head"><h3>🎖️ Rütbe Grubu Dağılımı</h3><span class="hint">Tamamlanan işlemlere göre</span></div><div class="report-bar-list">${rankBars}</div></section>
         <section class="report-section-card"><div class="report-section-head"><h3>📆 Günlük Performans</h3><span class="hint">${activeDays} aktif çalışma günü</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Tarih</th><th>Randevu</th><th>Tamam</th><th>Oran</th><th>Gelmedi</th><th>Acil</th><th>İşlem</th><th>Randevu Tahsil</th></tr></thead><tbody>${dayRows}</tbody></table></div></section>
         <section class="report-insight"><div class="report-insight-title">📌 Dönem Özeti</div><ul>${insightItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>
-        <footer class="report-footer"><span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.1</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
+        <footer class="report-footer"><span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.3</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
       </div></article>`;
     showStatus(`${all.length} randevu · ${Number(finance.payment_count||0)} tahsilat hareketi işlendi · Rapor hazır.`,'');
     setTimeout(()=>status.classList.add('hidden'),1800); return true;
@@ -2096,6 +2214,8 @@ function bind(){
     $('overrideReasonWrap').classList.toggle('hidden',!$('emergencyCheck').checked);
     refreshSlotSelect($('apptDate').value,$('slotSelect').value);
   };
+  let personLookupTimer=null;
+  $('personName').addEventListener('input',()=>{clearTimeout(personLookupTimer);personLookupTimer=setTimeout(()=>applyKnownPerson(),140);});
   $('personName').addEventListener('change',applyKnownPerson);
   $('personName').addEventListener('blur',applyKnownPerson);
   $('phoneNumber').addEventListener('input',updateCallButton);
