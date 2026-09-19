@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#0b1220">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Okan Vural Randevu Sistemi">
-<title>Okan Vural Randevu Sistemi v4.7.4</title>
+<meta name="apple-mobile-web-app-title" content="MEBS Subay Temel Berber">
+<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.4</title>
 <meta name="application-version" content="4.7.4">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
@@ -357,8 +357,8 @@ img,svg,canvas{max-width:100%;height:auto}
 <section id="authView" class="auth">
   <div class="card grid">
     <div>
-      <div class="brand" style="font-size:26px;line-height:1.15">Okan Vural Randevu Sistemi</div>
-      <div class="muted" style="margin-top:6px">Güvenli yönetici girişi</div>
+      <div class="brand" style="font-size:23px;line-height:1.15">MEBS Öğrenci Kurslar Taburu<br>Subay Temel Berber Randevu Sistemi</div>
+      <div class="muted" style="margin-top:6px">Yetkili personel girişi</div>
     </div>
     <div class="security-card">
       🔒 Kayıt kapalıdır. Yalnızca yetkilendirilmiş yönetici hesabı giriş yapabilir.
@@ -404,6 +404,7 @@ img,svg,canvas{max-width:100%;height:auto}
         <img src="./icon-192.png" alt="MEBS" class="header-logo">
         <div>
           <h1 id="pageTitle">Bugün</h1>
+          <div class="muted" style="font-size:10px;font-weight:850;letter-spacing:.04em">MEBS SUBAY TEMEL BERBER</div>
           <div id="dateLabel" class="muted"></div>
         </div>
       </div>
@@ -663,6 +664,8 @@ const SUPABASE_KEY = 'sb_publishable_l2qxOCeQoVcSDFhY6tBkrg_nxNBqkWM';
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
+const DISPLAY_NAME = "MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi";
+const SHORT_NAME = "MEBS Subay Temel Berber";
 const APP_VERSION = "4.7.4";
 const MFA_REQUIRED = true;
 
@@ -1896,7 +1899,7 @@ async function runReport(){
     if(activeDays) insightItems.push(`Aktif çalışma günü başına ortalama ${dailyAverage.toLocaleString('tr-TR',{maximumFractionDigits:1})} tamamlanan işlem gerçekleşti.`);
 
     out.innerHTML=`<article class="report-shell">
-      <header class="report-hero"><div class="eyebrow">Yönetici Raporu · KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi</div><h2>Faaliyet, Kazanç ve Tahsilat Raporu</h2><div style="opacity:.86;font-size:13px">Gerçek para girişi, verilen hizmet, borç ve randevu performansı tek raporda.</div><div class="report-hero-meta"><span class="report-chip">📅 ${trDate(a)} – ${trDate(b)}</span><span class="report-chip">🔒 2FA / Güvenilir Oturum</span><span class="report-chip">🕒 ${new Date().toLocaleString('tr-TR')}</span></div></header>
+      <header class="report-hero"><div class="eyebrow">Yönetici Raporu · ${esc(DISPLAY_NAME)}</div><h2>Faaliyet, Kazanç ve Tahsilat Raporu</h2><div style="opacity:.86;font-size:13px">Gerçek para girişi, verilen hizmet, borç ve randevu performansı tek raporda.</div><div class="report-hero-meta"><span class="report-chip">📅 ${trDate(a)} – ${trDate(b)}</span><span class="report-chip">🔒 2FA / Güvenilir Oturum</span><span class="report-chip">🕒 ${new Date().toLocaleString('tr-TR')}</span></div></header>
       <div class="report-body">
         <div class="report-overview"><div class="report-ring" style="--pct:${completionRate}"><div class="report-ring-content"><b>%${completionRate}</b><span>GERÇEKLEŞME</span></div></div><div class="report-mini-grid"><div class="report-mini blue"><span>TOPLAM RANDEVU</span><b>${valid.length}</b></div><div class="report-mini green"><span>TAMAMLANAN</span><b>${done.length}</b></div><div class="report-mini orange"><span>ACİL / İSTİSNAİ</span><b>${emergency}</b></div><div class="report-mini red"><span>GELMEDİ / İPTAL</span><b>${noShow} / ${cancelled}</b></div></div></div>
         <div class="finance-grid-v47"><div class="finance-kpi-v47 cash"><div class="label">Gerçek Tahsilat</div><div class="amount">${trMoney(cashCollected)}</div></div><div class="finance-kpi-v47"><div class="label">Hizmet Bedeli</div><div class="amount">${trMoney(serviceTotal)}</div></div><div class="finance-kpi-v47 prior"><div class="label">Önceki Borç Tahsilatı</div><div class="amount">${trMoney(priorDebtCollected)}</div></div><div class="finance-kpi-v47 debt"><div class="label">Bu Dönem Kalan Borç</div><div class="amount">${trMoney(outstanding)}</div></div></div>
@@ -1907,7 +1910,7 @@ async function runReport(){
         <section class="report-section-card"><div class="report-section-head"><h3>🎖️ Rütbe Grubu Dağılımı</h3><span class="hint">Tamamlanan işlemlere göre</span></div><div class="report-bar-list">${rankBars}</div></section>
         <section class="report-section-card"><div class="report-section-head"><h3>📆 Günlük Performans</h3><span class="hint">${activeDays} aktif çalışma günü</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Tarih</th><th>Randevu</th><th>Tamam</th><th>Oran</th><th>Gelmedi</th><th>Acil</th><th>İşlem</th><th>Randevu Tahsil</th></tr></thead><tbody>${dayRows}</tbody></table></div></section>
         <section class="report-insight"><div class="report-insight-title">📌 Dönem Özeti</div><ul>${insightItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>
-        <footer class="report-footer"><span>KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.4</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
+        <footer class="report-footer"><span>${esc(DISPLAY_NAME)} v4.7.4</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
       </div></article>`;
     showStatus(`${all.length} randevu · ${Number(finance.payment_count||0)} tahsilat hareketi işlendi · Rapor hazır.`,'');
     setTimeout(()=>status.classList.add('hidden'),1800); return true;
@@ -2071,7 +2074,7 @@ function renderSettings(){
   const mfaActive=state.mfa.verified.length>0;
   const mfaSession=state.mfa.currentLevel==='aal2';
   $('securitySettings').innerHTML=`<b>🔒 Tek Kullanıcı / Yüksek Güvenlik Modu</b>
-    <div style="margin-top:8px">Sistem: <strong>${esc(APP_NAME)}</strong></div>
+    <div style="margin-top:8px">Sistem: <strong>${esc(DISPLAY_NAME)}</strong></div>
     <div style="margin-top:4px">Yetkili hesap: <strong>${esc(state.user?.email||'Yönetici')}</strong></div>
     <div style="margin-top:4px">Yeni kullanıcı kaydı: <strong>SUNUCU SEVİYESİNDE KAPALI</strong></div>
     <div style="margin-top:4px">Veri erişimi: <strong>RLS / Yalnız aktif yönetici</strong></div>
@@ -2123,7 +2126,7 @@ function renderSettings(){
 
 function officialHeader(title,meta=''){
   return `<div class="od-head">
-    <div class="od-unit">${esc(APP_NAME.toLocaleUpperCase('tr-TR'))}</div>
+    <div class="od-unit">${esc(DISPLAY_NAME.toLocaleUpperCase('tr-TR'))}</div>
     <div class="od-title">${esc(title)}</div>
     ${meta?`<div style="font-size:10px;margin-top:5px">${meta}</div>`:''}
   </div>`;
@@ -2212,8 +2215,8 @@ async function shareDay(){
   const lines=state.appointments.filter(x=>x.status!=='cancelled').map(x=>({time:time5(x.start_time),text:`${time5(x.start_time)} – ${rankLabel(x.people?.rank_id)} ${x.people?.full_name||''}`}));
   state.manualBlocks.filter(b=>b.block_date===state.selectedDate).forEach(b=>lines.push({time:time5(b.start_time),text:`${time5(b.start_time)} – DOLU`}));
   lines.sort((a,b)=>a.time.localeCompare(b.time));
-  const text=`${APP_NAME.toLocaleUpperCase('tr-TR')}\nGÜNLÜK RANDEVU LİSTESİ\n${trDate(state.selectedDate).toLocaleUpperCase('tr-TR')}\n\n${lines.length?lines.map(x=>x.text).join('\n'):'Randevu bulunmuyor.'}`;
-  if(navigator.share) await navigator.share({title:APP_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Liste panoya kopyalandı.');}
+  const text=`${DISPLAY_NAME.toLocaleUpperCase('tr-TR')}\nGÜNLÜK RANDEVU LİSTESİ\n${trDate(state.selectedDate).toLocaleUpperCase('tr-TR')}\n\n${lines.length?lines.map(x=>x.text).join('\n'):'Randevu bulunmuyor.'}`;
+  if(navigator.share) await navigator.share({title:DISPLAY_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Liste panoya kopyalandı.');}
 }
 
 async function shareWeek(){
@@ -2238,14 +2241,14 @@ async function shareWeek(){
     if(!items.length) lines.push('Randevu yok');
     else items.forEach(x=>lines.push(x.text));
   });
-  const text=`${APP_NAME.toLocaleUpperCase('tr-TR')}\nHAFTALIK RANDEVU PLANI\n${lines.join('\n')}`;
-  if(navigator.share) await navigator.share({title:APP_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Haftalık liste panoya kopyalandı.');}
+  const text=`${DISPLAY_NAME.toLocaleUpperCase('tr-TR')}\nHAFTALIK RANDEVU PLANI\n${lines.join('\n')}`;
+  if(navigator.share) await navigator.share({title:DISPLAY_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Haftalık liste panoya kopyalandı.');}
 }
 
 async function shareReport(){
   if(!state.lastReport) await runReport();
   const r=state.lastReport; if(!r)return;
-  const text=`${APP_NAME.toLocaleUpperCase('tr-TR')}\nFAALİYET VE TAHSİLAT RAPORU
+  const text=`${DISPLAY_NAME.toLocaleUpperCase('tr-TR')}\nFAALİYET VE TAHSİLAT RAPORU
 ${r.start} – ${r.end}
 
 Toplam Randevu: ${r.total}
@@ -2257,7 +2260,7 @@ Acil / İstisnai: ${r.emergency}
 İşlem Toplamı: ${trMoney(r.totalAmount)}
 Tahsil Edilen: ${trMoney(r.paid)}
 Bekleyen: ${trMoney(r.unpaid)}`;
-  if(navigator.share) await navigator.share({title:APP_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Rapor panoya kopyalandı.');}
+  if(navigator.share) await navigator.share({title:DISPLAY_NAME,text}); else {await navigator.clipboard.writeText(text);alert('Rapor panoya kopyalandı.');}
 }
 
 function exportCsv(){
@@ -2287,7 +2290,7 @@ function switchPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
   const titles={weekPage:'Haftalık Plan',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar'};
-  $('pageTitle').textContent=id==='homePage'?selectedDayLabel(state.selectedDate):(titles[id]||APP_NAME);
+  $('pageTitle').textContent=id==='homePage'?selectedDayLabel(state.selectedDate):(titles[id]||SHORT_NAME);
   $('fab').classList.toggle('hidden',id!=='homePage');
   if(id==='weekPage')loadWeek(); if(id==='recordsPage')loadRecords(); if(id==='reportPage'&&!state.lastReport)runReport(); if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),getMfaState().then(x=>state.mfa=x)]).then(renderSettings);}
 }

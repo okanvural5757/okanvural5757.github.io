@@ -1,7 +1,7 @@
 {
-  "name": "Okan Vural Randevu Sistemi",
-  "short_name": "Okan Vural",
-  "description": "Güvenli yönetici randevu sistemi",
+  "name": "MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi",
+  "short_name": "MEBS Berber",
+  "description": "Yetkili personel için güvenli berber randevu ve işlem takip sistemi",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
