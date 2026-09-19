@@ -487,6 +487,15 @@ img,svg,canvas{max-width:100%;height:auto}
     </section>
 
     <section id="settingsPage" class="page">
+      <div class="section-title">TV Bilgilendirme Ekranı</div>
+      <div class="card grid">
+        <div>Randevu detayındaki “Tıraşa Başla” ile işlemdeki kişiyi TV’ye aktarın. “Tıraş Tamamlandı” ile işlemi bitirin.</div>
+        <div class="toolbar">
+          <a class="btn primary" href="./tv-v48.html?mode=panel" target="_blank" rel="noopener">TV Ayarları ve Eşleştirme</a>
+          <a class="btn" href="./tv-v48.html?mode=screen&amp;demo=1" target="_blank" rel="noopener">Örnek TV Önizlemesi</a>
+        </div>
+        <div class="muted">TV tarayıcısında tv-v48.html?mode=screen adresini açın. Ekrandaki kodu TV ayarlarından onaylayın. Değişiklikler TV’nin yenileme aralığında görünür.</div>
+      </div>
       <div class="section-title">Güvenlik</div>
       <div id="securitySettings" class="security-card"></div>
 
@@ -1601,6 +1610,23 @@ async function saveAppointment(e){
   }
 }
 
+async function startTvService(appointment,button){
+  if(appointment.appointment_date!==today()||!['scheduled','arrived'].includes(appointment.status)) return alert('Yalnız bugünün bekleyen veya geldi durumundaki randevusu başlatılabilir.');
+  if(!navigator.onLine) return alert('Tıraşı başlatmak için internet bağlantısı gerekiyor.');
+  button.disabled=true;
+  try{
+    const running=await db.from('appointments').select('id').eq('appointment_date',today()).eq('status','in_service').is('deleted_at',null).neq('id',appointment.id).limit(1);
+    if(running.error) throw running.error;
+    if(running.data?.length) throw new Error('Başka bir randevu işlemde. Önce o randevuyu tamamlayın.');
+    const result=await db.from('appointments').update({status:'in_service'}).eq('id',appointment.id).eq('appointment_date',today()).eq('status',appointment.status).is('deleted_at',null).select('id');
+    if(result.error) throw result.error;
+    if(!result.data?.length) throw new Error('Randevu değişmiş veya güncelleme yetkisi yok. Listeyi yenileyip tekrar deneyin.');
+    $('detailDialog').close();
+    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadAudit()]);
+  }catch(e){alert(e.message||'Tıraş başlatılamadı.');}
+  finally{button.disabled=false;}
+}
+
 async function openDetail(id){
   const x=state.appointments.find(a=>a.id===id) || state.records.find(a=>a.id===id);
   if(!x)return;
@@ -1637,6 +1663,8 @@ async function openDetail(id){
     </div>
     <label class="service"><span>İmza alındı</span><input id="sigCheck" type="checkbox" ${x.signature_received?'checked':''}></label>
     <div class="toolbar">
+      ${x.appointment_date===today()&&['scheduled','arrived'].includes(x.status)?'<button class="btn primary" data-act="start_service">✂ Tıraşa Başla</button>':''}
+      ${x.status==='in_service'?'<span class="badge">✂ Şu an işlemde</span>':''}
       <button class="btn ok" data-act="complete">✓ Tıraş Tamamlandı</button>
       <button class="btn" data-act="edit">Düzenle</button>
       <button class="btn warn" data-act="no_show">Gelmedi</button>
@@ -1653,6 +1681,7 @@ async function openDetail(id){
 
   $('detailBody').querySelectorAll('[data-act]').forEach(b=>b.onclick=async()=>{
     const act=b.dataset.act;
+    if(act==='start_service'){await startTvService(x,b);return;}
     if(act==='edit'){$('detailDialog').close();await openNew(time5(x.start_time),id);return;}
     if(act==='prior_debt'){$('detailDialog').close();await openDebtDialog(p.id,x.id,p.full_name);return;}
     if(act==='delete'){
