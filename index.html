@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="MEBS Subay Temel Berber">
-<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.12</title>
-<meta name="application-version" content="4.7.12">
+<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.12.1</title>
+<meta name="application-version" content="4.7.12.1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -381,6 +381,22 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
   .fab{width:54px;height:54px}
 }
 
+
+/* v4.7.12.1 mobile + stock-report patch */
+.mobile-new-appt{display:none;width:100%;margin:0 0 12px}
+.stock-period-card{border:1px solid #b2ccff;background:#f5f8ff;border-radius:15px;padding:12px;display:grid;gap:9px}
+.stock-opening-note{border-radius:12px;background:#ecfdf3;color:#067647;padding:10px;font-size:12px;line-height:1.45}
+.stock-opening-note span{font-weight:600}
+.stock-service-summary{display:flex;gap:8px;flex-wrap:wrap}
+.stock-service-summary span{display:inline-flex;padding:7px 9px;border-radius:999px;background:#fff;border:1px solid #dbe5ff;font-size:11px;color:#344054}
+@media(max-width:640px){
+  .wrap{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+  .fab{display:none!important}
+  .mobile-new-appt{display:block}
+  #homePage,#weekPage,#recordsPage,#reportPage,#settingsPage,#backupsPage{padding-bottom:calc(34px + env(safe-area-inset-bottom))}
+  .stock-period-card .row.between{align-items:flex-start}
+}
+
 @page{size:A4;margin:10mm}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -406,7 +422,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 </style>
 </head>
 <body>
-<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.12 - Zimmet Final -->
+<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.12.1 - Mobil + Sarf Raporu -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -487,6 +503,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
         <input id="dayPicker" type="date" style="max-width:180px">
         <button id="nextDay" class="btn small">Sonraki ›</button>
       </div>
+      <button id="mobileNewAppointment" class="btn primary mobile-new-appt no-print" type="button">+ Yeni Randevu</button>
       <div id="schedule" class="list"></div>
       <div id="dayEndPanel" class="day-end no-print"></div>
     </section>
@@ -541,7 +558,11 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
           <div class="muted" style="font-size:11px;margin-top:6px">Günlük liste başlangıç tarihini; kayıt çizelgesi seçili tarih aralığını kullanır.</div>
         </div>
       </div>
-      <div class="notice no-print" style="margin-top:12px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff"><b>📊 Profesyonel rapor:</b> Haftalık, 15 günlük, aylık veya özel tarih aralığında gerçek tahsilat, hizmet bedeli, önceki borç tahsilatı, kalan borç, gelmedi ve işlem dağılımını gösterir.</div><div id="reportStatus" class="report-status-box hidden"></div><div id="reportOut" style="margin-top:12px"></div>
+      <div class="notice no-print" style="margin-top:12px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff"><b>📊 Profesyonel rapor:</b> Haftalık, 15 günlük, aylık veya özel tarih aralığında gerçek tahsilat, hizmet bedeli, önceki borç tahsilatı, kalan borç, gelmedi ve işlem dağılımını gösterir.</div>
+      <button id="openStockReportBtn" class="settings-link-card no-print" type="button" style="margin-top:12px">
+        <span><b>📦 Zimmet ve Sarf Raporu</b><span class="muted" style="display:block;font-size:11px;margin-top:4px">Ay sonu sayımı yapılmadan da teorik stok ve otomatik sarfı görüntüle.</span></span><span class="arrow">›</span>
+      </button>
+      <div id="reportStatus" class="report-status-box hidden"></div><div id="reportOut" style="margin-top:12px"></div>
       <div class="card no-print" style="margin-top:12px">
         <div class="row between"><div><b>Rapor Arşivi</b><div class="muted" style="font-size:11px;margin-top:3px">Arşiv yalnız dönem özetini saklar; telefon ve kişisel not içermez.</div></div><button id="archiveReportBtn" class="btn small primary" type="button">Raporu Arşivle</button></div>
         <div id="reportArchiveList" class="archive-list"><div class="muted">Arşiv yükleniyor…</div></div>
@@ -575,7 +596,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
       <div class="section-title">Çöp Kutusu</div>
       <div id="trashSettings" class="list"></div>
 
-      <div class="section-title">Zimmet ve Sarf</div>
+      <div id="stockReportAnchor" class="section-title">Zimmet ve Sarf</div>
       <div class="card grid">
         <div class="notice success"><b>Kesin sarf kuralı:</b> Malzeme yalnız randevu <b>Tamamlandı + Ödendi</b> olduğunda bir kez düşer. Sonradan iptal/ödeme değişikliği stoğu kendiliğinden geri getirmez.</div>
         <div class="stock-actions"><button id="receivePackageBtn" class="btn primary" type="button">+ Zimmet Paketi Al</button><button id="stockCountBtn" class="btn" type="button">Başlangıç / Ay Sonu Sayımı</button></div>
@@ -809,7 +830,7 @@ const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
 const DISPLAY_NAME = "MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi";
 const SHORT_NAME = "MEBS Subay Temel Berber";
-const APP_VERSION = "4.7.12";
+const APP_VERSION = "4.7.12.1";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -917,7 +938,7 @@ async function loadDayEndSummary(){
 
 function renderDayEndPanel(){
   const box=$('dayEndPanel');if(!box)return;const s=state.dayEndSummary||localDayEndSummary();const checked=s.checked;const future=state.selectedDate>today();
-  box.innerHTML=`<div class="row between"><div><b>Gün Sonu Kontrolü</b><div class="muted" style="font-size:11px">Kayıtları değiştirmeden eksikleri gösterir.</div></div>${checked?'<span class="backup-chip ok">KONTROL EDİLDİ</span>':''}</div>
+  box.innerHTML=`<div class="row between"><div><b>Gün Sonu Kontrolü</b><div class="muted" style="font-size:11px">Randevu, ödeme ve stok değiştirilmez; yalnız günün kontrol edildiği kaydedilir.</div></div>${checked?'<span class="backup-chip ok">KONTROL EDİLDİ</span>':''}</div>
   <div class="day-end-grid"><div class="day-end-kpi"><span class="muted">Tamamlanan</span><b>${Number(s.completed||0)}</b></div><div class="day-end-kpi"><span class="muted">Sonuçlanmayan</span><b>${Number(s.unresolved||0)}</b></div><div class="day-end-kpi"><span class="muted">Bekleyen Tahsilat</span><b>${Number(s.unpaid_count||0)}</b></div></div>
   <div class="module-meta"><span>Gelmedi: <b>${Number(s.no_show||0)}</b></span><span>İptal: <b>${Number(s.cancelled||0)}</b></span><span>İmza eksik: <b>${Number(s.signature_missing||0)}</b></span><span>Tahsilat: <b>${trMoney(s.paid_total)}</b></span><span>Kalan: <b>${trMoney(s.outstanding_total)}</b></span></div>
   ${future?'<div class="notice">Gelecek gün için gün sonu kaydı oluşturulamaz.</div>':Number(s.unresolved||0)>0?'<div class="notice">Gün sonu kaydı için bekleyen, geldi veya işlemde durumundaki randevuları sonuçlandır.</div>':'<button id="saveDayEndBtn" class="btn primary" type="button">Gün Sonu Kontrol Edildi</button>'}`;
@@ -939,7 +960,7 @@ async function loadExtensionData(){
     db.from('report_archives').select('*').order('created_at',{ascending:false}).limit(30)
   ]);
   const firstError=[items,moves,maintenance,archives].find(x=>x.error)?.error;
-  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.12 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
+  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.12.1 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
   state.extensionsAvailable=true;state.inventoryItems=items.data||[];state.inventoryMovements=moves.data||[];state.maintenance=maintenance.data||[];state.reportArchives=archives.data||[];
   renderInventory();renderMaintenance();renderReportArchives();return true;
 }
@@ -993,7 +1014,7 @@ function openStockCount(){
 async function saveStockCount(e){
   e.preventDefault();const notes=$('stockCountNotes').value.trim();if(notes.length<3)return msg($('stockCountMsg'),'Sayım açıklaması zorunlu.','error');
   const btn=e.submitter;btn.disabled=true;
-  try{const counts=[...$('stockCountFields').querySelectorAll('[data-count-code]')].map(x=>({code:x.dataset.countCode,quantity:Number(x.value)}));const r=await db.rpc('count_inventory_package_v4712',{p_counts:counts,p_request_id:stockCountRequestId,p_notes:notes});if(r.error)throw r.error;$('stockCountDialog').close();await loadExtensionData();await loadStockMonthReport();}
+  try{const counts=[...$('stockCountFields').querySelectorAll('[data-count-code]')].map(x=>({code:x.dataset.countCode,quantity:Number(x.value)}));const r=await db.rpc('count_inventory_package_v47121',{p_counts:counts,p_request_id:stockCountRequestId,p_notes:notes});if(r.error)throw r.error;$('stockCountDialog').close();await loadExtensionData();await loadStockMonthReport();}
   catch(err){msg($('stockCountMsg'),err.message,'error');}finally{btn.disabled=false;}
 }
 async function saveStockRates(){
@@ -1002,9 +1023,34 @@ async function saveStockRates(){
   catch(err){msg($('stockPackageMsg'),err.message,'error');}finally{b.disabled=false;}
 }
 async function loadStockMonthReport(){
-  const box=$('stockMonthReport');if(!box)return;const month=$('stockMonthPicker')?.value||today().slice(0,7);box.innerHTML='<div class="muted">Zimmet raporu hazırlanıyor…</div>';
-  try{const r=await db.rpc('get_inventory_month_v4712',{p_month:month+'-01'});if(r.error)throw r.error;state.stockMonth=r.data;const items=r.data?.items||[];box.innerHTML=items.map(x=>{const diff=Number(x.count_difference||0);return `<div class="stock-report-row ${Number(x.current)<=Number(x.minimum)?'stock-low':''}"><div class="row between"><b>${esc(x.name)}</b><b>${numberTr(x.closing_recorded)} ${esc(x.unit)}</b></div><div class="stock-report-grid"><span>Devir: <b>${numberTr(x.opening)}</b></span><span>Giriş: <b>${numberTr(x.received)}</b></span><span>Otomatik sarf: <b>${numberTr(x.auto_used)}</b></span><span>Diğer sarf: <b>${numberTr(x.manual_used)}</b></span><span>Sayım farkı: <b>${diff>0?'+':''}${numberTr(diff)}</b></span><span>Fizikî sayım: <b>${x.physical_count==null?'—':numberTr(x.physical_count)}</b></span></div></div>`}).join('')||'<div class="muted">Bu ay için zimmet kaydı yok.</div>';}
-  catch(err){box.innerHTML=`<div class="notice error">Zimmet raporu alınamadı: ${esc(err.message)}</div>`;}
+  const box=$('stockMonthReport');if(!box)return;
+  const month=$('stockMonthPicker')?.value||today().slice(0,7);
+  box.innerHTML='<div class="muted">Zimmet raporu hazırlanıyor…</div>';
+  try{
+    const r=await db.rpc('get_inventory_month_v47121',{p_month:month+'-01'});
+    if(r.error)throw r.error;
+    state.stockMonth=r.data;
+    const items=r.data?.items||[];
+    const start=r.data?.period_start||month+'-01', end=r.data?.period_end||month+'-31';
+    const trackingStart=r.data?.tracking_start?new Date(r.data.tracking_start).toLocaleString('tr-TR'):null;
+    const started=!!r.data?.tracking_started_in_month;
+    const haircut=Number(r.data?.haircut_count||0), wash=Number(r.data?.wash_count||0);
+    const openingNote=String(r.data?.opening_note||'').trim();
+    const info=`<div class="stock-period-card"><div class="row between"><div><b>${esc(trDate(start))} – ${esc(trDate(end))}</b><div class="muted" style="font-size:11px">Ay içi teorik stok raporu</div></div><span class="backup-chip ok">TAKİP AKTİF</span></div>
+      ${started?`<div class="stock-opening-note"><b>Başlangıç stoğu:</b> Bu ay ${trackingStart?esc(trackingStart):'takip başlangıcında'} sisteme tanımlandı.${openingNote?`<br><span>${esc(openingNote)}</span>`:''}</div>`:''}
+      <div class="stock-service-summary"><span><b>Saç Tıraşı:</b> ${numberTr(haircut)}</span><span><b>Saç Yıkama:</b> ${numberTr(wash)}</span></div>
+      <div class="muted" style="font-size:11px">Ay sonu fizikî sayım yapılmadan da teorik mevcut gösterilir. Fizikî sayım yapıldığında fark ayrıca hesaplanır.</div></div>`;
+    const rows=items.map(x=>{
+      const diff=Number(x.count_difference||0), physical=x.physical_count;
+      const opening=x.opening_stock!=null?Number(x.opening_stock):Number(x.opening||0);
+      const theoretical=Number(x.theoretical_closing||0);
+      const recorded=Number(x.closing_recorded||0);
+      const physicalText=physical==null?'Henüz yapılmadı':`${numberTr(physical)} ${esc(x.unit)}`;
+      const diffText=physical==null?'—':`${diff>0?'+':''}${numberTr(diff)} ${esc(x.unit)}`;
+      return `<div class="stock-report-row ${Number(x.current)<=Number(x.minimum)?'stock-low':''}"><div class="row between"><div><b>${esc(x.name)}</b><div class="muted" style="font-size:10px">Teorik mevcut</div></div><b>${numberTr(theoretical)} ${esc(x.unit)}</b></div><div class="stock-report-grid"><span>Başlangıç / Devir: <b>${numberTr(opening)}</b></span><span>Zimmet girişi: <b>+${numberTr(x.received)}</b></span><span>Otomatik sarf: <b>-${numberTr(x.auto_used)}</b></span><span>Diğer giriş: <b>+${numberTr(x.manual_in)}</b></span><span>Diğer sarf: <b>-${numberTr(x.manual_used)}</b></span><span>Kayıtlı mevcut: <b>${numberTr(recorded)}</b></span><span>Fizikî sayım: <b>${physicalText}</b></span><span>Sayım farkı: <b>${diffText}</b></span></div></div>`;
+    }).join('')||'<div class="muted">Bu ay için zimmet kaydı yok.</div>';
+    box.innerHTML=info+rows;
+  }catch(err){box.innerHTML=`<div class="notice error">Zimmet raporu alınamadı: ${esc(err.message)}</div>`;}
 }
 
 function renderMaintenance(){const el=$('maintenanceList');if(!el)return;if(!state.maintenance.length){el.innerHTML='<div class="muted">Henüz bakım kaydı yok.</div>';return;}const now=today();el.innerHTML=state.maintenance.map(x=>{const due=x.next_maintenance_date&&x.next_maintenance_date<=now;return `<div class="module-card ${due?'stock-low':''}"><div class="row between"><div><b>${esc(x.equipment_name)}</b><div class="muted" style="font-size:11px">${esc(x.notes||'')}</div></div><span class="badge">${x.next_maintenance_date?trDate(x.next_maintenance_date):'Tarih yok'}</span></div><button class="btn small" data-maintenance-edit="${x.id}">Düzenle</button></div>`}).join('');el.querySelectorAll('[data-maintenance-edit]').forEach(b=>b.onclick=()=>openMaintenance(b.dataset.maintenanceEdit));}
@@ -2639,6 +2685,7 @@ function bind(){
 
   $('logoutBtn').onclick=()=>db.auth.signOut();
   $('fab').onclick=()=>openNew();
+  $('mobileNewAppointment').onclick=()=>openNew();
   $('closeDialog').onclick=()=>{state.editAppointmentId=null;$('appointmentDialog').close();};
   $('closeDetail').onclick=()=>$('detailDialog').close();
   $('appointmentForm').onsubmit=saveAppointment;
@@ -2668,6 +2715,7 @@ function bind(){
   });
 
   $('runReport').onclick=runReport;
+  $('openStockReportBtn').onclick=()=>{switchPage('settingsPage');setTimeout(()=>{document.getElementById('stockReportAnchor')?.scrollIntoView({behavior:'smooth',block:'start'});loadStockMonthReport();},120);};
   $('printReportBtn').onclick=async()=>{state.lastReport=null;await runReport();if(state.lastReport)startPrint('print-report');};
   $('officialDailyBtn').onclick=printOfficialDaily;
   $('officialRegisterBtn').onclick=printOfficialRegister;
