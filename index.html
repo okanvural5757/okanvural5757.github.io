@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="MEBS Subay Temel Berber">
-<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.4</title>
-<meta name="application-version" content="4.7.4">
+<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.12</title>
+<meta name="application-version" content="4.7.12">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -308,6 +308,24 @@ img,svg,canvas{max-width:100%;height:auto}
 .backup-chip{display:inline-flex;padding:5px 7px;border-radius:999px;background:#f2f4f7;color:#344054;font-size:10px;font-weight:850}
 .backup-chip.ok{background:#ecfdf3;color:#067647}
 .backup-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.quick-panel{margin:0 0 12px;border:1px solid #b2ccff;background:linear-gradient(135deg,#f5f8ff,#eef4ff);border-radius:17px;padding:13px;display:grid;gap:10px}
+.quick-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.quick-actions .btn{padding:11px 7px;font-size:12px}
+.module-card{border:1px solid var(--line);border-radius:16px;background:#fff;padding:13px;display:grid;gap:9px}
+.module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.health-line{display:flex;align-items:center;gap:9px;border-radius:14px;padding:11px;border:1px solid var(--line);background:#f8fafc}
+.health-dot{width:12px;height:12px;border-radius:50%;background:#98a2b3;box-shadow:0 0 0 4px rgba(152,162,179,.12)}
+.health-line.ok{background:#ecfdf3;border-color:#abefc6}.health-line.ok .health-dot{background:#12b76a}
+.health-line.warn{background:#fffaeb;border-color:#fedf89}.health-line.warn .health-dot{background:#f79009}
+.health-line.bad{background:#fef3f2;border-color:#fecdca}.health-line.bad .health-dot{background:#f04438}
+.stock-low{border-color:#fdb022;background:#fffaeb}
+.module-meta{display:flex;gap:6px;flex-wrap:wrap;font-size:11px;color:#667085}
+.day-end{margin-top:14px;border:1px solid #c7d7fe;background:linear-gradient(135deg,#f8faff,#eef4ff);border-radius:18px;padding:15px;display:grid;gap:11px}
+.day-end-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.day-end-kpi{background:#fff;border:1px solid #dbe5ff;border-radius:13px;padding:10px}.day-end-kpi b{display:block;font-size:20px;margin-top:3px}
+.archive-list{display:grid;gap:9px;margin-top:10px}
+.archive-item{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px;display:grid;gap:7px}
 .finance-grid-v47{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}
 .finance-kpi-v47{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:13px;min-width:0}
 .finance-kpi-v47 .label{font-size:10px;font-weight:850;color:#667085;letter-spacing:.02em;text-transform:uppercase}
@@ -325,6 +343,43 @@ img,svg,canvas{max-width:100%;height:auto}
   .finance-grid-v47{grid-template-columns:1fr 1fr}
 }
 @media(max-width:390px){.pro-contact{grid-template-columns:1fr}.pro-contact .btn{width:100%}.finance-grid-v47{grid-template-columns:1fr}.backup-actions{grid-template-columns:1fr}}
+@media(max-width:520px){.quick-actions,.day-end-grid,.module-grid{grid-template-columns:1fr}.quick-head{align-items:flex-start;flex-direction:column}}
+
+
+/* v4.7.12 mobile stability gate: no page/modal may escape the phone viewport */
+html{overflow-x:clip}
+body{overflow-x:clip;min-height:100dvh}
+.wrap,.page,main,section,form,fieldset,.sheet,.card,.module-card,.backup-item{max-inline-size:100%;min-inline-size:0}
+button,input,select,textarea,a{max-width:100%}
+input,select,textarea{min-width:0}
+.row,.between{min-width:0}
+.row>*,.between>*{overflow-wrap:anywhere}
+dialog{max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);margin:auto;overflow:visible}
+dialog[open]{position:fixed;inset:0}
+dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:calc(18px + env(safe-area-inset-bottom))}
+.stock-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.stock-rate-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stock-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:0}
+.stock-qty{text-align:right;flex:0 0 auto}
+.stock-report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
+.stock-report-row{border:1px solid var(--line);border-radius:14px;padding:11px;background:#fff;min-width:0}
+.settings-link-card{width:100%;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;color:var(--ink)}
+.settings-link-card b{font-size:15px}.settings-link-card .arrow{font-size:22px;flex:0 0 auto}
+.backups-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}.backups-head h2{margin:0;font-size:20px}
+@media(max-width:640px){
+  dialog{width:calc(100vw - 8px);max-width:calc(100vw - 8px);max-height:calc(100dvh - 8px)}
+  dialog .sheet{max-height:calc(100dvh - 8px);border-radius:18px;padding:13px 11px calc(16px + env(safe-area-inset-bottom))}
+  .sheet>.row.between:first-child{position:sticky;top:-13px;z-index:8;background:#fff;padding:13px 0 8px;margin-top:-13px}
+  .sheet>.row.between:first-child h2{font-size:19px;line-height:1.15;min-width:0}
+  .stock-actions,.stock-rate-grid,.stock-report-grid{grid-template-columns:1fr}
+  .stock-card-head{flex-direction:column}.stock-qty{text-align:left}
+  .backup-actions{grid-template-columns:1fr 1fr}
+}
+@media(max-width:360px){
+  .backup-actions{grid-template-columns:1fr}
+  .nav button{font-size:10px}
+  .fab{width:54px;height:54px}
+}
 
 @page{size:A4;margin:10mm}
 @media print{
@@ -351,7 +406,7 @@ img,svg,canvas{max-width:100%;height:auto}
 </style>
 </head>
 <body>
-<!-- KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi v4.7.4 - professional final build -->
+<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.12 - Zimmet Final -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -426,12 +481,14 @@ img,svg,canvas{max-width:100%;height:auto}
         <div class="money-box paid-box"><span class="muted">Tahsil Edilen</span><b id="stPaid" style="display:block;font-size:21px;margin-top:3px">0 ₺</b></div>
         <div class="money-box unpaid-box"><span class="muted">Ödenmeyen / Bekleyen</span><b id="stUnpaid" style="display:block;font-size:21px;margin-top:3px">0 ₺</b></div>
       </div>
+      <div id="quickPanel" class="quick-panel hidden no-print"></div>
       <div class="row between no-print" style="margin:8px 0 12px">
         <button id="prevDay" class="btn small">‹ Önceki</button>
         <input id="dayPicker" type="date" style="max-width:180px">
         <button id="nextDay" class="btn small">Sonraki ›</button>
       </div>
       <div id="schedule" class="list"></div>
+      <div id="dayEndPanel" class="day-end no-print"></div>
     </section>
 
     <section id="weekPage" class="page">
@@ -485,6 +542,10 @@ img,svg,canvas{max-width:100%;height:auto}
         </div>
       </div>
       <div class="notice no-print" style="margin-top:12px;background:#eef4ff;color:#1849a9;border:1px solid #b2ccff"><b>📊 Profesyonel rapor:</b> Haftalık, 15 günlük, aylık veya özel tarih aralığında gerçek tahsilat, hizmet bedeli, önceki borç tahsilatı, kalan borç, gelmedi ve işlem dağılımını gösterir.</div><div id="reportStatus" class="report-status-box hidden"></div><div id="reportOut" style="margin-top:12px"></div>
+      <div class="card no-print" style="margin-top:12px">
+        <div class="row between"><div><b>Rapor Arşivi</b><div class="muted" style="font-size:11px;margin-top:3px">Arşiv yalnız dönem özetini saklar; telefon ve kişisel not içermez.</div></div><button id="archiveReportBtn" class="btn small primary" type="button">Raporu Arşivle</button></div>
+        <div id="reportArchiveList" class="archive-list"><div class="muted">Arşiv yükleniyor…</div></div>
+      </div>
     </section>
 
     <section id="settingsPage" class="page">
@@ -506,24 +567,38 @@ img,svg,canvas{max-width:100%;height:auto}
       <div class="section-title">Son Güvenli İşlemler</div>
       <div id="auditSettings" class="card"></div>
 
-      <div class="section-title">Veri Güvenliği / Yedek Merkezi</div>
-      <div class="card grid">
-        <div class="muted">Tam yedek hem Yedek Merkezi'ne güvenli sunucu kopyası olarak kaydedilir hem de iPhone'a JSON dosyası olarak indirilir. v4.6 ve v4.7 yedekleri desteklenir.</div>
-        <div class="grid grid2">
-          <button id="backupBtn" class="btn primary">Yeni Tam Yedek Al</button>
-          <button id="importBackupBtn" class="btn">Eski Yedeği Merkeze Ekle</button>
-        </div>
-        <button id="restoreBtn" class="btn">Dosyadan Güvenli Geri Yükle</button>
-        <input id="restoreFile" type="file" accept=".json,application/json" class="hidden">
-        <input id="importBackupFile" type="file" accept=".json,application/json" class="hidden">
-        <div class="restore-warning"><b>Güvenli geri yükleme:</b> Geri yükleme başlamadan hemen önce otomatik güvenlik yedeği alınır. İşlem tek transaction olarak tamamlanır veya tamamen geri alınır.</div>
-        <div id="backupCenterStatus" class="notice hidden"></div>
-        <div id="backupCenterList" class="backup-list"><div class="muted">Yedek listesi yükleniyor…</div></div>
-        <div class="muted" style="font-size:11px">Yedekler personel ve randevu bilgileri içerir. Program içindeki sunucu kopyalarına doğrudan tablo erişimi kapalıdır; yalnız yetkili güvenli oturum RPC üzerinden erişebilir.</div>
-      </div>
+      <div class="section-title">Veri Güvenliği</div>
+      <button id="openBackupsBtn" class="settings-link-card" type="button">
+        <span><b>🗂️ Yedekler</b><span class="muted" style="display:block;font-size:11px;margin-top:4px">Tam yedek al, doğrula, indir veya güvenli geri yükle.</span></span><span class="arrow">›</span>
+      </button>
 
       <div class="section-title">Çöp Kutusu</div>
       <div id="trashSettings" class="list"></div>
+
+      <div class="section-title">Zimmet ve Sarf</div>
+      <div class="card grid">
+        <div class="notice success"><b>Kesin sarf kuralı:</b> Malzeme yalnız randevu <b>Tamamlandı + Ödendi</b> olduğunda bir kez düşer. Sonradan iptal/ödeme değişikliği stoğu kendiliğinden geri getirmez.</div>
+        <div class="stock-actions"><button id="receivePackageBtn" class="btn primary" type="button">+ Zimmet Paketi Al</button><button id="stockCountBtn" class="btn" type="button">Başlangıç / Ay Sonu Sayımı</button></div>
+        <div id="inventoryList" class="list"><div class="muted">Zimmet stokları yükleniyor…</div></div>
+        <div style="border-top:1px solid var(--line);padding-top:12px"><b>Otomatik Sıvı Sarf Ayarı</b><div class="muted" style="font-size:11px;margin-top:3px">Adetli ürünler Saç Tıraşında sabit 1'er adettir. Sıvılar tahmini otomatik sarftır; fizikî sayım gerçek miktarı esas alır.</div></div>
+        <div class="stock-rate-grid">
+          <label>Saç Tıraşı Şampuan (ml)<input id="haircutShampooRate" type="number" min="0" max="1000" step="0.1" value="10"></label>
+          <label>Saç Tıraşı Kolonya (ml)<input id="haircutCologneRate" type="number" min="0" max="1000" step="0.1" value="3"></label>
+          <label>Saç Yıkama Şampuan (ml)<input id="washShampooRate" type="number" min="0" max="1000" step="0.1" value="10"></label>
+        </div>
+        <button id="saveStockRatesBtn" class="btn" type="button">Sarf Ayarlarını Kaydet</button>
+        <div id="stockPackageMsg" class="notice hidden"></div>
+        <div style="border-top:1px solid var(--line);padding-top:12px"><b>Aylık Zimmet ve Sarf Raporu</b></div>
+        <div class="row"><input id="stockMonthPicker" type="month" style="max-width:210px"><button id="stockMonthBtn" class="btn small" type="button">Raporu Göster</button></div>
+        <div id="stockMonthReport" class="grid"><div class="muted">Ay seçildiğinde rapor burada görünür.</div></div>
+        <div class="muted" style="font-size:11px">Zimmet ve stok bilgileri TV'ye aktarılmaz; ödeme ve borç hesaplarını değiştirmez.</div>
+      </div>
+
+      <div class="section-title">Ekipman Bakım Takibi</div>
+      <div class="card grid">
+        <button id="newMaintenanceBtn" class="btn" type="button">+ Bakım Kaydı</button>
+        <div id="maintenanceList" class="list"><div class="muted">Bakım kayıtları yükleniyor…</div></div>
+      </div>
 
       <div class="section-title">İşlem ve Fiyatlar</div>
       <div id="serviceSettings" class="list"></div>
@@ -533,6 +608,22 @@ img,svg,canvas{max-width:100%;height:auto}
 
       <div class="section-title">Rütbeler</div>
       <div id="rankSettings" class="card"></div>
+    </section>
+
+    <section id="backupsPage" class="page">
+      <div class="backups-head"><button id="backFromBackups" class="btn small" type="button">‹ Ayarlar</button><h2>Yedekler</h2></div>
+      <div class="card grid">
+        <div id="backupHealth" class="health-line"><span class="health-dot"></span><div><b>Yedek durumu kontrol ediliyor</b><div class="muted" style="font-size:11px">Son güvenli sunucu yedeği doğrulanacak.</div></div></div>
+        <div class="muted">Tam yedek Yedek Merkezi'ne kaydedilir ve JSON olarak indirilebilir. Şema 4, 5, 6 ve yeni şema 7 desteklenir.</div>
+        <div class="grid grid2"><button id="backupBtn" class="btn primary">Yeni Tam Yedek Al</button><button id="importBackupBtn" class="btn">Eski Yedeği Merkeze Ekle</button></div>
+        <button id="restoreBtn" class="btn">Dosyadan Güvenli Geri Yükle</button>
+        <input id="restoreFile" type="file" accept=".json,application/json" class="hidden">
+        <input id="importBackupFile" type="file" accept=".json,application/json" class="hidden">
+        <div class="restore-warning"><b>Güvenli geri yükleme:</b> İşlemden hemen önce otomatik güvenlik yedeği alınır. Başarısız restore yarım veri bırakmaz.</div>
+        <div id="backupCenterStatus" class="notice hidden"></div>
+        <div id="backupCenterList" class="backup-list"><div class="muted">Yedek listesi yükleniyor…</div></div>
+        <div class="muted" style="font-size:11px">Manuel ve güvenlik yedekleri otomatik silinmez. Yedekler kişisel veri içerebilir; yalnız yetkili güvenli oturumdan erişilir.</div>
+      </div>
     </section>
   </main>
 </div>
@@ -656,6 +747,58 @@ img,svg,canvas{max-width:100%;height:auto}
   </div>
 </dialog>
 
+
+
+<dialog id="movementDialog">
+  <div class="sheet">
+    <div class="row between"><h2>Diğer Sarf / Düzeltme</h2><button id="closeMovement" class="btn small" type="button">Kapat</button></div>
+    <form id="movementForm" class="grid">
+      <input id="movementItemId" type="hidden"><div id="movementItemName" class="module-card"></div>
+      <label>Hareket<select id="movementType"><option value="out">Diğer Sarf / Fire / Temizlik (-)</option><option value="in">Sarf Düzeltme / Ek Giriş (+)</option></select></label>
+      <label>Miktar<input id="movementQuantity" type="number" min="0.01" step="0.01" required></label>
+      <label>Açıklama <b>(zorunlu)</b><textarea id="movementNotes" maxlength="500" required placeholder="Örn. Temizlikte kullanıldı / Sarf kaydı düzeltildi"></textarea></label>
+      <button class="btn primary" type="submit">Hareketi Kaydet</button><div id="movementMsg" class="notice hidden"></div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="packageDialog">
+  <div class="sheet">
+    <div class="row between"><h2>Zimmet Paketi Teslimi</h2><button id="closePackage" class="btn small" type="button">Kapat</button></div>
+    <form id="packageForm" class="grid">
+      <div class="notice success"><b>1 paket:</b> 200 havlu · 200 boyun bandı · 200 örtü · 2.000 ml şampuan · 1.000 ml kolonya.</div>
+      <label>Paket Sayısı<input id="packageCount" type="number" min="1" max="100" step="1" value="1" required></label>
+      <label>Teslim / Belge Açıklaması<textarea id="packageNotes" maxlength="500" placeholder="İsteğe bağlı teslim tarihi veya belge notu"></textarea></label>
+      <button class="btn primary" type="submit">Paketi Stoklara Ekle</button><div id="packageMsg" class="notice hidden"></div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="stockCountDialog">
+  <div class="sheet">
+    <div class="row between"><h2>Fizikî Stok Sayımı</h2><button id="closeStockCount" class="btn small" type="button">Kapat</button></div>
+    <form id="stockCountForm" class="grid">
+      <div class="notice">İlk kullanımda elindeki gerçek açılış stokunu, ay sonunda ise fizikî sayımı gir. Eski tıraşlara geriye dönük sarf uygulanmaz.</div>
+      <div id="stockCountFields" class="grid"></div>
+      <label>Sayım Açıklaması <b>(zorunlu)</b><textarea id="stockCountNotes" maxlength="500" required placeholder="Başlangıç sayımı / Eylül ay sonu sayımı / fark nedeni"></textarea></label>
+      <button class="btn primary" type="submit">Sayımı ve Farkları Kaydet</button><div id="stockCountMsg" class="notice hidden"></div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="maintenanceDialog">
+  <div class="sheet">
+    <div class="row between"><h2>Ekipman Bakımı</h2><button id="closeMaintenance" class="btn small" type="button">Kapat</button></div>
+    <form id="maintenanceForm" class="grid">
+      <input id="maintenanceId" type="hidden">
+      <label>Ekipman Adı<input id="maintenanceName" maxlength="120" required placeholder="Örn. Tıraş makinesi 1"></label>
+      <div class="grid grid2"><label>Son Bakım<input id="maintenanceLast" type="date"></label><label>Sonraki Bakım<input id="maintenanceNext" type="date"></label></div>
+      <label>Açıklama<textarea id="maintenanceNotes" maxlength="500"></textarea></label>
+      <button class="btn primary" type="submit">Bakım Kaydını Kaydet</button><div id="maintenanceMsg" class="notice hidden"></div>
+    </form>
+  </div>
+</dialog>
+
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
 
@@ -666,7 +809,7 @@ const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
 const DISPLAY_NAME = "MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi";
 const SHORT_NAME = "MEBS Subay Temel Berber";
-const APP_VERSION = "4.7.4";
+const APP_VERSION = "4.7.12";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -677,7 +820,8 @@ const state = {
   mfa:{verified:[],currentLevel:'aal1',nextLevel:'aal1'},
   mfaEnrollFactorId:null, mfaChallengeFactorId:null, restorePayload:null, slotDateAppointments:[], slotDateKey:'',
   currentClosure:null, dayLoadSeq:0, weekLoadSeq:0, slotLoadSeq:0,
-  selectedPersonId:null, personAlerts:null, debtPersonId:null, debtBeforeAppointmentId:null, debtMax:0, backups:[], pendingSensitiveAction:null
+  selectedPersonId:null, personAlerts:null, debtPersonId:null, debtBeforeAppointmentId:null, debtMax:0, backups:[], pendingSensitiveAction:null,
+  inventoryItems:[], inventoryMovements:[], maintenance:[], reportArchives:[], dayEndSummary:null, stockMonth:null, extensionsAvailable:true
 };
 const IDLE_MS = 24 * 60 * 60 * 1000;
 const SESSION_CHECK_MS = 15 * 1000;
@@ -717,12 +861,175 @@ function cleanupPrintMode(){document.body.classList.remove('print-report','print
 function startPrint(mode){cleanupPrintMode();document.body.classList.add(mode);setTimeout(()=>window.print(),60);}
 window.addEventListener('afterprint',cleanupPrintMode);
 
+async function transitionAppointment(id,newStatus,note=''){
+  const r=await db.rpc('transition_appointment_status_v4711',{p_appointment_id:id,p_new_status:newStatus,p_note:note||null});
+  if(r.error) throw r.error;
+  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadAudit()]);
+  if(newStatus==='completed'){await loadExtensionData();warnIfLowStock();}
+  return r.data;
+}
+
+function quickCandidate(){
+  if(state.selectedDate!==today()) return null;
+  const active=state.appointments.filter(x=>!x.deleted_at&&!['completed','no_show','cancelled'].includes(x.status));
+  return active.find(x=>x.status==='in_service')||active.find(x=>x.status==='arrived')||active.find(x=>x.status==='scheduled')||null;
+}
+
+function renderQuickPanel(){
+  const box=$('quickPanel'); if(!box) return;
+  const x=quickCandidate();
+  if(!x){box.classList.add('hidden');box.innerHTML='';return;}
+  const p=x.people||{};
+  const actions=[];
+  if(x.status==='scheduled') actions.push(`<button class="btn" data-quick-status="arrived">✓ Geldi</button>`);
+  if(['scheduled','arrived'].includes(x.status)) actions.push(`<button class="btn primary" data-quick-status="in_service">✂ Tıraşa Başla</button>`);
+  if(x.status==='in_service') actions.push(`<button class="btn ok" data-quick-status="completed">✓ Tamamlandı</button>`);
+  box.innerHTML=`<div class="quick-head"><div><div class="muted" style="font-size:11px;font-weight:900">TELEFON HIZLI İŞLEM</div><b>${esc(rankLabel(p.rank_id))} ${esc(p.full_name||'')}</b><div class="muted" style="font-size:12px">${time5(x.start_time)} · ${esc(statusName(x.status))}</div></div><span class="badge ${esc(x.status)}">${esc(statusName(x.status))}</span></div><div class="quick-actions">${actions.join('')}</div>`;
+  box.classList.remove('hidden');
+  box.querySelectorAll('[data-quick-status]').forEach(b=>b.onclick=async()=>{
+    const target=b.dataset.quickStatus;
+    if(target==='completed'&&!confirm('Tıraş tamamlandı olarak kaydedilsin mi?')) return;
+    b.disabled=true;
+    try{await transitionAppointment(x.id,target,'Telefon hızlı işlem');}
+    catch(e){alert(e.message||'Durum güncellenemedi.');}
+    finally{b.disabled=false;}
+  });
+}
+
+function localDayEndSummary(){
+  const a=state.appointments.filter(x=>!x.deleted_at);
+  const completed=a.filter(x=>x.status==='completed');
+  return {date:state.selectedDate,total:a.filter(x=>x.status!=='cancelled').length,completed:completed.length,
+    no_show:a.filter(x=>x.status==='no_show').length,cancelled:a.filter(x=>x.status==='cancelled').length,
+    unresolved:a.filter(x=>['scheduled','arrived','in_service'].includes(x.status)).length,
+    in_service:a.filter(x=>x.status==='in_service').length,signature_missing:completed.filter(x=>!x.signature_received).length,
+    unpaid_count:completed.filter(x=>x.payment_status==='unpaid').length,
+    service_total:completed.reduce((s,x)=>s+Number(x.total_amount||0),0),
+    paid_total:completed.reduce((s,x)=>s+Math.min(Number(x.amount_paid||0),Number(x.total_amount||0)),0),
+    outstanding_total:completed.filter(x=>x.payment_status!=='free').reduce((s,x)=>s+Math.max(0,Number(x.total_amount||0)-Number(x.amount_paid||0)),0)};
+}
+
+async function loadDayEndSummary(){
+  const fallback=localDayEndSummary(); state.dayEndSummary=fallback; renderDayEndPanel();
+  try{const r=await db.rpc('get_day_end_summary_v4711',{p_date:state.selectedDate});if(r.error)throw r.error;state.dayEndSummary=r.data||fallback;state.extensionsAvailable=true;renderDayEndPanel();}
+  catch(e){console.warn('Gün sonu özeti yerel gösteriliyor',e);}
+}
+
+function renderDayEndPanel(){
+  const box=$('dayEndPanel');if(!box)return;const s=state.dayEndSummary||localDayEndSummary();const checked=s.checked;const future=state.selectedDate>today();
+  box.innerHTML=`<div class="row between"><div><b>Gün Sonu Kontrolü</b><div class="muted" style="font-size:11px">Kayıtları değiştirmeden eksikleri gösterir.</div></div>${checked?'<span class="backup-chip ok">KONTROL EDİLDİ</span>':''}</div>
+  <div class="day-end-grid"><div class="day-end-kpi"><span class="muted">Tamamlanan</span><b>${Number(s.completed||0)}</b></div><div class="day-end-kpi"><span class="muted">Sonuçlanmayan</span><b>${Number(s.unresolved||0)}</b></div><div class="day-end-kpi"><span class="muted">Bekleyen Tahsilat</span><b>${Number(s.unpaid_count||0)}</b></div></div>
+  <div class="module-meta"><span>Gelmedi: <b>${Number(s.no_show||0)}</b></span><span>İptal: <b>${Number(s.cancelled||0)}</b></span><span>İmza eksik: <b>${Number(s.signature_missing||0)}</b></span><span>Tahsilat: <b>${trMoney(s.paid_total)}</b></span><span>Kalan: <b>${trMoney(s.outstanding_total)}</b></span></div>
+  ${future?'<div class="notice">Gelecek gün için gün sonu kaydı oluşturulamaz.</div>':Number(s.unresolved||0)>0?'<div class="notice">Gün sonu kaydı için bekleyen, geldi veya işlemde durumundaki randevuları sonuçlandır.</div>':'<button id="saveDayEndBtn" class="btn primary" type="button">Gün Sonu Kontrol Edildi</button>'}`;
+  $('saveDayEndBtn')?.addEventListener('click',saveDayEndCheck);
+}
+
+async function saveDayEndCheck(){
+  const b=$('saveDayEndBtn');if(!b)return;if(!confirm(`${trDate(state.selectedDate)} için gün sonu kontrolü kaydedilsin mi?`))return;
+  b.disabled=true;
+  try{const r=await db.rpc('save_day_end_check_v4711',{p_date:state.selectedDate,p_notes:null});if(r.error)throw r.error;await loadDayEndSummary();}
+  catch(e){alert(e.message||'Gün sonu kaydedilemedi.');}finally{b.disabled=false;}
+}
+
+async function loadExtensionData(){
+  const [items,moves,maintenance,archives]=await Promise.all([
+    db.from('inventory_items').select('*').eq('active',true).order('name'),
+    db.from('inventory_movements').select('*').order('occurred_at',{ascending:false}).limit(50),
+    db.from('equipment_maintenance').select('*').eq('active',true).order('next_maintenance_date',{ascending:true,nullsFirst:false}),
+    db.from('report_archives').select('*').order('created_at',{ascending:false}).limit(30)
+  ]);
+  const firstError=[items,moves,maintenance,archives].find(x=>x.error)?.error;
+  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.12 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
+  state.extensionsAvailable=true;state.inventoryItems=items.data||[];state.inventoryMovements=moves.data||[];state.maintenance=maintenance.data||[];state.reportArchives=archives.data||[];
+  renderInventory();renderMaintenance();renderReportArchives();return true;
+}
+
+function renderExtensionUnavailable(){
+  const html='<div class="notice">Ek modül veritabanı kurulumu bekleniyor. Mevcut randevu, ödeme ve TV sistemi etkilenmez.</div>';
+  if($('inventoryList'))$('inventoryList').innerHTML=html;if($('maintenanceList'))$('maintenanceList').innerHTML=html;if($('reportArchiveList'))$('reportArchiveList').innerHTML=html;
+}
+
+const SYSTEM_STOCK_ORDER={towel:1,neckband:2,cape:3,shampoo:4,cologne:5};
+function systemInventory(){return state.inventoryItems.filter(x=>SYSTEM_STOCK_ORDER[x.system_code]).sort((a,b)=>SYSTEM_STOCK_ORDER[a.system_code]-SYSTEM_STOCK_ORDER[b.system_code]);}
+function numberTr(v){return Number(v||0).toLocaleString('tr-TR',{maximumFractionDigits:2});}
+function warnIfLowStock(){
+  const low=systemInventory().filter(x=>x.tracking_since&&Number(x.current_quantity)<=Number(x.minimum_quantity));
+  if(!low.length)return;
+  alert('Stok uyarısı: '+low.map(x=>`${x.name} ${numberTr(x.current_quantity)} ${x.unit}`).join(' · ')+'. Fizikî stok ve zimmet teslimini kontrol et.');
+}
+function renderInventory(){
+  const el=$('inventoryList');if(!el)return;
+  const items=systemInventory();
+  if(!items.length){el.innerHTML='<div class="notice">Zimmet malzemeleri henüz kurulmadı. Final veritabanı güncellemesi bekleniyor.</div>';return;}
+  el.innerHTML=items.map(x=>{const low=x.tracking_since&&Number(x.current_quantity)<=Number(x.minimum_quantity);const tracking=x.tracking_since?'Takip aktif':'Başlangıç sayımı bekleniyor';return `<div class="module-card ${low?'stock-low':''}"><div class="stock-card-head"><div><b>${esc(x.name)}</b><div class="muted" style="font-size:11px">${esc(x.notes||'')} · ${tracking}</div></div><div class="stock-qty"><b style="font-size:20px">${numberTr(x.current_quantity)} ${esc(x.unit)}</b><div class="muted" style="font-size:10px">Kritik: ${numberTr(x.minimum_quantity)} ${esc(x.unit)}</div></div></div><button class="btn small" data-stock-move="${x.id}" type="button">Diğer Sarf / Düzeltme</button></div>`}).join('');
+  el.querySelectorAll('[data-stock-move]').forEach(b=>b.onclick=()=>openMovement(b.dataset.stockMove));
+  const shampoo=items.find(x=>x.system_code==='shampoo'),cologne=items.find(x=>x.system_code==='cologne');
+  if($('haircutShampooRate'))$('haircutShampooRate').value=numberTr(shampoo?.per_haircut??10).replace(',','.');
+  if($('washShampooRate'))$('washShampooRate').value=numberTr(shampoo?.per_wash??10).replace(',','.');
+  if($('haircutCologneRate'))$('haircutCologneRate').value=numberTr(cologne?.per_haircut??3).replace(',','.');
+}
+
+function openMovement(id){const x=state.inventoryItems.find(i=>i.id===id);if(!x)return;$('movementForm').reset();$('movementItemId').value=x.id;$('movementQuantity').step=x.unit==='adet'?'1':'0.1';$('movementItemName').innerHTML=`<b>${esc(x.name)}</b><div class="muted">Mevcut: ${numberTr(x.current_quantity)} ${esc(x.unit)}</div>`;hideMsg($('movementMsg'));$('movementDialog').showModal();}
+
+async function saveMovement(e){
+  e.preventDefault();const notes=$('movementNotes').value.trim();if(notes.length<3)return msg($('movementMsg'),'Açıklama zorunlu.','error');
+  const btn=e.submitter;btn.disabled=true;
+  try{const r=await db.rpc('record_inventory_manual_v4712',{p_item_id:$('movementItemId').value,p_direction:$('movementType').value,p_quantity:Number($('movementQuantity').value),p_reason:notes});if(r.error)throw r.error;$('movementDialog').close();await loadExtensionData();warnIfLowStock();}
+  catch(err){msg($('movementMsg'),err.message,'error');}finally{btn.disabled=false;}
+}
+
+let packageRequestId=null,stockCountRequestId=null;
+function openPackageReceipt(){packageRequestId=crypto.randomUUID();$('packageForm').reset();$('packageCount').value='1';hideMsg($('packageMsg'));$('packageDialog').showModal();}
+async function receivePackage(e){
+  e.preventDefault();const btn=e.submitter;btn.disabled=true;
+  try{const r=await db.rpc('receive_inventory_package_v4712',{p_packages:Number($('packageCount').value),p_request_id:packageRequestId,p_notes:$('packageNotes').value.trim()||null});if(r.error)throw r.error;$('packageDialog').close();await loadExtensionData();msg($('stockPackageMsg'),'Zimmet paketi atomik olarak stoklara eklendi.','success');}
+  catch(err){msg($('packageMsg'),err.message,'error');}finally{btn.disabled=false;}
+}
+function openStockCount(){
+  stockCountRequestId=crypto.randomUUID();hideMsg($('stockCountMsg'));$('stockCountNotes').value='';
+  $('stockCountFields').innerHTML=systemInventory().map(x=>`<label>${esc(x.name)} (${esc(x.unit)})<input data-count-code="${esc(x.system_code)}" type="number" min="0" step="${x.unit==='adet'?'1':'0.1'}" value="${Number(x.current_quantity||0)}" required></label>`).join('');
+  $('stockCountDialog').showModal();
+}
+async function saveStockCount(e){
+  e.preventDefault();const notes=$('stockCountNotes').value.trim();if(notes.length<3)return msg($('stockCountMsg'),'Sayım açıklaması zorunlu.','error');
+  const btn=e.submitter;btn.disabled=true;
+  try{const counts=[...$('stockCountFields').querySelectorAll('[data-count-code]')].map(x=>({code:x.dataset.countCode,quantity:Number(x.value)}));const r=await db.rpc('count_inventory_package_v4712',{p_counts:counts,p_request_id:stockCountRequestId,p_notes:notes});if(r.error)throw r.error;$('stockCountDialog').close();await loadExtensionData();await loadStockMonthReport();}
+  catch(err){msg($('stockCountMsg'),err.message,'error');}finally{btn.disabled=false;}
+}
+async function saveStockRates(){
+  const b=$('saveStockRatesBtn');b.disabled=true;hideMsg($('stockPackageMsg'));
+  try{const r=await db.rpc('set_inventory_service_rates_v4712',{p_haircut_shampoo:Number($('haircutShampooRate').value||0),p_haircut_cologne:Number($('haircutCologneRate').value||0),p_wash_shampoo:Number($('washShampooRate').value||0)});if(r.error)throw r.error;await loadExtensionData();msg($('stockPackageMsg'),'Sarf ayarları kaydedildi.','success');}
+  catch(err){msg($('stockPackageMsg'),err.message,'error');}finally{b.disabled=false;}
+}
+async function loadStockMonthReport(){
+  const box=$('stockMonthReport');if(!box)return;const month=$('stockMonthPicker')?.value||today().slice(0,7);box.innerHTML='<div class="muted">Zimmet raporu hazırlanıyor…</div>';
+  try{const r=await db.rpc('get_inventory_month_v4712',{p_month:month+'-01'});if(r.error)throw r.error;state.stockMonth=r.data;const items=r.data?.items||[];box.innerHTML=items.map(x=>{const diff=Number(x.count_difference||0);return `<div class="stock-report-row ${Number(x.current)<=Number(x.minimum)?'stock-low':''}"><div class="row between"><b>${esc(x.name)}</b><b>${numberTr(x.closing_recorded)} ${esc(x.unit)}</b></div><div class="stock-report-grid"><span>Devir: <b>${numberTr(x.opening)}</b></span><span>Giriş: <b>${numberTr(x.received)}</b></span><span>Otomatik sarf: <b>${numberTr(x.auto_used)}</b></span><span>Diğer sarf: <b>${numberTr(x.manual_used)}</b></span><span>Sayım farkı: <b>${diff>0?'+':''}${numberTr(diff)}</b></span><span>Fizikî sayım: <b>${x.physical_count==null?'—':numberTr(x.physical_count)}</b></span></div></div>`}).join('')||'<div class="muted">Bu ay için zimmet kaydı yok.</div>';}
+  catch(err){box.innerHTML=`<div class="notice error">Zimmet raporu alınamadı: ${esc(err.message)}</div>`;}
+}
+
+function renderMaintenance(){const el=$('maintenanceList');if(!el)return;if(!state.maintenance.length){el.innerHTML='<div class="muted">Henüz bakım kaydı yok.</div>';return;}const now=today();el.innerHTML=state.maintenance.map(x=>{const due=x.next_maintenance_date&&x.next_maintenance_date<=now;return `<div class="module-card ${due?'stock-low':''}"><div class="row between"><div><b>${esc(x.equipment_name)}</b><div class="muted" style="font-size:11px">${esc(x.notes||'')}</div></div><span class="badge">${x.next_maintenance_date?trDate(x.next_maintenance_date):'Tarih yok'}</span></div><button class="btn small" data-maintenance-edit="${x.id}">Düzenle</button></div>`}).join('');el.querySelectorAll('[data-maintenance-edit]').forEach(b=>b.onclick=()=>openMaintenance(b.dataset.maintenanceEdit));}
+
+function openMaintenance(id=null){const x=id?state.maintenance.find(i=>i.id===id):null;$('maintenanceForm').reset();$('maintenanceId').value=x?.id||'';$('maintenanceName').value=x?.equipment_name||'';$('maintenanceLast').value=x?.last_maintenance_date||'';$('maintenanceNext').value=x?.next_maintenance_date||'';$('maintenanceNotes').value=x?.notes||'';hideMsg($('maintenanceMsg'));$('maintenanceDialog').showModal();}
+
+async function saveMaintenance(e){e.preventDefault();const id=$('maintenanceId').value||null;const payload={equipment_name:$('maintenanceName').value.trim(),last_maintenance_date:$('maintenanceLast').value||null,next_maintenance_date:$('maintenanceNext').value||null,notes:$('maintenanceNotes').value.trim()||null};try{const r=id?await db.from('equipment_maintenance').update(payload).eq('id',id):await db.from('equipment_maintenance').insert({...payload,created_by:state.user.id});if(r.error)throw r.error;$('maintenanceDialog').close();await loadExtensionData();}catch(err){msg($('maintenanceMsg'),err.message,'error');}}
+
+function safeReportSummary(r){return {version:APP_VERSION,start:r.start,end:r.end,total:Number(r.total||0),completed:Number(r.done||0),no_show:Number(r.noShow||0),cancelled:Number(r.cancelled||0),emergency:Number(r.emergency||0),service_total:Number(r.totalAmount||0),paid:Number(r.paid||0),unpaid:Number(r.unpaid||0),completion_rate:Number(r.completionRate||0),collection_rate:Number(r.collectionRate||0)};}
+
+async function archiveCurrentReport(){if(!state.lastReport)await runReport();if(!state.lastReport)return;const b=$('archiveReportBtn');b.disabled=true;try{const r=await db.rpc('archive_barber_report_v4711',{p_start:state.lastReport.start,p_end:state.lastReport.end,p_summary:safeReportSummary(state.lastReport)});if(r.error)throw r.error;await loadExtensionData();alert('Rapor özeti güvenli arşive kaydedildi.');}catch(e){alert(e.message||'Rapor arşivlenemedi.');}finally{b.disabled=false;}}
+
+function renderReportArchives(){const el=$('reportArchiveList');if(!el)return;if(!state.reportArchives.length){el.innerHTML='<div class="muted">Henüz arşivlenmiş rapor yok.</div>';return;}el.innerHTML=state.reportArchives.map(x=>{const s=x.summary||{};return `<div class="archive-item"><div class="row between"><b>${trDate(x.start_date)} – ${trDate(x.end_date)}</b><span class="backup-chip ok">DOĞRULANDI</span></div><div class="module-meta"><span>${Number(s.completed||0)} tamamlanan</span><span>${trMoney(s.paid)} tahsilat</span><span>%${Number(s.completion_rate||0)} gerçekleşme</span></div><div class="muted" style="font-size:10px">${new Date(x.created_at).toLocaleString('tr-TR')} · SHA-256 ${esc(String(x.sha256||'').slice(0,16))}…</div></div>`}).join('');}
+
+function renderBackupHealth(){const el=$('backupHealth');if(!el)return;if(!state.backups.length){el.className='health-line bad';el.innerHTML='<span class="health-dot"></span><div><b>Yedek bulunamadı</b><div class="muted" style="font-size:11px">Yeni tam yedek alın.</div></div>';return;}const latest=state.backups[0],age=(Date.now()-new Date(latest.created_at).getTime())/86400000,cls=age<=1?'ok':age<=3?'warn':'bad';el.className='health-line '+cls;el.innerHTML=`<span class="health-dot"></span><div style="flex:1"><b>${cls==='ok'?'Yedek güncel':cls==='warn'?'Yedek eskiyor':'Yedek güncel değil'}</b><div class="muted" style="font-size:11px">Son yedek: ${new Date(latest.created_at).toLocaleString('tr-TR')}</div></div><button id="verifyLatestBackup" class="btn small" type="button">Doğrula</button>`;$('verifyLatestBackup').onclick=verifyLatestBackup;}
+
+async function verifyLatestBackup(){const latest=state.backups[0];if(!latest)return;const b=$('verifyLatestBackup');b.disabled=true;try{const r=await db.rpc('verify_backup_snapshot_v4712',{p_id:latest.id});if(r.error)throw r.error;if(!r.data?.ok)throw new Error('Yedek bütünlüğü doğrulanamadı');alert('Yedek SHA-256 ve içerik bütünlüğü doğrulandı.');}catch(e){alert(e.message||'Yedek doğrulanamadı.');}finally{b.disabled=false;}}
+
 async function init(){
   state.selectedDate=today();
   $('dayPicker').value=state.selectedDate;
   $('weekPicker').value=state.selectedDate;
   $('repStart').value=state.selectedDate.slice(0,8)+'01';
   $('repEnd').value=state.selectedDate;
+  if($('stockMonthPicker'))$('stockMonthPicker').value=state.selectedDate.slice(0,7);
   bind();
   startIdleGuard();
   updateConnectionState();
@@ -838,7 +1145,7 @@ async function openTrustedApp(){
   sessionCheckTimer=setInterval(checkRemoteSession,SESSION_CHECK_MS);
   resetActivity();
   await loadBase();
-  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter()]);
+  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData()]);
   renderSettings();
 
   // 24 saat güvenilir oturum sunucu tarafından doğrulandıysa MFA API'si açılışı engellemez.
@@ -862,7 +1169,7 @@ async function enter(user){
 
     if(!$('appView').classList.contains('hidden')) return;
 
-    // v4.7.4: önce 24 saat güvenilir session kontrolü.
+    // Önce 24 saat güvenilir session kontrolü.
     const trusted=await getTrustedSessionState();
     if(trusted?.active===true){
       await openTrustedApp();
@@ -1376,7 +1683,7 @@ async function applyKnownPerson(){
   await loadPersonAlerts(p,state.editAppointmentId||null);
 }
 function fillServices(){
-  $('servicesBox').innerHTML=state.services.map(s=>`<label class="service"><span><input type="checkbox" class="svc" value="${s.id}" data-price="${s.current_price}"> ${esc(s.name)}</span><b>${trMoney(s.current_price)}</b></label>`).join('');
+  $('servicesBox').innerHTML=state.services.filter(s=>['Saç Tıraşı','Saç Yıkama'].includes(s.name)).map(s=>`<label class="service"><span><input type="checkbox" class="svc" value="${s.id}" data-price="${s.current_price}"> ${esc(s.name)}</span><b>${trMoney(s.current_price)}</b></label>`).join('');
   document.querySelectorAll('.svc').forEach(x=>x.addEventListener('change',calcNewTotal));
 }
 function calcNewTotal(){
@@ -1489,7 +1796,7 @@ function renderDay(){
     const prev=workdayFrom(state.selectedDate,-1,false), next=workdayFrom(state.selectedDate,1,false);
     pieces.push(`<div class="card closed-day-card"><div class="big" style="font-size:19px">Bu tarihte çalışma planı yok</div><div class="muted" style="margin-top:5px">${esc(trDate(state.selectedDate))} için tanımlı randevu saatleri bulunmuyor. Hafta sonlarında bu normaldir.</div><div class="toolbar" style="margin-top:12px"><button class="btn small" data-jump-workday="${prev}">‹ Önceki çalışma günü</button><button class="btn small primary" data-jump-workday="${next}">Sonraki çalışma günü ›</button></div></div>`);
     if(active.length){ pieces.push('<div class="section-title" style="margin-top:14px">Plan dışı mevcut kayıtlar</div>'); active.sort((a,b)=>time5(a.start_time).localeCompare(time5(b.start_time))).forEach(x=>pieces.push(appointmentCardHtml(x))); }
-    $('schedule').innerHTML=pieces.join(''); bindDayCards(); return;
+    $('schedule').innerHTML=pieces.join(''); bindDayCards(); renderQuickPanel(); void loadDayEndSummary(); return;
   }
   slots.forEach(s=>{
     const t=time5(s.start_time), x=apptByTime.get(t), block=blockByTime.get(t);
@@ -1508,7 +1815,7 @@ function renderDay(){
     pieces.push('<div class="section-title" style="margin-top:14px">Eski plan kayıtları</div>');
     legacyAppointments.forEach(x=>pieces.push(`<div class="legacy-wrap"><div class="muted" style="font-size:11px;font-weight:800;margin:0 0 5px 4px">ESKİ ÇALIŞMA PLANI</div>${appointmentCardHtml(x)}</div>`));
   }
-  $('schedule').innerHTML=pieces.join(''); bindDayCards();
+  $('schedule').innerHTML=pieces.join(''); bindDayCards(); renderQuickPanel(); void loadDayEndSummary();
 }
 
 async function openNew(time='', editId=null, forceEmergency=false){
@@ -1593,7 +1900,7 @@ async function saveAppointment(e){
   const oldText=btn?.textContent||'Randevuyu Kaydet';
   if(btn){btn.disabled=true;btn.textContent='Kaydediliyor…';}
   try{
-    const q=await db.rpc('save_barber_appointment_v46',{payload});
+    const q=await db.rpc('save_barber_appointment_v4711',{payload});
     if(q.error){
       const raw=q.error.message||'Randevu kaydedilemedi.';
       const friendly=/dolu|duplicate|unique/i.test(raw)?'Bu saat dolu. Başka bir saat seç.':raw;
@@ -1618,14 +1925,8 @@ async function startTvService(appointment,button){
   if(!navigator.onLine) return alert('Tıraşı başlatmak için internet bağlantısı gerekiyor.');
   button.disabled=true;
   try{
-    const running=await db.from('appointments').select('id').eq('appointment_date',today()).eq('status','in_service').is('deleted_at',null).neq('id',appointment.id).limit(1);
-    if(running.error) throw running.error;
-    if(running.data?.length) throw new Error('Başka bir randevu işlemde. Önce o randevuyu tamamlayın.');
-    const result=await db.from('appointments').update({status:'in_service'}).eq('id',appointment.id).eq('appointment_date',today()).eq('status',appointment.status).is('deleted_at',null).select('id');
-    if(result.error) throw result.error;
-    if(!result.data?.length) throw new Error('Randevu değişmiş veya güncelleme yetkisi yok. Listeyi yenileyip tekrar deneyin.');
+    await transitionAppointment(appointment.id,'in_service','Randevu ayrıntısından başlatıldı');
     $('detailDialog').close();
-    await Promise.all([loadDay(),loadWeek(),loadRecords(),loadAudit()]);
   }catch(e){alert(e.message||'Tıraş başlatılamadı.');}
   finally{button.disabled=false;}
 }
@@ -1666,12 +1967,13 @@ async function openDetail(id){
     </div>
     <label class="service"><span>İmza alındı</span><input id="sigCheck" type="checkbox" ${x.signature_received?'checked':''}></label>
     <div class="toolbar">
+      ${x.appointment_date===today()&&x.status==='scheduled'?'<button class="btn" data-act="arrived">✓ Geldi</button>':''}
       ${x.appointment_date===today()&&['scheduled','arrived'].includes(x.status)?'<button class="btn primary" data-act="start_service">✂ Tıraşa Başla</button>':''}
       ${x.status==='in_service'?'<span class="badge">✂ Şu an işlemde</span>':''}
-      <button class="btn ok" data-act="complete">✓ Tıraş Tamamlandı</button>
+      ${x.status==='in_service'?'<button class="btn ok" data-act="complete">✓ Tıraş Tamamlandı</button>':''}
       <button class="btn" data-act="edit">Düzenle</button>
-      <button class="btn warn" data-act="no_show">Gelmedi</button>
-      <button class="btn danger" data-act="cancelled">İptal</button>
+      ${['scheduled','arrived'].includes(x.status)?'<button class="btn warn" data-act="no_show">Gelmedi</button>':''}
+      ${['scheduled','arrived','in_service'].includes(x.status)?'<button class="btn danger" data-act="cancelled">İptal</button>':''}
       <button class="btn danger" data-act="delete">Çöp Kutusuna Taşı</button>
     </div>
     <div class="muted">${esc(x.notes)}</div>
@@ -1694,17 +1996,16 @@ async function openDetail(id){
     }else if(act==='paid'){
       const r=await db.rpc('record_appointment_payment_v47',{p_appointment_id:id,p_amount:null,p_notes:null});
       if(r.error) return alert(r.error.message);
+      await loadExtensionData();warnIfLowStock();
     }else if(act==='unpaid'){
       if(amountPaid>0 && !confirm('Bu randevuya bağlı tahsilat kayıtları geri alınacak. Devam edilsin mi?')) return;
       const r=await db.rpc('clear_appointment_payments_v47',{p_appointment_id:id});
       if(r.error) return alert(r.error.message);
-    }else{
-      let patch={};
-      if(act==='complete') patch={status:'completed',completed_at:new Date().toISOString()};
-      if(act==='no_show') patch={status:'no_show'};
-      if(act==='cancelled') patch={status:'cancelled'};
-      const u=await db.from('appointments').update(patch).eq('id',id);
-      if(u.error) return alert(u.error.message);
+    }else if(['arrived','complete','no_show','cancelled'].includes(act)){
+      const target=act==='complete'?'completed':act;
+      if(target==='completed'&&!confirm('Tıraş tamamlandı olarak kaydedilsin mi?')) return;
+      try{await transitionAppointment(id,target,'Randevu ayrıntısından güncellendi');}
+      catch(e){return alert(e.message||'Durum güncellenemedi.');}
     }
     $('detailDialog').close();
     await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit()]);
@@ -1910,7 +2211,7 @@ async function runReport(){
         <section class="report-section-card"><div class="report-section-head"><h3>🎖️ Rütbe Grubu Dağılımı</h3><span class="hint">Tamamlanan işlemlere göre</span></div><div class="report-bar-list">${rankBars}</div></section>
         <section class="report-section-card"><div class="report-section-head"><h3>📆 Günlük Performans</h3><span class="hint">${activeDays} aktif çalışma günü</span></div><div class="report-table-wrap"><table class="report-table pro"><thead><tr><th>Tarih</th><th>Randevu</th><th>Tamam</th><th>Oran</th><th>Gelmedi</th><th>Acil</th><th>İşlem</th><th>Randevu Tahsil</th></tr></thead><tbody>${dayRows}</tbody></table></div></section>
         <section class="report-insight"><div class="report-insight-title">📌 Dönem Özeti</div><ul>${insightItems.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>
-        <footer class="report-footer"><span>${esc(DISPLAY_NAME)} v4.7.4</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
+        <footer class="report-footer"><span>${esc(DISPLAY_NAME)} v${APP_VERSION}</span><span>Bu rapor sistem kayıtlarından otomatik oluşturulmuştur.</span></footer>
       </div></article>`;
     showStatus(`${all.length} randevu · ${Number(finance.payment_count||0)} tahsilat hareketi işlendi · Rapor hazır.`,'');
     setTimeout(()=>status.classList.add('hidden'),1800); return true;
@@ -1950,9 +2251,9 @@ function downloadBackupPayload(payload){
 async function loadBackupCenter(){
   const el=$('backupCenterList'); if(!el) return;
   try{
-    const r=await db.rpc('list_backup_snapshots_v47');
+    const r=await db.rpc('list_backup_snapshots_v4712');
     if(r.error) throw r.error;
-    state.backups=Array.isArray(r.data)?r.data:[]; renderBackupCenter();
+    state.backups=Array.isArray(r.data)?r.data:[]; renderBackupCenter(); renderBackupHealth();
   }catch(e){
     state.backups=[]; el.innerHTML=`<div class="notice error">Yedek Merkezi okunamadı: ${esc(e.message)}</div>`;
   }
@@ -1962,11 +2263,12 @@ function renderBackupCenter(){
   const el=$('backupCenterList'); if(!el) return;
   if(!state.backups.length){el.innerHTML='<div class="muted">Program içinde kayıtlı yedek bulunmuyor.</div>';return;}
   el.innerHTML=state.backups.map(x=>`<div class="backup-item">
-    <div class="row between"><b>${esc(x.label||'Yedek')}</b><span class="backup-chip ok">DOĞRULANDI</span></div>
-    <div class="backup-meta"><span class="backup-chip">${new Date(x.created_at).toLocaleString('tr-TR')}</span><span class="backup-chip">v${esc(x.app_version||'?')}</span><span class="backup-chip">${Number(x.people_count||0)} kişi</span><span class="backup-chip">${Number(x.appointments_count||0)} randevu</span>${Number(x.payment_transactions_count||0)?`<span class="backup-chip">${Number(x.payment_transactions_count)} ödeme</span>`:''}</div>
+    <div class="row between"><b>${esc(x.label||'Yedek')}</b><span class="backup-chip ${x.integrity_ok?'ok':''}">${x.integrity_ok?'DOĞRULANDI':'KONTROL GEREKLİ'}</span></div>
+    <div class="backup-meta"><span class="backup-chip">${new Date(x.created_at).toLocaleString('tr-TR')}</span><span class="backup-chip">${esc(x.source||'manual')}</span><span class="backup-chip">v${esc(x.app_version||'?')}</span><span class="backup-chip">şema ${Number(x.schema_version||0)}</span><span class="backup-chip">${Number(x.people_count||0)} kişi</span><span class="backup-chip">${Number(x.appointments_count||0)} randevu</span>${Number(x.payment_transactions_count||0)?`<span class="backup-chip">${Number(x.payment_transactions_count)} ödeme</span>`:''}</div>
     <div class="muted" style="font-size:10px;word-break:break-all">SHA-256: ${esc(String(x.sha256||'').slice(0,20))}… · ${(Number(x.payload_bytes||0)/1024).toLocaleString('tr-TR',{maximumFractionDigits:0})} KB</div>
-    <div class="backup-actions"><button class="btn small" data-backup-download="${x.id}">İndir</button><button class="btn small primary" data-backup-restore="${x.id}">Geri Yükle</button></div>
+    <div class="backup-actions"><button class="btn small" data-backup-verify="${x.id}">Doğrula</button><button class="btn small" data-backup-download="${x.id}">İndir</button><button class="btn small primary" data-backup-restore="${x.id}">Geri Yükle</button></div>
   </div>`).join('');
+  el.querySelectorAll('[data-backup-verify]').forEach(b=>b.onclick=()=>verifyBackupSnapshot(b.dataset.backupVerify));
   el.querySelectorAll('[data-backup-download]').forEach(b=>b.onclick=()=>downloadBackupSnapshot(b.dataset.backupDownload));
   el.querySelectorAll('[data-backup-restore]').forEach(b=>b.onclick=()=>restoreBackupSnapshot(b.dataset.backupRestore));
 }
@@ -1974,9 +2276,9 @@ function renderBackupCenter(){
 async function backupJson(){
   const status=$('backupCenterStatus'); hideMsg(status); msg(status,'Tam yedek hazırlanıyor ve Yedek Merkezi’ne kaydediliyor…','');
   try{
-    const c=await db.rpc('create_backup_snapshot_v47',{p_label:'Manuel Tam Yedek'});
+    const c=await db.rpc('create_backup_snapshot_v4712',{p_label:'Manuel Tam Yedek'});
     if(c.error) throw c.error;
-    const g=await db.rpc('get_backup_snapshot_v47',{p_id:c.data?.id});
+    const g=await db.rpc('get_backup_snapshot_v4712',{p_id:c.data?.id});
     if(g.error) throw g.error;
     validateBackupPayload(g.data); downloadBackupPayload(g.data);
     await loadBackupCenter(); msg(status,'Yedek doğrulandı, Yedek Merkezi’ne kaydedildi ve indirildi.','success');
@@ -1987,10 +2289,11 @@ function validateBackupPayload(payload){
   if(!payload || typeof payload!=='object') throw new Error('Yedek JSON nesnesi okunamadı.');
   if(payload.app!==APP_NAME) throw new Error('Bu dosya farklı bir sisteme ait.');
   const schema=Number(payload.schema_version||4);
-  if(![4,5].includes(schema)) throw new Error('Desteklenmeyen yedek sürümü.');
+  if(![4,5,6,7].includes(schema)) throw new Error('Desteklenmeyen yedek sürümü.');
   if(!payload.data || typeof payload.data!=='object') throw new Error('Yedek veri bölümü eksik.');
   const arrays=['people','appointments','services','appointment_services','weekly_slots','manual_slot_blocks','rank_groups','ranks','daily_closures'];
   if(schema>=5) arrays.push('payment_transactions','payment_allocations');
+  if(schema>=6) arrays.push('inventory_items','inventory_movements','equipment_maintenance','report_archives','appointment_status_history','day_end_checks');
   arrays.forEach(k=>{if(payload.data[k]!=null&&!Array.isArray(payload.data[k])) throw new Error(`${k} bölümü geçersiz.`);});
   const raw=JSON.stringify(payload.data);
   if(/<\s*script|javascript\s*:|onerror\s*=|onload\s*=/i.test(raw)) throw new Error('Yedekte güvenli olmayan HTML/komut içeriği tespit edildi.');
@@ -1999,13 +2302,15 @@ function validateBackupPayload(payload){
   if(integrity.people!=null && Number(integrity.people)!==(payload.data.people||[]).length) throw new Error('Kişi sayısı bütünlük kontrolü başarısız.');
   if(integrity.appointments!=null && Number(integrity.appointments)!==(payload.data.appointments||[]).length) throw new Error('Randevu sayısı bütünlük kontrolü başarısız.');
   if(integrity.appointment_services!=null && Number(integrity.appointment_services)!==(payload.data.appointment_services||[]).length) throw new Error('İşlem satırı bütünlük kontrolü başarısız.');
+  if(integrity.inventory_items!=null && Number(integrity.inventory_items)!==(payload.data.inventory_items||[]).length) throw new Error('Malzeme sayısı bütünlük kontrolü başarısız.');
+  if(integrity.report_archives!=null && Number(integrity.report_archives)!==(payload.data.report_archives||[]).length) throw new Error('Rapor arşivi bütünlük kontrolü başarısız.');
   return true;
 }
 
 function showRestorePreview(payload){
   state.restorePayload=payload;
   const d=payload.data||{}, schema=Number(payload.schema_version||4);
-  const items=[['Yedek Sürümü',`v${payload.version||'?'} / şema ${schema}`],['Kişi',(d.people||[]).length],['Randevu',(d.appointments||[]).length],['İşlem Satırı',(d.appointment_services||[]).length],['DOLU Saat',(d.manual_slot_blocks||[]).length],['Tahsilat',(d.payment_transactions||[]).length]];
+  const items=[['Yedek Sürümü',`v${payload.version||'?'} / şema ${schema}`],['Kişi',(d.people||[]).length],['Randevu',(d.appointments||[]).length],['İşlem Satırı',(d.appointment_services||[]).length],['DOLU Saat',(d.manual_slot_blocks||[]).length],['Tahsilat',(d.payment_transactions||[]).length],['Malzeme',(d.inventory_items||[]).length],['Rapor Arşivi',(d.report_archives||[]).length]];
   $('restoreInfo').innerHTML=items.map(([label,count])=>`<div class="restore-count"><span class="muted">${esc(label)}</span><b>${esc(count)}</b></div>`).join('');
   $('restoreConfirmText').value=''; $('confirmRestoreBtn').disabled=true; hideMsg($('restoreMsg')); $('restoreDialog').showModal();
 }
@@ -2028,19 +2333,24 @@ async function importBackupFile(file){
   const status=$('backupCenterStatus'); hideMsg(status);
   try{
     const payload=await parseBackupFile(file);
-    const r=await db.rpc('store_backup_snapshot_v47',{p_payload:payload,p_label:`İçe Aktarılan · ${file.name}`,p_source:'imported'});
+    const r=await db.rpc('store_backup_snapshot_v4712',{p_payload:payload,p_label:`İçe Aktarılan · ${file.name}`,p_source:'imported'});
     if(r.error) throw r.error;
     await loadBackupCenter(); msg(status,`v${payload.version||'?'} yedeği doğrulandı ve Yedek Merkezi’ne eklendi. Veri geri yüklenmedi.`,'success');
   }catch(e){msg(status,'Yedek içe aktarılamadı: '+e.message,'error');}
   finally{$('importBackupFile').value='';}
 }
 
+async function verifyBackupSnapshot(id){
+  try{const r=await db.rpc('verify_backup_snapshot_v4712',{p_id:id});if(r.error)throw r.error;if(!r.data?.ok)throw new Error('SHA-256 / içerik bütünlüğü doğrulanamadı.');await loadBackupCenter();alert('Yedek SHA-256 ve içerik bütünlüğü doğrulandı.');}
+  catch(e){alert('Yedek doğrulanamadı: '+e.message);}
+}
+
 async function downloadBackupSnapshot(id){
-  try{const r=await db.rpc('get_backup_snapshot_v47',{p_id:id});if(r.error)throw r.error;validateBackupPayload(r.data);downloadBackupPayload(r.data);}catch(e){alert('Yedek indirilemedi: '+e.message);}
+  try{const r=await db.rpc('get_backup_snapshot_v4712',{p_id:id});if(r.error)throw r.error;validateBackupPayload(r.data);downloadBackupPayload(r.data);}catch(e){alert('Yedek indirilemedi: '+e.message);}
 }
 
 async function restoreBackupSnapshot(id){
-  try{const r=await db.rpc('get_backup_snapshot_v47',{p_id:id});if(r.error)throw r.error;validateBackupPayload(r.data);showRestorePreview(r.data);}catch(e){alert('Yedek açılamadı: '+e.message);}
+  try{const r=await db.rpc('get_backup_snapshot_v4712',{p_id:id});if(r.error)throw r.error;validateBackupPayload(r.data);showRestorePreview(r.data);}catch(e){alert('Yedek açılamadı: '+e.message);}
 }
 
 async function restoreBackup(){
@@ -2057,13 +2367,13 @@ async function restoreBackup(){
       return;
     }
     $('confirmRestoreBtn').textContent='Ön yedek alınıyor…';
-    const pre=await db.rpc('create_backup_snapshot_v47',{p_label:'Geri Yükleme Öncesi Otomatik Yedek'});
+    const pre=await db.rpc('create_backup_snapshot_v4712',{p_label:'GERİ YÜKLEME ÖNCESİ GÜVENLİK YEDEĞİ'});
     if(pre.error) throw new Error('Geri yükleme öncesi güvenlik yedeği alınamadı: '+pre.error.message);
     $('confirmRestoreBtn').textContent='Geri yükleniyor…';
-    const r=await db.rpc('restore_app_backup_v47',{payload:state.restorePayload});
+    const r=await db.rpc('restore_app_backup_v4712',{payload:state.restorePayload});
     if(r.error) throw r.error;
     state.restorePayload=null; $('restoreDialog').close();
-    await loadBase(); await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter()]); renderSettings();
+    await loadBase(); await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData()]); renderSettings();
     alert(`Geri yükleme tamamlandı. ${r.data?.appointments??0} randevu ve ${r.data?.people??0} kişi kaydı işlendi.`);
   }catch(e){msg($('restoreMsg'),'Geri yükleme iptal edildi: '+e.message,'error');}
   finally{$('confirmRestoreBtn').textContent='Güvenli Geri Yüklemeyi Başlat';$('confirmRestoreBtn').disabled=$('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';}
@@ -2088,6 +2398,10 @@ function renderSettings(){
     <div style="margin-top:7px;font-size:11px;opacity:.88">Authenticator 2FA zorunludur. Aynı doğrulanmış oturum için 24 saatlik güven penceresi uygulanır; farklı cihaz/oturum bu güveni kullanamaz.</div>`;
 
   renderMfaSettings();
+  renderBackupHealth();
+  renderInventory();
+  renderMaintenance();
+  if($('stockMonthPicker')&&!$('stockMonthPicker').value)$('stockMonthPicker').value=today().slice(0,7);
 
   $('auditSettings').innerHTML=state.audit.length
     ? state.audit.map(x=>`<div class="row between" style="padding:7px 0;border-bottom:1px solid var(--line)"><span><b>${esc(x.action)}</b> · ${esc(x.table_name)}</span><span class="muted" style="font-size:12px">${new Date(x.created_at).toLocaleString('tr-TR')}</span></div>`).join('')
@@ -2098,7 +2412,7 @@ function renderSettings(){
     : '<div class="card muted">Çöp kutusu boş.</div>';
   document.querySelectorAll('[data-restore]').forEach(b=>b.onclick=()=>restoreTrash(b.dataset.restore));
 
-  $('serviceSettings').innerHTML=state.services.map(s=>`<div class="card row between">
+  $('serviceSettings').innerHTML=state.services.filter(s=>['Saç Tıraşı','Saç Yıkama'].includes(s.name)).map(s=>`<div class="card row between">
     <div><b>${esc(s.name)}</b><div class="muted">Güncel fiyat</div></div>
     <div class="row"><input data-priceid="${s.id}" type="number" min="0" step="1" value="${Number(s.current_price)}" style="width:100px"><button class="btn small" data-saveprice="${s.id}">Kaydet</button></div>
   </div>`).join('');
@@ -2289,10 +2603,14 @@ function switchPage(id){
   state.currentPage=id;
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
-  const titles={weekPage:'Haftalık Plan',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar'};
+  const titles={weekPage:'Haftalık Plan',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar',backupsPage:'Yedekler'};
   $('pageTitle').textContent=id==='homePage'?selectedDayLabel(state.selectedDate):(titles[id]||SHORT_NAME);
   $('fab').classList.toggle('hidden',id!=='homePage');
-  if(id==='weekPage')loadWeek(); if(id==='recordsPage')loadRecords(); if(id==='reportPage'&&!state.lastReport)runReport(); if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),getMfaState().then(x=>state.mfa=x)]).then(renderSettings);}
+  if(id==='weekPage')loadWeek();
+  if(id==='recordsPage')loadRecords();
+  if(id==='reportPage'){if(!state.lastReport)runReport();loadExtensionData();}
+  if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData(),getMfaState().then(x=>state.mfa=x)]).then(()=>{renderSettings();loadStockMonthReport();});}
+  if(id==='backupsPage'){loadBackupCenter();}
 }
 
 function bind(){
@@ -2373,6 +2691,22 @@ function bind(){
   $('confirmRestoreBtn').onclick=restoreBackup;
   $('closeDebt').onclick=()=>$('debtDialog').close();
   $('collectDebtBtn').onclick=collectPriorDebt;
+  $('archiveReportBtn').onclick=archiveCurrentReport;
+  $('openBackupsBtn').onclick=()=>switchPage('backupsPage');
+  $('backFromBackups').onclick=()=>switchPage('settingsPage');
+  $('receivePackageBtn').onclick=openPackageReceipt;
+  $('stockCountBtn').onclick=openStockCount;
+  $('saveStockRatesBtn').onclick=saveStockRates;
+  $('stockMonthBtn').onclick=loadStockMonthReport;
+  $('newMaintenanceBtn').onclick=()=>openMaintenance();
+  $('closeMovement').onclick=()=>$('movementDialog').close();
+  $('closeMaintenance').onclick=()=>$('maintenanceDialog').close();
+  $('movementForm').onsubmit=saveMovement;
+  $('packageForm').onsubmit=receivePackage;
+  $('stockCountForm').onsubmit=saveStockCount;
+  $('closePackage').onclick=()=>$('packageDialog').close();
+  $('closeStockCount').onclick=()=>$('stockCountDialog').close();
+  $('maintenanceForm').onsubmit=saveMaintenance;
 
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>switchPage(b.dataset.page));
 }
