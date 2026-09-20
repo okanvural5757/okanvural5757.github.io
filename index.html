@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="MEBS Subay Temel Berber">
-<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.12.1</title>
-<meta name="application-version" content="4.7.12.1">
+<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.12.2</title>
+<meta name="application-version" content="4.7.12.2">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -397,6 +397,58 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
   .stock-period-card .row.between{align-items:flex-start}
 }
 
+
+
+/* v4.7.12.2 professional stock PDF */
+.stock-pdf-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stock-pdf-actions .btn{width:100%}
+#stockPrint{display:none;background:#fff;color:#111}
+.stock-pdf{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;font-size:10px;line-height:1.35}
+.stock-pdf *{box-sizing:border-box}
+.stock-pdf-page{min-height:270mm;position:relative;background:#fff}
+.stock-pdf-header{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;gap:10px;border-bottom:2px solid #173b6c;padding:0 0 10px;margin-bottom:11px}
+.stock-pdf-logo{width:58px;height:58px;object-fit:contain;justify-self:center}
+.stock-pdf-headtext{text-align:center}
+.stock-pdf-unit{font-size:10px;font-weight:800;letter-spacing:.04em;color:#344054}
+.stock-pdf-title{font-size:18px;line-height:1.08;font-weight:950;color:#0f2748;margin-top:3px}
+.stock-pdf-subtitle{font-size:11px;font-weight:800;margin-top:4px}
+.stock-pdf-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.stock-pdf-meta>div{border:1px solid #d0d5dd;border-radius:8px;padding:7px;background:#f8fafc}
+.stock-pdf-meta span{display:block;font-size:8px;color:#667085;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.stock-pdf-meta b{display:block;margin-top:2px;font-size:10px}
+.stock-pdf-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;align-items:stretch;margin:9px 0 10px}
+.stock-pdf-flow .flow-box{border:1px solid #cbd5e1;border-radius:8px;padding:7px 5px;text-align:center;background:#f8fafc;min-width:0}
+.stock-pdf-flow .flow-box b{display:block;font-size:10px;color:#0f2748;overflow-wrap:anywhere}
+.stock-pdf-flow .flow-box span{display:block;font-size:8px;color:#667085;margin-top:2px}
+.stock-pdf-flow .flow-box.final{background:#eef4ff;border-color:#9dbaf9}
+.stock-pdf-service{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:8px 0 10px}
+.stock-pdf-service .svc{border-radius:9px;padding:8px 10px;border:1px solid #d0d5dd;background:#fff}
+.stock-pdf-service .svc span{display:block;font-size:8px;color:#667085;font-weight:800}
+.stock-pdf-service .svc b{font-size:18px;color:#0f2748}
+.stock-pdf-note{border:1px solid #b2ccff;background:#eef4ff;color:#1849a9;border-radius:8px;padding:8px 9px;margin:8px 0;font-size:9px;line-height:1.45}
+.stock-pdf-note.warn{border-color:#fedf89;background:#fffaeb;color:#7a2e0e}
+.stock-pdf-note.danger{border-color:#fecdca;background:#fef3f2;color:#b42318}
+.stock-pdf h3{font-size:12px;color:#0f2748;margin:12px 0 6px;border-left:4px solid #2859a5;padding-left:7px}
+.stock-pdf-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.stock-pdf-table th,.stock-pdf-table td{border:1px solid #cfd5de;padding:5px 4px;font-size:8.7px;vertical-align:middle;overflow-wrap:anywhere}
+.stock-pdf-table th{background:#0f2748;color:#fff;text-align:center;font-weight:850}
+.stock-pdf-table tbody tr:nth-child(even){background:#f8fafc}
+.stock-pdf-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.stock-pdf-table .center{text-align:center}
+.stock-pdf-status{display:inline-block;border-radius:999px;padding:2px 5px;font-size:7.5px;font-weight:900;white-space:nowrap}
+.stock-pdf-status.good{background:#dcfce7;color:#166534}.stock-pdf-status.warn{background:#ffedd5;color:#9a3412}.stock-pdf-status.bad{background:#fee2e2;color:#991b1b}
+.stock-pdf-signatures{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;page-break-inside:avoid}
+.stock-pdf-signatures>div{text-align:center;border-top:1px solid #667085;padding-top:5px;min-height:34px;font-size:9px;font-weight:800}
+.stock-pdf-footer{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #d0d5dd;margin-top:16px;padding-top:6px;font-size:7.5px;color:#667085}
+.stock-pdf-detail-break{break-before:page;page-break-before:always}
+.stock-pdf-detail-table th,.stock-pdf-detail-table td{font-size:8px;padding:4px 3px}
+.stock-pdf-detail-table .note-cell{font-size:7.7px}
+.stock-pdf-detail-summary{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0 10px}
+.stock-pdf-detail-summary>div{border:1px solid #d0d5dd;border-radius:8px;padding:6px;text-align:center;background:#f8fafc}
+.stock-pdf-detail-summary span{display:block;font-size:7.5px;color:#667085}.stock-pdf-detail-summary b{display:block;font-size:12px;margin-top:2px;color:#0f2748}
+.stock-pdf-approval{min-height:250mm}.stock-pdf-approval .stock-pdf-signatures{margin-top:65px}.stock-pdf-approval-note{border:1px solid #d0d5dd;border-radius:10px;padding:14px;background:#f8fafc;font-size:10px;line-height:1.55;margin-top:18px}
+@media(max-width:640px){.stock-pdf-actions{grid-template-columns:1fr}.stock-pdf-actions .btn{min-height:44px}}
+
 @page{size:A4;margin:10mm}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -410,6 +462,10 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
   body.print-official #appView{display:none!important}
   body.print-official #authView,body.print-official #mfaView{display:none!important}
   body.print-official #officialPrint{display:block!important}
+  body.print-stock #appView,body.print-stock #authView,body.print-stock #mfaView,body.print-stock #officialPrint{display:none!important}
+  body.print-stock #stockPrint{display:block!important}
+  body.print-stock{background:#fff!important}
+  body.print-stock .stock-pdf-page{min-height:0}
   .report-shell{box-shadow:none;border:0;border-radius:0}
   .report-hero{border-radius:0}
   .report-body{padding:12px 0}
@@ -422,7 +478,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 </style>
 </head>
 <body>
-<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.12.1 - Mobil + Sarf Raporu -->
+<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.12.2 - PDF Rapor & Stabilite Final -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -611,6 +667,13 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
         <div id="stockPackageMsg" class="notice hidden"></div>
         <div style="border-top:1px solid var(--line);padding-top:12px"><b>Aylık Zimmet ve Sarf Raporu</b></div>
         <div class="row"><input id="stockMonthPicker" type="month" style="max-width:210px"><button id="stockMonthBtn" class="btn small" type="button">Raporu Göster</button></div>
+        <div class="stock-pdf-actions no-print">
+          <button id="stockSummaryPdfBtn" class="btn primary" type="button">📄 Özet PDF</button>
+          <button id="stockDetailPdfBtn" class="btn" type="button">📑 Detay PDF</button>
+          <button id="stockPrintBtn" class="btn" type="button">🖨️ Yazdır</button>
+        </div>
+        <div class="muted no-print" style="font-size:11px">PDF düğmeleri A4 uyumlu kurumsal raporu açar. Telefon veya bilgisayarda yazdırma ekranından PDF olarak kaydedebilirsin.</div>
+        <div id="stockPdfMsg" class="notice hidden no-print"></div>
         <div id="stockMonthReport" class="grid"><div class="muted">Ay seçildiğinde rapor burada görünür.</div></div>
         <div class="muted" style="font-size:11px">Zimmet ve stok bilgileri TV'ye aktarılmaz; ödeme ve borç hesaplarını değiştirmez.</div>
       </div>
@@ -661,6 +724,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 </div>
 
 <section id="officialPrint"></section>
+<section id="stockPrint"></section>
 
 <dialog id="mfaEnrollDialog">
   <div class="sheet">
@@ -830,7 +894,7 @@ const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
 const DISPLAY_NAME = "MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi";
 const SHORT_NAME = "MEBS Subay Temel Berber";
-const APP_VERSION = "4.7.12.1";
+const APP_VERSION = "4.7.12.2";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -842,7 +906,7 @@ const state = {
   mfaEnrollFactorId:null, mfaChallengeFactorId:null, restorePayload:null, slotDateAppointments:[], slotDateKey:'',
   currentClosure:null, dayLoadSeq:0, weekLoadSeq:0, slotLoadSeq:0,
   selectedPersonId:null, personAlerts:null, debtPersonId:null, debtBeforeAppointmentId:null, debtMax:0, backups:[], pendingSensitiveAction:null,
-  inventoryItems:[], inventoryMovements:[], maintenance:[], reportArchives:[], dayEndSummary:null, stockMonth:null, extensionsAvailable:true
+  inventoryItems:[], inventoryMovements:[], maintenance:[], reportArchives:[], dayEndSummary:null, stockMonth:null, stockMovements:[], stockMovementsMonth:null, extensionsAvailable:true
 };
 const IDLE_MS = 24 * 60 * 60 * 1000;
 const SESSION_CHECK_MS = 15 * 1000;
@@ -878,8 +942,9 @@ const esc = v => String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','
 function msg(el,text,type=''){ el.textContent=text; el.className='notice '+type; el.classList.remove('hidden'); }
 function hideMsg(el){el.classList.add('hidden')}
 function updateConnectionState(){document.body.classList.toggle('offline',!navigator.onLine);}
-function cleanupPrintMode(){document.body.classList.remove('print-report','print-records','print-official');}
-function startPrint(mode){cleanupPrintMode();document.body.classList.add(mode);setTimeout(()=>window.print(),60);}
+let printOriginalTitle=null;
+function cleanupPrintMode(){document.body.classList.remove('print-report','print-records','print-official','print-stock');if(printOriginalTitle!==null){document.title=printOriginalTitle;printOriginalTitle=null;}}
+function startPrint(mode,title=null){cleanupPrintMode();if(title){printOriginalTitle=document.title;document.title=title;}document.body.classList.add(mode);setTimeout(()=>window.print(),120);}
 window.addEventListener('afterprint',cleanupPrintMode);
 
 async function transitionAppointment(id,newStatus,note=''){
@@ -960,7 +1025,7 @@ async function loadExtensionData(){
     db.from('report_archives').select('*').order('created_at',{ascending:false}).limit(30)
   ]);
   const firstError=[items,moves,maintenance,archives].find(x=>x.error)?.error;
-  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.12.1 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
+  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.12.2 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
   state.extensionsAvailable=true;state.inventoryItems=items.data||[];state.inventoryMovements=moves.data||[];state.maintenance=maintenance.data||[];state.reportArchives=archives.data||[];
   renderInventory();renderMaintenance();renderReportArchives();return true;
 }
@@ -1025,6 +1090,7 @@ async function saveStockRates(){
 async function loadStockMonthReport(){
   const box=$('stockMonthReport');if(!box)return;
   const month=$('stockMonthPicker')?.value||today().slice(0,7);
+  if(state.stockMovementsMonth!==month){state.stockMovementsMonth=null;state.stockMovements=[];}
   box.innerHTML='<div class="muted">Zimmet raporu hazırlanıyor…</div>';
   try{
     const r=await db.rpc('get_inventory_month_v47121',{p_month:month+'-01'});
@@ -1042,7 +1108,7 @@ async function loadStockMonthReport(){
       <div class="muted" style="font-size:11px">Ay sonu fizikî sayım yapılmadan da teorik mevcut gösterilir. Fizikî sayım yapıldığında fark ayrıca hesaplanır.</div></div>`;
     const rows=items.map(x=>{
       const diff=Number(x.count_difference||0), physical=x.physical_count;
-      const opening=x.opening_stock!=null?Number(x.opening_stock):Number(x.opening||0);
+      const opening=x.tracking_started_in_month&&x.opening_stock!=null?Number(x.opening_stock):Number(x.opening||0);
       const theoretical=Number(x.theoretical_closing||0);
       const recorded=Number(x.closing_recorded||0);
       const physicalText=physical==null?'Henüz yapılmadı':`${numberTr(physical)} ${esc(x.unit)}`;
@@ -1051,6 +1117,107 @@ async function loadStockMonthReport(){
     }).join('')||'<div class="muted">Bu ay için zimmet kaydı yok.</div>';
     box.innerHTML=info+rows;
   }catch(err){box.innerHTML=`<div class="notice error">Zimmet raporu alınamadı: ${esc(err.message)}</div>`;}
+}
+
+
+function stockMonthLabel(month){
+  const d=new Date(`${month}-01T12:00:00`);
+  return new Intl.DateTimeFormat('tr-TR',{month:'long',year:'numeric'}).format(d).replace(/^./,c=>c.toLocaleUpperCase('tr-TR'));
+}
+function stockMonthBounds(month){
+  const [y,m]=month.split('-').map(Number), next=m===12?`${y+1}-01`:`${y}-${String(m+1).padStart(2,'0')}`;
+  return {start:`${month}-01T00:00:00+03:00`,end:`${next}-01T00:00:00+03:00`};
+}
+async function fetchStockMovementsForMonth(month){
+  const {start,end}=stockMonthBounds(month);let all=[],from=0;const page=500;
+  while(true){
+    const q=await db.from('inventory_movements').select('id,item_id,movement_type,quantity,quantity_before,quantity_after,notes,occurred_at,source_kind,appointment_id,batch_id,estimated').gte('occurred_at',start).lt('occurred_at',end).order('occurred_at',{ascending:true}).range(from,from+page-1);
+    if(q.error)throw q.error;
+    const rows=q.data||[];all=all.concat(rows);if(rows.length<page)break;from+=page;
+    if(from>10000)throw new Error('Hareket sayısı güvenli rapor sınırını aştı.');
+  }
+  state.stockMovementsMonth=month;state.stockMovements=all;return all;
+}
+function stockOpeningCandidate(m){return m?.source_kind==='opening'||(m?.source_kind==='count'&&String(m?.notes||'').toLocaleLowerCase('tr-TR').includes('başlangıç'));}
+function annotateStockMovements(moves){
+  const firstOpening=new Set();
+  const grouped={};
+  moves.forEach(m=>{if(stockOpeningCandidate(m))(grouped[m.item_id]??=[]).push(m);});
+  Object.values(grouped).forEach(arr=>{arr.sort((a,b)=>new Date(a.occurred_at)-new Date(b.occurred_at));if(arr[0])firstOpening.add(arr[0].id);});
+  return moves.map(m=>{
+    let label='Stok Hareketi',kind='other',amount=Number(m.quantity||0);
+    if(stockOpeningCandidate(m)){
+      if(firstOpening.has(m.id)){label='Başlangıç Stoğu';kind='opening';amount=Number(m.quantity_after||m.quantity||0);}
+      else if(Number(m.quantity_before||0)===Number(m.quantity_after||0)){label='Başlangıç Doğrulaması · Stok Değişmedi';kind='verify';amount=0;}
+      else {label='Başlangıç Düzeltmesi';kind='verify';amount=Number(m.quantity_after||0)-Number(m.quantity_before||0);}
+    }else if(m.source_kind==='package'){label='Zimmet Girişi';kind='in';amount=Number(m.quantity||0);}
+    else if(['haircut','service_finalized'].includes(m.source_kind)){label='Otomatik Sarf';kind='out';amount=-Number(m.quantity||0);}
+    else if(m.source_kind==='manual'&&m.movement_type==='in'){label='Manuel Giriş / Düzeltme';kind='in';amount=Number(m.quantity||0);}
+    else if(m.source_kind==='manual'&&m.movement_type==='out'){label='Diğer Sarf / Fire';kind='out';amount=-Number(m.quantity||0);}
+    else if(m.source_kind==='count'){label='Ay Sonu Fizikî Sayım';kind='count';amount=Number(m.quantity_after||0)-Number(m.quantity_before||0);}
+    else if(m.movement_type==='in'){label='Diğer Giriş';kind='in';amount=Number(m.quantity||0);}
+    else if(m.movement_type==='out'){label='Diğer Sarf';kind='out';amount=-Number(m.quantity||0);}
+    return {...m,_label:label,_kind:kind,_amount:amount};
+  });
+}
+function stockStatus(item){
+  const theoretical=Number(item.theoretical_closing||0), min=Number(item.minimum||0);
+  if(theoretical<0)return {text:'STOK AÇIĞI',cls:'bad'};
+  if(theoretical<=min)return {text:'KRİTİK',cls:'warn'};
+  return {text:'NORMAL',cls:'good'};
+}
+function stockReportNotes(report){
+  const notes=[];
+  if(report?.tracking_started_in_month){
+    let n='Stok takibi bu ay içinde kalan gerçek miktar üzerinden başlatılmıştır.';
+    if(report.opening_note)n+=' '+String(report.opening_note).trim();
+    notes.push(n);
+  }
+  const noPhysical=(report?.items||[]).every(x=>x.physical_count==null);
+  if(noPhysical)notes.push('Ay sonu fizikî sayım henüz yapılmadı. Teorik mevcut değerler stok hareket defterine göre hesaplanmıştır ve fizikî sayımla kesinleştirilmemiştir.');
+  else notes.push('Fizikî sayım yapılan kalemlerde sayım farkı teorik miktar ile gerçek sayım arasındaki farkı gösterir.');
+  if((report?.items||[]).some(x=>Number(x.theoretical_closing||0)<0))notes.unshift('DİKKAT: En az bir malzemede teorik stok negatiftir. Fizikî stok ve zimmet hareketleri kontrol edilmelidir.');
+  notes.push('Otomatik sarf yalnız Tamamlandı + Ödendi durumunda bir kez oluşur; sonradan iptal veya ödeme değişikliği otomatik stok iadesi oluşturmaz.');
+  return notes;
+}
+function stockReportHeader(report,title){
+  const month=String(report?.month||$('stockMonthPicker')?.value+'-01').slice(0,7), start=report?.period_start||month+'-01',end=report?.period_end||month+'-31';
+  return `<header class="stock-pdf-header"><img class="stock-pdf-logo" src="./kkk-logo.png" alt="KKK"><div class="stock-pdf-headtext"><div class="stock-pdf-unit">MEBS OKULU VE EĞİTİM MERKEZİ KOMUTANLIĞI</div><div class="stock-pdf-title">${esc(title)}</div><div class="stock-pdf-subtitle">MEBS SUBAY TEMEL BERBER</div></div><img class="stock-pdf-logo" src="./mebs-logo.png" alt="MEBS"></header>
+    <div class="stock-pdf-meta"><div><span>Rapor Dönemi</span><b>${esc(trDate(start))} – ${esc(trDate(end))}</b></div><div><span>Ay</span><b>${esc(stockMonthLabel(month))}</b></div><div><span>Oluşturulma</span><b>${esc(new Date().toLocaleString('tr-TR'))}</b></div></div>`;
+}
+function stockSummaryRows(report){
+  return (report?.items||[]).map(x=>{
+    const opening=x.tracking_started_in_month&&x.opening_stock!=null?Number(x.opening_stock):Number(x.opening||0), physical=x.physical_count, diff=Number(x.count_difference||0), st=stockStatus(x);
+    return `<tr><td><b>${esc(x.name)}</b><br><span class="stock-pdf-status ${st.cls}">${st.text}</span></td><td class="center">${esc(x.unit)}</td><td class="num">${numberTr(opening)}</td><td class="num">${numberTr(x.received)}</td><td class="num">${numberTr(x.manual_in)}</td><td class="num">-${numberTr(x.auto_used)}</td><td class="num">-${numberTr(x.manual_used)}</td><td class="num"><b>${numberTr(x.theoretical_closing)}</b></td><td class="num">${physical==null?'Yapılmadı':numberTr(physical)}</td><td class="num">${physical==null?'—':`${diff>0?'+':''}${numberTr(diff)}`}</td></tr>`;
+  }).join('');
+}
+function stockFlowHtml(report){
+  return `<div class="stock-pdf-flow"><div class="flow-box"><b>Başlangıç / Devir</b><span>Ayın referans stoğu</span></div><div class="flow-box"><b>+ Zimmet</b><span>Yeni paket teslimleri</span></div><div class="flow-box"><b>+ Diğer Giriş</b><span>Manuel giriş / düzeltme</span></div><div class="flow-box"><b>− Otomatik Sarf</b><span>Tamamlandı + Ödendi</span></div><div class="flow-box"><b>− Diğer Sarf</b><span>Fire / temizlik / düzeltme</span></div><div class="flow-box final"><b>= Teorik Mevcut</b><span>Fizikî sayım ile karşılaştırılır</span></div></div>`;
+}
+function stockSignatures(){return `<div class="stock-pdf-signatures"><div>HAZIRLAYAN<br><br>Ad Soyad / İmza</div><div>KONTROL EDEN<br><br>Ad Soyad / İmza</div><div>ONAYLAYAN<br><br>Ad Soyad / İmza</div></div>`;}
+function stockApprovalPage(report){return `<div class="stock-pdf-detail-break stock-pdf-approval">${stockReportHeader(report,'RAPOR ONAY VE İMZA')}<div class="stock-pdf-approval-note"><b>Kontrol Notu:</b> Bu rapor seçili ayın stok hareket defteri, otomatik sarf kayıtları, zimmet girişleri ve varsa fizikî sayım kayıtları esas alınarak sistem tarafından hazırlanmıştır. Fizikî sayım yapılmamış kalemler teorik mevcut olarak gösterilir.</div>${stockSignatures()}${stockFooter()}</div>`;}
+function stockFooter(){return `<footer class="stock-pdf-footer"><span>${esc(DISPLAY_NAME)} · v${esc(APP_VERSION)}</span><span>Bu rapor sistem stok hareketlerinden otomatik oluşturulmuştur.</span></footer>`;}
+function buildStockSummaryPdf(report){
+  const notes=stockReportNotes(report), haircut=Number(report?.haircut_count||0),wash=Number(report?.wash_count||0);
+  return `<div class="stock-pdf"><div class="stock-pdf-page">${stockReportHeader(report,'AYLIK ZİMMET VE SARF ÖZET RAPORU')}${stockFlowHtml(report)}<div class="stock-pdf-service"><div class="svc"><span>SAÇ TIRAŞI</span><b>${numberTr(haircut)}</b><div>otomatik sarf oluşturan işlem</div></div><div class="svc"><span>SAÇ YIKAMA</span><b>${numberTr(wash)}</b><div>otomatik sarf oluşturan işlem</div></div></div>${notes.map(n=>`<div class="stock-pdf-note ${n.startsWith('DİKKAT:')?'danger':n.startsWith('Ay sonu')?'warn':''}">${esc(n)}</div>`).join('')}<h3>Malzeme Stok Özeti</h3><table class="stock-pdf-table"><thead><tr><th style="width:18%">Malzeme</th><th style="width:6%">Birim</th><th>Başlangıç / Devir</th><th>Zimmet</th><th>Diğer Giriş</th><th>Otomatik Sarf</th><th>Diğer Sarf</th><th>Teorik Mevcut</th><th>Fizikî Sayım</th><th>Fark</th></tr></thead><tbody>${stockSummaryRows(report)}</tbody></table>${stockSignatures()}${stockFooter()}</div></div>`;
+}
+function buildStockDetailPdf(report,moves){
+  const annotated=annotateStockMovements(moves), itemsById=Object.fromEntries(state.inventoryItems.map(x=>[x.id,x]));
+  const rows=annotated.map((m,i)=>{const it=itemsById[m.item_id]||{}, amount=m._kind==='opening'?numberTr(m._amount):(m._amount>0?'+':'')+numberTr(m._amount);return `<tr><td class="center">${i+1}</td><td>${esc(new Date(m.occurred_at).toLocaleString('tr-TR'))}</td><td>${esc(it.name||'Malzeme')}</td><td>${esc(m._label)}</td><td class="num">${amount} ${esc(it.unit||'')}</td><td class="num">${numberTr(m.quantity_before)}</td><td class="num">${numberTr(m.quantity_after)}</td><td class="note-cell">${esc(m.notes||'—')}</td></tr>`;}).join('')||'<tr><td colspan="8" class="center">Bu dönemde stok hareketi bulunmuyor.</td></tr>';
+  const counts={opening:0,in:0,out:0,count:0,verify:0};annotated.forEach(x=>{counts[x._kind]=(counts[x._kind]||0)+1;});
+  return `<div class="stock-pdf"><div class="stock-pdf-page">${stockReportHeader(report,'AYLIK ZİMMET VE SARF DETAY RAPORU')}${stockFlowHtml(report)}<div class="stock-pdf-service"><div class="svc"><span>SAÇ TIRAŞI</span><b>${numberTr(report?.haircut_count||0)}</b></div><div class="svc"><span>SAÇ YIKAMA</span><b>${numberTr(report?.wash_count||0)}</b></div></div>${stockReportNotes(report).map(n=>`<div class="stock-pdf-note ${n.startsWith('DİKKAT:')?'danger':n.startsWith('Ay sonu')?'warn':''}">${esc(n)}</div>`).join('')}<h3>Malzeme Stok Özeti</h3><table class="stock-pdf-table"><thead><tr><th style="width:18%">Malzeme</th><th style="width:6%">Birim</th><th>Başlangıç / Devir</th><th>Zimmet</th><th>Diğer Giriş</th><th>Otomatik Sarf</th><th>Diğer Sarf</th><th>Teorik Mevcut</th><th>Fizikî Sayım</th><th>Fark</th></tr></thead><tbody>${stockSummaryRows(report)}</tbody></table></div><div class="stock-pdf-detail-break">${stockReportHeader(report,'STOK HAREKET DÖKÜMÜ')}<div class="stock-pdf-detail-summary"><div><span>HAREKET</span><b>${annotated.length}</b></div><div><span>BAŞLANGIÇ</span><b>${counts.opening||0}</b></div><div><span>GİRİŞ</span><b>${counts.in||0}</b></div><div><span>SARF</span><b>${counts.out||0}</b></div><div><span>SAYIM</span><b>${counts.count||0}</b></div></div><table class="stock-pdf-table stock-pdf-detail-table"><thead><tr><th style="width:4%">No</th><th style="width:14%">Tarih / Saat</th><th style="width:14%">Malzeme</th><th style="width:16%">Hareket</th><th style="width:10%">Miktar</th><th style="width:9%">Önce</th><th style="width:9%">Sonra</th><th>Açıklama</th></tr></thead><tbody>${rows}</tbody></table></div>${stockApprovalPage(report)}</div>`;
+}
+async function prepareStockPdf(mode='summary'){
+  const box=$('stockPdfMsg');hideMsg(box);const month=$('stockMonthPicker')?.value||today().slice(0,7);
+  try{
+    await loadStockMonthReport();
+    const report=state.stockMonth;if(!report)throw new Error('Aylık stok raporu yüklenemedi.');
+    let html,title;
+    if(mode==='detail'){if(!state.inventoryItems.length)await loadExtensionData();const moves=await fetchStockMovementsForMonth(month);html=buildStockDetailPdf(report,moves);title=`MEBS_Zimmet_Sarf_Detay_${month}`;}
+    else{html=buildStockSummaryPdf(report);title=`MEBS_Zimmet_Sarf_Ozet_${month}`;}
+    $('stockPrint').innerHTML=html;
+    startPrint('print-stock',title);
+  }catch(e){msg(box,'PDF raporu hazırlanamadı: '+(e?.message||'Bilinmeyen hata'),'error');}
 }
 
 function renderMaintenance(){const el=$('maintenanceList');if(!el)return;if(!state.maintenance.length){el.innerHTML='<div class="muted">Henüz bakım kaydı yok.</div>';return;}const now=today();el.innerHTML=state.maintenance.map(x=>{const due=x.next_maintenance_date&&x.next_maintenance_date<=now;return `<div class="module-card ${due?'stock-low':''}"><div class="row between"><div><b>${esc(x.equipment_name)}</b><div class="muted" style="font-size:11px">${esc(x.notes||'')}</div></div><span class="badge">${x.next_maintenance_date?trDate(x.next_maintenance_date):'Tarih yok'}</span></div><button class="btn small" data-maintenance-edit="${x.id}">Düzenle</button></div>`}).join('');el.querySelectorAll('[data-maintenance-edit]').forEach(b=>b.onclick=()=>openMaintenance(b.dataset.maintenanceEdit));}
@@ -2746,6 +2913,10 @@ function bind(){
   $('stockCountBtn').onclick=openStockCount;
   $('saveStockRatesBtn').onclick=saveStockRates;
   $('stockMonthBtn').onclick=loadStockMonthReport;
+  $('stockMonthPicker').onchange=()=>{state.stockMonth=null;state.stockMovementsMonth=null;state.stockMovements=[];};
+  $('stockSummaryPdfBtn').onclick=()=>prepareStockPdf('summary');
+  $('stockDetailPdfBtn').onclick=()=>prepareStockPdf('detail');
+  $('stockPrintBtn').onclick=()=>prepareStockPdf('detail');
   $('newMaintenanceBtn').onclick=()=>openMaintenance();
   $('closeMovement').onclick=()=>$('movementDialog').close();
   $('closeMaintenance').onclick=()=>$('maintenanceDialog').close();
