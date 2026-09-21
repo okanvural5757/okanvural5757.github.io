@@ -2192,6 +2192,13 @@ async function openDetail(id){
   const appliedPaid=Math.min(recordedPaid,appointmentTotal);
   const remaining=Math.max(0,appointmentTotal-appliedPaid);
   const paymentMismatch=paid&&Math.abs(recordedPaid-appointmentTotal)>0.009;
+  const isToday=x.appointment_date===today();
+  const isFuture=x.appointment_date>today();
+  const canArrive=isToday&&x.status==='scheduled';
+  const canStart=isToday&&['scheduled','arrived'].includes(x.status);
+  const canComplete=!isFuture&&['scheduled','arrived','in_service'].includes(x.status);
+  const canNoShow=!isFuture&&['scheduled','arrived'].includes(x.status);
+  const canCancel=['scheduled','arrived','in_service'].includes(x.status);
   let alerts={no_show_count:0,debt:0};
 
   $('detailBody').innerHTML=`<div class="grid">
@@ -2216,14 +2223,20 @@ async function openDetail(id){
       ${Number(alerts.debt||0)>0?`<button type="button" class="btn warn" data-act="prior_debt" style="width:100%;margin-top:9px">₺ Önceki Borç Tahsil Et · ${trMoney(alerts.debt)}</button>`:''}
     </div>
     <label class="service"><span>İmza alındı</span><input id="sigCheck" type="checkbox" ${x.signature_received?'checked':''}></label>
+    <div class="card" style="padding:12px">
+      <div class="row between" style="margin-bottom:10px"><b>Randevu Durumu</b><span class="badge ${esc(x.status)}">${esc(statusName(x.status))}</span></div>
+      <div class="toolbar" style="margin:0">
+        ${canArrive?'<button class="btn" data-act="arrived">✓ Geldi</button>':''}
+        ${canStart?'<button class="btn primary" data-act="start_service">✂ Tıraşa Başla</button>':''}
+        ${x.status==='in_service'?'<span class="badge">✂ Şu an işlemde</span>':''}
+        ${canComplete?'<button class="btn ok" data-act="complete">✓ Tıraş Tamamlandı</button>':''}
+        ${canNoShow?'<button class="btn warn" data-act="no_show">Gelmedi</button>':''}
+        ${canCancel?'<button class="btn danger" data-act="cancelled">İptal</button>':''}
+      </div>
+      ${!canArrive&&!canStart&&!canComplete&&!canNoShow&&!canCancel?'<div class="muted" style="font-size:12px;margin-top:6px">Bu randevu terminal durumda. Geçmiş ödeme ve stok hareketlerini korumak için durum geriye çevrilmez.</div>':''}
+    </div>
     <div class="toolbar">
-      ${x.appointment_date===today()&&x.status==='scheduled'?'<button class="btn" data-act="arrived">✓ Geldi</button>':''}
-      ${x.appointment_date===today()&&['scheduled','arrived'].includes(x.status)?'<button class="btn primary" data-act="start_service">✂ Tıraşa Başla</button>':''}
-      ${x.status==='in_service'?'<span class="badge">✂ Şu an işlemde</span>':''}
-      ${x.status==='in_service'?'<button class="btn ok" data-act="complete">✓ Tıraş Tamamlandı</button>':''}
       <button class="btn" data-act="edit">Düzenle</button>
-      ${['scheduled','arrived'].includes(x.status)?'<button class="btn warn" data-act="no_show">Gelmedi</button>':''}
-      ${['scheduled','arrived','in_service'].includes(x.status)?'<button class="btn danger" data-act="cancelled">İptal</button>':''}
       <button class="btn danger" data-act="delete">Çöp Kutusuna Taşı</button>
     </div>
     <div class="muted">${esc(x.notes)}</div>
