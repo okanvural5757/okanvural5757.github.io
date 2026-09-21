@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="MEBS Subay Temel Berber">
-<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.12.3</title>
-<meta name="application-version" content="4.7.12.3">
+<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.13</title>
+<meta name="application-version" content="4.7.13">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -399,7 +399,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 
 
 
-/* v4.7.12.3 professional stock PDF */
+/* v4.7.13 professional stock PDF */
 .stock-pdf-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .stock-pdf-actions .btn{width:100%}
 #stockPrint{display:none;background:#fff;color:#111}
@@ -475,7 +475,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 </style>
 </head>
 <body>
-<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.12.3 - PDF Rapor & Stabilite Final -->
+<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.13 - PDF Rapor & Stabilite Final -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -632,6 +632,23 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
         </div>
         <div class="muted">TV tarayıcısında tv-v48.html?mode=screen adresini açın. Ekrandaki kodu TV ayarlarından onaylayın. Değişiklikler TV’nin yenileme aralığında görünür.</div>
       </div>
+      <div class="section-title">QR ile Randevu</div>
+      <div id="qrBookingSettings" class="card grid">
+        <div class="muted">TV ekranındaki QR kodu ve günlük 4 haneli şifre ile kontrollü randevu alınır. Şifre her gün otomatik yenilenir; istersen buradan anında değiştirebilirsin.</div>
+        <div class="row between" style="align-items:flex-end;flex-wrap:wrap">
+          <div><div class="muted" style="font-size:11px;font-weight:900">BUGÜNÜN RANDEVU ŞİFRESİ</div><div id="qrDailyPin" style="font-size:34px;font-weight:950;letter-spacing:.18em;margin-top:3px">----</div><div id="qrPinDate" class="muted" style="font-size:11px"></div></div>
+          <span id="qrEnabledBadge" class="backup-chip">YÜKLENİYOR</span>
+        </div>
+        <div class="toolbar">
+          <button id="qrRandomPinBtn" class="btn primary" type="button">Yeni Rastgele Şifre</button>
+          <button id="qrSetPinBtn" class="btn" type="button">Şifreyi Değiştir</button>
+          <button id="qrToggleBtn" class="btn" type="button">QR Randevuyu Kapat</button>
+          <a class="btn" href="./randevu.html" target="_blank" rel="noopener">Randevu Sayfasını Aç</a>
+        </div>
+        <div id="qrBookingMsg" class="notice hidden"></div>
+        <div class="muted" style="font-size:11px">Güvenlik: 5 hatalı denemeden sonra geçici engel uygulanır. Doğru şifre kısa süreli tek-randevuluk oturum açar; şifre değiştirilince açık QR oturumları iptal edilir.</div>
+      </div>
+
       <div class="section-title">Güvenlik</div>
       <div id="securitySettings" class="security-card"></div>
 
@@ -891,7 +908,7 @@ const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
 const DISPLAY_NAME = "MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi";
 const SHORT_NAME = "MEBS Subay Temel Berber";
-const APP_VERSION = "4.7.12.3";
+const APP_VERSION = "4.7.13";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -903,7 +920,7 @@ const state = {
   mfaEnrollFactorId:null, mfaChallengeFactorId:null, restorePayload:null, slotDateAppointments:[], slotDateKey:'',
   currentClosure:null, dayLoadSeq:0, weekLoadSeq:0, slotLoadSeq:0,
   selectedPersonId:null, personAlerts:null, debtPersonId:null, debtBeforeAppointmentId:null, debtMax:0, backups:[], pendingSensitiveAction:null,
-  inventoryItems:[], inventoryMovements:[], maintenance:[], reportArchives:[], dayEndSummary:null, stockMonth:null, stockMovements:[], stockMovementsMonth:null, extensionsAvailable:true
+  inventoryItems:[], inventoryMovements:[], maintenance:[], reportArchives:[], dayEndSummary:null, stockMonth:null, stockMovements:[], stockMovementsMonth:null, extensionsAvailable:true, qrBooking:null
 };
 const IDLE_MS = 24 * 60 * 60 * 1000;
 const SESSION_CHECK_MS = 15 * 1000;
@@ -958,16 +975,26 @@ function quickCandidate(){
   return active.find(x=>x.status==='in_service')||active.find(x=>x.status==='arrived')||active.find(x=>x.status==='scheduled')||null;
 }
 
+function quickStatusMeta(x){
+  if(x.status!=='scheduled') return {line:`${time5(x.start_time)} · ${statusName(x.status)}`,badge:statusName(x.status)};
+  const start=new Date(`${x.appointment_date}T${time5(x.start_time)}:00`);
+  const diff=start.getTime()-Date.now();
+  if(Number.isFinite(diff)&&diff>30*60*1000) return {line:`Bugünün İlk Randevusu · ${time5(x.start_time)}`,badge:'Planlı'};
+  if(Number.isFinite(diff)&&diff>0) return {line:`${time5(x.start_time)} · Randevu Saati Yaklaşıyor`,badge:'Yaklaşıyor'};
+  return {line:`${time5(x.start_time)} · Bekliyor`,badge:'Bekliyor'};
+}
+
 function renderQuickPanel(){
   const box=$('quickPanel'); if(!box) return;
   const x=quickCandidate();
   if(!x){box.classList.add('hidden');box.innerHTML='';return;}
-  const p=x.people||{};
+  const p=x.people||{},meta=quickStatusMeta(x);
   const actions=[];
   if(x.status==='scheduled') actions.push(`<button class="btn" data-quick-status="arrived">✓ Geldi</button>`);
   if(['scheduled','arrived'].includes(x.status)) actions.push(`<button class="btn primary" data-quick-status="in_service">✂ Tıraşa Başla</button>`);
   if(x.status==='in_service') actions.push(`<button class="btn ok" data-quick-status="completed">✓ Tamamlandı</button>`);
-  box.innerHTML=`<div class="quick-head"><div><div class="muted" style="font-size:11px;font-weight:900">TELEFON HIZLI İŞLEM</div><b>${esc(rankLabel(p.rank_id))} ${esc(p.full_name||'')}</b><div class="muted" style="font-size:12px">${time5(x.start_time)} · ${esc(statusName(x.status))}</div></div><span class="badge ${esc(x.status)}">${esc(statusName(x.status))}</span></div><div class="quick-actions">${actions.join('')}</div>`;
+  const qr=x.booking_source==='qr'?'<span class="badge" style="background:#eef4ff;color:#175cd3">QR Randevu</span>':'';
+  box.innerHTML=`<div class="quick-head"><div><div class="muted" style="font-size:11px;font-weight:900">TELEFON HIZLI İŞLEM</div><b>${esc(rankLabel(p.rank_id))} ${esc(p.full_name||'')}</b><div class="muted" style="font-size:12px">${esc(meta.line)}</div></div><div class="row" style="flex-wrap:wrap;justify-content:flex-end">${qr}<span class="badge ${esc(x.status)}">${esc(meta.badge)}</span></div></div><div class="quick-actions">${actions.join('')}</div>`;
   box.classList.remove('hidden');
   box.querySelectorAll('[data-quick-status]').forEach(b=>b.onclick=async()=>{
     const target=b.dataset.quickStatus;
@@ -1022,7 +1049,7 @@ async function loadExtensionData(){
     db.from('report_archives').select('*').order('created_at',{ascending:false}).limit(30)
   ]);
   const firstError=[items,moves,maintenance,archives].find(x=>x.error)?.error;
-  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.12.3 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
+  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.13 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
   state.extensionsAvailable=true;state.inventoryItems=items.data||[];state.inventoryMovements=moves.data||[];state.maintenance=maintenance.data||[];state.reportArchives=archives.data||[];
   renderInventory();renderMaintenance();renderReportArchives();return true;
 }
@@ -1354,7 +1381,7 @@ async function openTrustedApp(){
   sessionCheckTimer=setInterval(checkRemoteSession,SESSION_CHECK_MS);
   resetActivity();
   await loadBase();
-  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData()]);
+  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData(),loadQrBookingState()]);
   renderSettings();
 
   // 24 saat güvenilir oturum sunucu tarafından doğrulandıysa MFA API'si açılışı engellemez.
@@ -1980,7 +2007,7 @@ function appointmentCardHtml(x,slot=null){
   const paymentClass=paid?'payment-paid':unpaid?'payment-unpaid':'';
   const paymentBadge=paid?'<span class="payment-badge paid">✓ ÖDENDİ</span>':free?'<span class="payment-badge free">ÜCRETSİZ</span>':'<span class="payment-badge unpaid">₺ ÖDENMEDİ</span>';
   const overdue=appointmentIsOverdue(x);
-  return `<button class="slot ${emergency?'emergency-card':''} ${paymentClass} ${overdue?'overdue-card':''}" data-id="${x.id}" style="text-align:left"><div class="row between"><div class="time">${time5(x.start_time)} – ${time5(x.end_time)}</div><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 ACİL':statusName(x.status)}</span></div><div class="name">${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</div><div class="row between"><span class="muted">${esc(p.unit_name)}${x.slot_override&&slot?' · '+esc(slot.label||'İstisna'):''}</span><b>${trMoney(x.total_amount)}</b></div>${overdue?'<div class="overdue-warning"><span>⚠️ Randevu saati geçti</span><span>Geldi / Gelmedi durumunu seç</span></div>':''}<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme Durumu</span>${paymentBadge}</div></button>`;
+  return `<button class="slot ${emergency?'emergency-card':''} ${paymentClass} ${overdue?'overdue-card':''}" data-id="${x.id}" style="text-align:left"><div class="row between"><div class="time">${time5(x.start_time)} – ${time5(x.end_time)}</div><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 ACİL':statusName(x.status)}</span></div><div class="name">${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}${x.booking_source==='qr'?' <span class="badge" style="background:#eef4ff;color:#175cd3;margin-left:6px">QR</span>':''}</div><div class="row between"><span class="muted">${esc(p.unit_name)}${x.slot_override&&slot?' · '+esc(slot.label||'İstisna'):''}</span><b>${trMoney(x.total_amount)}</b></div>${overdue?'<div class="overdue-warning"><span>⚠️ Randevu saati geçti</span><span>Geldi / Gelmedi durumunu seç</span></div>':''}<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme Durumu</span>${paymentBadge}</div></button>`;
 }
 function bindDayCards(){
   document.querySelectorAll('[data-empty]').forEach(b=>b.onclick=e=>{e.stopPropagation();openNew(b.dataset.empty);});
@@ -2322,7 +2349,7 @@ function renderRecords(){
         ? '<span class="payment-badge free">ÜCRETSİZ</span>'
         : '<span class="payment-badge unpaid">₺ ÖDENMEDİ</span>';
     return `<button class="person ${emergency?'emergency-card':''} ${paid?'payment-paid':unpaid?'payment-unpaid':''}" data-recordid="${x.id}" style="text-align:left;width:100%">
-      <div class="row between"><b>${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</b><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 Acil':esc(statusName(x.status))}</span></div>
+      <div class="row between"><b>${esc(rankLabel(p.rank_id))} ${esc(p.full_name)}</b><span class="row" style="gap:5px">${x.booking_source==='qr'?'<span class="badge" style="background:#eef4ff;color:#175cd3">QR</span>':''}<span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 Acil':esc(statusName(x.status))}</span></span></div>
       <div class="muted">${esc(x.appointment_date)} · ${time5(x.start_time)} · ${esc(p.unit_name)}</div>
       <div class="row between" style="margin-top:6px"><span>${(x.appointment_services||[]).map(s=>esc(s.service_items?.name||'')).join(', ')}</span><b>${trMoney(x.total_amount)}</b></div>
       ${paymentBadge?`<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme</span>${paymentBadge}</div>`:''}
@@ -2485,7 +2512,7 @@ function renderBackupCenter(){
 async function backupJson(){
   const status=$('backupCenterStatus'); hideMsg(status); msg(status,'Tam yedek hazırlanıyor ve Yedek Merkezi’ne kaydediliyor…','');
   try{
-    const c=await db.rpc('create_backup_snapshot_v4712',{p_label:'Manuel Tam Yedek'});
+    const c=await db.rpc('create_backup_snapshot_v4713',{p_label:'Manuel Tam Yedek'});
     if(c.error) throw c.error;
     const g=await db.rpc('get_backup_snapshot_v4712',{p_id:c.data?.id});
     if(g.error) throw g.error;
@@ -2542,7 +2569,7 @@ async function importBackupFile(file){
   const status=$('backupCenterStatus'); hideMsg(status);
   try{
     const payload=await parseBackupFile(file);
-    const r=await db.rpc('store_backup_snapshot_v4712',{p_payload:payload,p_label:`İçe Aktarılan · ${file.name}`,p_source:'imported'});
+    const r=await db.rpc('store_backup_snapshot_v4713',{p_payload:payload,p_label:`İçe Aktarılan · ${file.name}`,p_source:'imported'});
     if(r.error) throw r.error;
     await loadBackupCenter(); msg(status,`v${payload.version||'?'} yedeği doğrulandı ve Yedek Merkezi’ne eklendi. Veri geri yüklenmedi.`,'success');
   }catch(e){msg(status,'Yedek içe aktarılamadı: '+e.message,'error');}
@@ -2576,10 +2603,10 @@ async function restoreBackup(){
       return;
     }
     $('confirmRestoreBtn').textContent='Ön yedek alınıyor…';
-    const pre=await db.rpc('create_backup_snapshot_v4712',{p_label:'GERİ YÜKLEME ÖNCESİ GÜVENLİK YEDEĞİ'});
+    const pre=await db.rpc('create_backup_snapshot_v4713',{p_label:'GERİ YÜKLEME ÖNCESİ GÜVENLİK YEDEĞİ'});
     if(pre.error) throw new Error('Geri yükleme öncesi güvenlik yedeği alınamadı: '+pre.error.message);
     $('confirmRestoreBtn').textContent='Geri yükleniyor…';
-    const r=await db.rpc('restore_app_backup_v4712',{payload:state.restorePayload});
+    const r=await db.rpc('restore_app_backup_v4713',{payload:state.restorePayload});
     if(r.error) throw r.error;
     state.restorePayload=null; $('restoreDialog').close();
     await loadBase(); await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData()]); renderSettings();
@@ -2587,6 +2614,23 @@ async function restoreBackup(){
   }catch(e){msg($('restoreMsg'),'Geri yükleme iptal edildi: '+e.message,'error');}
   finally{$('confirmRestoreBtn').textContent='Güvenli Geri Yüklemeyi Başlat';$('confirmRestoreBtn').disabled=$('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';}
 }
+
+async function loadQrBookingState(){
+  try{const r=await db.rpc('get_qr_booking_admin_state_v4713');if(r.error)throw r.error;state.qrBooking=r.data||null;return true;}
+  catch(e){console.warn('QR randevu ayarları yüklenemedi',e);state.qrBooking=null;return false;}
+}
+function renderQrBookingSettings(){
+  const q=state.qrBooking,box=$('qrBookingSettings');if(!box)return;
+  $('qrDailyPin').textContent=q?.pin||'----';
+  $('qrPinDate').textContent=q?.pin_date?`${trDate(q.pin_date)} · günlük şifre`:'Günlük şifre yüklenemedi';
+  const on=!!q?.enabled;$('qrEnabledBadge').textContent=on?'QR RANDEVU AÇIK':'QR RANDEVU KAPALI';$('qrEnabledBadge').className='backup-chip '+(on?'ok':'bad');
+  $('qrToggleBtn').textContent=on?'QR Randevuyu Kapat':'QR Randevuyu Aç';
+  $('qrRandomPinBtn').disabled=!q;$('qrSetPinBtn').disabled=!q;$('qrToggleBtn').disabled=!q;
+}
+async function refreshQrBookingSettings(){await loadQrBookingState();renderQrBookingSettings();}
+async function setQrPin(){const v=prompt('Yeni 4 haneli günlük randevu şifresini gir:',state.qrBooking?.pin||'');if(v===null)return;const pin=String(v).replace(/\D/g,'');if(pin.length!==4)return alert('Şifre tam 4 haneli olmalı.');if(!confirm(`Günlük randevu şifresi ${pin} olarak değiştirilsin mi? Açık QR oturumları kapanır.`))return;const r=await db.rpc('set_qr_booking_pin_v4713',{p_pin:pin});if(r.error)return alert(r.error.message);state.qrBooking=r.data;renderQrBookingSettings();msg($('qrBookingMsg'),'Günlük QR randevu şifresi değiştirildi. TV bir sonraki yenilemede yeni şifreyi gösterecek.','success');}
+async function randomQrPin(){if(!confirm('Yeni rastgele günlük randevu şifresi oluşturulsun mu? Açık QR oturumları kapanır.'))return;const r=await db.rpc('generate_qr_booking_pin_v4713');if(r.error)return alert(r.error.message);state.qrBooking=r.data;renderQrBookingSettings();msg($('qrBookingMsg'),'Yeni günlük randevu şifresi oluşturuldu.','success');}
+async function toggleQrBooking(){const next=!state.qrBooking?.enabled;if(!confirm(`QR ile randevu ${next?'açılsın':'kapatılsın'} mı?`))return;const r=await db.rpc('set_qr_booking_enabled_v4713',{p_enabled:next});if(r.error)return alert(r.error.message);state.qrBooking=r.data;renderQrBookingSettings();msg($('qrBookingMsg'),`QR ile randevu ${next?'açıldı':'kapatıldı'}.`,'success');}
 
 function renderSettings(){
   const lastSignIn=state.user?.last_sign_in_at?new Date(state.user.last_sign_in_at).toLocaleString('tr-TR'):'—';
@@ -2611,6 +2655,7 @@ function renderSettings(){
   renderInventory();
   renderMaintenance();
   if($('stockMonthPicker')&&!$('stockMonthPicker').value)$('stockMonthPicker').value=today().slice(0,7);
+  renderQrBookingSettings();
 
   $('auditSettings').innerHTML=state.audit.length
     ? state.audit.map(x=>`<div class="row between" style="padding:7px 0;border-bottom:1px solid var(--line)"><span><b>${esc(x.action)}</b> · ${esc(x.table_name)}</span><span class="muted" style="font-size:12px">${new Date(x.created_at).toLocaleString('tr-TR')}</span></div>`).join('')
@@ -2818,7 +2863,7 @@ function switchPage(id){
   if(id==='weekPage')loadWeek();
   if(id==='recordsPage')loadRecords();
   if(id==='reportPage'){if(!state.lastReport)runReport();loadExtensionData();}
-  if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData(),getMfaState().then(x=>state.mfa=x)]).then(()=>{renderSettings();loadStockMonthReport();});}
+  if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData(),loadQrBookingState(),getMfaState().then(x=>state.mfa=x)]).then(()=>{renderSettings();loadStockMonthReport();});}
   if(id==='backupsPage'){loadBackupCenter();}
 }
 
@@ -2851,7 +2896,8 @@ function bind(){
   $('mobileNewAppointment').onclick=()=>openNew();
   $('closeDialog').onclick=()=>{state.editAppointmentId=null;$('appointmentDialog').close();};
   $('closeDetail').onclick=()=>$('detailDialog').close();
-  $('appointmentForm').onsubmit=saveAppointment;
+  $('qrRandomPinBtn').onclick=randomQrPin;$('qrSetPinBtn').onclick=setQrPin;$('qrToggleBtn').onclick=toggleQrBooking;
+$('appointmentForm').onsubmit=saveAppointment;
   $('apptDate').onchange=async()=>refreshSlotSelect($('apptDate').value,$('slotSelect').value);
   $('emergencyCheck').onchange=()=>{
     $('overrideReasonWrap').classList.toggle('hidden',!$('emergencyCheck').checked);
