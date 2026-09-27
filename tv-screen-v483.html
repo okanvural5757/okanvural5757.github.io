@@ -8,7 +8,7 @@
 <section class="slide active" data-slide="queue"><div class="grid2"><div class="panel"><div class="eyebrow">Şu an</div><div id="currentStatus" class="status-pill">İŞLEM DEVAM EDİYOR</div><div id="currentName" class="big">Şu an işlem yok</div><div id="currentService" class="sub"></div></div><div class="panel"><div class="eyebrow">Sıradaki randevu</div><div id="nextTime" class="nexttime">—</div><div id="nextName" class="sub" style="font-size:2.4vw;font-weight:900">Sırada randevu yok</div><div id="nextService" class="sub"></div></div></div></section>
 <section class="slide" data-slide="today"><div class="eyebrow">Bugünkü uygun saatler</div><div id="todayLayout" class="today-layout"><div><div class="big" style="font-size:3.8vw">Boş Randevular</div><div id="freeSlots" class="free-grid"></div></div><div id="todayQrCard" class="qr-card hidden"><div class="qr-label">QR RANDEVU ŞİFRESİ</div><div id="todayQrPin" class="qr-pin">----</div><div style="font-size:1vw;color:#5b6c61">Telefonunuzdan randevu sayfasını açın.</div></div></div></section>
 <section class="slide" data-slide="days"><div class="eyebrow">Sonraki çalışma günleri</div><div id="daysContent" class="days-content"><div id="dayCards"></div><div id="daysQrCard" class="qr-card hidden"><div class="qr-label">QR RANDEVU ŞİFRESİ</div><div id="daysQrPin" class="qr-pin">----</div><div style="font-size:1vw;color:#5b6c61">Güvenli çevrim içi randevu</div></div></div></section>
-<section class="slide" data-slide="closed"><div style="text-align:center"><div class="eyebrow">Çalışma durumu</div><div class="big">Bugün randevu hizmeti kapalı</div><div id="closedNext" class="sub"></div></div></section>
+<section class="slide" data-slide="closed"><div style="text-align:center"><div class="eyebrow">Çalışma durumu</div><div class="big">Bugün çalışma planı yok</div><div id="closedNext" class="sub"></div></div></section>
 </main>
 <div id="period" class="period"><b id="periodTitle">Ara</b><div id="periodDetail"></div></div><footer class="footer" id="footerMessage">Randevu saatlerine riayet edilmesi önemle rica olunur.</footer>
 <div id="pairOverlay" class="overlay"><div class="pairbox"><img src="./mebs-logo.png" alt="MEBS" style="width:90px;height:90px;object-fit:contain"><div class="eyebrow" style="margin-top:1vh">TV Güvenli Eşleştirme</div><div id="pairCode">------</div><div id="pairText">Yönetici panelinden eşleştirmeyi açın.</div><div id="pairSub">Kod yaklaşık 5 dakika geçerlidir.</div></div></div>
@@ -23,7 +23,7 @@ const LAST_PAYLOAD_KEY='okan_tv_last_payload_v4717';
 const URL_Q=new URLSearchParams(location.search);
 const IS_DEMO=URL_Q.get('demo')==='1';
 const DEMO_SCENE=URL_Q.get('scene')||'';
-const TV_VERSION='v4.7.17 TV';
+const TV_VERSION='v4.7.17';
 const ROTATION_SECONDS={queue:12,today:16,days:30,closed:15};
 const demoDefaults={enabled:true,auto_rotate:true,queue_seconds:12,today_seconds:16,days_seconds:30,refresh_seconds:15,next_name_format:'time_only',show_service:true,show_stats:false,show_next_free:false,show_today:true,show_days:true,show_busy_slots:false,footer_message:'Randevu saatlerine riayet edilmesi önemle rica olunur.',hide_names_after_seconds:60};
 let payload=null,settings={...demoDefaults},slides=[],slideIndex=0,slideTimer=null,refreshTimer=null,pairTimer=null;
@@ -73,7 +73,8 @@ function renderQr(){
 }
 function render(){
   renderQr();
-  const c=payload.current,n=payload.next;
+  const working=payload?.today_working!==false;
+  const c=working?payload.current:null,n=working?payload.next:null;
   if(c?.conflict){el('currentName').textContent='İşlem Devam Ediyor';el('currentService').textContent='Bilgi güncelleniyor'}
   else if(c){el('currentName').textContent='İşlem Devam Ediyor';el('currentService').textContent=settings.show_service?(c.service||''):''}
   else{el('currentName').textContent='Şu an işlem yok';el('currentService').textContent=''}
@@ -83,7 +84,7 @@ function render(){
   fitSingleLine(el('currentName'),5,3.15);fitSingleLine(el('nextName'),3.65,2.5);
   el('footerMessage').textContent=settings.footer_message||demoDefaults.footer_message;
   const slots=Array.isArray(payload.today_slots)?payload.today_slots:[];const free=slots.filter(x=>x.available);
-  el('freeSlots').innerHTML=free.length?free.map(x=>`<div class="free-slot"><div class="t">${esc(x.time)}</div></div>`).join(''):'<div class="today-empty">Bugün için kalan uygun randevu saati bulunmuyor.</div>';
+  el('freeSlots').innerHTML=free.length?free.map(x=>`<div class="free-slot"><div class="t">${esc(x.time)}</div></div>`).join(''):`<div class="today-empty">${working?'Bugün için kalan uygun randevu saati bulunmuyor.':'Bugün çalışma planı yok. Sonraki çalışma günleri aşağıdaki ekranda gösterilir.'}</div>`;
   const days=Array.isArray(payload.future_days)?payload.future_days:[];
   el('dayCards').innerHTML=days.length?days.map(x=>{const d=new Date(String(x.date)+'T12:00:00');const times=Array.isArray(x.times)?x.times:[];const count=Number(x.free_count??times.length);const countLabel=count===1?'uygun saat':'uygun saat';return `<article class="daycard"><div class="daydate">${esc(d.toLocaleDateString('tr-TR',{day:'2-digit',month:'long',year:'numeric'}))}</div><div class="dayname">${esc(d.toLocaleDateString('tr-TR',{weekday:'long'}))}</div><div class="count">${count}<span>${countLabel}</span></div><div class="times-label">Uygun Randevu Saatleri</div><div class="times">${times.length?times.map(t=>`<span class="time-chip">${esc(t)}</span>`).join(''):'<div class="day-empty">Uygun saat yok</div>'}</div></article>`}).join(''):'<article class="daycard" style="grid-column:1/-1;display:grid;place-items:center"><div class="day-empty">Sonraki çalışma günü bilgisi bulunmuyor.</div></article>';
   const d=days[0]?.date?new Date(String(days[0].date)+'T12:00:00'):null;el('closedNext').innerHTML=d?'Sonraki çalışma günü: <strong>'+esc(d.toLocaleDateString('tr-TR',{weekday:'long',day:'2-digit',month:'long'}))+'</strong>':'Sonraki çalışma günü bilgisi bekleniyor.';
@@ -95,7 +96,7 @@ function activeSlides(){
   if(IS_DEMO&&['queue','today','days','closed'].includes(DEMO_SCENE))return all.filter(s=>s.dataset.slide===DEMO_SCENE);
   if(IS_DEMO&&DEMO_SCENE==='today7')return all.filter(s=>s.dataset.slide==='today');
   if(IS_DEMO&&DEMO_SCENE==='queue-long')return all.filter(s=>s.dataset.slide==='queue');
-  if(payload?.today_working===false&&!payload.current)return all.filter(s=>s.dataset.slide==='closed');
+  if(payload?.today_working===false)return all.filter(s=>s.dataset.slide==='closed'||(s.dataset.slide==='today'&&settings.show_today)||(s.dataset.slide==='days'&&settings.show_days));
   return all.filter(s=>s.dataset.slide==='queue'||(s.dataset.slide==='today'&&settings.show_today)||(s.dataset.slide==='days'&&settings.show_days))
 }
 let rotationSignature='';
