@@ -546,10 +546,11 @@ body.pwa-standalone .top{top:0;padding-top:max(10px,env(safe-area-inset-top))}
 .availability-days{display:grid;gap:12px;margin-top:14px}.availability-day{background:#fff;border:1px solid #dfe6df;border-radius:18px;padding:15px;box-shadow:0 7px 22px rgba(16,47,27,.06)}
 .availability-day-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.availability-day-title{font-weight:950}.availability-count{font-size:11px;font-weight:900;color:#276037;background:#edf8f0;padding:6px 9px;border-radius:999px}.availability-count.full{color:#8b2b23;background:#fff0ee}
 .free-slots{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.free-slot{border:1px solid #bcd7c3;background:#f2fbf4;color:#173f23;border-radius:12px;padding:10px 13px;font-weight:950;font-size:13px}.free-slot:active{transform:scale(.97)}
-body.availability-show-mode{background:#07160d}body.availability-show-mode .top,body.availability-show-mode .nav,body.availability-show-mode .fab{display:none!important}body.availability-show-mode .wrap{max-width:none;padding:18px 18px calc(18px + env(safe-area-inset-bottom))}body.availability-show-mode main>.page:not(#availabilityPage){display:none!important}body.availability-show-mode #availabilityPage{display:block!important}body.availability-show-mode .availability-hero{min-height:120px;padding-top:max(18px,env(safe-area-inset-top))}body.availability-show-mode .free-slot{pointer-events:none;background:#f5fbf6}
+body.availability-show-mode{background:#07160d}body.availability-show-mode .top,body.availability-show-mode .nav,body.availability-show-mode .fab{display:none!important}body.availability-show-mode .wrap{max-width:none;padding:18px 18px calc(18px + env(safe-area-inset-bottom))}body.availability-show-mode main>.page:not(#availabilityPage){display:none!important}body.availability-show-mode #availabilityPage{display:block!important}body.availability-show-mode .availability-hero{min-height:120px;padding-top:max(18px,env(safe-area-inset-top))}body.availability-show-mode .free-slot{background:#f5fbf6;cursor:pointer;box-shadow:0 3px 10px rgba(9,42,22,.08)}body.availability-show-mode .availability-day-head .muted{display:none}
 .qr-review{border:1px solid #f4c35d;background:#fff9e9;border-radius:16px;padding:13px;color:#6b4303}.qr-review b{display:block;margin-bottom:4px}.qr-pending-list{display:grid;gap:8px;margin-top:8px}.qr-pending-item{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #f2d38d;background:#fffbef;border-radius:13px;padding:10px}
 .tv-security-note{border:1px solid #b7dfc1;background:#effaf2;color:#18532a;border-radius:14px;padding:12px;font-size:12px}
 .pwa-tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:950;background:#eaf5ec;color:#1b5a2d}
+.appointment-sheet{padding:16px 16px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#fff,#fbfcfb)}.appointment-head{position:sticky;top:-16px;z-index:4;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);padding:12px 0 10px;border-bottom:1px solid #eef1ee;margin-bottom:2px}.appointment-sheet form{gap:13px}.appointment-sheet .service{background:#f8faf8;border-color:#dfe7e1}.person-compact-tip{font-size:12px;line-height:1.45;color:#366044;background:#f3faf5;border:1px solid #d8eadc;border-radius:12px;padding:10px 11px}.appointment-sheet textarea{min-height:68px}.appointment-sheet .person-profile-help{font-size:11px;line-height:1.4;color:#667085}.availability-show-mode .availability-mode-note{max-width:760px;margin-inline:auto}
 @media(max-width:560px){.wrap{padding-left:12px;padding-right:12px}.top .toolbar .btn#shareBtn{display:none}.availability-toolbar{gap:6px}.range-chip{padding:8px 10px}.show-mode-btn{margin-left:0}.pwa-splash-logo{width:132px;height:132px}.pwa-splash-title{font-size:23px}}
 
 </style>
@@ -661,7 +662,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
         <div class="row between"><div><div class="pwa-tag">● CANLI MÜSAİTLİK</div><h2>Boş Randevular</h2><div class="muted" style="font-size:12px;margin-top:5px">Yalnız gerçekten müsait normal randevu saatleri gösterilir.</div></div><button id="availabilityShowModeBtn" class="btn small show-mode-btn" type="button">👁 Göster Modu</button></div>
         <div class="availability-toolbar" id="availabilityRange"><button class="range-chip active" data-range="1">Bugün</button><button class="range-chip" data-range="3">3 Gün</button><button class="range-chip" data-range="7">7 Gün</button><button class="range-chip" data-range="14">14 Gün</button></div>
       </div>
-      <div id="availabilityModeNote" class="notice hidden" style="margin-top:12px;background:#eef8f1;color:#18532a"><b>Göster Modu:</b> Yalnız gün ve boş saatler görünür. Kişisel bilgiler gizlidir. Randevu vermek için Göster Modu'ndan çık.</div>
+      <div id="availabilityModeNote" class="notice hidden" style="margin-top:12px;background:#eef8f1;color:#18532a"><b>Göster Modu:</b> Kişisel bilgiler gizlidir. Boş saate dokununca randevu ekranı açılır.</div>
       <div id="availabilityList" class="availability-days"><div class="card muted">Boş saatler hazırlanıyor…</div></div>
     </section>
 
@@ -674,7 +675,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
 
     <section id="recordsPage" class="page">
       <div class="card no-print grid">
-        <label>Kayıtlarda ara<input id="recordSearch" placeholder="Ad Soyad veya Ayırt Etme"></label>
+        <label>Kayıtlarda ara<input id="recordSearch" placeholder="Ad Soyad veya Not"></label>
         <div class="record-filters" id="recordFilters">
           <button class="record-filter active" data-record-filter="all">Tümü</button>
           <button class="record-filter paid-filter" data-record-filter="paid">✓ Ödendi</button>
@@ -728,10 +729,10 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
 
     <section id="settingsPage" class="page">
       <div class="section-title">Gizlilik Modu</div>
-      <div class="notice" style="background:#eef8f1;color:#176b3a;border:1px solid #b7e3c5"><b>Aktif:</b> Kişi profili Ad Soyad + gerekirse kısa Ayırt Etme bilgisiyle yönetilir. Telefon, rütbe ve birlik kullanılmaz. TV ve QR ayrı güvenlik katmanlarıyla aynı randevu takvimine entegredir. TV kişisel veri göstermez; QR aynı isimleri otomatik birleştirmez.</div>
+      <div class="notice" style="background:#eef8f1;color:#176b3a;border:1px solid #b7e3c5"><b>Aktif:</b> Kişi profili Ad Soyad + gerekirse kısa Not Alanıyla yönetilir. Telefon, rütbe ve birlik kullanılmaz. TV ve QR ayrı güvenlik katmanlarıyla aynı randevu takvimine entegredir. TV kişisel veri göstermez; QR aynı isimleri otomatik birleştirmez.</div>
       <div class="section-title">TV Bilgilendirme Ekranı</div>
       <div class="card grid">
-        <div class="tv-security-note"><b>🔒 Güvenli TV:</b> TV yalnız çalışma durumu, hizmet, boş/dolu saat ve QR erişimini görür. Ad Soyad, Ayırt Etme, borç, ödeme ve kişi kimliği TV payloadına gönderilmez.</div>
+        <div class="tv-security-note"><b>🔒 Güvenli TV:</b> TV yalnız çalışma durumu, hizmet, boş/dolu saat ve QR erişimini görür. Ad Soyad, Not Alanı, borç, ödeme ve kişi kimliği TV payloadına gönderilmez.</div>
         <div class="toolbar">
           <a class="btn primary" href="./tv-v48.html?mode=panel" target="_blank" rel="noopener">TV Ayarları ve Eşleştirme</a>
           <a class="btn" href="./tv-v48.html?mode=screen" target="_blank" rel="noopener">TV Ekranını Aç</a>
@@ -831,7 +832,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
         <p class="muted" style="margin:0;line-height:1.55">Bu sayfa sistemin uzun süreli kullanımında başvuru kaynağıdır. Günlük kullanıcı işlemleri ile gelecekte yapılacak teknik geliştirmeler aynı kurallara bağlanmıştır.</p>
         <div class="docs-meta">
           <span class="docs-chip">Doküman tarihi: 27.09.2026</span>
-          <span class="docs-chip">Gizlilik: Ad Soyad + isteğe bağlı Ayırt Etme</span>
+          <span class="docs-chip">Gizlilik: Ad Soyad + isteğe bağlı Not Alanı</span>
           <span class="docs-chip">TV: Güvenli Aktif · kişisel veri yok</span>
           <span class="docs-chip">QR Randevu: Güvenli Aktif · PIN korumalı</span>
         </div>
@@ -855,10 +856,10 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
         <article class="docs-section">
           <h3>📖 1. Kullanım Kılavuzu — Sistemin Amacı ve Temel Kuralı</h3>
           <p>Bu uygulama MEBS Subay Temel Berber randevularını, hizmet ücretlerini, tahsilatları, randevu durumlarını, zimmet/sarf stoklarını, dönem raporlarını ve güvenli yedekleri tek merkezden yönetmek için kullanılır. Sistem uzun süreli günlük kullanım düşünülerek sadeleştirilmiştir.</p>
-          <div class="rule ok"><b>En temel çalışma kuralı:</b> Günlük işlemlerde kişi profili <b>Ad Soyad</b> ve yalnız aynı isimli farklı kişileri ayırmak gerekiyorsa kısa <b>Ayırt Etme</b> bilgisiyle (örn. 2015) yönetilir. Telefon, rütbe ve birlik/bölüm yeni işlemlerde kullanılmaz. Tam doğum tarihi, T.C. kimlik numarası veya gereksiz personel bilgisi Ayırt Etme alanına yazılmaz.</div>
-          <div class="rule warn"><b>Aynı isim uyarısı:</b> Aynı Ad Soyada sahip iki farklı kişi olabilir. Sistem isimden otomatik birleştirme yapmaz. Aynı kişi tekrar geldiyse mevcut profil elle seçilir; farklı kişiyse Ayırt Etme bilgisi girilerek ayrı profil oluşturulur. Aynı Ad Soyad + aynı Ayırt Etme ikinci kez oluşturulamaz.</div>
+          <div class="rule ok"><b>En temel çalışma kuralı:</b> Günlük işlemlerde kişi profili <b>Ad Soyad</b> ve yalnız aynı isimli farklı kişileri ayırmak gerekiyorsa kısa <b>Not Alanı</b> bilgisiyle (örn. 2015) yönetilir. Telefon, rütbe ve birlik/bölüm yeni işlemlerde kullanılmaz. Tam doğum tarihi, T.C. kimlik numarası veya gereksiz personel bilgisi Not Alanına yazılmaz.</div>
+          <div class="rule warn"><b>Aynı isim uyarısı:</b> Aynı Ad Soyada sahip iki farklı kişi olabilir. Sistem isimden otomatik birleştirme yapmaz. Aynı kişi tekrar geldiyse mevcut profil elle seçilir; farklı kişiyse Not Alanına kısa bilgi girilerek ayrı profil oluşturulur. Aynı Ad Soyad + aynı Not Alanı ikinci kez oluşturulamaz.</div>
           <div class="docs-kv">
-            <div class="k">Aktif kişisel alan</div><div class="v">Ad Soyad + isteğe bağlı Ayırt Etme (örn. 2015)</div>
+            <div class="k">Aktif kişisel alan</div><div class="v">Ad Soyad + isteğe bağlı Not Alanı (örn. 2015)</div>
             <div class="k">Pasif alanlar</div><div class="v">Telefon, Rütbe, Birlik/Bölüm</div>
             <div class="k">Ana modüller</div><div class="v">Randevu, Ödeme, Rapor, Zimmet/Sarf, Yedek, 2FA/Oturum</div>
             <div class="k">Güvenli dış özellikler</div><div class="v">Anonim TV bilgilendirme ekranı + PIN korumalı public QR randevu</div>
@@ -884,7 +885,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
           <p>Ana ekranda boş bir randevu saatindeki <b>+ Randevu Ver</b> düğmesi veya mobildeki yeni randevu düğmesi kullanılır. Yeni kayıt için Ad Soyad yazıldığında sistem aynı isimli mevcut kişi profillerini kontrol eder; geçmiş borç/gelmedi bilgisi ancak seçilen profile bağlanır.</p>
           <ol class="docs-checklist">
             <li><b>Ad Soyad</b> bilgisini yaz. Aynı isimli mevcut profil çıkarsa aynı kişiyse profili seç.</li>
-            <li>Farklı bir kişiyse <b>Ayırt Etme</b> alanına kısa bir bilgi yaz (örn. 2015). Tam doğum tarihi veya T.C. kimlik no yazma.</li>
+            <li>Farklı bir kişiyse <b>Not Alanı</b>na kısa bir bilgi yaz (örn. 2015). Tam doğum tarihi veya T.C. kimlik no yazma.</li>
             <li>Mevcut profil seçildiğinde borç, gelmedi sayısı, geçmiş işlem sayısı ve son işlem bilgilerini kontrol et.</li>
             <li>Tarihi seç. Çalışma planı olmayan günlerde sistem uygun sonraki çalışma gününe yönlendirebilir.</li>
             <li>Uygun saati seç. Dolu veya çakışan saat sistem tarafından reddedilmelidir.</li>
@@ -1025,7 +1026,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
             <div class="k">Web dağıtımı</div><div class="v">GitHub Pages üzerinde statik ana uygulama; ana dosya <code>index.html</code></div>
             <div class="k">Veri katmanı</div><div class="v">Supabase PostgreSQL + Auth + RLS/RPC + yedek altyapısı</div>
             <div class="k">Ana kullanım</div><div class="v">Tek yönetici; MFA ve aktif tek oturum güvenliği</div>
-            <div class="k">Gizlilik modu</div><div class="v">Ad Soyad + gerekirse Ayırt Etme; telefon/rütbe/birlik pasif</div>
+            <div class="k">Gizlilik modu</div><div class="v">Ad Soyad + gerekirse Not Alanı; telefon/rütbe/birlik pasif</div>
             <div class="k">TV</div><div class="v">Aktif; yalnız anonimleştirilmiş çalışma/boş saat/hizmet verisi</div>
             <div class="k">Public QR randevu</div><div class="v">Aktif; günlük PIN + rate-limit + minimal veri + kişi doğrulama kuyruğu</div>
           </div>
@@ -1053,7 +1054,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
 
         <article class="docs-section">
           <h3>13. Gizlilik Kararı — Kesin Tasarım Kuralı</h3>
-          <p>Yeni kişi akışında profil <b>Ad Soyad</b> ve isteğe bağlı <b>Ayırt Etme</b> etiketiyle tutulur. Telefon, rütbe ve birlik/bölüm kolonları veritabanında korunur fakat yeni arayüz bunları istemez. Aynı kişi seçildiğinde person_id sabit kaldığı için borç ve gelmedi geçmişi tutarlı biçimde devam eder.</p>
+          <p>Yeni kişi akışında profil <b>Ad Soyad</b> ve isteğe bağlı <b>Not Alanı</b> ile tutulur. Telefon, rütbe ve birlik/bölüm kolonları veritabanında korunur fakat yeni arayüz bunları istemez. Aynı kişi seçildiğinde person_id sabit kaldığı için borç ve gelmedi geçmişi tutarlı biçimde devam eder.</p>
           <ul>
             <li>Eski personel kayıtları topluca silinmez.</li>
             <li>Telefon/rütbe/birlik DB kolonları silinmez; ileride yetkili karar ile yeniden etkinleştirilebilir.</li>
@@ -1067,7 +1068,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
           <h3>14. TV ve QR Modülleri — Güvenli ve İzole Entegrasyon</h3>
           <p>TV bilgilendirme ekranı ve public QR randevu v4.7.17 ile aktif kullanılabilir. İki modül de ana yönetici yetkilerinden ayrıdır: TV yalnız anonimleştirilmiş payload okur; QR yalnız kontrollü randevu oluşturma/yönetme Edge Function hattını kullanır. Her iki modül feature/config seviyesinde bağımsız kapatılabilir.</p>
           <ul>
-            <li>TV config yalnız yönetici tarafından açılıp kapatılır; payload içinde Ad Soyad, kişi kimliği, Ayırt Etme, borç ve ödeme bulunmaz.</li>
+            <li>TV config yalnız yönetici tarafından açılıp kapatılır; payload içinde Ad Soyad, kişi kimliği, Not Alanı, borç ve ödeme bulunmaz.</li>
             <li>QR booking yalnız günlük PIN, kısa ömürlü oturum, rate-limit ve sunucu tarafı slot kilidi ile çalışır.</li>
             <li>Public randevu sayfası yalnız Ad Soyad, gün/saat ve hizmet alır; telefon, rütbe ve birlik istemez; aynı isimleri otomatik birleştirmez.</li>
             <li>TV cihazı önce yönetici tarafından eşleştirilir; cihaz tokenı yalnız TV payload erişimi sağlar ve yönetici tarafından iptal edilebilir.</li>
@@ -1093,7 +1094,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
             <li><code>record_appointment_payment_v47(...)</code> — tahsilat kaydı.</li>
             <li><code>clear_appointment_payments_v47(...)</code> / <code>void_payment_transaction_v47(...)</code> — güvenli ödeme geri alma.</li>
             <li><code>private.sync_appointment_payment_v47(...)</code> — allocation toplamı ile randevu ödeme özetini senkronlar.</li>
-            <li><code>get_app_backup_v4717()</code>, <code>create_backup_snapshot_v4717(...)</code>, <code>verify_backup_snapshot_v4717(...)</code>, <code>restore_app_backup_v4717(...)</code> — şema 8 yedek hattı; kişi Ayırt Etme bilgisi de korunur.</li>
+            <li><code>get_app_backup_v4717()</code>, <code>create_backup_snapshot_v4717(...)</code>, <code>verify_backup_snapshot_v4717(...)</code>, <code>restore_app_backup_v4717(...)</code> — şema 8 yedek hattı; kişi Not Alanı bilgisi de korunur.</li>
             <li><code>service_*_qr_*_v4717</code> — public QR için Ad Soyad-only rezervasyon, slot kilidi, rate-limit ve self-servis iptal hattı.</li>
             <li><code>reconcile_qr_identity_v4717(...)</code> — QR ile gelen minimal kişiyi yönetici onayıyla mevcut profile bağlar veya yeni kişi olarak doğrular.</li>
             <li><code>get_tv_display_payload_v4717(...)</code> — TV için kişisel veri içermeyen güvenli payload.</li>
@@ -1154,7 +1155,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
         <article class="docs-section">
           <h3>20. Gelecekte Yeni Sohbete Verilecek Kısa Talimat</h3>
           <p>Aşağıdaki mantık yeni bir ChatGPT sohbetinde başlangıç cümlesi olarak kullanılabilir:</p>
-          <div class="rule"><b>“MEBS Berber Randevu Sistemi v4.7.17 FINAL STABLE üzerinden devam et. Mevcut çalışan düzeni bozma. Yeni randevularda Ad Soyad + gerekirse Ayırt Etme kişi profili kullan; aynı isimleri otomatik birleştirme; telefon/rütbe/birlik altyapısını silme. TV ve QR yalnız v4.7.17 güvenlik katmanları üzerinden aktif çalışsın; TV kişisel veri göstermesin, QR aynı isimleri otomatik birleştirmesin. Ödeme olan randevuda hizmeti doğrudan değiştirme. Stok yalnız Tamamlandı + Ödendi olduğunda bir kez düşsün. Her değişiklikten önce yedek/test/rollback/regresyon yap; kritik/yüksek hata varsa final paket verme. Canlı sayı ve stokları eski nottan alma, yeniden sorgula.”</b></div>
+          <div class="rule"><b>“MEBS Berber Randevu Sistemi v4.7.17 FINAL STABLE üzerinden devam et. Mevcut çalışan düzeni bozma. Yeni randevularda Ad Soyad + gerekirse Not Alanı kişi profili kullan; aynı isimleri otomatik birleştirme; telefon/rütbe/birlik altyapısını silme. TV ve QR yalnız v4.7.17 güvenlik katmanları üzerinden aktif çalışsın; TV kişisel veri göstermesin, QR aynı isimleri otomatik birleştirmesin. Ödeme olan randevuda hizmeti doğrudan değiştirme. Stok yalnız Tamamlandı + Ödendi olduğunda bir kez düşsün. Her değişiklikten önce yedek/test/rollback/regresyon yap; kritik/yüksek hata varsa final paket verme. Canlı sayı ve stokları eski nottan alma, yeniden sorgula.”</b></div>
         </article>
 
         <article class="docs-section">
@@ -1235,15 +1236,15 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
 </dialog>
 
 <dialog id="appointmentDialog">
-  <div class="sheet">
-    <div class="row between">
+  <div class="sheet appointment-sheet">
+    <div class="row between appointment-head">
       <h2 id="appointmentTitle">Yeni Randevu</h2>
       <button id="closeDialog" class="btn small">Kapat</button>
     </div>
     <form id="appointmentForm" class="grid">
       <label>Ad Soyad<input id="personName" required autocomplete="off" maxlength="100"></label>
-      <label>Ayırt Etme <span class="muted" style="font-weight:600">(isteğe bağlı)</span><input id="identityLabel" autocomplete="off" maxlength="30" placeholder="Örn. 2015"><span class="person-profile-help">Yalnız aynı isimli farklı kişileri ayırmak için kullan. Örn. 2015. Tam doğum tarihi, T.C. kimlik no, telefon, rütbe veya birlik girme.</span></label>
-      <div class="notice" style="background:#eef8f1;color:#176b3a;border:1px solid #b7e3c5"><b>Kişi Profili:</b> Aynı kişi tekrar geldiğinde mevcut profili seç. Böylece borç, gelmedi ve geçmiş işlem uyarıları doğru kişide devam eder.</div>
+      <label>Not Alanı <span class="muted" style="font-weight:600">(isteğe bağlı)</span><input id="identityLabel" autocomplete="off" maxlength="30" placeholder="Örn. 2015"><span class="person-profile-help">Aynı isimli farklı kişileri ayırmak için kısa not.</span></label>
+      <div class="person-compact-tip">Aynı kişiyse mevcut profili seç; geçmiş ve borç uyarıları doğru kişide devam eder.</div>
       <div id="personProfileStatus" class="hidden"></div>
       <div id="personMatches" class="profile-results hidden"></div>
       <div id="personAlertBox" class="hidden"></div>
@@ -1259,7 +1260,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
         <label>Saat<select id="slotSelect" required></select></label>
       </div>
       <label class="service">
-        <span><b>🚨 Acil / İstisnai Randevu</b><div class="muted" style="font-size:12px;margin-top:3px">Dinlenme veya temizlik saatini gerektiğinde kullanılabilir yapar.</div></span>
+        <span><b>🚨 Acil / İstisnai Randevu</b><div class="muted" style="font-size:12px;margin-top:3px">Dinlenme/temizlik saatinde gerekiyorsa kullan.</div></span>
         <input id="emergencyCheck" type="checkbox">
       </label>
       <div id="overrideReasonWrap" class="hidden">
@@ -1270,7 +1271,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
         <div style="font-size:13px;font-weight:800;margin-bottom:7px">İşlem</div>
         <div id="servicesBox" class="grid"></div>
       </div>
-      <label>Açıklama<textarea id="notes"></textarea></label>
+      <label>Randevu Notu <span class="muted" style="font-weight:600">(isteğe bağlı)</span><textarea id="notes" placeholder="Gerekliyse kısa not"></textarea></label>
       <div class="row between">
         <b>Toplam</b><span id="newTotal" class="big">0 ₺</span>
       </div>
@@ -1295,7 +1296,7 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
   <div class="sheet"><div class="row between"><h2>QR Kişi Doğrulama</h2><button id="closeQrIdentity" class="btn small" type="button">Kapat</button></div>
     <div id="qrIdentityInfo" class="qr-review"></div>
     <div id="qrIdentityCandidates" class="grid" style="margin-top:12px"></div>
-    <div class="card grid" style="margin-top:12px"><b>Farklı kişi olarak kaydet</b><div class="muted" style="font-size:12px">Aynı isimli farklı biriyse 2015 gibi kısa bir Ayırt Etme bilgisi gir.</div><label>Ayırt Etme<input id="qrIdentityLabel" maxlength="30" placeholder="Örn. 2015"></label><button id="confirmQrNewPerson" class="btn primary" type="button">Yeni Kişi Olarak Onayla</button></div>
+    <div class="card grid" style="margin-top:12px"><b>Farklı kişi olarak kaydet</b><div class="muted" style="font-size:12px">Aynı isimli farklı biriyse 2015 gibi kısa bir not gir.</div><label>Not Alanı<input id="qrIdentityLabel" maxlength="30" placeholder="Örn. 2015"></label><button id="confirmQrNewPerson" class="btn primary" type="button">Yeni Kişi Olarak Onayla</button></div>
     <div id="qrIdentityMsg" class="notice hidden"></div>
   </div>
 </dialog>
@@ -2588,7 +2589,7 @@ function renderPersonCandidates(){
       <div class="muted" style="font-size:10px">Aynı kişiyse bu profili seç.</div>
     </button>`;
   }).join('');
-  box.innerHTML=`<div class="profile-results-head"><b>Bu Ad Soyad ile ${list.length} mevcut kişi profili bulundu.</b><br>Aynı kişiyse profili seç. Farklı kişiyse Ayırt Etme alanına örn. <b>2015</b> yazıp yeni profil oluştur.</div>${cards}`;
+  box.innerHTML=`<div class="profile-results-head"><b>Bu Ad Soyad ile ${list.length} mevcut kişi profili bulundu.</b><br>Aynı kişiyse profili seç. Farklı kişiyse Not Alanına örn. <b>2015</b> yazıp yeni profil oluştur.</div>${cards}`;
   box.classList.remove('hidden');
   box.querySelectorAll('[data-person-profile]').forEach(b=>b.onclick=()=>selectPersonProfile(b.dataset.personProfile));
 }
@@ -2898,8 +2899,8 @@ async function saveAppointment(e){
   const identityLabel=$('identityLabel').value.trim();
   const date=$('apptDate').value, start=$('slotSelect').value;
   if(name.length<3||name.length>100||!date) return msg($('formMsg'),'Ad Soyad ve tarih bilgisini kontrol et.','error');
-  if(identityLabel.length>30) return msg($('formMsg'),'Ayırt Etme bilgisi en fazla 30 karakter olabilir.','error');
-  if(!state.editAppointmentId && !state.selectedPersonId && state.personCandidates.length && !identityLabel) return msg($('formMsg'),'Bu Ad Soyad ile mevcut kişi profili var. Aynı kişiyse profili seç; farklı kişiyse Ayırt Etme bilgisi gir (örn. 2015).','error');
+  if(identityLabel.length>30) return msg($('formMsg'),'Not Alanı en fazla 30 karakter olabilir.','error');
+  if(!state.editAppointmentId && !state.selectedPersonId && state.personCandidates.length && !identityLabel) return msg($('formMsg'),'Bu Ad Soyad ile mevcut kişi profili var. Aynı kişiyse profili seç; farklı kişiyse Not Alanına kısa bir bilgi gir (örn. 2015).','error');
   if(!hasWorkPlan(date)) return msg($('formMsg'),'Bu tarihte çalışma planı yok. Lütfen bir çalışma günü seç.','error');
   if(!start) return msg($('formMsg'),'Uygun bir randevu saati seç.','error');
   if(state.manualBlocks.some(b=>b.block_date===date&&time5(b.start_time)===start)) return msg($('formMsg'),'Bu saat manuel olarak DOLU işaretlenmiş. Önce dolu işaretini kaldır.','error');
@@ -2990,7 +2991,7 @@ async function openDetail(id){
   $('detailBody').innerHTML=`<div class="grid">
     <div class="card">
       <div class="big" style="font-size:22px">${esc(profileName(p))}</div>
-      <div class="muted" style="margin-top:6px">Kişi profili · Ad Soyad${p.identity_label?' + Ayırt Etme':''}</div>
+      <div class="muted" style="margin-top:6px">Kişi profili · Ad Soyad${p.identity_label?' + Not':''}</div>
     </div>
     ${(Number(alerts.history_count||0)>0||Number(alerts.debt||0)>0||Number(alerts.no_show_count||0)>0)?`<div class="${Number(alerts.debt||0)>0?'person-alert debt-alert':Number(alerts.no_show_count||0)>0?'person-alert':'person-alert safe'}"><div class="alert-title">${Number(alerts.debt||0)>0?'⚠️ ÖNCEKİ BORÇ VAR':Number(alerts.no_show_count||0)>0?'⚠️ GELMEDİ GEÇMİŞİ VAR':'✓ KİŞİ GEÇMİŞİ'}</div>${Number(alerts.debt||0)>0?`<div class="debt-warning-amount">${trMoney(alerts.debt)}</div>`:''}${Number(alerts.no_show_count||0)>0?`<div>Daha önce <b>${Number(alerts.no_show_count)} kez gelmedi</b>${alerts.last_no_show?` · Son: ${esc(alerts.last_no_show)}`:''}.</div>`:''}<div class="profile-history-grid"><div><b>${Number(alerts.history_count||0)}</b><span>GEÇMİŞ</span></div><div><b>${Number(alerts.completed_count||0)}</b><span>TAMAMLANAN</span></div><div><b>${alerts.last_completed_date?esc(alerts.last_completed_date):'—'}</b><span>SON İŞLEM</span></div></div></div>`:''}
     <div><b>${x.appointment_date} · ${time5(x.start_time)}–${time5(x.end_time)}</b></div>
@@ -3624,7 +3625,7 @@ Bekleyen: ${trMoney(r.unpaid)}`;
 }
 
 function exportCsv(){
-  const rows=[['Tarih','Saat','Ad Soyad','Ayırt Etme','Durum','Ödeme','Acil/İstisna','Tutar']];
+  const rows=[['Tarih','Saat','Ad Soyad','Not','Durum','Ödeme','Acil/İstisna','Tutar']];
   state.records.forEach(x=>rows.push([
     x.appointment_date,time5(x.start_time),x.people?.full_name||'',x.people?.identity_label||'',
     statusName(x.status),
@@ -3668,9 +3669,9 @@ function showPwaSplash(){const el=$('pwaSplash');if(!el)return;if(V4717_STANDALO
 async function hidePwaSplash(){const el=$('pwaSplash');if(!el)return;const waitMs=Math.max(0,V4717_SPLASH_MIN-(Date.now()-v4717SplashStarted));if(waitMs)await wait(waitMs);el.classList.add('hidden-splash');el.setAttribute('aria-hidden','true');}
 function updatePwaOfflineShield(){const sh=$('offlineShield');if(!sh)return;sh.classList.toggle('hidden',navigator.onLine!==false);}
 async function retryPwaConnection(){updatePwaOfflineShield();if(navigator.onLine===false)return;const b=$('offlineRetryBtn');if(b){b.disabled=true;b.textContent='Bağlanıyor…';}try{if(state.user&&!appReady)await retryConnectionGate();else if(state.user){await loadDay();if(state.currentPage==='availabilityPage')await loadAvailability(state.availabilityRange||1);}$('offlineShield').classList.add('hidden');}catch(e){console.warn(e);}finally{if(b){b.disabled=false;b.textContent='Bağlantıyı Yeniden Dene';}}}
-function setupPwaRuntime(){showPwaSplash();updatePwaOfflineShield();window.addEventListener('offline',updatePwaOfflineShield);window.addEventListener('online',()=>void retryPwaConnection());if('serviceWorker'in navigator){navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(e=>console.warn('PWA cache kaydı başarısız',e));}}
+function setPwaAuthControlsEnabled(enabled){['loginEmail','loginPassword'].forEach(id=>{const n=$(id);if(n)n.disabled=!enabled;});}function setupPwaRuntime(){if(V4717_STANDALONE)setPwaAuthControlsEnabled(false);showPwaSplash();updatePwaOfflineShield();window.addEventListener('offline',updatePwaOfflineShield);window.addEventListener('online',()=>void retryPwaConnection());if('serviceWorker'in navigator){navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(e=>console.warn('PWA cache kaydı başarısız',e));}}
 
-const _v4717ShowAuth=showAuth;let v4717AuthRevealPromise=null;showAuth=function(){const splash=$('pwaSplash');if(V4717_STANDALONE&&splash&&!splash.classList.contains('hidden-splash')){$('authView')?.classList.add('hidden');$('mfaView')?.classList.add('hidden');$('appView')?.classList.add('hidden');if(!v4717AuthRevealPromise){v4717AuthRevealPromise=hidePwaSplash().then(()=>{v4717AuthRevealPromise=null;_v4717ShowAuth();});}return;}return _v4717ShowAuth.apply(this,arguments);};
+const _v4717ShowAuth=showAuth;let v4717AuthRevealPromise=null;showAuth=function(){const splash=$('pwaSplash');if(V4717_STANDALONE&&splash&&!splash.classList.contains('hidden-splash')){$('authView')?.classList.add('hidden');$('mfaView')?.classList.add('hidden');$('appView')?.classList.add('hidden');if(!v4717AuthRevealPromise){v4717AuthRevealPromise=hidePwaSplash().then(()=>{v4717AuthRevealPromise=null;setPwaAuthControlsEnabled(true);_v4717ShowAuth();});}return;}setPwaAuthControlsEnabled(true);return _v4717ShowAuth.apply(this,arguments);};
 const _v4717ShowConnectionGate=showConnectionGate;showConnectionGate=function(){const r=_v4717ShowConnectionGate.apply(this,arguments);void hidePwaSplash();return r;};
 const _v4717ShowMfaSetupGate=showMfaSetupGate;showMfaSetupGate=function(){const r=_v4717ShowMfaSetupGate.apply(this,arguments);void hidePwaSplash();return r;};
 const _v4717ShowMfaChallengeGate=showMfaChallengeGate;showMfaChallengeGate=function(){const r=_v4717ShowMfaChallengeGate.apply(this,arguments);void hidePwaSplash();return r;};
@@ -3704,7 +3705,7 @@ async function loadAvailability(rangeDays=1){
     state.availabilityDays=days;renderAvailability();return true;
   }catch(e){box.innerHTML=`<div class="notice error"><b>Boş saatler yüklenemedi.</b><br>${esc(e?.message||'Bağlantıyı kontrol et.')}</div>`;return false;}
 }
-function renderAvailability(){const box=$('availabilityList');if(!box)return;const show=document.body.classList.contains('availability-show-mode');if(!state.availabilityDays.length){const oneDay=Number(state.availabilityRange||1)===1;box.innerHTML=`<div class="card muted">${oneDay?'Bugün çalışma planı yok. 3, 7 veya 14 Gün seçerek sonraki çalışma günlerini görebilirsin.':'Bu aralıkta çalışma planı bulunmuyor.'}</div>`;return;}box.innerHTML=state.availabilityDays.map(d=>{const label=new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long'}).format(new Date(d.date+'T12:00:00'));const count=d.times.length;return `<div class="availability-day"><div class="availability-day-head"><div><div class="availability-day-title">${esc(label)}</div><div class="muted" style="font-size:11px;margin-top:2px">${esc(d.date)}</div></div><span class="availability-count ${count?'':'full'}">${d.closed?'KAPALI':count?`${count} BOŞ SAAT`:'DOLU'}</span></div>${d.closed?'<div class="muted" style="margin-top:11px">Bu çalışma günü kapalı.</div>':count?`<div class="free-slots">${d.times.map(t=>show?`<span class="free-slot">${esc(t.time)}</span>`:`<button type="button" class="free-slot" data-free-date="${d.date}" data-free-time="${t.time}">${esc(t.time)}</button>`).join('')}</div>`:'<div class="muted" style="margin-top:11px">Uygun boş randevu saati kalmadı.</div>'}</div>`}).join('');box.querySelectorAll('[data-free-time]').forEach(b=>b.onclick=()=>openNew(b.dataset.freeTime,null,false,b.dataset.freeDate));}
+function renderAvailability(){const box=$('availabilityList');if(!box)return;if(!state.availabilityDays.length){const oneDay=Number(state.availabilityRange||1)===1;box.innerHTML=`<div class="card muted">${oneDay?'Bugün çalışma planı yok. 3, 7 veya 14 Gün seçerek sonraki çalışma günlerini görebilirsin.':'Bu aralıkta çalışma planı bulunmuyor.'}</div>`;return;}box.innerHTML=state.availabilityDays.map(d=>{const label=new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long'}).format(new Date(d.date+'T12:00:00'));const count=d.times.length;return `<div class="availability-day"><div class="availability-day-head"><div><div class="availability-day-title">${esc(label)}</div><div class="muted" style="font-size:11px;margin-top:2px">${esc(d.date)}</div></div><span class="availability-count ${count?'':'full'}">${d.closed?'KAPALI':count?`${count} BOŞ SAAT`:'DOLU'}</span></div>${d.closed?'<div class="muted" style="margin-top:11px">Bu çalışma günü kapalı.</div>':count?`<div class="free-slots">${d.times.map(t=>`<button type="button" class="free-slot" data-free-date="${d.date}" data-free-time="${t.time}" aria-label="${esc(t.time)} saatine randevu ver">${esc(t.time)}</button>`).join('')}</div>`:'<div class="muted" style="margin-top:11px">Uygun boş randevu saati kalmadı.</div>'}</div>`}).join('');box.querySelectorAll('[data-free-time]').forEach(b=>b.onclick=()=>openNew(b.dataset.freeTime,null,false,b.dataset.freeDate));}
 function toggleAvailabilityShowMode(){const active=!document.body.classList.contains('availability-show-mode');document.body.classList.toggle('availability-show-mode',active);$('availabilityModeNote').classList.toggle('hidden',!active);$('availabilityShowModeBtn').textContent=active?'← Yönetici Moduna Dön':'👁 Göster Modu';renderAvailability();}
 
 async function loadQrBookingState(){try{const r=await db.rpc('get_qr_booking_admin_state_v4713');if(r.error)throw r.error;state.qrBooking=r.data||{enabled:false};return true;}catch(e){console.warn('QR yönetim durumu alınamadı',e);state.qrBooking={enabled:false,error:e};return false;}}
