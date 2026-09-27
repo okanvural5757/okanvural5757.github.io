@@ -981,6 +981,40 @@ body.v4718-ui #appointmentDialog #saveAppointmentBtn{min-height:45px!important;b
   body.v4718-ui .free-slots,body.v4718-ui.availability-show-mode .free-slots{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
 /* END v4.7.18 RC3 */
+
+/* v4.7.18 RC4 FIT & FILTER */
+/* Boş Saatler sayfasında çift başlık hissini kaldır; safe-area hero tarafından korunur. */
+body.v4718-ui:has(#availabilityPage.active):not(.availability-show-mode) .top{display:none!important}
+body.v4718-ui:has(#availabilityPage.active):not(.availability-show-mode) .wrap{padding-top:calc(8px + env(safe-area-inset-top))!important}
+body.v4718-ui:has(#availabilityPage.active):not(.availability-show-mode) .availability-hero{margin-top:0!important}
+
+/* Yeni Randevu tarih/saat taşmasını iOS Safari'de kesin sınırla. */
+body.v4718-ui #appointmentForm>.grid.grid2{overflow:hidden!important;grid-template-columns:minmax(0,1fr)!important}
+body.v4718-ui #appointmentForm>.grid.grid2 label{display:grid!important;min-width:0!important;width:100%!important;max-width:100%!important;overflow:hidden!important}
+body.v4718-ui #appointmentForm>.grid.grid2 input,
+body.v4718-ui #appointmentForm>.grid.grid2 select{box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;display:block!important}
+body.v4718-ui #appointmentForm #slotSelect{padding-right:34px!important}
+body.v4718-ui #appointmentForm #apptDate{padding-right:10px!important}
+@media(min-width:600px){body.v4718-ui #appointmentForm>.grid.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}}
+
+/* RC3 minimal görünümü biraz daha rafine et. */
+body.v4718-ui .availability-hero{padding:13px 14px 12px!important;border-radius:18px!important}
+body.v4718-ui .availability-hero h2{font-size:20.5px!important}
+body.v4718-ui .availability-toolbar{margin-top:9px!important}
+body.v4718-ui .range-chip{min-height:31px!important;padding:6px 10px!important;font-size:11px!important}
+body.v4718-ui .show-mode-btn{min-height:33px!important;padding:6px 9px!important;font-size:11px!important}
+body.v4718-ui .availability-day{padding:10px 11px!important;border-radius:15px!important}
+body.v4718-ui .availability-day-title{font-size:15px!important}
+body.v4718-ui .free-slots{gap:5px!important;margin-top:8px!important}
+body.v4718-ui .free-slot{min-height:36px!important;padding:5px 3px!important;border-radius:9px!important;font-size:12.5px!important}
+body.v4718-ui.availability-show-mode .availability-day{padding:11px 12px!important}
+body.v4718-ui.availability-show-mode .free-slot{min-height:40px!important;font-size:13.5px!important}
+
+@media(max-width:390px){
+  body.v4718-ui .availability-hero .row.between{gap:8px!important}
+  body.v4718-ui .availability-hero .show-mode-btn{max-width:126px!important}
+}
+/* END v4.7.18 RC4 */
 </style>
 </head>
 <body class="v4718-ui">
@@ -3159,22 +3193,24 @@ function fillSlotSelect(dateStr,preferred=''){
     $('saveAppointmentBtn').disabled=true;
     return false;
   }
-  $('slotSelect').innerHTML=slots.map(s=>{
+  const visible=slots.filter(s=>{
     const t=time5(s.start_time), isAppt=s.slot_type==='appointment', isOverride=['break','cleaning'].includes(s.slot_type);
     const isAllowed=isAppt || (emergency && isOverride);
-    const isBooked=booked.has(t), isManualBlocked=manualBlocked.has(t);
-    const disabled=!isAllowed||isBooked||isManualBlocked;
-    let label='';
-    if(isAppt) label=isManualBlocked?`${t} – DOLU`:isBooked?`${t} – RANDEVULU`:`${t} – ${time5(s.end_time)}`;
-    else if(isOverride) label=isBooked?`${t} – ${s.label||s.slot_type} / DOLU`:`${t} – ${s.label||s.slot_type}${emergency?' / ACİL KULLANILABİLİR':''}`;
-    else label=`${t} – ${s.label||s.slot_type}`;
-    return `<option value="${t}" data-end="${time5(s.end_time)}" data-slot-type="${s.slot_type}" ${disabled?'disabled':''} ${preferred===t?'selected':''}>${label}</option>`;
+    return isAllowed && !booked.has(t) && !manualBlocked.has(t);
+  });
+  if(!visible.length){
+    $('slotSelect').innerHTML='<option value="" disabled selected>Uygun boş randevu saati yok</option>';
+    $('saveAppointmentBtn').disabled=true;
+    return false;
+  }
+  $('slotSelect').innerHTML=visible.map(s=>{
+    const t=time5(s.start_time), isOverride=['break','cleaning'].includes(s.slot_type);
+    const label=isOverride?`${t} – ${s.label||s.slot_type} / ACİL`:`${t} – ${time5(s.end_time)}`;
+    return `<option value="${t}" data-end="${time5(s.end_time)}" data-slot-type="${s.slot_type}" ${preferred===t?'selected':''}>${label}</option>`;
   }).join('');
-  const selected=$('slotSelect').selectedOptions[0];
-  if(!selected || selected.disabled){ const first=[...$('slotSelect').options].find(o=>!o.disabled); if(first) $('slotSelect').value=first.value; }
-  const hasOpen=[...$('slotSelect').options].some(o=>!o.disabled && o.value);
-  $('saveAppointmentBtn').disabled=!hasOpen;
-  return hasOpen;
+  if(!$('slotSelect').value){$('slotSelect').value=visible[0]?time5(visible[0].start_time):'';}
+  $('saveAppointmentBtn').disabled=!$('slotSelect').value;
+  return !!$('slotSelect').value;
 }
 
 async function refreshSlotSelect(dateStr,preferred=''){
