@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MEBS Berber">
-<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.17</title>
-<meta name="application-version" content="4.7.17">
+<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.18 UI</title>
+<meta name="application-version" content="4.7.18-ui">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -553,9 +553,236 @@ body.availability-show-mode{background:#07160d}body.availability-show-mode .top,
 .appointment-sheet{padding:16px 16px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#fff,#fbfcfb)}.appointment-head{position:sticky;top:-16px;z-index:4;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);padding:12px 0 10px;border-bottom:1px solid #eef1ee;margin-bottom:2px}.appointment-sheet form{gap:13px}.appointment-sheet .service{background:#f8faf8;border-color:#dfe7e1}.person-compact-tip{font-size:12px;line-height:1.45;color:#366044;background:#f3faf5;border:1px solid #d8eadc;border-radius:12px;padding:10px 11px}.appointment-sheet textarea{min-height:68px}.appointment-sheet .person-profile-help{font-size:11px;line-height:1.4;color:#667085}.availability-show-mode .availability-mode-note{max-width:760px;margin-inline:auto}
 @media(max-width:560px){.wrap{padding-left:12px;padding-right:12px}.top .toolbar .btn#shareBtn{display:none}.availability-toolbar{gap:6px}.range-chip{padding:8px 10px}.show-mode-btn{margin-left:0}.pwa-splash-logo{width:132px;height:132px}.pwa-splash-title{font-size:23px}}
 
+
+/* ===== v4.7.18 MODERN UI / POLISH EDITION — PHASE 1 ===== */
+body.v4718-ui{
+  --ui-green-950:#071d11;
+  --ui-green-900:#0b2a18;
+  --ui-green-800:#154326;
+  --ui-green-700:#1d6034;
+  --ui-green-600:#168447;
+  --ui-gold:#d7ba70;
+  --ui-navy:#071426;
+  --ui-surface:#f4f6f4;
+  --ui-card:#ffffff;
+  --ui-border:#e1e7e2;
+  --ui-muted:#68766d;
+  --ui-blue:#2563eb;
+  --ui-orange:#ea580c;
+  --ui-red:#c72b22;
+  --ui-shadow:0 10px 28px rgba(20,54,31,.08);
+  --ui-shadow-soft:0 5px 16px rgba(20,54,31,.055);
+  background:linear-gradient(180deg,#eef3ef 0,#f7f8f7 38%,#f4f6f4 100%);
+}
+body.v4718-ui .wrap{max-width:780px;padding-left:14px;padding-right:14px}
+body.v4718-ui .top{
+  background:linear-gradient(135deg,rgba(7,29,17,.98),rgba(12,48,27,.97));
+  color:#fff;border:1px solid rgba(255,255,255,.06);border-radius:0 0 24px 24px;
+  margin:0 -14px 16px;padding:14px 18px 16px;box-shadow:0 10px 32px rgba(6,25,14,.18);
+}
+body.v4718-ui .top .muted{color:#c4d0c8}
+body.v4718-ui .top h1{color:#fff;font-size:24px;letter-spacing:-.025em}
+body.v4718-ui .top .header-logo{width:48px;height:48px;border-radius:15px;border:1px solid rgba(215,186,112,.28);box-shadow:0 8px 22px rgba(0,0,0,.2)}
+body.v4718-ui .top .toolbar .btn{background:rgba(255,255,255,.11);color:#fff;border:1px solid rgba(255,255,255,.10)}
+
+/* Dashboard summary */
+body.v4718-ui #homePage .stats{grid-template-columns:repeat(3,1fr);gap:9px;margin:4px 0 10px}
+body.v4718-ui #homePage .stat,
+body.v4718-ui #homePage .money-box{border:0;border-radius:18px;padding:14px 13px;box-shadow:var(--ui-shadow-soft);min-height:92px;position:relative;overflow:hidden}
+body.v4718-ui #homePage .stat:after,
+body.v4718-ui #homePage .money-box:after{content:"";position:absolute;width:70px;height:70px;border-radius:50%;right:-28px;top:-30px;background:rgba(255,255,255,.13)}
+body.v4718-ui #homePage .stat:nth-child(1){background:linear-gradient(145deg,#0e8a48,#126b3c);color:#fff}
+body.v4718-ui #homePage .stat:nth-child(2){background:linear-gradient(145deg,#3c78e8,#2758c7);color:#fff}
+body.v4718-ui #homePage .stat:nth-child(3){background:linear-gradient(145deg,#c48c2d,#9a6d20);color:#fff}
+body.v4718-ui #homePage .stat .muted{color:rgba(255,255,255,.78);font-weight:800;font-size:11px}
+body.v4718-ui #homePage .stat b{font-size:28px;line-height:1;margin-top:9px;letter-spacing:-.04em}
+body.v4718-ui #homePage .money-strip{gap:9px;margin-bottom:12px}
+body.v4718-ui #homePage .money-box.paid-box{background:linear-gradient(145deg,#ebf9ef,#f8fdf9);border:1px solid #bfe6c9}
+body.v4718-ui #homePage .money-box.unpaid-box{background:linear-gradient(145deg,#fff4e9,#fffaf4);border:1px solid #f2c99e}
+body.v4718-ui #homePage .money-box .muted{font-size:11px;font-weight:850;color:#5e6f64}
+body.v4718-ui #homePage .money-box b{font-size:25px!important;letter-spacing:-.03em}
+
+/* Date navigator */
+body.v4718-ui #homePage>.row.between.no-print{background:#fff;border:1px solid var(--ui-border);border-radius:18px;padding:8px;box-shadow:var(--ui-shadow-soft);gap:8px}
+body.v4718-ui #homePage #dayPicker{border:0;background:#f2f5f2;text-align:center;font-weight:900;min-height:42px}
+body.v4718-ui #homePage #prevDay,
+body.v4718-ui #homePage #nextDay{background:#edf2ee;color:#173622;border-radius:13px;min-height:42px;padding-inline:13px}
+body.v4718-ui #mobileNewAppointment{border-radius:17px;min-height:54px;font-size:15px;background:linear-gradient(135deg,#0c2617,#071426);box-shadow:0 10px 22px rgba(7,20,38,.18)}
+
+/* Daily appointment cards */
+body.v4718-ui #schedule{gap:9px}
+body.v4718-ui #schedule .slot{border:1px solid var(--ui-border);border-radius:18px;padding:13px 14px;background:#fff;box-shadow:var(--ui-shadow-soft);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+body.v4718-ui #schedule button.slot:active{transform:scale(.988)}
+body.v4718-ui #schedule .slot .time{font-size:14px;letter-spacing:.01em;color:#163a22}
+body.v4718-ui #schedule .slot .name{font-size:15px;letter-spacing:-.01em;color:#0f1c14}
+body.v4718-ui #schedule .badge{font-size:10.5px;font-weight:950;padding:6px 9px;border-radius:999px}
+body.v4718-ui #schedule .badge.scheduled{background:#fff1e9;color:#cf4b16}
+body.v4718-ui #schedule .badge.arrived{background:#eef4ff;color:#2256b8}
+body.v4718-ui #schedule .badge.in_service{background:#fff7da;color:#8c6511}
+body.v4718-ui #schedule .badge.completed{background:#eaf8ef;color:#11723c}
+body.v4718-ui #schedule .badge.cancelled,
+body.v4718-ui #schedule .badge.no_show{background:#fff0ee;color:#b42318}
+body.v4718-ui #schedule .slot.payment-paid{border-color:#bfe5cb;background:linear-gradient(135deg,#fff,#f7fcf8)}
+body.v4718-ui #schedule .slot.payment-unpaid{border-color:#f1c692;background:linear-gradient(135deg,#fff,#fffaf3)}
+body.v4718-ui #schedule .payment-strip{border-top:1px dashed #e7ece8;margin-top:5px}
+body.v4718-ui #schedule .payment-badge{font-size:10.5px;border-radius:999px}
+body.v4718-ui #schedule .slot-actions{gap:8px}
+body.v4718-ui #schedule .slot-action{min-height:40px;border-radius:12px}
+body.v4718-ui #schedule .slot-action.book{background:#eaf3ed;color:#174b29}
+body.v4718-ui #schedule .slot-action.full{background:#fff3ef;color:#a83a24}
+
+/* Availability */
+body.v4718-ui .availability-hero{background:linear-gradient(135deg,#082417 0%,#104426 58%,#1c5c31 100%);border-radius:26px;padding:21px;box-shadow:0 18px 42px rgba(9,50,26,.18);border:1px solid rgba(215,186,112,.12)}
+body.v4718-ui .availability-hero h2{font-size:25px;letter-spacing:-.035em;margin-top:7px}
+body.v4718-ui .availability-hero .pwa-tag{background:rgba(255,255,255,.12);color:#e8f5ec;border:1px solid rgba(255,255,255,.10)}
+body.v4718-ui .availability-toolbar{margin-top:17px}
+body.v4718-ui .range-chip{min-height:38px;padding:9px 15px;border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.07)}
+body.v4718-ui .range-chip.active{background:var(--ui-gold);border-color:var(--ui-gold);color:#17301f;box-shadow:0 5px 14px rgba(215,186,112,.18)}
+body.v4718-ui .show-mode-btn{border-radius:14px!important;min-height:43px;font-weight:900}
+body.v4718-ui #availabilityModeNote{border:1px solid #c6dfcc!important;border-radius:17px!important;background:#eff8f1!important;color:#245633!important;box-shadow:var(--ui-shadow-soft)}
+body.v4718-ui .availability-days{gap:13px}
+body.v4718-ui .availability-day{border:1px solid var(--ui-border);border-radius:22px;padding:17px;background:#fff;box-shadow:var(--ui-shadow)}
+body.v4718-ui .availability-day-title{font-size:17px;letter-spacing:-.015em}
+body.v4718-ui .availability-count{padding:7px 10px;background:#ebf7ef;color:#17643a}
+body.v4718-ui .free-slots{gap:9px}
+body.v4718-ui .free-slot{min-width:74px;min-height:46px;border-radius:14px;border:1px solid #bfdbc6;background:linear-gradient(180deg,#f7fcf8,#edf8f0);font-size:15px;color:#15542d;box-shadow:0 3px 8px rgba(21,84,45,.045)}
+body.v4718-ui.availability-show-mode .free-slot{min-width:92px;min-height:56px;font-size:18px;border-radius:17px}
+body.v4718-ui.availability-show-mode .availability-day{max-width:880px;margin-inline:auto}
+
+/* New appointment modal */
+body.v4718-ui #appointmentDialog{border-radius:0}
+body.v4718-ui #appointmentDialog .appointment-sheet{background:#f6f8f6;padding:0 16px calc(18px + env(safe-area-inset-bottom));border-radius:26px}
+body.v4718-ui #appointmentDialog .appointment-head{top:0;margin:0 -16px 14px;padding:17px 16px 14px;background:rgba(255,255,255,.94);border-bottom:1px solid #e5ebe6;border-radius:26px 26px 0 0}
+body.v4718-ui #appointmentDialog .appointment-head h2{font-size:22px;letter-spacing:-.025em}
+body.v4718-ui #appointmentDialog #closeDialog{background:#edf1ee;color:#253a2b;border:1px solid #dde5df}
+body.v4718-ui #appointmentForm>label,
+body.v4718-ui #appointmentForm>.grid,
+body.v4718-ui #appointmentForm>div:not(.sticky-save):not(.hidden){background:#fff;border:1px solid var(--ui-border);border-radius:17px;padding:13px 14px;box-shadow:0 4px 13px rgba(22,53,31,.045)}
+body.v4718-ui #appointmentForm>label>input,
+body.v4718-ui #appointmentForm>label>textarea,
+body.v4718-ui #appointmentForm>.grid input,
+body.v4718-ui #appointmentForm>.grid select{margin-top:3px;border:1px solid #dce4de;background:#fbfcfb;border-radius:13px;min-height:46px}
+body.v4718-ui #appointmentForm .person-compact-tip{background:#edf7f0;border-color:#d4e8d9;color:#2f5d3d;box-shadow:none}
+body.v4718-ui #appointmentForm .service{border-radius:16px!important;background:#fff!important;border:1px solid var(--ui-border)!important;min-height:62px;box-shadow:none!important;transition:border-color .15s ease,background .15s ease,transform .15s ease}
+body.v4718-ui #appointmentForm .service:has(input:checked){border-color:#7dbf90!important;background:#eef9f1!important;box-shadow:0 0 0 2px rgba(22,132,71,.08)!important}
+body.v4718-ui #appointmentForm .service input[type="checkbox"]{width:24px;height:24px;accent-color:#177943}
+body.v4718-ui #appointmentForm #newTotal{font-size:30px;color:#0e6c39;letter-spacing:-.045em}
+body.v4718-ui #appointmentDialog .sticky-save{position:sticky;bottom:0;padding:10px 0 calc(2px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(246,248,246,0),#f6f8f6 28%)}
+body.v4718-ui #appointmentDialog #saveAppointmentBtn{min-height:56px;border-radius:16px;background:linear-gradient(135deg,#146f3c,#0b4225);font-size:15px;box-shadow:0 10px 22px rgba(20,111,60,.2)}
+
+/* Bottom navigation */
+body.v4718-ui .nav{width:min(calc(100% - 18px),760px);bottom:7px;border:1px solid rgba(255,255,255,.08);border-radius:20px;background:rgba(5,27,15,.96);box-shadow:0 14px 34px rgba(5,24,13,.28);padding:7px 7px calc(7px + env(safe-area-inset-bottom))}
+body.v4718-ui .nav button{min-height:55px;border-radius:14px;color:#aebcb3}
+body.v4718-ui .nav button.active{color:#f3ddb0;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.045));box-shadow:inset 0 0 0 1px rgba(215,186,112,.08)}
+body.v4718-ui .nav .nav-ico{font-size:19px}
+body.v4718-ui .fab{bottom:91px}
+
+@media(max-width:560px){
+  body.v4718-ui .top{margin-left:-12px;margin-right:-12px;padding-left:14px;padding-right:14px;border-radius:0 0 22px 22px}
+  body.v4718-ui #homePage .stats{gap:7px}
+  body.v4718-ui #homePage .stat{padding:12px 10px;min-height:88px}
+  body.v4718-ui #homePage .stat b{font-size:25px}
+  body.v4718-ui #homePage .money-box{min-height:84px;padding:12px}
+  body.v4718-ui #homePage>.row.between.no-print{display:grid;grid-template-columns:auto 1fr auto}
+  body.v4718-ui #homePage #dayPicker{max-width:none!important}
+  body.v4718-ui .availability-hero{padding:18px}
+  body.v4718-ui .availability-hero .row.between{align-items:flex-start;gap:10px}
+  body.v4718-ui .availability-day{padding:15px}
+  body.v4718-ui .free-slot{min-width:calc(25% - 7px);padding-inline:8px}
+  body.v4718-ui #appointmentDialog .appointment-sheet{border-radius:24px 24px 0 0}
+  body.v4718-ui #appointmentDialog .appointment-head{border-radius:24px 24px 0 0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.v4718-ui *,body.v4718-ui *:before,body.v4718-ui *:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+
+
+/* ===== v4.7.18 MODERN UI / POLISH EDITION — PHASE 2 ===== */
+body.v4718-ui .card{border-color:var(--ui-border);border-radius:20px;box-shadow:var(--ui-shadow-soft)}
+body.v4718-ui input,
+body.v4718-ui select,
+body.v4718-ui textarea{border-color:#dce4de;border-radius:13px;background:#fbfcfb;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease}
+body.v4718-ui input:focus,
+body.v4718-ui select:focus,
+body.v4718-ui textarea:focus{outline:none;border-color:#7fbd91;background:#fff;box-shadow:0 0 0 3px rgba(22,132,71,.09)}
+body.v4718-ui .btn{border-radius:13px;min-height:42px}
+body.v4718-ui .btn.primary{background:linear-gradient(135deg,#103c22,#071426);color:#fff;box-shadow:0 7px 18px rgba(7,20,38,.12)}
+body.v4718-ui .section-title{font-size:16px;letter-spacing:-.01em;color:#183522;margin:22px 2px 10px;display:flex;align-items:center;gap:8px}
+body.v4718-ui .section-title:before{content:"";width:5px;height:18px;border-radius:999px;background:linear-gradient(180deg,#c9a95e,#187c43);flex:0 0 auto}
+
+/* Records */
+body.v4718-ui #recordsPage>.card{background:linear-gradient(180deg,#fff,#fbfcfb);padding:15px}
+body.v4718-ui #recordSearch{min-height:48px;background:#f7f9f7;padding-left:14px}
+body.v4718-ui #recordFilters{gap:7px}
+body.v4718-ui .record-filter{min-height:36px;padding:8px 12px;border-radius:999px;background:#f5f7f5;border-color:#dce4de;color:#536158}
+body.v4718-ui .record-filter.active{background:#0b2c19;color:#fff;border-color:#0b2c19;box-shadow:0 5px 12px rgba(11,44,25,.12)}
+body.v4718-ui .record-filter.paid-filter.active{background:#187744;border-color:#187744}
+body.v4718-ui .record-filter.unpaid-filter.active{background:#c55b17;border-color:#c55b17}
+body.v4718-ui #recordList{gap:9px}
+body.v4718-ui #recordList .person{border:1px solid var(--ui-border);border-radius:18px;background:#fff;box-shadow:var(--ui-shadow-soft);padding:14px}
+body.v4718-ui #recordList .person.payment-paid{border-color:#c6e5cf;background:linear-gradient(135deg,#fff,#f8fcf9)}
+body.v4718-ui #recordList .person.payment-unpaid{border-color:#f1c99b;background:linear-gradient(135deg,#fff,#fffaf4)}
+
+/* Reports */
+body.v4718-ui #reportPage>.card{padding:16px;background:linear-gradient(180deg,#fff,#fbfcfb)}
+body.v4718-ui #reportPage>.notice{border-radius:18px!important;box-shadow:var(--ui-shadow-soft)}
+body.v4718-ui #reportPage .toolbar{gap:7px}
+body.v4718-ui #reportPage .toolbar .btn.small{background:#f1f5f2;border:1px solid #e0e7e1;color:#334a39}
+body.v4718-ui #reportPage .official-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+body.v4718-ui #reportPage .official-btn{background:#f4f7f4;border:1px solid #e0e7e1;color:#22392a}
+body.v4718-ui .report-shell{border-radius:24px;border-color:#dde5df;background:#f5f7f5;box-shadow:var(--ui-shadow)}
+body.v4718-ui .report-hero{background:linear-gradient(135deg,#071426 0%,#0b3520 58%,#17643a 100%);padding:22px;border-radius:24px 24px 0 0}
+body.v4718-ui .report-hero h2{letter-spacing:-.035em}
+body.v4718-ui .report-chip{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.12)}
+body.v4718-ui .report-body{padding:17px}
+body.v4718-ui .report-mini,
+body.v4718-ui .report-section-card,
+body.v4718-ui .report-fin-card{border:1px solid #e0e7e1!important;border-radius:18px!important;box-shadow:0 4px 13px rgba(22,53,31,.04)}
+body.v4718-ui #openStockReportBtn{border-radius:18px;border-color:#dfe6e0;background:linear-gradient(135deg,#fff,#f8fbf8);box-shadow:var(--ui-shadow-soft)}
+body.v4718-ui .report-table-wrap{border-radius:16px;border-color:#e0e7e1}
+body.v4718-ui .report-table th{background:#f2f6f3;color:#35463a}
+
+/* Settings and system management */
+body.v4718-ui #settingsPage>.notice,
+body.v4718-ui #settingsPage>.card,
+body.v4718-ui #settingsPage .card{border-radius:19px;box-shadow:var(--ui-shadow-soft);border-color:var(--ui-border)}
+body.v4718-ui #settingsPage>.notice{background:linear-gradient(135deg,#f0f9f2,#f8fcf9)!important;color:#285c39!important;border:1px solid #c9e1cf!important}
+body.v4718-ui #settingsPage .tv-security-note{border-radius:15px;background:#eff8f2;border-color:#c5dfcc;padding:12px 13px}
+body.v4718-ui #settingsPage .settings-link-card{border:1px solid var(--ui-border);border-radius:18px;background:#fff;box-shadow:var(--ui-shadow-soft);transition:transform .15s ease,box-shadow .15s ease}
+body.v4718-ui #settingsPage .settings-link-card:active{transform:scale(.99)}
+body.v4718-ui #settingsPage .backup-chip{border-radius:999px}
+body.v4718-ui #settingsPage .qr-pending-item{border-radius:15px}
+body.v4718-ui #settingsPage .security-card{border-radius:16px;background:#eef8f1;border-color:#c2dfca}
+body.v4718-ui #settingsPage .danger-zone{border-radius:20px}
+body.v4718-ui #settingsPage .weekday{border-radius:17px;box-shadow:0 4px 12px rgba(22,53,31,.035)}
+
+/* Auth / MFA polish */
+body.v4718-ui #authView,
+body.v4718-ui #mfaView{background:radial-gradient(circle at 50% 18%,#1e5230 0,#0c2d1a 43%,#06170e 100%)}
+body.v4718-ui #authView>.card,
+body.v4718-ui #mfaView>.card{border:1px solid rgba(255,255,255,.12);border-radius:26px;background:rgba(255,255,255,.97);box-shadow:0 26px 70px rgba(0,0,0,.28);padding:21px}
+body.v4718-ui #authView .brand,
+body.v4718-ui #mfaView .brand{color:#112c1c;letter-spacing:-.025em}
+body.v4718-ui #authView .security-card,
+body.v4718-ui #mfaView .security-card{background:#edf7f0;border-color:#cce3d2;color:#275638}
+body.v4718-ui #loginForm .btn.primary,
+body.v4718-ui #mfaView .btn.primary{min-height:52px;border-radius:15px;background:linear-gradient(135deg,#0d4326,#071426)}
+
+/* Dialog family */
+body.v4718-ui dialog:not(#appointmentDialog) .sheet{border-radius:24px;background:#fbfcfb;border:1px solid #e1e7e2;box-shadow:0 24px 70px rgba(7,29,17,.22)}
+body.v4718-ui dialog:not(#appointmentDialog) .sheet>.row.between:first-child{position:sticky;top:0;z-index:3;background:rgba(251,252,251,.96);backdrop-filter:blur(12px);padding-bottom:10px;border-bottom:1px solid #e7ece8}
+
+@media(max-width:560px){
+  body.v4718-ui #reportPage .official-actions{grid-template-columns:1fr}
+  body.v4718-ui #recordFilters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}
+  body.v4718-ui #recordFilters::-webkit-scrollbar{display:none}
+  body.v4718-ui .record-filter{white-space:nowrap}
+}
+
 </style>
 </head>
-<body>
+<body class="v4718-ui">
 <div id="pwaSplash" class="pwa-splash hidden-splash" aria-hidden="true">
   <div class="pwa-splash-inner">
     <img class="pwa-splash-logo" src="./kkk-logo.png" alt="KKK">
