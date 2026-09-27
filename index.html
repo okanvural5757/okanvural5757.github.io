@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1220">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="MEBS Subay Temel Berber">
-<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.15</title>
-<meta name="application-version" content="4.7.15">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MEBS Berber">
+<title>MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi v4.7.17</title>
+<meta name="application-version" content="4.7.17">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="no-referrer">
@@ -297,6 +297,23 @@ img,svg,canvas{max-width:100%;height:auto}
 .person-alert.debt-alert .debt-warning-amount{font-size:20px;font-weight:950;color:#b42318}
 .person-alert .alert-title{font-size:13px;font-weight:950}
 .person-alert .alert-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
+
+.person-profile-help{font-size:11px;line-height:1.45;color:var(--muted);margin-top:4px}
+.profile-results{display:grid;gap:8px}
+.profile-results-head{border:1px solid #b2ccff;background:#eff4ff;color:#1849a9;border-radius:14px;padding:10px 11px;font-size:12px;line-height:1.4}
+.profile-card{width:100%;text-align:left;border:1px solid var(--line);background:var(--card);border-radius:15px;padding:11px;display:grid;gap:6px;cursor:pointer}
+.profile-card:hover{border-color:#84adff;background:#f8faff}
+.profile-card.danger{border-color:#fda29b;background:#fff5f4}
+.profile-card.warning{border-color:#fec84b;background:#fffaeb}
+.profile-card .profile-name{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-weight:900}
+.profile-tag{display:inline-flex;align-items:center;border-radius:999px;padding:3px 7px;background:#eef4ff;color:#3538cd;font-size:10px;font-weight:900;border:1px solid #c7d7fe}
+.profile-meta{display:flex;gap:7px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.profile-selected{border:1px solid #75e0a7;background:#ecfdf3;color:#067647;border-radius:14px;padding:10px 11px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.profile-selected strong{font-size:13px}
+.profile-history-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:2px}
+.profile-history-grid>div{border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.58);border-radius:10px;padding:7px;text-align:center}
+.profile-history-grid b{display:block;font-size:14px}
+.profile-history-grid span{font-size:9px;font-weight:800;opacity:.8}
 .overdue-card{border-color:#f04438!important;background:linear-gradient(135deg,#fff 0%,#fff1f0 100%)!important;box-shadow:0 7px 20px rgba(217,45,32,.12)!important}
 .overdue-warning{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:11px;background:#fee4e2;color:#b42318;font-size:11px;font-weight:900}
 .debt-card{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;border-radius:15px;padding:13px}
@@ -393,13 +410,13 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
   .wrap{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .fab{display:none!important}
   .mobile-new-appt{display:block}
-  #homePage,#weekPage,#recordsPage,#reportPage,#settingsPage,#backupsPage{padding-bottom:calc(34px + env(safe-area-inset-bottom))}
+  #homePage,#weekPage,#recordsPage,#reportPage,#settingsPage,#backupsPage,#docsPage{padding-bottom:calc(34px + env(safe-area-inset-bottom))}
   .stock-period-card .row.between{align-items:flex-start}
 }
 
 
 
-/* v4.7.15 professional stock PDF */
+/* v4.7.17 professional stock PDF */
 .stock-pdf-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .stock-pdf-actions .btn{width:100%}
 #stockPrint{display:none;background:#fff;color:#111}
@@ -446,6 +463,23 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 .stock-pdf-detail-summary span{display:block;font-size:7.5px;color:#667085}.stock-pdf-detail-summary b{display:block;font-size:12px;margin-top:2px;color:#0f2748}
 @media(max-width:640px){.stock-pdf-actions{grid-template-columns:1fr}.stock-pdf-actions .btn{min-height:44px}}
 
+
+/* v4.7.17 long-term documentation */
+.docs-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.docs-head h2{margin:0;font-size:20px}
+.docs-hero{border:1px solid #b2ccff;background:linear-gradient(135deg,#f5f8ff,#eef4ff);border-radius:18px;padding:16px;display:grid;gap:8px;margin-bottom:12px}
+.docs-hero h3{margin:0;font-size:20px;color:#0f2748}
+.docs-meta{display:flex;gap:6px;flex-wrap:wrap}.docs-chip{display:inline-flex;padding:6px 9px;border-radius:999px;background:#fff;border:1px solid #dbe5ff;font-size:10px;font-weight:850;color:#344054}
+.docs-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.docs-toc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.docs-toc a{display:block;text-decoration:none;color:#1849a9;background:#f8faff;border:1px solid #dbe5ff;border-radius:12px;padding:10px;font-size:12px;font-weight:850}
+.docs-section{border:1px solid var(--line);background:#fff;border-radius:17px;padding:15px;margin:0 0 12px;scroll-margin-top:90px}
+.docs-section h3{font-size:18px;margin:0 0 10px;color:#101828}.docs-section h4{font-size:14px;margin:14px 0 7px;color:#0f2748}.docs-section p{font-size:12px;line-height:1.6;color:#344054;margin:7px 0}.docs-section ul,.docs-section ol{padding-left:21px;margin:7px 0}.docs-section li{font-size:12px;line-height:1.55;color:#344054;margin:5px 0}.docs-section code{font-size:10px;background:#f2f4f7;border-radius:6px;padding:2px 5px;overflow-wrap:anywhere}.docs-section .rule{border-left:4px solid #2859a5;background:#f8faff;border-radius:10px;padding:10px 11px;margin:9px 0;font-size:12px;line-height:1.55;color:#1849a9}.docs-section .warn{border-left-color:#f79009;background:#fffaeb;color:#7a2e0e}.docs-section .danger{border-left-color:#f04438;background:#fef3f2;color:#b42318}.docs-section .ok{border-left-color:#12b76a;background:#ecfdf3;color:#067647}
+.docs-kv{display:grid;grid-template-columns:minmax(120px,.8fr) minmax(0,1.8fr);gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:9px 0}.docs-kv div{padding:9px 10px;border-bottom:1px solid var(--line);font-size:11px;line-height:1.45}.docs-kv div:nth-last-child(-n+2){border-bottom:0}.docs-kv .k{font-weight:850;background:#f8fafc;color:#344054}.docs-kv .v{color:#101828}
+.docs-checklist{counter-reset:step}.docs-checklist li{list-style:none;position:relative;padding-left:30px}.docs-checklist li:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:#eef4ff;color:#1849a9;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:950}
+.docs-footer-note{font-size:11px;color:#667085;line-height:1.5;margin:14px 0 4px}
+@media(max-width:640px){.docs-actions,.docs-toc{grid-template-columns:1fr}.docs-kv{grid-template-columns:1fr}.docs-kv .k{border-bottom:0}.docs-kv div:nth-last-child(-n+2){border-bottom:1px solid var(--line)}.docs-kv div:last-child{border-bottom:0}}
+
 @page{size:A4;margin:10mm}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -463,6 +497,10 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
   body.print-stock #stockPrint{display:block!important}
   body.print-stock{background:#fff!important}
   body.print-stock .stock-pdf-page{min-height:0}
+  body.print-docs .page{display:none!important}
+  body.print-docs #docsPage{display:block!important}
+  body.print-docs .docs-actions,body.print-docs .docs-toc,body.print-docs .backups-head{display:none!important}
+  body.print-docs .docs-section{break-inside:auto;box-shadow:none}
   .report-shell{box-shadow:none;border:0;border-radius:0}
   .report-hero{border-radius:0}
   .report-body{padding:12px 0}
@@ -472,10 +510,65 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
   .report-section-card,.report-fin-card,.report-mini,.report-ring{break-inside:avoid}
   .report-section-card{page-break-inside:avoid}
 }
+
+/* ===== v4.7.17 PWA EDITION ===== */
+:root{--army:#16351f;--army2:#234c2c;--navy:#071424;--gold:#c8a85b;--pwa-surface:#f3f5f3}
+html{min-height:100%;background:var(--navy)}
+body{min-height:100dvh;overscroll-behavior-y:none;background:var(--pwa-surface)}
+body.pwa-standalone .wrap{padding-top:max(12px,env(safe-area-inset-top))}
+body.pwa-standalone .top{top:0;padding-top:max(10px,env(safe-area-inset-top))}
+.pwa-splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 50% 30%,#294d33 0,#142f1d 36%,#08170f 70%,#050d09 100%);display:grid;place-items:center;color:#fff;opacity:1;transition:opacity .42s ease,visibility .42s ease;visibility:visible}
+.pwa-splash.hidden-splash{opacity:0;visibility:hidden;pointer-events:none}
+.pwa-splash-inner{text-align:center;padding:28px;width:min(92vw,420px)}
+.pwa-splash-logo{width:146px;height:146px;object-fit:contain;filter:drop-shadow(0 14px 30px rgba(0,0,0,.38));animation:splashPulse 1.6s ease-in-out infinite alternate}
+.pwa-splash-kicker{font-size:13px;letter-spacing:.22em;font-weight:900;color:#d9c07d;margin-top:16px}
+.pwa-splash-title{font-size:25px;line-height:1.12;font-weight:950;letter-spacing:-.02em;margin-top:8px}
+.pwa-splash-sub{font-size:11px;font-weight:800;letter-spacing:.07em;opacity:.78;margin-top:8px;line-height:1.5}
+.pwa-splash-progress{height:3px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden;margin:28px auto 12px;width:180px}
+.pwa-splash-progress:after{content:"";display:block;height:100%;width:40%;background:#d6bb76;border-radius:inherit;animation:splashLoad 1.2s ease-in-out infinite}
+.pwa-splash-status{font-size:12px;opacity:.78}
+@keyframes splashPulse{from{transform:scale(.985)}to{transform:scale(1.02)}}
+@keyframes splashLoad{0%{transform:translateX(-110%)}100%{transform:translateX(360%)}}
+.offline-shield{position:fixed;inset:0;z-index:9950;background:rgba(5,13,9,.96);display:grid;place-items:center;padding:24px;color:#fff;text-align:center}
+.offline-shield .offline-card{width:min(100%,400px);background:#10251a;border:1px solid rgba(214,187,118,.3);border-radius:24px;padding:24px;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.offline-shield .offline-icon{font-size:46px;margin-bottom:10px}.offline-shield h2{margin:0 0 8px}.offline-shield p{opacity:.78;line-height:1.5;font-size:13px}.offline-shield .btn{width:100%;margin-top:12px;background:#d4b66d;color:#152015}
+.app-head-brand .header-logo{background:#fff}
+.top{background:linear-gradient(180deg,rgba(245,248,245,.98),rgba(245,248,245,.88));border-bottom:1px solid rgba(22,53,31,.06)}
+.nav{background:rgba(8,24,15,.97);border-top:1px solid rgba(255,255,255,.08);box-shadow:0 -10px 32px rgba(4,12,8,.16);padding-top:7px}
+.nav button{color:#aeb9b1;font-size:10.5px;border-radius:12px;display:grid;gap:3px;place-items:center;min-height:52px}
+.nav button.active{color:#f2ddb0;background:rgba(255,255,255,.06)}
+.nav .nav-ico{font-size:18px;line-height:1}
+.fab{background:linear-gradient(145deg,#244d2c,#102f1b);box-shadow:0 12px 28px rgba(16,47,27,.32)}
+.availability-hero{background:linear-gradient(135deg,#0c2114,#234c2c);color:#fff;border-radius:22px;padding:18px;box-shadow:0 12px 30px rgba(16,47,27,.17)}
+.availability-hero h2{margin:0;font-size:22px}.availability-hero .muted{color:#c9d2cb}.availability-toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.range-chip{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:9px 12px;font-size:12px;font-weight:900}.range-chip.active{background:#d6ba75;color:#102315;border-color:#d6ba75}
+.show-mode-btn{margin-left:auto;background:#fff!important;color:#17331f!important}
+.availability-days{display:grid;gap:12px;margin-top:14px}.availability-day{background:#fff;border:1px solid #dfe6df;border-radius:18px;padding:15px;box-shadow:0 7px 22px rgba(16,47,27,.06)}
+.availability-day-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.availability-day-title{font-weight:950}.availability-count{font-size:11px;font-weight:900;color:#276037;background:#edf8f0;padding:6px 9px;border-radius:999px}.availability-count.full{color:#8b2b23;background:#fff0ee}
+.free-slots{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.free-slot{border:1px solid #bcd7c3;background:#f2fbf4;color:#173f23;border-radius:12px;padding:10px 13px;font-weight:950;font-size:13px}.free-slot:active{transform:scale(.97)}
+body.availability-show-mode{background:#07160d}body.availability-show-mode .top,body.availability-show-mode .nav,body.availability-show-mode .fab{display:none!important}body.availability-show-mode .wrap{max-width:none;padding:18px 18px calc(18px + env(safe-area-inset-bottom))}body.availability-show-mode main>.page:not(#availabilityPage){display:none!important}body.availability-show-mode #availabilityPage{display:block!important}body.availability-show-mode .availability-hero{min-height:120px;padding-top:max(18px,env(safe-area-inset-top))}body.availability-show-mode .free-slot{pointer-events:none;background:#f5fbf6}
+.qr-review{border:1px solid #f4c35d;background:#fff9e9;border-radius:16px;padding:13px;color:#6b4303}.qr-review b{display:block;margin-bottom:4px}.qr-pending-list{display:grid;gap:8px;margin-top:8px}.qr-pending-item{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #f2d38d;background:#fffbef;border-radius:13px;padding:10px}
+.tv-security-note{border:1px solid #b7dfc1;background:#effaf2;color:#18532a;border-radius:14px;padding:12px;font-size:12px}
+.pwa-tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:950;background:#eaf5ec;color:#1b5a2d}
+@media(max-width:560px){.wrap{padding-left:12px;padding-right:12px}.top .toolbar .btn#shareBtn{display:none}.availability-toolbar{gap:6px}.range-chip{padding:8px 10px}.show-mode-btn{margin-left:0}.pwa-splash-logo{width:132px;height:132px}.pwa-splash-title{font-size:23px}}
+
 </style>
 </head>
 <body>
-<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.15 - Privacy Stable -->
+<div id="pwaSplash" class="pwa-splash hidden-splash" aria-hidden="true">
+  <div class="pwa-splash-inner">
+    <img class="pwa-splash-logo" src="./kkk-logo.png" alt="KKK">
+    <div class="pwa-splash-kicker">KARA KUVVETLERİ KOMUTANLIĞI</div>
+    <div class="pwa-splash-title">MEBS BERBER<br>RANDEVU SİSTEMİ</div>
+    <div class="pwa-splash-sub">MEBS ÖĞRENCİ VE KURSLAR TABURU<br>SUBAY TEMEL</div>
+    <div class="pwa-splash-progress"></div>
+    <div id="pwaSplashStatus" class="pwa-splash-status">Güvenli sistem hazırlanıyor…</div>
+  </div>
+</div>
+<div id="offlineShield" class="offline-shield hidden" role="alertdialog" aria-modal="true">
+  <div class="offline-card"><div class="offline-icon">⌁</div><h2>Bağlantı kurulamadı</h2><p><b>ÇEVRİMDIŞI — Veri değişikliği yapılamaz.</b><br>İnternet bağlantısı yokken veri değişikliği yapılamaz. Randevu, ödeme ve stok işlemleri bağlantı gelene kadar kilitlenir. Bağlantı geri geldiğinde güvenli oturumun korunur.</p><button id="offlineRetryBtn" class="btn" type="button">Bağlantıyı Yeniden Dene</button></div>
+</div>
+<!-- MEBS Subay Temel Berber Randevu Sistemi v4.7.17 - PWA + Secure TV + Secure QR -->
 <div class="online-banner">İnternet bağlantısı yok · Kayıt işlemleri geçici olarak kullanılamaz</div>
 
 <section id="authView" class="auth">
@@ -499,7 +592,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 <section id="mfaView" class="auth hidden">
   <div class="card grid">
     <div>
-      <div class="brand" style="font-size:22px;line-height:1.15">🔐 İki Aşamalı Doğrulama</div>
+      <div id="mfaGateTitle" class="brand" style="font-size:22px;line-height:1.15">🔐 İki Aşamalı Doğrulama</div>
       <div id="mfaGateText" class="muted" style="margin-top:6px">Güvenli giriş doğrulanıyor.</div>
     </div>
     <div id="mfaGateSetup" class="grid hidden">
@@ -516,6 +609,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
       <button class="btn primary" type="submit">Güvenli Girişi Tamamla</button>
     </form>
     <div id="mfaMsg" class="notice hidden"></div>
+    <button id="mfaRetryBtn" class="btn primary hidden" type="button">Bağlantıyı Yeniden Dene</button>
     <button id="mfaLogoutBtn" class="btn">Çıkış Yap</button>
   </div>
 </section>
@@ -561,6 +655,16 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
       <div id="dayEndPanel" class="day-end no-print"></div>
     </section>
 
+
+    <section id="availabilityPage" class="page">
+      <div class="availability-hero no-print">
+        <div class="row between"><div><div class="pwa-tag">● CANLI MÜSAİTLİK</div><h2>Boş Randevular</h2><div class="muted" style="font-size:12px;margin-top:5px">Yalnız gerçekten müsait normal randevu saatleri gösterilir.</div></div><button id="availabilityShowModeBtn" class="btn small show-mode-btn" type="button">👁 Göster Modu</button></div>
+        <div class="availability-toolbar" id="availabilityRange"><button class="range-chip active" data-range="1">Bugün</button><button class="range-chip" data-range="3">3 Gün</button><button class="range-chip" data-range="7">7 Gün</button><button class="range-chip" data-range="14">14 Gün</button></div>
+      </div>
+      <div id="availabilityModeNote" class="notice hidden" style="margin-top:12px;background:#eef8f1;color:#18532a"><b>Göster Modu:</b> Yalnız gün ve boş saatler görünür. Kişisel bilgiler gizlidir. Randevu vermek için Göster Modu'ndan çık.</div>
+      <div id="availabilityList" class="availability-days"><div class="card muted">Boş saatler hazırlanıyor…</div></div>
+    </section>
+
     <section id="weekPage" class="page">
       <div class="card no-print">
         <label>Haftanın içindeki bir gün<input id="weekPicker" type="date"></label>
@@ -570,7 +674,7 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 
     <section id="recordsPage" class="page">
       <div class="card no-print grid">
-        <label>Kayıtlarda ara<input id="recordSearch" placeholder="Ad Soyad"></label>
+        <label>Kayıtlarda ara<input id="recordSearch" placeholder="Ad Soyad veya Ayırt Etme"></label>
         <div class="record-filters" id="recordFilters">
           <button class="record-filter active" data-record-filter="all">Tümü</button>
           <button class="record-filter paid-filter" data-record-filter="paid">✓ Ödendi</button>
@@ -624,20 +728,19 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 
     <section id="settingsPage" class="page">
       <div class="section-title">Gizlilik Modu</div>
-      <div class="notice" style="background:#eef8f1;color:#176b3a;border:1px solid #b7e3c5"><b>Aktif:</b> Kişi kaydında yalnız Ad Soyad kullanılır. TV bilgilendirme ekranı ve dışarıdan/QR ile randevu alma özelliği şimdilik pasiftir. Altyapı silinmemiştir.</div>
-      <div style="display:none" aria-hidden="true">
+      <div class="notice" style="background:#eef8f1;color:#176b3a;border:1px solid #b7e3c5"><b>Aktif:</b> Kişi profili Ad Soyad + gerekirse kısa Ayırt Etme bilgisiyle yönetilir. Telefon, rütbe ve birlik kullanılmaz. TV ve QR ayrı güvenlik katmanlarıyla aynı randevu takvimine entegredir. TV kişisel veri göstermez; QR aynı isimleri otomatik birleştirmez.</div>
       <div class="section-title">TV Bilgilendirme Ekranı</div>
       <div class="card grid">
-        <div>Randevu detayındaki “Tıraşa Başla” ile işlemdeki kişiyi TV’ye aktarın. “Tıraş Tamamlandı” ile işlemi bitirin.</div>
+        <div class="tv-security-note"><b>🔒 Güvenli TV:</b> TV yalnız çalışma durumu, hizmet, boş/dolu saat ve QR erişimini görür. Ad Soyad, Ayırt Etme, borç, ödeme ve kişi kimliği TV payloadına gönderilmez.</div>
         <div class="toolbar">
           <a class="btn primary" href="./tv-v48.html?mode=panel" target="_blank" rel="noopener">TV Ayarları ve Eşleştirme</a>
-          <a class="btn" href="./tv-v48.html?mode=screen&amp;demo=1" target="_blank" rel="noopener">Örnek TV Önizlemesi</a>
+          <a class="btn" href="./tv-v48.html?mode=screen" target="_blank" rel="noopener">TV Ekranını Aç</a>
         </div>
-        <div class="muted">TV tarayıcısında tv-v48.html?mode=screen adresini açın. Ekrandaki kodu TV ayarlarından onaylayın. Değişiklikler TV’nin yenileme aralığında görünür.</div>
+        <div class="muted">TV ilk açılışta eşleştirme kodu üretir. Yönetici panelinden onaylanan cihaz yalnız anonimleştirilmiş TV verisini okuyabilir; cihaz yetkisi istenirse iptal edilebilir.</div>
       </div>
       <div class="section-title">QR ile Randevu</div>
       <div id="qrBookingSettings" class="card grid">
-        <div class="muted">TV ekranındaki QR kodu ve günlük 4 haneli şifre ile kontrollü randevu alınır. Şifre her gün otomatik yenilenir; istersen buradan anında değiştirebilirsin.</div>
+        <div class="muted">TV ekranındaki QR kodu ve günlük 4 haneli şifre ile kontrollü randevu alınır. Public form yalnız Ad Soyad, gün/saat ve hizmet ister; aynı isimli kişiler otomatik birleştirilmez.</div>
         <div class="row between" style="align-items:flex-end;flex-wrap:wrap">
           <div><div class="muted" style="font-size:11px;font-weight:900">BUGÜNÜN RANDEVU ŞİFRESİ</div><div id="qrDailyPin" style="font-size:34px;font-weight:950;letter-spacing:.18em;margin-top:3px">----</div><div id="qrPinDate" class="muted" style="font-size:11px"></div></div>
           <span id="qrEnabledBadge" class="backup-chip">YÜKLENİYOR</span>
@@ -649,10 +752,13 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
           <a class="btn" href="./randevu.html" target="_blank" rel="noopener">Randevu Sayfasını Aç</a>
         </div>
         <div id="qrBookingMsg" class="notice hidden"></div>
-        <div class="muted" style="font-size:11px">Güvenlik: 5 hatalı denemeden sonra geçici engel uygulanır. Doğru şifre kısa süreli tek-randevuluk oturum açar; şifre değiştirilince açık QR oturumları iptal edilir.</div>
+        <div class="muted" style="font-size:11px">Güvenlik: 5 hatalı denemeden sonra geçici engel uygulanır. Doğru şifre kısa süreli tek-randevuluk oturum açar. QR kişisi önce geçici profile bağlanır; eşleştirme kararını yalnız yönetici verir.</div><div id="qrIdentityPending" class="qr-pending-list"></div>
       </div>
 
-      </div>
+      <div class="section-title">Sistem Dokümantasyonu</div>
+      <button id="openDocsBtn" class="settings-link-card" type="button">
+        <span><b>📘 Kullanım Kılavuzu ve Büyük Devir Notu</b><span class="muted" style="display:block;font-size:11px;margin-top:4px">Günlük kullanım, ödeme, stok, yedek, sorun giderme ve gelecekteki teknik devir bilgileri.</span></span><span class="arrow">›</span>
+      </button>
 
       <div class="section-title">Güvenlik</div>
       <div id="securitySettings" class="security-card"></div>
@@ -712,6 +818,354 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
       <div style="display:none" aria-hidden="true"><div class="section-title">Rütbeler</div><div id="rankSettings" class="card"></div></div>
     </section>
 
+
+    <section id="docsPage" class="page">
+      <div class="docs-head no-print">
+        <button id="backFromDocs" class="btn small" type="button">‹ Ayarlar</button>
+        <h2>Sistem Kılavuzu ve Devir Notu</h2>
+      </div>
+
+      <div class="docs-hero">
+        <div class="eyebrow">MEBS SUBAY TEMEL BERBER · SİSTEM DOKÜMANTASYONU</div>
+        <h3>v4.7.17 FINAL STABLE · SESSION STABLE</h3>
+        <p class="muted" style="margin:0;line-height:1.55">Bu sayfa sistemin uzun süreli kullanımında başvuru kaynağıdır. Günlük kullanıcı işlemleri ile gelecekte yapılacak teknik geliştirmeler aynı kurallara bağlanmıştır.</p>
+        <div class="docs-meta">
+          <span class="docs-chip">Doküman tarihi: 27.09.2026</span>
+          <span class="docs-chip">Gizlilik: Ad Soyad + isteğe bağlı Ayırt Etme</span>
+          <span class="docs-chip">TV: Güvenli Aktif · kişisel veri yok</span>
+          <span class="docs-chip">QR Randevu: Güvenli Aktif · PIN korumalı</span>
+        </div>
+      </div>
+
+      <div class="docs-actions no-print">
+        <button id="copyUsageGuideBtn" class="btn primary" type="button">Kullanım Kılavuzunu Kopyala</button>
+        <button id="copyHandoverBtn" class="btn" type="button">Büyük Devir Notunu Kopyala</button>
+        <button id="printDocsBtn" class="btn" type="button">Yazdır / PDF</button>
+      </div>
+      <div id="docsMsg" class="notice hidden no-print"></div>
+
+      <div class="docs-toc no-print">
+        <a href="#usageGuideContent">📖 Kullanım Kılavuzu</a>
+        <a href="#handoverContent">🧭 Büyük Devir Notu</a>
+        <a href="#docsTroubleshooting">🛠️ Sorun Giderme</a>
+        <a href="#docsChangePolicy">🧪 Değişiklik ve Test Politikası</a>
+      </div>
+
+      <div id="usageGuideContent">
+        <article class="docs-section">
+          <h3>📖 1. Kullanım Kılavuzu — Sistemin Amacı ve Temel Kuralı</h3>
+          <p>Bu uygulama MEBS Subay Temel Berber randevularını, hizmet ücretlerini, tahsilatları, randevu durumlarını, zimmet/sarf stoklarını, dönem raporlarını ve güvenli yedekleri tek merkezden yönetmek için kullanılır. Sistem uzun süreli günlük kullanım düşünülerek sadeleştirilmiştir.</p>
+          <div class="rule ok"><b>En temel çalışma kuralı:</b> Günlük işlemlerde kişi profili <b>Ad Soyad</b> ve yalnız aynı isimli farklı kişileri ayırmak gerekiyorsa kısa <b>Ayırt Etme</b> bilgisiyle (örn. 2015) yönetilir. Telefon, rütbe ve birlik/bölüm yeni işlemlerde kullanılmaz. Tam doğum tarihi, T.C. kimlik numarası veya gereksiz personel bilgisi Ayırt Etme alanına yazılmaz.</div>
+          <div class="rule warn"><b>Aynı isim uyarısı:</b> Aynı Ad Soyada sahip iki farklı kişi olabilir. Sistem isimden otomatik birleştirme yapmaz. Aynı kişi tekrar geldiyse mevcut profil elle seçilir; farklı kişiyse Ayırt Etme bilgisi girilerek ayrı profil oluşturulur. Aynı Ad Soyad + aynı Ayırt Etme ikinci kez oluşturulamaz.</div>
+          <div class="docs-kv">
+            <div class="k">Aktif kişisel alan</div><div class="v">Ad Soyad + isteğe bağlı Ayırt Etme (örn. 2015)</div>
+            <div class="k">Pasif alanlar</div><div class="v">Telefon, Rütbe, Birlik/Bölüm</div>
+            <div class="k">Ana modüller</div><div class="v">Randevu, Ödeme, Rapor, Zimmet/Sarf, Yedek, 2FA/Oturum</div>
+            <div class="k">Güvenli dış özellikler</div><div class="v">Anonim TV bilgilendirme ekranı + PIN korumalı public QR randevu</div>
+          </div>
+        </article>
+
+        <article class="docs-section">
+          <h3>🔐 2. Giriş, 2FA ve Güvenli Oturum</h3>
+          <p>Sistem tek yetkili yönetici hesabı mantığıyla çalışır. Yönetici girişi yapıldıktan sonra Authenticator tabanlı iki aşamalı doğrulama kullanılır. Doğrulanmış aynı cihaz ve aynı aktif oturum için 24 saatlik güven penceresi bulunur. Tarayıcıyı/sekmesini kapatıp yeniden açmak aynı oturum devam ediyorsa kod istemeyebilir; <b>Çıkış</b> düğmesiyle oturumu kapatmak, yeni oturum açmak, cihaz değiştirmek veya güven süresinin dolması yeniden Authenticator kodu gerektirir. Bu davranış rastgele değildir.</p>
+          <ol class="docs-checklist">
+            <li>Siteyi aç ve yönetici hesabıyla giriş yap.</li>
+            <li>Sistem 2FA isterse Authenticator uygulamasındaki güncel kodu gir.</li>
+            <li>Aynı cihaz + aynı aktif oturum + geçerli güven süresi varsa 24 saat içinde tekrar kod istenmemesi normaldir.</li>
+            <li><b>Çıkış</b> düğmesiyle çıkış yapılırsa sonraki giriş yeni oturum sayılır ve Authenticator kodu istenebilir; bu güvenlik kuralıdır.</li>
+            <li>Başka cihazda giriş yapılırsa mevcut aktif oturumun kapanması güvenlik tasarımının parçasıdır.</li>
+            <li>Veritabanı veya internet geçici olarak yanıt vermezse sistem oturumu silmez ve bunu 2FA ihtiyacı gibi yorumlamaz; bağlantıyı otomatik dener veya <b>Bağlantıyı Yeniden Dene</b> düğmesini gösterir.</li>
+          </ol>
+          <div class="rule danger"><b>Yapılmaması gereken:</b> Giriş/2FA sorununda güvenlik kontrollerini kaldırmak, RLS/oturum fonksiyonlarını devre dışı bırakmak veya MFA'yı atlatacak geçici kod eklemek. Sorun önce oturum, cihaz saati, Authenticator ve Supabase Auth tarafında teşhis edilmelidir.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>📅 3. Yeni Randevu Oluşturma</h3>
+          <p>Ana ekranda boş bir randevu saatindeki <b>+ Randevu Ver</b> düğmesi veya mobildeki yeni randevu düğmesi kullanılır. Yeni kayıt için Ad Soyad yazıldığında sistem aynı isimli mevcut kişi profillerini kontrol eder; geçmiş borç/gelmedi bilgisi ancak seçilen profile bağlanır.</p>
+          <ol class="docs-checklist">
+            <li><b>Ad Soyad</b> bilgisini yaz. Aynı isimli mevcut profil çıkarsa aynı kişiyse profili seç.</li>
+            <li>Farklı bir kişiyse <b>Ayırt Etme</b> alanına kısa bir bilgi yaz (örn. 2015). Tam doğum tarihi veya T.C. kimlik no yazma.</li>
+            <li>Mevcut profil seçildiğinde borç, gelmedi sayısı, geçmiş işlem sayısı ve son işlem bilgilerini kontrol et.</li>
+            <li>Tarihi seç. Çalışma planı olmayan günlerde sistem uygun sonraki çalışma gününe yönlendirebilir.</li>
+            <li>Uygun saati seç. Dolu veya çakışan saat sistem tarafından reddedilmelidir.</li>
+            <li>Hizmet olarak <b>Saç Tıraşı</b> ve gerekiyorsa <b>Saç Yıkama</b> seç.</li>
+            <li>Gerekliyse açıklama ekle. Gizlilik gereği açıklamaya gereksiz personel bilgisi yazma.</li>
+            <li>Randevuyu kaydet ve günlük listede doğru saat/hizmet/tutar ile göründüğünü kontrol et.</li>
+          </ol>
+          <p><b>Acil / İstisnai Randevu:</b> Normalde dinlenme/temizlik olarak kapalı olan bir saat zorunlu durumda kullanılacaksa “Acil / İstisnai Randevu” seçeneği açılır ve kısa gerekçe yazılır. Bu kayıt raporlarda ayrıca sayılır.</p>
+          <div class="rule"><b>Saat güvenliği:</b> Aynı saat için iki aktif randevu olmamalıdır. Arayüz ve veritabanı birlikte çakışmayı engeller. Bir hata şüphesinde önce canlı veritabanında aktif zaman çakışması sorgulanır.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>✂️ 4. Randevu Durumları ve Butonların Anlamı</h3>
+          <p>Randevu ayrıntısındaki durum seçenekleri tarih ve mevcut duruma göre değişir. Böylece gelecek tarihli bir randevu yanlışlıkla tamamlanmaz, geçmiş ödeme ve stok hareketleri de geriye çevrilmez.</p>
+          <div class="docs-kv">
+            <div class="k">Bekliyor</div><div class="v">Randevu oluşturuldu, henüz işlem başlamadı.</div>
+            <div class="k">Geldi</div><div class="v">Kişi randevuya geldi; işlem başlamadan önce kullanılabilir.</div>
+            <div class="k">Tıraşa Başla / İşlemde</div><div class="v">Aktif hizmet başlamıştır. Aynı anda başka bir randevunun işlemde olması engellenir.</div>
+            <div class="k">Tıraş Tamamlandı</div><div class="v">Hizmet tamamlandı. Gelecek tarihli randevu tamamlanamaz.</div>
+            <div class="k">Gelmedi</div><div class="v">Kişi randevuya gelmedi. Gelecek tarih için kullanılamaz.</div>
+            <div class="k">İptal</div><div class="v">Randevu iptal edildi. Gelecek randevular da iptal edilebilir.</div>
+            <div class="k">Çöp Kutusuna Taşı</div><div class="v">Kaydı normal listeden kaldırır; fiziksel veri silme yerine geri alınabilir silme mantığı kullanılır.</div>
+          </div>
+          <p>Bugünkü <b>Bekliyor</b> randevuda Geldi, Tıraşa Başla, Tıraş Tamamlandı, Gelmedi ve İptal seçenekleri; <b>Geldi</b> durumunda Tıraşa Başla, Tıraş Tamamlandı, Gelmedi ve İptal; <b>İşlemde</b> durumunda Tıraş Tamamlandı ve İptal seçenekleri kullanılabilir.</p>
+          <div class="rule warn"><b>Terminal durumlar:</b> Tamamlandı, Gelmedi ve İptal kayıtları rastgele geriye çevrilmez. Özellikle Tamamlandı durumunda ödeme ve stok geçmişi oluşmuş olabileceği için önce veri etkisi incelenmeden durum değiştirilmez.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>💳 5. Hizmet, Fiyat ve Tahsilat Kullanımı</h3>
+          <p>Hizmet satırları randevu oluşturulurken o anki fiyatla kayda alınır. Fiyat ayarının daha sonra değiştirilmesi eski randevuların fiyatını değiştirmemelidir.</p>
+          <ul>
+            <li>Saç Tıraşı ve Saç Yıkama ayrı hizmetlerdir.</li>
+            <li>Ödeme alındığında randevu üzerindeki tahsilat ile ödeme hareketi birlikte izlenir.</li>
+            <li>Bir randevuda aktif tahsilat varsa hizmet ekleme/çıkarma veya fiyatı etkileyen düzenleme doğrudan yapılamaz.</li>
+            <li>Hizmeti değiştirmek gerekiyorsa önce tahsilat güvenli şekilde geri alınır/void edilir, sonra hizmet düzeltilir ve doğru tutar yeniden tahsil edilir.</li>
+            <li>Raporlardaki “Gerçek Tahsilat” ödeme hareketlerinin gerçek kayıt tarihini; “Hizmet Bedeli” tamamlanan hizmetlerin dönem toplamını gösterir.</li>
+          </ul>
+          <div class="rule ok"><b>21.09.2026 tarihli örnek düzeltme:</b> Adem Tapancı kaydında hizmet Saç Tıraşı = ₺80 iken yanlışlıkla ₺110 tahsilat kaydedilmişti. Eski ₺110 hareket void edilip doğru ₺80 tahsilat yeniden kaydedildi. Hizmet, Tamamlandı durumu ve stok hareketleri değiştirilmedi. Son kontrolde ödeme uyuşmazlığı 0'dır.</div>
+          <div class="rule danger"><b>Kesin kural:</b> Tahsilat/hizmet farkı görüldüğünde randevu veya ödeme tablosunda rastgele manuel SQL UPDATE yapılmaz. Önce hedef kayıt, aktif transaction ve allocation doğrulanır; düzeltme atomik işlemle yapılır ve ardından rapor/stok karşılaştırılır.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>📦 6. Zimmet, Stok ve Otomatik Sarf</h3>
+          <p>Bir standart zimmet paketi aşağıdaki malzemeleri içerir. Paket alımı stok girişidir; kullanım ise hizmete bağlı otomatik sarf hareketi oluşturur.</p>
+          <div class="docs-kv">
+            <div class="k">Tek kullanımlık havlu</div><div class="v">200 adet</div>
+            <div class="k">Boyun bandı</div><div class="v">200 adet</div>
+            <div class="k">Tek kullanımlık örtü</div><div class="v">200 adet</div>
+            <div class="k">Şampuan</div><div class="v">2000 ml</div>
+            <div class="k">Kolonya</div><div class="v">1000 ml</div>
+          </div>
+          <h4>Otomatik sarf kuralı</h4>
+          <p>Malzeme yalnız <b>RANDEVU = TAMAMLANDI</b> ve <b>ÖDEME = ÖDENDİ</b> şartları birlikte sağlandığında <b>bir kez</b> düşer.</p>
+          <div class="docs-kv">
+            <div class="k">Saç Tıraşı</div><div class="v">1 havlu + 1 boyun bandı + 1 örtü + 10 ml şampuan + 3 ml kolonya</div>
+            <div class="k">Saç Yıkama</div><div class="v">Ek olarak +10 ml şampuan</div>
+          </div>
+          <ul>
+            <li>Aynı randevu ve aynı stok kalemi için mükerrer otomatik sarf oluşmamalıdır.</li>
+            <li>Ödeme daha sonra iptal edilse bile stok otomatik geri eklenmez.</li>
+            <li>Fizikî sayımda fark bulunursa manuel stok hareketi/ayarlama ile gerçek miktar esas alınır.</li>
+            <li>Ay sonu raporunda teorik stok, fizikî stok ve fark birlikte kontrol edilir.</li>
+          </ul>
+          <div class="rule"><b>Son doğrulanmış stok referansı (27.09.2026):</b> Havlu 145, Boyun Bandı 145, Örtü 145, Şampuan 930 ml, Kolonya 835 ml. Bu yalnız tarihsel bir referanstır; sistem kullanıldıkça sayılar değişir ve eski rakamlar canlıya zorla geri yüklenmez.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>📊 7. Raporlar Nasıl Okunur?</h3>
+          <p>Rapor ekranı seçilen tarih aralığındaki randevu performansı ile para hareketlerini birlikte gösterir.</p>
+          <ul>
+            <li><b>Toplam Randevu:</b> İptal edilenler hariç geçerli randevular.</li>
+            <li><b>Tamamlanan:</b> Durumu Tamamlandı olan hizmetler.</li>
+            <li><b>Gerçekleşme Oranı:</b> Tamamlanan / geçerli randevu oranı.</li>
+            <li><b>Gelmedi / İptal:</b> Ayrı durum sayaçlarıdır.</li>
+            <li><b>Gerçek Tahsilat:</b> Gerçekte kaydedilen aktif para girişleri.</li>
+            <li><b>Hizmet Bedeli:</b> Tamamlanan hizmetlerin toplam bedeli.</li>
+            <li><b>Önceki Borç Tahsilatı:</b> Önceki dönemden kalan borca yapılan tahsilat.</li>
+            <li><b>Bu Dönem Kalan Borç:</b> Tamamlanan ancak tam tahsil edilmemiş hizmetlerden kalan tutar.</li>
+            <li><b>Günlük Para Girişi:</b> Tahsilat hareketinin gerçek işlem tarihine göre günlük toplam.</li>
+          </ul>
+          <p>Gerçek Tahsilat ile Hizmet Bedeli her zaman eşit olmak zorunda değildir; önceki borç tahsilatı, farklı işlem tarihleri veya açık borçlar fark oluşturabilir. Ancak açıklanamayan bir fark varsa tek tek transaction/allocation kontrolü yapılmalıdır.</p>
+          <div class="rule ok"><b>Son final kontrolü:</b> 21.09.2026 dönemi için düzeltme sonrası Gerçek Tahsilat ₺5.470 ve Hizmet Bedeli ₺5.470 olarak eşitlendi; aktif ödeme uyuşmazlığı 0 olarak doğrulandı.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>🗂️ 8. Yedekleme ve Geri Yükleme</h3>
+          <p>Yedek sistemi uzun süreli kullanımın en önemli güvenlik katmanıdır. Büyük değişiklik öncesinde ve önemli veri düzeltmelerinden sonra doğrulanmış yedek bulunmalıdır.</p>
+          <ol class="docs-checklist">
+            <li><b>Ayarlar → Yedekler</b> bölümünü aç.</li>
+            <li><b>Yeni Tam Yedek Al</b> ile sunucu yedeği oluştur.</li>
+            <li>Yedeğin doğrulama sonucu ve SHA-256 bütünlüğünü kontrol et.</li>
+            <li>İstersen JSON yedeğini ayrıca cihazına indir ve güvenli yerde sakla.</li>
+            <li>Geri yükleme yalnız gerçekten gerektiğinde kullanılmalıdır. Sistem geri yükleme öncesi güvenlik yedeği alır ve başarısız işlem yarım veri bırakmamalıdır.</li>
+          </ol>
+          <div class="docs-kv">
+            <div class="k">Final yedek etiketi</div><div class="v">v4.7.17 PERSON PROFILE STABLE CANLI FINAL YEDEĞİ 27.09.2026</div>
+            <div class="k">Final yedek ID</div><div class="v"><code>f6d9e6d7-a688-489e-9678-5679fa778a41</code></div>
+            <div class="k">Final yedek SHA-256</div><div class="v"><code>3e2cbbaa82ff74d5f2157dd1822ab66527344cb291350a44add78bd508fc723a</code></div>
+            <div class="k">Şema</div><div class="v">8</div>
+          </div>
+          <div class="rule danger"><b>Eski sayıları geri zorlamayın:</b> Bir devir notunda yazan kişi/randevu/stok sayıları yalnız o anın fotoğrafıdır. Kullanıcı sistemi kullanmaya devam ettiği için her canlı işlemden önce rakamlar yeniden sorgulanmalıdır.</div>
+        </article>
+
+        <article class="docs-section" id="docsTroubleshooting">
+          <h3>🛠️ 9. Sorun Giderme Rehberi</h3>
+          <h4>Randevu butonları görünmüyor</h4>
+          <p>Önce randevunun tarihine ve durumuna bak. Gelecek tarihli Bekliyor randevuda yalnız İptal görünmesi normaldir. Tamamlandı/Gelmedi/İptal terminal durumlarda geçmişi korumak için durum seçenekleri geri açılmaz.</p>
+          <h4>“Ödeme / hizmet tutarı kontrolü gerekli” uyarısı</h4>
+          <p>Hizmet toplamı ile aktif tahsilat farklıdır. Otomatik düzeltme yapılmaz. Önce gerçek alınan tutar ve gerçekten yapılan hizmet kullanıcıdan teyit edilir; sonra ödeme hareketi güvenli şekilde void edilip doğru tahsilat girilir.</p>
+          <h4>Stok beklediğimden farklı</h4>
+          <p>Önce randevunun Tamamlandı + Ödendi olup olmadığını, aynı randevuda otomatik sarfın kaç kez oluştuğunu ve son inventory movement'ın quantity_after değeri ile current_quantity değerini karşılaştır. Fizikî sayım her zaman gerçek stok için son referanstır.</p>
+          <h4>Rapor tutarı farklı</h4>
+          <p>Gerçek Tahsilat, hizmet bedeli ve önceki borç tahsilatını ayrı düşün. Aktif payment_transactions toplamı, payment_allocations ve randevu amount_paid/total_amount değerleri birlikte kontrol edilmelidir.</p>
+          <h4>Veritabanı görünmüyor / kayıtlar boş geliyor</h4>
+          <p>Yeni kararlı açılış akışı, ana ekranı veriler doğrulanmadan açmaz. Geçici bağlantı veya token yenileme sorunu olursa oturum korunur, temel veriler birkaç kez yeniden yüklenir ve gerekirse <b>Bağlantıyı Yeniden Dene</b> düğmesi gösterilir. Böyle bir durumda çıkış yapıp tekrar giriş yapmak ilk çözüm olmamalıdır.</p>
+          <h4>2FA kodu bazen isteniyor, bazen istenmiyor</h4>
+          <p>Kural şudur: aynı cihaz + aynı aktif oturum + geçerli 24 saatlik güven penceresi varsa kod istenmez. <b>Çıkış</b> ile yeni oturum açılmışsa, güven süresi dolmuşsa veya cihaz/oturum değişmişse kod istenir. Ağ/veritabanı hatası artık tek başına Authenticator ekranına yönlendirme sebebi değildir.</p>
+          <h4>2FA kodu çalışmıyor</h4>
+          <p>Telefonun tarih/saat ayarının otomatik olduğundan emin ol, yeni üretilmiş Authenticator kodunu kullan, oturumun hâlâ aktif olup olmadığını kontrol et. MFA'yı devre dışı bırakma.</p>
+          <h4>Site eski görünümü gösteriyor</h4>
+          <p>GitHub'a yeni dosyalar yüklendikten sonra Safari'deki eski sekmeyi tamamen kapatıp siteyi yeniden aç. Gerekirse PWA/ana ekran kısayolunu yenile. Önce dosyanın gerçekten GitHub ana dizininde güncellendiğini kontrol et.</p>
+        </article>
+      </div>
+
+      <div id="handoverContent">
+        <article class="docs-section">
+          <h3>🧭 10. BÜYÜK DEVİR NOTU — Gelecekte Sistemi Devralacak Kişi / ChatGPT İçin</h3>
+          <p><b>Bu bölüm teknik devir metnidir.</b> Amaç, aylar sonra yeni bir sohbet açıldığında veya sistemi başka bir teknik kişi incelediğinde çalışma mantığının bozulmamasıdır. Aşağıdaki kurallar sistem davranışının parçasıdır; yalnız görünüm tercihi değildir.</p>
+          <div class="rule danger"><b>Birinci kural:</b> “Başka bir yeri bozarak düzeltme yapma.” Çalışan modülü koru, önce yedek/test/rollback planı oluştur, sonra değişiklik yap.</div>
+          <div class="rule"><b>Gerçekçi kalite ilkesi:</b> “Kesinlikle sıfır hata” garantisi verilmez. Bilinen kritik veya yüksek seviyeli hata varsa final paket oluşturulmaz. Orta/düşük riskler açıkça raporlanır.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>11. Sistem Kimliği ve Mevcut Final Durumu</h3>
+          <div class="docs-kv">
+            <div class="k">Sistem</div><div class="v">MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi</div>
+            <div class="k">Final sürüm</div><div class="v">v4.7.17 FINAL STABLE</div>
+            <div class="k">Web dağıtımı</div><div class="v">GitHub Pages üzerinde statik ana uygulama; ana dosya <code>index.html</code></div>
+            <div class="k">Veri katmanı</div><div class="v">Supabase PostgreSQL + Auth + RLS/RPC + yedek altyapısı</div>
+            <div class="k">Ana kullanım</div><div class="v">Tek yönetici; MFA ve aktif tek oturum güvenliği</div>
+            <div class="k">Gizlilik modu</div><div class="v">Ad Soyad + gerekirse Ayırt Etme; telefon/rütbe/birlik pasif</div>
+            <div class="k">TV</div><div class="v">Aktif; yalnız anonimleştirilmiş çalışma/boş saat/hizmet verisi</div>
+            <div class="k">Public QR randevu</div><div class="v">Aktif; günlük PIN + rate-limit + minimal veri + kişi doğrulama kuyruğu</div>
+          </div>
+          <p>Canlı/test proje kimlikleri, servis anahtarları, API secret'ları veya parolalar bu sayfaya güvenlik nedeniyle yazılmamıştır. Gerektiğinde bağlı Supabase/GitHub araçlarından mevcut projeler bulunmalıdır; gizli anahtarlar asla sohbet veya public site metnine eklenmemelidir.</p>
+        </article>
+
+        <article class="docs-section">
+          <h3>12. Mimari ve Korunması Gereken İşlevler</h3>
+          <p>Aşağıdaki modüller birbirine bağlıdır ve bir geliştirme yapılırken regresyon testine birlikte dahil edilmelidir:</p>
+          <ul>
+            <li>Randevu oluşturma, saat uygunluğu ve durum geçişleri.</li>
+            <li>Saç Tıraşı / Saç Yıkama hizmetleri ve dönemsel fiyat geçmişi.</li>
+            <li>Gerçek tahsilat, payment_transactions, payment_allocations ve randevu ödeme özeti.</li>
+            <li>Tamamlandı + Ödendi koşuluna bağlı tek seferlik stok sarfı.</li>
+            <li>Aylık zimmet / fizikî sayım / teorik fark raporu.</li>
+            <li>Yönetici raporları, rapor arşivi ve resmî çıktılar.</li>
+            <li>Yedek oluşturma, SHA doğrulama, indirme ve geri yükleme round-trip.</li>
+            <li>Authenticator MFA, 24 saat güvenilir oturum ve tek aktif oturum.</li>
+            <li>Açılışta auth olaylarının seri işlenmesi, güvenilir oturum kontrolünün retry ile yapılması ve temel veriler yüklenmeden ana ekranın açılmaması.</li>
+            <li>Bağlantı hatasının MFA gereksinimi sayılmaması; bağlantı sorunu varsa kullanıcı oturumunun korunması.</li>
+            <li>Çöp kutusu ve geri yükleme mantığı.</li>
+          </ul>
+          <div class="rule warn"><b>Özellikle stok:</b> Ödeme iptali stok iadesi yapmaz. Stok geçmişi muhasebe hareketi gibi korunur; gerekli düzeltme manuel stok hareketi ile yapılır.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>13. Gizlilik Kararı — Kesin Tasarım Kuralı</h3>
+          <p>Yeni kişi akışında profil <b>Ad Soyad</b> ve isteğe bağlı <b>Ayırt Etme</b> etiketiyle tutulur. Telefon, rütbe ve birlik/bölüm kolonları veritabanında korunur fakat yeni arayüz bunları istemez. Aynı kişi seçildiğinde person_id sabit kaldığı için borç ve gelmedi geçmişi tutarlı biçimde devam eder.</p>
+          <ul>
+            <li>Eski personel kayıtları topluca silinmez.</li>
+            <li>Telefon/rütbe/birlik DB kolonları silinmez; ileride yetkili karar ile yeniden etkinleştirilebilir.</li>
+            <li>Kişi kartları, detay ekranı, kayıt listesi, CSV ve raporlar minimum bilgi ilkesine göre çalışmalıdır.</li>
+            <li>“Telefon Hızlı İşlem” gibi telefon bağımlı özellikler pasif kalmalıdır.</li>
+            <li>Aynı isimli iki kişiyi otomatik birleştirme yapılmamalıdır.</li>
+          </ul>
+        </article>
+
+        <article class="docs-section">
+          <h3>14. TV ve QR Modülleri — Güvenli ve İzole Entegrasyon</h3>
+          <p>TV bilgilendirme ekranı ve public QR randevu v4.7.17 ile aktif kullanılabilir. İki modül de ana yönetici yetkilerinden ayrıdır: TV yalnız anonimleştirilmiş payload okur; QR yalnız kontrollü randevu oluşturma/yönetme Edge Function hattını kullanır. Her iki modül feature/config seviyesinde bağımsız kapatılabilir.</p>
+          <ul>
+            <li>TV config yalnız yönetici tarafından açılıp kapatılır; payload içinde Ad Soyad, kişi kimliği, Ayırt Etme, borç ve ödeme bulunmaz.</li>
+            <li>QR booking yalnız günlük PIN, kısa ömürlü oturum, rate-limit ve sunucu tarafı slot kilidi ile çalışır.</li>
+            <li>Public randevu sayfası yalnız Ad Soyad, gün/saat ve hizmet alır; telefon, rütbe ve birlik istemez; aynı isimleri otomatik birleştirmez.</li>
+            <li>TV cihazı önce yönetici tarafından eşleştirilir; cihaz tokenı yalnız TV payload erişimi sağlar ve yönetici tarafından iptal edilebilir.</li>
+          </ul>
+          <div class="rule"><b>v4.7.17 güvenlik kuralı:</b> TV ve QR bağımsız feature/config ile yönetilir; bir modül kapatılsa da ana PWA, ödeme ve stok çekirdeği çalışmaya devam eder.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>15. Ödeme ve Hizmet Değişikliği Koruması</h3>
+          <p>Aktif tahsilatı bulunan randevuda hizmet ekleme, hizmet çıkarma veya toplamı değiştirecek doğrudan düzenleme engellenmelidir. Arayüzde uyarı olması yeterli değildir; sunucu tarafı da koruma sağlamalıdır.</p>
+          <div class="rule danger">Beklenen uyarı mantığı: “Bu randevuda tahsilat bulunmaktadır. Hizmetleri değiştirmek için önce tahsilatı geri alın.”</div>
+          <p>Randevunun durum, imza ve güvenli not gibi toplamı etkilemeyen alanları iş kuralına göre çalışmaya devam edebilir. Tahsilat düzeltmesi gerektiğinde eski transaction void edilerek yeni doğru transaction oluşturulması tercih edilir; geçmiş tamamen silinmez.</p>
+        </article>
+
+        <article class="docs-section">
+          <h3>16. Önemli Teknik Fonksiyonlar / Sürüm Notları</h3>
+          <p>İsimler gelecekte veritabanı incelenirken başlangıç noktasıdır. Körlemesine değiştirilmemelidir.</p>
+          <ul>
+            <li><code>save_barber_appointment_v4716(jsonb)</code> — gizlilik uyumlu randevu kaydı.</li>
+            <li><code>search_person_profiles_v4717</code> / <code>get_person_profile_summary_v4716</code> — güvenli kişi profili arama ve geçmiş uyarıları.</li>
+            <li><code>identity_label</code> — aynı isimli farklı kişileri ayıran isteğe bağlı kısa etiket; örn. 2015.</li>
+            <li><code>transition_appointment_status_v4711(...)</code> — izinli durum geçişleri.</li>
+            <li><code>record_appointment_payment_v47(...)</code> — tahsilat kaydı.</li>
+            <li><code>clear_appointment_payments_v47(...)</code> / <code>void_payment_transaction_v47(...)</code> — güvenli ödeme geri alma.</li>
+            <li><code>private.sync_appointment_payment_v47(...)</code> — allocation toplamı ile randevu ödeme özetini senkronlar.</li>
+            <li><code>get_app_backup_v4717()</code>, <code>create_backup_snapshot_v4717(...)</code>, <code>verify_backup_snapshot_v4717(...)</code>, <code>restore_app_backup_v4717(...)</code> — şema 8 yedek hattı; kişi Ayırt Etme bilgisi de korunur.</li>
+            <li><code>service_*_qr_*_v4717</code> — public QR için Ad Soyad-only rezervasyon, slot kilidi, rate-limit ve self-servis iptal hattı.</li>
+            <li><code>reconcile_qr_identity_v4717(...)</code> — QR ile gelen minimal kişiyi yönetici onayıyla mevcut profile bağlar veya yeni kişi olarak doğrular.</li>
+            <li><code>get_tv_display_payload_v4717(...)</code> — TV için kişisel veri içermeyen güvenli payload.</li>
+          </ul>
+          <div class="rule warn"><b>Supabase güvenlik danışmanı notu:</b> private/display tarafında bazı advisor uyarıları görülebilir. RLS'yi veya SECURITY DEFINER izinlerini “uyarıyı sıfırlamak” için körlemesine değiştirme. Anonim schema erişimleri ve hassas public RPC execute izinleri ayrı ayrı kontrol edilmeli; her hardening test projesinde denenmelidir.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>17. Son Final Regresyon Sonucu</h3>
+          <p>Final yayına alma öncesi ve sonrası veri bütünlüğü bu tabloda yeniden doğrulanmalıdır; aşağıdaki hedeflerin tamamı sağlanmadan final paket verilmez:</p>
+          <div class="docs-kv">
+            <div class="k">Aktif zaman çakışması</div><div class="v">0</div>
+            <div class="k">Randevu hizmet toplamı uyuşmazlığı</div><div class="v">0</div>
+            <div class="k">Ödeme toplamı uyuşmazlığı</div><div class="v">0</div>
+            <div class="k">Mükerrer otomatik sarf</div><div class="v">0</div>
+            <div class="k">Stok current_quantity / son movement farkı</div><div class="v">0</div>
+            <div class="k">TV</div><div class="v">Aktif / anonim payload / cihaz eşleştirme</div>
+            <div class="k">QR randevu</div><div class="v">Aktif / PIN + rate-limit + kişi doğrulama</div>
+          </div>
+          <p>Bu değerler final anındaki regresyon sonucudur. Randevu ve stok adetleri sistem kullanıldıkça doğal olarak değişir.</p>
+        </article>
+
+        <article class="docs-section" id="docsChangePolicy">
+          <h3>🧪 18. Değişiklik, Test ve Final Paket Politikası</h3>
+          <p>Her önemli geliştirme aşağıdaki sırayı izlemelidir. Bu sıra atlanırsa çalışan sistemin bozulma riski artar.</p>
+          <ol class="docs-checklist">
+            <li>Canlı sayı ve stok snapshot'ını yeniden sorgula.</li>
+            <li>Doğrulanmış güvenlik yedeği oluştur.</li>
+            <li>Mevcut GitHub paketini/commit'ini rollback noktası olarak sabitle.</li>
+            <li>Değişikliği önce test Supabase ve yerel web kopyasında uygula.</li>
+            <li>Migration ve RPC testlerini çalıştır.</li>
+            <li>Yeni randevu, düzenleme, durum geçişi ve tarih/saat kontrollerini test et.</li>
+            <li>Ödeme al, ödeme geri al, hizmet değişikliği korumasını test et.</li>
+            <li>Tamamlandı + Ödendi stok sarfını ve mükerrer düşmeme kuralını test et.</li>
+            <li>Rapor, CSV, resmî çıktı ve rapor arşivini kontrol et.</li>
+            <li>Yedek oluşturma, doğrulama ve restore round-trip testini yap.</li>
+            <li>RLS, anon/authenticated execute ve hassas schema erişimlerini denetle.</li>
+            <li>iPhone/Safari mobil görünümünü ve dialog taşmalarını test et.</li>
+            <li>Canlıya çıkmadan önce rollback smoke testi yap.</li>
+            <li>Canlıya geçtikten sonra başlangıç snapshot'ı ile veri/stok karşılaştırması yap.</li>
+            <li>Yeni final yedeği oluştur ve doğrula.</li>
+            <li>Ancak kritik/yüksek hata yoksa tek FINAL STABLE ZIP üret.</li>
+          </ol>
+          <div class="rule danger"><b>Final kriteri:</b> Bilinen kritik/yüksek hata varsa paket “FINAL” diye verilmez. Kullanıcıya yalnız gerçekten yüklenmesi gereken tek paket sunulur; SQL bilgisi gerektiren gereksiz manuel adımlar kullanıcıya bırakılmaz.</div>
+        </article>
+
+        <article class="docs-section">
+          <h3>19. Deployment / GitHub Güncelleme Kuralı</h3>
+          <p>Mevcut final dağıtım paketi GitHub Pages kök dizinine yüklenen statik dosyalardan oluşur. Yeni bir web finali üretildiğinde ZIP içeriği açılarak dosyalar GitHub ana dizinindeki aynı isimli dosyaların üzerine yazılır.</p>
+          <ul>
+            <li>ZIP dosyasının kendisini site köküne yüklemek yerine içindeki dosyaları yükle.</li>
+            <li>Supabase migration gerekmiyorsa kullanıcıya SQL çalıştırma görevi verilmez.</li>
+            <li>Yükleme sonrası Safari eski sekmesi tamamen kapatılıp site yeniden açılır.</li>
+            <li>Yüklemeden önce ve sonra <code>index.html</code> sürüm metni, JS syntax ve kritik sayfa dosyaları doğrulanır.</li>
+          </ul>
+        </article>
+
+        <article class="docs-section">
+          <h3>20. Gelecekte Yeni Sohbete Verilecek Kısa Talimat</h3>
+          <p>Aşağıdaki mantık yeni bir ChatGPT sohbetinde başlangıç cümlesi olarak kullanılabilir:</p>
+          <div class="rule"><b>“MEBS Berber Randevu Sistemi v4.7.17 FINAL STABLE üzerinden devam et. Mevcut çalışan düzeni bozma. Yeni randevularda Ad Soyad + gerekirse Ayırt Etme kişi profili kullan; aynı isimleri otomatik birleştirme; telefon/rütbe/birlik altyapısını silme. TV ve QR yalnız v4.7.17 güvenlik katmanları üzerinden aktif çalışsın; TV kişisel veri göstermesin, QR aynı isimleri otomatik birleştirmesin. Ödeme olan randevuda hizmeti doğrudan değiştirme. Stok yalnız Tamamlandı + Ödendi olduğunda bir kez düşsün. Her değişiklikten önce yedek/test/rollback/regresyon yap; kritik/yüksek hata varsa final paket verme. Canlı sayı ve stokları eski nottan alma, yeniden sorgula.”</b></div>
+        </article>
+
+        <article class="docs-section">
+          <h3>21. Son Koruma Notu</h3>
+          <p>Bu sistemin uzun süre stabil kalması için en doğru yaklaşım, çalışan yapıya gereksiz değişiklik yapmamaktır. Yeni ihtiyaç olduğunda önce iş kuralı netleştirilir, canlı veriye dokunmadan test edilir ve yalnız gerekli parçalar değiştirilir.</p>
+          <div class="rule ok"><b>Uzun süreli kullanım prensibi:</b> Günlük kullan, düzenli yedek al, ay sonunda fizikî stok sayımı yap, açıklanamayan ödeme/stok farkını otomatik düzeltme yerine önce teşhis et ve çalışan sistemi sırf “yenilemek” için değiştirme.</div>
+          <p class="docs-footer-note">Bu doküman uygulamanın çalışmasını değiştiren bir veri kaydı değildir; sistem içi başvuru ve devir metnidir. Gizli anahtar/parola/API secret bilgileri kasıtlı olarak dokümana dahil edilmemiştir.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="backupsPage" class="page">
       <div class="backups-head"><button id="backFromBackups" class="btn small" type="button">‹ Ayarlar</button><h2>Yedekler</h2></div>
       <div class="card grid">
@@ -733,11 +1187,11 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
 <button id="fab" class="fab">+</button>
 
 <nav class="nav">
-  <button class="active" data-page="homePage">Bugün</button>
-  <button data-page="weekPage">Hafta</button>
-  <button data-page="recordsPage">Kayıtlar</button>
-  <button data-page="reportPage">Rapor</button>
-  <button data-page="settingsPage">Ayarlar</button>
+  <button class="active" data-page="homePage"><span class="nav-ico">⌂</span><span>Bugün</span></button>
+  <button data-page="availabilityPage"><span class="nav-ico">◷</span><span>Boş Saatler</span></button>
+  <button data-page="recordsPage"><span class="nav-ico">≡</span><span>Kayıtlar</span></button>
+  <button data-page="reportPage"><span class="nav-ico">▥</span><span>Raporlar</span></button>
+  <button data-page="settingsPage"><span class="nav-ico">⚙</span><span>Ayarlar</span></button>
 </nav>
 </div>
 
@@ -788,14 +1242,17 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
     </div>
     <form id="appointmentForm" class="grid">
       <label>Ad Soyad<input id="personName" required autocomplete="off" maxlength="100"></label>
-      <div class="notice" style="background:#eef8f1;color:#176b3a;border:1px solid #b7e3c5"><b>Gizlilik Modu:</b> Bu randevuda kişisel bilgi olarak yalnız Ad Soyad kullanılır.</div>
+      <label>Ayırt Etme <span class="muted" style="font-weight:600">(isteğe bağlı)</span><input id="identityLabel" autocomplete="off" maxlength="30" placeholder="Örn. 2015"><span class="person-profile-help">Yalnız aynı isimli farklı kişileri ayırmak için kullan. Örn. 2015. Tam doğum tarihi, T.C. kimlik no, telefon, rütbe veya birlik girme.</span></label>
+      <div class="notice" style="background:#eef8f1;color:#176b3a;border:1px solid #b7e3c5"><b>Kişi Profili:</b> Aynı kişi tekrar geldiğinde mevcut profili seç. Böylece borç, gelmedi ve geçmiş işlem uyarıları doğru kişide devam eder.</div>
+      <div id="personProfileStatus" class="hidden"></div>
+      <div id="personMatches" class="profile-results hidden"></div>
+      <div id="personAlertBox" class="hidden"></div>
       <div style="display:none" aria-hidden="true">
         <select id="rankSelect"></select>
         <input id="unitName" autocomplete="off">
         <input id="phoneNumber" type="tel" autocomplete="off">
         <button id="callPersonBtn" type="button"></button>
         <datalist id="peopleList"></datalist>
-        <div id="personAlertBox" class="hidden"></div>
       </div>
       <div class="grid grid2">
         <label>Tarih<input id="apptDate" type="date" required></label>
@@ -830,6 +1287,16 @@ dialog .sheet{width:100%;max-width:100%;max-height:calc(100dvh - 12px);overflow-
       <button id="closeDetail" class="btn small">Kapat</button>
     </div>
     <div id="detailBody"></div>
+  </div>
+</dialog>
+
+
+<dialog id="qrIdentityDialog">
+  <div class="sheet"><div class="row between"><h2>QR Kişi Doğrulama</h2><button id="closeQrIdentity" class="btn small" type="button">Kapat</button></div>
+    <div id="qrIdentityInfo" class="qr-review"></div>
+    <div id="qrIdentityCandidates" class="grid" style="margin-top:12px"></div>
+    <div class="card grid" style="margin-top:12px"><b>Farklı kişi olarak kaydet</b><div class="muted" style="font-size:12px">Aynı isimli farklı biriyse 2015 gibi kısa bir Ayırt Etme bilgisi gir.</div><label>Ayırt Etme<input id="qrIdentityLabel" maxlength="30" placeholder="Örn. 2015"></label><button id="confirmQrNewPerson" class="btn primary" type="button">Yeni Kişi Olarak Onayla</button></div>
+    <div id="qrIdentityMsg" class="notice hidden"></div>
   </div>
 </dialog>
 
@@ -911,10 +1378,11 @@ const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 const APP_NAME = "KKK Mebs Öğr. Kurs. Taburu Sb. TML. Berber Randevu Sistemi";
 const DISPLAY_NAME = "MEBS Öğrenci Kurslar Taburu Subay Temel Berber Randevu Sistemi";
 const PRIVACY_MODE = true;
-const TV_FEATURE_ENABLED = false;
-const PUBLIC_BOOKING_ENABLED = false;
+const TV_FEATURE_ENABLED = true;
+const PUBLIC_BOOKING_ENABLED = true;
 const SHORT_NAME = "MEBS Subay Temel Berber";
-const APP_VERSION = "4.7.15";
+const APP_VERSION = "4.7.17";
+const BUILD_LABEL = "PWA + SECURE TV + SECURE QR EDITION 27.09.2026";
 const MFA_REQUIRED = true;
 
 const $ = id => document.getElementById(id);
@@ -925,7 +1393,7 @@ const state = {
   mfa:{verified:[],currentLevel:'aal1',nextLevel:'aal1'},
   mfaEnrollFactorId:null, mfaChallengeFactorId:null, restorePayload:null, slotDateAppointments:[], slotDateKey:'',
   currentClosure:null, dayLoadSeq:0, weekLoadSeq:0, slotLoadSeq:0,
-  selectedPersonId:null, personAlerts:null, debtPersonId:null, debtBeforeAppointmentId:null, debtMax:0, backups:[], pendingSensitiveAction:null,
+  selectedPersonId:null, selectedPersonProfile:null, personCandidates:[], personLookupSeq:0, personAlerts:null, debtPersonId:null, debtBeforeAppointmentId:null, debtMax:0, backups:[], pendingSensitiveAction:null,
   inventoryItems:[], inventoryMovements:[], maintenance:[], reportArchives:[], dayEndSummary:null, stockMonth:null, stockMovements:[], stockMovementsMonth:null, extensionsAvailable:true, qrBooking:null
 };
 const IDLE_MS = 24 * 60 * 60 * 1000;
@@ -936,7 +1404,9 @@ let idleTimer = null;
 let sessionCheckTimer = null;
 let lastServerTouch = 0;
 let sessionLossHandling = false;
-let entering = false;
+let enterPromise = null;
+let appReady = false;
+let appOpeningPromise = null;
 const trMoney = n => new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(Number(n||0));
 const isoDate = d => { const x=new Date(d); x.setMinutes(x.getMinutes()-x.getTimezoneOffset()); return x.toISOString().slice(0,10); };
 const today = () => isoDate(new Date());
@@ -963,7 +1433,7 @@ function msg(el,text,type=''){ el.textContent=text; el.className='notice '+type;
 function hideMsg(el){el.classList.add('hidden')}
 function updateConnectionState(){document.body.classList.toggle('offline',!navigator.onLine);}
 let printOriginalTitle=null;
-function cleanupPrintMode(){document.body.classList.remove('print-report','print-records','print-official','print-stock');if(printOriginalTitle!==null){document.title=printOriginalTitle;printOriginalTitle=null;}}
+function cleanupPrintMode(){document.body.classList.remove('print-report','print-records','print-official','print-stock','print-docs');if(printOriginalTitle!==null){document.title=printOriginalTitle;printOriginalTitle=null;}}
 function startPrint(mode,title=null){cleanupPrintMode();if(title){printOriginalTitle=document.title;document.title=title;}document.body.classList.add(mode);setTimeout(()=>window.print(),120);}
 window.addEventListener('afterprint',cleanupPrintMode);
 
@@ -1000,7 +1470,7 @@ function renderQuickPanel(){
   if(['scheduled','arrived'].includes(x.status)) actions.push(`<button class="btn primary" data-quick-status="in_service">✂ Tıraşa Başla</button>`);
   if(x.status==='in_service') actions.push(`<button class="btn ok" data-quick-status="completed">✓ Tamamlandı</button>`);
   const qr=x.booking_source==='qr'?'<span class="badge" style="background:#eef4ff;color:#175cd3">QR Randevu</span>':'';
-  box.innerHTML=`<div class="quick-head"><div><div class="muted" style="font-size:11px;font-weight:900">HIZLI İŞLEM</div><b>${esc(p.full_name||'')}</b><div class="muted" style="font-size:12px">${esc(meta.line)}</div></div><div class="row" style="flex-wrap:wrap;justify-content:flex-end">${qr}<span class="badge ${esc(x.status)}">${esc(meta.badge)}</span></div></div><div class="quick-actions">${actions.join('')}</div>`;
+  box.innerHTML=`<div class="quick-head"><div><div class="muted" style="font-size:11px;font-weight:900">HIZLI İŞLEM</div><b>${esc(profileName(p))}</b><div class="muted" style="font-size:12px">${esc(meta.line)}</div></div><div class="row" style="flex-wrap:wrap;justify-content:flex-end">${qr}<span class="badge ${esc(x.status)}">${esc(meta.badge)}</span></div></div><div class="quick-actions">${actions.join('')}</div>`;
   box.classList.remove('hidden');
   box.querySelectorAll('[data-quick-status]').forEach(b=>b.onclick=async()=>{
     const target=b.dataset.quickStatus;
@@ -1055,7 +1525,7 @@ async function loadExtensionData(){
     db.from('report_archives').select('*').order('created_at',{ascending:false}).limit(30)
   ]);
   const firstError=[items,moves,maintenance,archives].find(x=>x.error)?.error;
-  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.15 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
+  if(firstError){state.extensionsAvailable=false;console.warn('v4.7.17 ek modülleri henüz hazır değil',firstError);renderExtensionUnavailable();return false;}
   state.extensionsAvailable=true;state.inventoryItems=items.data||[];state.inventoryMovements=moves.data||[];state.maintenance=maintenance.data||[];state.reportArchives=archives.data||[];
   renderInventory();renderMaintenance();renderReportArchives();return true;
 }
@@ -1263,7 +1733,7 @@ function renderReportArchives(){const el=$('reportArchiveList');if(!el)return;if
 
 function renderBackupHealth(){const el=$('backupHealth');if(!el)return;if(!state.backups.length){el.className='health-line bad';el.innerHTML='<span class="health-dot"></span><div><b>Yedek bulunamadı</b><div class="muted" style="font-size:11px">Yeni tam yedek alın.</div></div>';return;}const latest=state.backups[0],age=(Date.now()-new Date(latest.created_at).getTime())/86400000,cls=age<=1?'ok':age<=3?'warn':'bad';el.className='health-line '+cls;el.innerHTML=`<span class="health-dot"></span><div style="flex:1"><b>${cls==='ok'?'Yedek güncel':cls==='warn'?'Yedek eskiyor':'Yedek güncel değil'}</b><div class="muted" style="font-size:11px">Son yedek: ${new Date(latest.created_at).toLocaleString('tr-TR')}</div></div><button id="verifyLatestBackup" class="btn small" type="button">Doğrula</button>`;$('verifyLatestBackup').onclick=verifyLatestBackup;}
 
-async function verifyLatestBackup(){const latest=state.backups[0];if(!latest)return;const b=$('verifyLatestBackup');b.disabled=true;try{const r=await db.rpc('verify_backup_snapshot_v4715',{p_id:latest.id});if(r.error)throw r.error;if(!r.data?.ok)throw new Error('Yedek bütünlüğü doğrulanamadı');alert('Yedek SHA-256 ve içerik bütünlüğü doğrulandı.');}catch(e){alert(e.message||'Yedek doğrulanamadı.');}finally{b.disabled=false;}}
+async function verifyLatestBackup(){const latest=state.backups[0];if(!latest)return;const b=$('verifyLatestBackup');b.disabled=true;try{const r=await db.rpc('verify_backup_snapshot_v4717',{p_id:latest.id});if(r.error)throw r.error;if(!r.data?.ok)throw new Error('Yedek bütünlüğü doğrulanamadı');alert('Yedek SHA-256 ve içerik bütünlüğü doğrulandı.');}catch(e){alert(e.message||'Yedek doğrulanamadı.');}finally{b.disabled=false;}}
 
 async function init(){
   state.selectedDate=today();
@@ -1275,14 +1745,31 @@ async function init(){
   bind();
   startIdleGuard();
   updateConnectionState();
-  window.addEventListener('online',updateConnectionState);
+  window.addEventListener('online',()=>{updateConnectionState();if(!document.hidden&&state.user&&!appReady)void retryConnectionGate();});
   window.addEventListener('offline',updateConnectionState);
-  const {data:{session}}=await db.auth.getSession();
-  if(session) await enter(session.user);
-  db.auth.onAuthStateChange(async (_e,s)=>{
-    if(s?.user) await enter(s.user);
-    else showAuth();
+
+  // Auth olayının kendi kilidi içinde Supabase çağrıları bekletilmez.
+  // Böylece TOKEN_REFRESHED / SIGNED_IN sırasında veritabanı ve MFA çağrıları yarışmaz.
+  db.auth.onAuthStateChange((event,sess)=>{
+    setTimeout(()=>{
+      if(event==='SIGNED_OUT'){
+        showAuth();
+        return;
+      }
+      // Devam eden giriş akışını TOKEN_REFRESHED/SIGNED_IN olayıyla ikinci kez başlatma.
+      if(sess?.user && !appReady && !enterPromise) void enter(sess.user);
+    },0);
   });
+
+  try{
+    const {data,error}=await db.auth.getSession();
+    if(error) throw error;
+    if(data?.session?.user) await enter(data.session.user);
+    else showAuth();
+  }catch(error){
+    console.error('İlk oturum okunamadı',error);
+    showConnectionGate('Güvenli oturum okunamadı. İnternet bağlantısı geri geldiğinde yeniden dene.',error);
+  }
 }
 
 const MFA_FACTOR_CACHE_KEY='okan_mfa_factor_cache_v473';
@@ -1353,134 +1840,317 @@ async function fetchVerifiedMfaFactors(allowCache=true){
 }
 
 async function getMfaState(){
-  const [verified,aalRes]=await Promise.all([
-    fetchVerifiedMfaFactors(true),
-    db.auth.mfa.getAuthenticatorAssuranceLevel()
-  ]);
+  const verified=await fetchVerifiedMfaFactors(true);
+  let aalRes=await db.auth.mfa.getAuthenticatorAssuranceLevel();
   if(aalRes.error) throw aalRes.error;
-  const currentLevel=aalRes.data?.currentLevel||'aal1';
-  const nextLevel=aalRes.data?.nextLevel||'aal1';
-  if(currentLevel!=='aal2' && nextLevel!=='aal2' && verified.length){
-    clearCachedMfaFactor();
-    return {verified:[],currentLevel,nextLevel};
+
+  let currentLevel=aalRes.data?.currentLevel||'aal1';
+  let nextLevel=aalRes.data?.nextLevel||'aal1';
+
+  // Doğrulanmış faktör varken AAL bilgisi kısa süreli eski dönebilir.
+  // Böyle bir durumda faktörü silinmiş saymak yerine oturumu bir kez yenileyip tekrar sor.
+  if(verified.length && currentLevel!=='aal2' && nextLevel!=='aal2'){
+    await refreshSessionQuietly();
+    await wait(150);
+    aalRes=await db.auth.mfa.getAuthenticatorAssuranceLevel();
+    if(aalRes.error) throw aalRes.error;
+    currentLevel=aalRes.data?.currentLevel||'aal1';
+    nextLevel=aalRes.data?.nextLevel||'aal1';
   }
+
   return {verified,currentLevel,nextLevel};
 }
 
 
-async function getTrustedSessionState(){
+const wait = ms => new Promise(resolve=>setTimeout(resolve,ms));
+
+async function refreshSessionQuietly(){
   try{
-    const r=await db.rpc('check_app_session_v47',{p_device_id:getDeviceId()});
-    if(r.error) return {active:false,reason:'check_error',error:r.error};
-    return r.data||{active:false,reason:'not_activated'};
-  }catch(error){
-    return {active:false,reason:'check_error',error};
+    const r=await db.auth.refreshSession();
+    if(r.error) throw r.error;
+    return true;
+  }catch(e){
+    console.warn('Oturum yenilenemedi',e);
+    return false;
   }
 }
 
-async function openTrustedApp(){
+function showConnectionGate(text='Güvenli bağlantı kuruluyor…',error=null,retryVisible=true){
+  appReady=false;
   $('authView').classList.add('hidden');
-  $('mfaView').classList.add('hidden');
-  $('appView').classList.remove('hidden');
-  lastServerTouch=Date.now();
-  clearInterval(sessionCheckTimer);
-  sessionCheckTimer=setInterval(checkRemoteSession,SESSION_CHECK_MS);
-  resetActivity();
-  await loadBase();
-  await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData()]);
-  renderSettings();
+  $('appView').classList.add('hidden');
+  $('mfaView').classList.remove('hidden');
+  if($('mfaGateTitle')) $('mfaGateTitle').textContent='🔄 Güvenli Bağlantı';
+  $('mfaGateText').textContent=text;
+  $('mfaGateSetup').classList.add('hidden');
+  $('mfaChallengeForm').classList.add('hidden');
+  $('mfaRetryBtn')?.classList.toggle('hidden',!retryVisible);
+  if(error){
+    const raw=String(error?.message||error||'').trim();
+    msg($('mfaMsg'),raw?`Bağlantı geçici olarak kurulamadı: ${raw}`:'Bağlantı geçici olarak kurulamadı.','error');
+  }else{
+    hideMsg($('mfaMsg'));
+  }
+}
 
-  // 24 saat güvenilir oturum sunucu tarafından doğrulandıysa MFA API'si açılışı engellemez.
-  void getMfaState().then(x=>{state.mfa=x;if(state.currentPage==='settingsPage')renderMfaSettings();})
-    .catch(e=>console.warn('MFA durumu arka planda yenilenemedi',e));
+async function retryConnectionGate(){
+  const b=$('mfaRetryBtn');
+  if(b){b.disabled=true;b.textContent='Yeniden bağlanılıyor…';}
+  try{
+    const {data,error}=await db.auth.getSession();
+    if(error) throw error;
+    if(!data?.session?.user){
+      showAuth();
+      return;
+    }
+    state.user=data.session.user;
+    await enter(data.session.user);
+  }catch(error){
+    console.error('Bağlantı yeniden kurulamadı',error);
+    showConnectionGate('Oturum korunuyor. İnternet/veritabanı bağlantısını yeniden dene.',error,true);
+  }finally{
+    if(b){b.disabled=false;b.textContent='Bağlantıyı Yeniden Dene';}
+  }
+}
+
+async function getAdminMembershipStable(userId){
+  let lastError=null;
+  for(let attempt=0;attempt<4;attempt++){
+    try{
+      const r=await db.from('app_members').select('user_id,role,active').eq('user_id',userId).maybeSingle();
+      if(!r.error) return {ok:true,data:r.data};
+      lastError=r.error;
+    }catch(e){ lastError=e; }
+
+    if(attempt===0) await refreshSessionQuietly();
+    if(attempt<3) await wait(250*(attempt+1));
+  }
+  return {ok:false,error:lastError||new Error('Yetki kaydı okunamadı')};
+}
+
+async function getTrustedSessionState(){
+  let lastError=null;
+  for(let attempt=0;attempt<4;attempt++){
+    try{
+      const r=await db.rpc('check_app_session_v47',{p_device_id:getDeviceId()});
+      if(!r.error){
+        const data=r.data||{active:false,reason:'not_activated'};
+        if(data?.reason==='no_session' && attempt<3){
+          await refreshSessionQuietly();
+          await wait(180*(attempt+1));
+          continue;
+        }
+        return data;
+      }
+      lastError=r.error;
+    }catch(error){ lastError=error; }
+
+    if(attempt===0) await refreshSessionQuietly();
+    if(attempt<3) await wait(250*(attempt+1));
+  }
+  // Bağlantı hatası güvenlik kodu gerektiriyor gibi yorumlanmaz.
+  return {active:null,reason:'check_error',error:lastError||new Error('Oturum kontrolü yapılamadı')};
+}
+
+async function loadCriticalDataStable(){
+  let lastError=null;
+  for(let attempt=0;attempt<4;attempt++){
+    try{
+      await loadBase();
+      const dayOk=await loadDay();
+      const recordsOk=await loadRecords();
+      if(dayOk!==true || recordsOk!==true) throw new Error('Randevu verileri henüz hazır değil');
+      return true;
+    }catch(error){
+      lastError=error;
+      console.warn(`Temel veriler yüklenemedi (${attempt+1}/4)`,error);
+      if(attempt===0) await refreshSessionQuietly();
+      if(attempt<3) await wait(350*(attempt+1));
+    }
+  }
+  throw lastError||new Error('Veritabanı bağlantısı kurulamadı');
+}
+
+async function loadAppDataStable(){
+  await loadCriticalDataStable();
+
+  // Bunlar ana randevu ekranını bloke etmeyen yardımcı modüllerdir.
+  // Bir tanesi geçici olarak yanıt vermezse ana sistem yine açılır ve modül kendi uyarısını gösterir.
+  await Promise.allSettled([
+    loadWeek(),
+    loadTrash(),
+    loadAudit(),
+    loadBackupCenter(),
+    loadExtensionData()
+  ]);
+  renderSettings();
+}
+
+async function openTrustedApp(){
+  if(appReady && !$('appView').classList.contains('hidden')) return true;
+  if(appOpeningPromise) return appOpeningPromise;
+
+  appOpeningPromise=(async()=>{
+    const expectedUserId=state.user?.id||null;
+    showConnectionGate('Oturum doğrulandı. Veritabanına güvenli bağlantı kuruluyor…',null,false);
+    try{
+      await loadAppDataStable();
+
+      // Veri yüklenirken kullanıcı çıkış yaptıysa eski akış uygulamayı tekrar açamaz.
+      const authCheck=await db.auth.getSession();
+      if(authCheck.error || !authCheck.data?.session?.user || authCheck.data.session.user.id!==expectedUserId){
+        showAuth();
+        return false;
+      }
+
+      $('authView').classList.add('hidden');
+      $('mfaView').classList.add('hidden');
+      $('appView').classList.remove('hidden');
+      $('mfaRetryBtn')?.classList.add('hidden');
+      appReady=true;
+
+      lastServerTouch=Date.now();
+      clearInterval(sessionCheckTimer);
+      sessionCheckTimer=setInterval(checkRemoteSession,SESSION_CHECK_MS);
+      resetActivity();
+
+      // Güvenilir oturum sunucu tarafından doğrulandıysa MFA servisi açılışı engellemez.
+      void getMfaState().then(x=>{state.mfa=x;if(state.currentPage==='settingsPage')renderMfaSettings();})
+        .catch(e=>console.warn('MFA durumu arka planda yenilenemedi',e));
+      return true;
+    }catch(error){
+      console.error('Uygulama verileri yüklenemedi',error);
+      showConnectionGate(
+        'Oturumun açık. Veritabanına geçici olarak ulaşılamadı; çıkış yapmana gerek yok.',
+        error,
+        true
+      );
+      return false;
+    }finally{
+      appOpeningPromise=null;
+    }
+  })();
+
+  return appOpeningPromise;
+}
+
+async function enterCore(user){
+  if(!user) return false;
+  state.user=user;
+
+  const membership=await getAdminMembershipStable(user.id);
+  if(!membership.ok){
+    showConnectionGate('Yetki ve veritabanı bağlantısı doğrulanıyor. Oturumun korunuyor.',membership.error,true);
+    return false;
+  }
+  const data=membership.data;
+  if(!data?.active || data?.role!=='admin'){
+    await db.auth.signOut();
+    showAuth();
+    msg($('authMsg'),'Bu hesap bu sisteme yetkili değil.','error');
+    return false;
+  }
+
+  if(appReady && !$('appView').classList.contains('hidden')) return true;
+
+  // Önce 24 saatlik güvenilir oturum sunucudan doğrulanır.
+  // RPC'nin geçici ağ hatası MFA ihtiyacı olarak yorumlanmaz.
+  const trusted=await getTrustedSessionState();
+  if(trusted?.active===true){
+    return await openTrustedApp();
+  }
+  if(trusted?.active===null || trusted?.reason==='check_error'){
+    showConnectionGate('Güvenilir oturum doğrulanamadı. Güvenlik kodu istemeden önce bağlantı yeniden kontrol edilecek.',trusted?.error,true);
+    return false;
+  }
+
+  let mfaState=null;
+  let lastMfaError=null;
+  for(let attempt=0;attempt<3;attempt++){
+    try{
+      mfaState=await getMfaState();
+      lastMfaError=null;
+      break;
+    }catch(error){
+      lastMfaError=error;
+      console.warn(`MFA durum kontrolü başarısız (${attempt+1}/3)`,error);
+      if(attempt===0) await refreshSessionQuietly();
+      if(attempt<2) await wait(250*(attempt+1));
+    }
+  }
+  if(!mfaState){
+    showConnectionGate('2FA servisine geçici olarak ulaşılamadı. Oturumun silinmedi; yeniden dene.',lastMfaError,true);
+    return false;
+  }
+
+  state.mfa=mfaState;
+
+  if(MFA_REQUIRED && !state.mfa.verified.length){
+    // Kurulu MFA bilgisinin gerçekten olmadığı doğrulanmışsa kurulum ekranı gösterilir.
+    showMfaSetupGate();
+    return false;
+  }
+
+  if(state.mfa.currentLevel==='aal2'){
+    if(!(await activateAppSession(false))) return false;
+    return await openTrustedApp();
+  }
+
+  if(state.mfa.nextLevel==='aal2'){
+    showMfaChallengeGate(state.mfa.verified?.[0]);
+    return false;
+  }
+
+  // Doğrulanmış faktör var ancak AAL bilgisi henüz senkronize değilse
+  // yanlışlıkla yeni MFA kurulumu başlatmak yerine bağlantı/oturum yenilenir.
+  if(state.mfa.verified.length){
+    showConnectionGate('Authenticator kaydı bulundu; güvenlik oturumu senkronize ediliyor. Yeniden dene.',null,true);
+    return false;
+  }
+
+  showMfaSetupGate();
+  return false;
 }
 
 async function enter(user){
-  if(entering) return;
-  entering=true;
+  // Auth olaylarını düşürmek yerine tek sırada işler.
+  // Böylece SIGNED_IN ve TOKEN_REFRESHED aynı anda geldiğinde biri diğerini bozamaz.
+  if(enterPromise){
+    try{ await enterPromise; }catch(e){}
+    if(appReady) return true;
+  }
+  enterPromise=enterCore(user);
   try{
-    state.user=user;
-    const {data,error}=await db.from('app_members').select('user_id,role,active').eq('user_id',user.id).maybeSingle();
-    if(error) console.error(error);
-    if(!data?.active || data?.role!=='admin'){
-      await db.auth.signOut();
-      showAuth();
-      msg($('authMsg'),'Bu hesap bu sisteme yetkili değil.','error');
-      return;
-    }
-
-    if(!$('appView').classList.contains('hidden')) return;
-
-    // Önce 24 saat güvenilir session kontrolü.
-    const trusted=await getTrustedSessionState();
-    if(trusted?.active===true){
-      await openTrustedApp();
-      return;
-    }
-
-    let mfaState=null;
-    try{
-      mfaState=await getMfaState();
-    }catch(firstError){
-      console.warn('İlk MFA durum kontrolü başarısız',firstError);
-      try{
-        const refreshed=await db.auth.refreshSession();
-        if(refreshed.error) throw refreshed.error;
-        mfaState=await getMfaState();
-      }catch(secondError){
-        console.error('MFA güvenlik durumu doğrulanamadı',secondError);
-        $('authView').classList.add('hidden');
-        $('appView').classList.add('hidden');
-        $('mfaView').classList.remove('hidden');
-        $('mfaGateText').textContent='Güvenli oturum doğrulanıyor.';
-        $('mfaGateSetup').classList.add('hidden');
-        $('mfaChallengeForm').classList.add('hidden');
-        msg($('mfaMsg'),'2FA servisine geçici olarak ulaşılamadı. Sayfayı yenileyip tekrar dene; mevcut oturum silinmedi.','error');
-        return;
-      }
-    }
-    state.mfa=mfaState;
-
-    if(MFA_REQUIRED && !state.mfa.verified.length){
-      showMfaSetupGate();
-      return;
-    }
-
-    if(state.mfa.currentLevel==='aal2'){
-      if(!(await activateAppSession(false))) return;
-      await openTrustedApp();
-      return;
-    }
-
-    if(state.mfa.nextLevel==='aal2'){
-      showMfaChallengeGate(state.mfa.verified?.[0]);
-      return;
-    }
-
-    showMfaSetupGate();
-  } finally {
-    entering=false;
+    return await enterPromise;
+  }finally{
+    enterPromise=null;
   }
 }
 
 function showMfaSetupGate(){
+  appReady=false;
   $('authView').classList.add('hidden');
   $('appView').classList.add('hidden');
   $('mfaView').classList.remove('hidden');
+  if($('mfaGateTitle')) $('mfaGateTitle').textContent='🔐 İki Aşamalı Doğrulama';
   $('mfaGateText').textContent='İlk güvenli giriş için 2FA kurulumu tamamlanmalıdır.';
   $('mfaGateSetup').classList.remove('hidden');
   $('mfaChallengeForm').classList.add('hidden');
+  $('mfaRetryBtn')?.classList.add('hidden');
   hideMsg($('mfaMsg'));
 }
 
 function showMfaChallengeGate(factor){
+  appReady=false;
   state.mfaChallengeFactorId=factor?.id||null;
   $('authView').classList.add('hidden');
   $('appView').classList.add('hidden');
   $('mfaView').classList.remove('hidden');
+  if($('mfaGateTitle')) $('mfaGateTitle').textContent='🔐 İki Aşamalı Doğrulama';
   $('mfaGateText').textContent='Şifre doğrulandı · İkinci güvenlik adımı gerekli.';
   $('mfaGateSetup').classList.add('hidden');
   $('mfaChallengeForm').classList.remove('hidden');
+  $('mfaRetryBtn')?.classList.add('hidden');
   const factors=state.mfa.verified||[];
   $('mfaFactorSelect').innerHTML=factors.map((f,i)=>`<option value="${f.id}">${esc(f.friendly_name||('Authenticator '+(i+1)))}</option>`).join('');
   $('mfaFactorWrap').classList.toggle('hidden',factors.length<=1);
@@ -1492,9 +2162,12 @@ function showMfaChallengeGate(factor){
 
 function showAuth(){
   state.user=null;
+  appReady=false;
+  appOpeningPromise=null;
   clearInterval(sessionCheckTimer);
   state.mfa={verified:[],currentLevel:'aal1',nextLevel:'aal1'};
   ['appointmentDialog','detailDialog','mfaEnrollDialog','restoreDialog'].forEach(id=>{const d=$(id);if(d?.open)d.close();});
+  $('mfaRetryBtn')?.classList.add('hidden');
   $('appView').classList.add('hidden');
   $('mfaView').classList.add('hidden');
   $('authView').classList.remove('hidden');
@@ -1525,25 +2198,42 @@ async function handleSessionLost(reason='another_session_active'){
 }
 
 async function activateAppSession(challengeOnMfa=false){
-  const r=await db.rpc('activate_app_session_v47',{p_device_id:getDeviceId()});
-  if(r.error){
-    const text=r.error.message||'Güvenli oturum etkinleştirilemedi.';
-    if(challengeOnMfa && /2FA|doğrulama gerekli|güven süresi/i.test(text)){
-      try{
-        if(!state.mfa.verified?.length) state.mfa.verified=await fetchVerifiedMfaFactors(true);
-      }catch(e){ console.warn('2FA faktörü yeniden okunamadı',e); }
-      showMfaChallengeGate(state.mfa.verified?.[0]);
-      return false;
+  let lastError=null;
+  for(let attempt=0;attempt<3;attempt++){
+    try{
+      const r=await db.rpc('activate_app_session_v47',{p_device_id:getDeviceId()});
+      if(!r.error){
+        lastServerTouch=Date.now();
+        clearInterval(sessionCheckTimer);
+        sessionCheckTimer=setInterval(checkRemoteSession,SESSION_CHECK_MS);
+        return true;
+      }
+      lastError=r.error;
+      const text=r.error.message||'Güvenli oturum etkinleştirilemedi.';
+      if(/2FA|doğrulama gerekli|güven süresi/i.test(text)){
+        try{
+          if(!state.mfa.verified?.length) state.mfa.verified=await fetchVerifiedMfaFactors(true);
+        }catch(e){ console.warn('2FA faktörü yeniden okunamadı',e); }
+        showMfaChallengeGate(state.mfa.verified?.[0]);
+        return false;
+      }
+      if(/Yetkisiz hesap|Oturum gerekli/i.test(text)){
+        try{ await db.auth.signOut({scope:'local'}); }catch(e){ console.warn(e); }
+        showAuth();
+        msg($('authMsg'),text,'error');
+        return false;
+      }
+    }catch(error){
+      lastError=error;
     }
-    try{ await db.auth.signOut({scope:'local'}); }catch(e){ console.warn(e); }
-    showAuth();
-    msg($('authMsg'),text,'error');
-    return false;
+
+    if(attempt===0) await refreshSessionQuietly();
+    if(attempt<2) await wait(250*(attempt+1));
   }
-  lastServerTouch=Date.now();
-  clearInterval(sessionCheckTimer);
-  sessionCheckTimer=setInterval(checkRemoteSession,SESSION_CHECK_MS);
-  return true;
+
+  // Ağ/RPC hatasında kullanıcıyı dışarı atma; oturum korunur ve yeniden denenebilir.
+  showConnectionGate('Güvenli oturum etkinleştirilemedi. Oturumun korunuyor; bağlantıyı yeniden dene.',lastError,true);
+  return false;
 }
 
 async function checkRemoteSession(){
@@ -1762,10 +2452,11 @@ async function loadBase(){
     db.from('rank_groups').select('*').eq('active',true).order('sort_order'),
     db.from('service_items').select('*').eq('active',true).order('sort_order'),
     db.from('weekly_slots').select('*').eq('active',true).order('day_of_week').order('sort_order'),
-    db.from('people').select('id,full_name').eq('active',true).is('deleted_at',null).order('full_name'),
+    db.from('people').select('id,full_name,identity_label').eq('active',true).is('deleted_at',null).order('full_name'),
     db.from('manual_slot_blocks').select('*').order('block_date').order('start_time')
   ]);
-  if(ranks.error||groups.error||services.error||slots.error||people.error||manualBlocks.error) throw new Error('Temel veriler alınamadı');
+  const firstError=[ranks,groups,services,slots,people,manualBlocks].find(x=>x.error)?.error;
+  if(firstError) throw firstError;
   state.ranks=ranks.data||[];
   state.groups=groups.data||[];
   state.services=services.data||[];
@@ -1786,7 +2477,7 @@ async function loadDay(){
   $('schedule').innerHTML='<div class="card muted">Günlük plan yükleniyor…</div>';
   try{
     const [appointmentsRes,blocksRes,closureRes]=await Promise.all([
-      db.from('appointments').select('*,people(id,full_name),appointment_services(id,quantity,unit_price,line_total,service_id,service_items(name))').eq('appointment_date',dateStr).is('deleted_at',null).order('start_time'),
+      db.from('appointments').select('*,people(id,full_name,identity_label),appointment_services(id,quantity,unit_price,line_total,service_id,service_items(name))').eq('appointment_date',dateStr).is('deleted_at',null).order('start_time'),
       db.from('manual_slot_blocks').select('*').eq('block_date',dateStr).order('start_time'),
       db.from('daily_closures').select('id,work_date,notes').eq('work_date',dateStr).maybeSingle()
     ]);
@@ -1862,6 +2553,69 @@ function fillPeopleList(){
   $('peopleList').innerHTML=state.people.map(p=>`<option value="${esc(p.full_name)}"></option>`).join('');
 }
 
+function profileName(person){
+  if(!person)return '';
+  const label=String(person.identity_label||'').trim();
+  return `${person.full_name||''}${label?` · ${label}`:''}`;
+}
+
+function resetPersonProfileSelection(clearLabel=false){
+  state.selectedPersonId=null;
+  state.selectedPersonProfile=null;
+  state.personAlerts=null;
+  $('personName').readOnly=false;
+  $('identityLabel').readOnly=false;
+  if(clearLabel)$('identityLabel').value='';
+  $('personProfileStatus').classList.add('hidden');
+  $('personProfileStatus').innerHTML='';
+  renderPersonAlertBox(null,null);
+}
+
+function renderPersonCandidates(){
+  const box=$('personMatches');
+  const list=state.personCandidates||[];
+  if(state.editAppointmentId || state.selectedPersonId || !list.length){
+    box.classList.add('hidden'); box.innerHTML=''; return;
+  }
+  const cards=list.map(p=>{
+    const debt=Number(p.debt||0), noShow=Number(p.no_show_count||0);
+    const cls=debt>0?'danger':noShow>0?'warning':'';
+    const tag=p.identity_label?`<span class="profile-tag">${esc(p.identity_label)}</span>`:'<span class="profile-tag">Etiketsiz</span>';
+    const last=p.last_appointment_date?`Son: ${esc(p.last_appointment_date)}`:'Geçmiş işlem yok';
+    return `<button type="button" class="profile-card ${cls}" data-person-profile="${p.id}">
+      <div class="profile-name">${esc(p.full_name)} ${tag}</div>
+      <div class="profile-meta"><span>Geçmiş: <b>${Number(p.history_count||0)}</b></span><span>Gelmedi: <b>${noShow}</b></span><span>Borç: <b>${trMoney(debt)}</b></span><span>${last}</span></div>
+      <div class="muted" style="font-size:10px">Aynı kişiyse bu profili seç.</div>
+    </button>`;
+  }).join('');
+  box.innerHTML=`<div class="profile-results-head"><b>Bu Ad Soyad ile ${list.length} mevcut kişi profili bulundu.</b><br>Aynı kişiyse profili seç. Farklı kişiyse Ayırt Etme alanına örn. <b>2015</b> yazıp yeni profil oluştur.</div>${cards}`;
+  box.classList.remove('hidden');
+  box.querySelectorAll('[data-person-profile]').forEach(b=>b.onclick=()=>selectPersonProfile(b.dataset.personProfile));
+}
+
+async function selectPersonProfile(id){
+  const person=(state.personCandidates||[]).find(x=>x.id===id)||state.people.find(x=>x.id===id);
+  if(!person)return;
+  state.selectedPersonId=person.id;
+  state.selectedPersonProfile=person;
+  $('personName').value=person.full_name||'';
+  $('identityLabel').value=person.identity_label||'';
+  $('personName').readOnly=true;
+  $('identityLabel').readOnly=true;
+  $('personMatches').classList.add('hidden');
+  $('personMatches').innerHTML='';
+  const status=$('personProfileStatus');
+  status.className='profile-selected';
+  status.innerHTML=`<div><strong>✓ Mevcut kişi profili seçildi</strong><div style="font-size:11px;margin-top:2px">${esc(profileName(person))}</div></div>${state.editAppointmentId?'':'<button id="changePersonProfileBtn" type="button" class="btn small">Seçimi Değiştir</button>'}`;
+  status.classList.remove('hidden');
+  $('changePersonProfileBtn')?.addEventListener('click',()=>{
+    resetPersonProfileSelection(false);
+    void applyKnownPerson();
+    $('personName').focus();
+  });
+  await loadPersonAlerts(person,state.editAppointmentId||null);
+}
+
 function updateCallButton(){
   $('callPersonBtn').classList.add('hidden');
   $('callPersonBtn').dataset.phone='';
@@ -1871,20 +2625,20 @@ function renderPersonAlertBox(alerts,person){
   const box=$('personAlertBox');
   if(!alerts || !person){box.classList.add('hidden');box.innerHTML='';return;}
   const noShow=Number(alerts.no_show_count||0), debt=Number(alerts.debt||0), debtCount=Number(alerts.debt_count||0);
-  if(!noShow && !debt){
-    box.className='person-alert safe';
-    box.innerHTML='<div class="alert-title">✓ Geçmiş uyarı bulunmuyor</div><div>Bu kişi için önceki borç veya gelmedi kaydı görünmüyor.</div>';
-    return;
-  }
-  const parts=[];
+  const history=Number(alerts.history_count||0), completed=Number(alerts.completed_count||0);
+  const last=alerts.last_completed_date||alerts.last_appointment_date||null;
+  const cls=debt>0?'person-alert debt-alert':noShow>0?'person-alert':'person-alert safe';
+  const title=debt>0?'⚠️ ÖNCEKİ BORÇ VAR':noShow>0?'⚠️ GELMEDİ GEÇMİŞİ VAR':'✓ KİŞİ GEÇMİŞİ TEMİZ';
+  const parts=[`<div class="alert-title">${title}</div>`];
   if(debt>0){
-    parts.push(`<div class="alert-title">⚠️ ÖNCEKİ BORÇ VAR</div>`);
     parts.push(`<div class="debt-warning-amount">${trMoney(debt)}</div>`);
-    parts.push(`<div>${debtCount>0?`${debtCount} tamamlanmış işlemden kalan borç. `:''}${alerts.latest_debt_date?`Son borç tarihi: ${esc(alerts.latest_debt_date)}.`:''}</div>`);
+    parts.push(`<div>${debtCount} tamamlanmış işlemden kalan borç.${alerts.latest_debt_date?` Son borç: ${esc(alerts.latest_debt_date)}.`:''}</div>`);
   }
-  if(noShow) parts.push(`<div><b>⚠️ Daha önce ${noShow} kez randevusuna gelmedi.</b>${alerts.last_no_show?` Son kayıt: ${esc(alerts.last_no_show)}.`:''}</div>`);
-  box.className=debt>0?'person-alert debt-alert':'person-alert';
+  if(noShow>0) parts.push(`<div>Daha önce <b>${noShow} kez gelmedi</b>${alerts.last_no_show?` · Son: ${esc(alerts.last_no_show)}`:''}.</div>`);
+  parts.push(`<div class="profile-history-grid"><div><b>${history}</b><span>GEÇMİŞ</span></div><div><b>${completed}</b><span>TAMAMLANAN</span></div><div><b>${last?esc(last):'—'}</b><span>SON İŞLEM</span></div></div>`);
+  box.className=cls;
   box.innerHTML=`${parts.join('')}${debt>0?`<div class="alert-actions"><button id="inlineDebtBtn" type="button" class="btn warn">₺ Önceki Borç Tahsil Et · ${trMoney(debt)}</button></div>`:''}`;
+  box.classList.remove('hidden');
   if(debt>0){
     const debtBtn=$('inlineDebtBtn');
     if(debtBtn) debtBtn.onclick=()=>openDebtDialog(person.id,state.editAppointmentId||null,person.full_name||'');
@@ -1894,26 +2648,44 @@ function renderPersonAlertBox(alerts,person){
 async function loadPersonAlerts(person,beforeAppointmentId=null){
   if(!person?.id){state.personAlerts=null;renderPersonAlertBox(null,null);return null;}
   try{
-    const r=await db.rpc('get_person_alerts_v47',{p_person_id:person.id,p_before_appointment_id:beforeAppointmentId||null});
+    const r=await db.rpc('get_person_profile_summary_v4716',{p_person_id:person.id,p_before_appointment_id:beforeAppointmentId||null});
     if(r.error) throw r.error;
-    state.personAlerts=r.data||{no_show_count:0,debt:0};
+    state.personAlerts=r.data||{no_show_count:0,debt:0,history_count:0,completed_count:0};
     renderPersonAlertBox(state.personAlerts,person);
     return state.personAlerts;
   }catch(e){
-    console.warn('Kişi uyarıları yüklenemedi',e);
+    console.warn('Kişi geçmişi yüklenemedi',e);
     state.personAlerts=null;
     const box=$('personAlertBox');
     box.className='person-alert';
-    box.innerHTML='<div class="alert-title">Geçmiş bilgisi doğrulanamadı</div><div>Randevu kaydı yapılabilir; borç ve gelmedi geçmişini daha sonra tekrar kontrol et.</div>';
+    box.innerHTML='<div class="alert-title">Geçmiş bilgisi doğrulanamadı</div><div>Bağlantıyı kontrol et ve kişi profilini yeniden seç. Yanlış kişiye geçmiş bağlanmaz.</div>';
+    box.classList.remove('hidden');
     return null;
   }
 }
 
 async function applyKnownPerson(){
-  // Privacy Stable: Ad Soyad dışında mevcut kişi profili eşleştirilmez veya yüklenmez.
-  state.selectedPersonId=null; state.personAlerts=null;
+  if(state.editAppointmentId || state.selectedPersonId)return state.selectedPersonProfile;
+  const name=$('personName').value.trim();
+  const seq=++state.personLookupSeq;
+  state.personCandidates=[];
   renderPersonAlertBox(null,null);
-  return null;
+  if(name.length<3){renderPersonCandidates();return null;}
+  try{
+    const r=await db.rpc('search_person_profiles_v4717',{p_name:name});
+    if(seq!==state.personLookupSeq)return null;
+    if(r.error)throw r.error;
+    state.personCandidates=Array.isArray(r.data)?r.data:[];
+    renderPersonCandidates();
+    return state.personCandidates;
+  }catch(e){
+    if(seq!==state.personLookupSeq)return null;
+    console.warn('Kişi profili araması yapılamadı',e);
+    const box=$('personMatches');
+    box.innerHTML='<div class="notice error">Kişi geçmişi şu anda doğrulanamadı. Randevu kaydetmeden önce bağlantıyı yeniden dene.</div>';
+    box.classList.remove('hidden');
+    return null;
+  }
 }
 
 function fillServices(){
@@ -2005,7 +2777,7 @@ function appointmentCardHtml(x,slot=null){
   const paymentClass=paid?'payment-paid':unpaid?'payment-unpaid':'';
   const paymentBadge=paid?'<span class="payment-badge paid">✓ ÖDENDİ</span>':free?'<span class="payment-badge free">ÜCRETSİZ</span>':'<span class="payment-badge unpaid">₺ ÖDENMEDİ</span>';
   const overdue=appointmentIsOverdue(x);
-  return `<button class="slot ${emergency?'emergency-card':''} ${paymentClass} ${overdue?'overdue-card':''}" data-id="${x.id}" style="text-align:left"><div class="row between"><div class="time">${time5(x.start_time)} – ${time5(x.end_time)}</div><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 ACİL':statusName(x.status)}</span></div><div class="name">${esc(p.full_name)}${x.booking_source==='qr'?' <span class="badge" style="background:#eef4ff;color:#175cd3;margin-left:6px">QR</span>':''}</div><div class="row between"><span class="muted">${x.slot_override&&slot?esc(slot.label||'İstisna'):''}</span><b>${trMoney(x.total_amount)}</b></div>${overdue?'<div class="overdue-warning"><span>⚠️ Randevu saati geçti</span><span>Geldi / Gelmedi durumunu seç</span></div>':''}<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme Durumu</span>${paymentBadge}</div></button>`;
+  return `<button class="slot ${emergency?'emergency-card':''} ${paymentClass} ${overdue?'overdue-card':''}" data-id="${x.id}" style="text-align:left"><div class="row between"><div class="time">${time5(x.start_time)} – ${time5(x.end_time)}</div><span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 ACİL':statusName(x.status)}</span></div><div class="name">${esc(profileName(p))}${x.booking_source==='qr'?' <span class="badge" style="background:#eef4ff;color:#175cd3;margin-left:6px">QR</span>':''}</div><div class="row between"><span class="muted">${x.slot_override&&slot?esc(slot.label||'İstisna'):''}</span><b>${trMoney(x.total_amount)}</b></div>${overdue?'<div class="overdue-warning"><span>⚠️ Randevu saati geçti</span><span>Geldi / Gelmedi durumunu seç</span></div>':''}<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme Durumu</span>${paymentBadge}</div></button>`;
 }
 function bindDayCards(){
   document.querySelectorAll('[data-empty]').forEach(b=>b.onclick=e=>{e.stopPropagation();openNew(b.dataset.empty);});
@@ -2052,11 +2824,13 @@ function renderDay(){
   $('schedule').innerHTML=pieces.join(''); bindDayCards(); renderQuickPanel(); void loadDayEndSummary();
 }
 
-async function openNew(time='', editId=null, forceEmergency=false){
+async function openNew(time='', editId=null, forceEmergency=false, requestedDateOverride=null){
   $('appointmentForm').reset();
   hideMsg($('formMsg'));
   state.editAppointmentId=editId;
-  state.selectedPersonId=null; state.personAlerts=null;
+  state.selectedPersonId=null; state.selectedPersonProfile=null; state.personCandidates=[]; state.personAlerts=null;
+  $('personName').readOnly=false; $('identityLabel').readOnly=false; $('identityLabel').value='';
+  $('personMatches').classList.add('hidden'); $('personMatches').innerHTML=''; $('personProfileStatus').classList.add('hidden'); $('personProfileStatus').innerHTML='';
   renderPersonAlertBox(null,null); $('callPersonBtn').classList.add('hidden');
   hideMsg($('paymentEditGuard'));
   fillServices();
@@ -2071,8 +2845,14 @@ async function openNew(time='', editId=null, forceEmergency=false){
     $('appointmentTitle').textContent='Randevuyu Düzenle';
     $('saveAppointmentBtn').textContent='Değişiklikleri Kaydet';
     $('personName').value=p.full_name||'';
+    $('identityLabel').value=p.identity_label||'';
     $('rankSelect').value=''; $('unitName').value=''; $('phoneNumber').value='';
-    state.selectedPersonId=null;
+    state.selectedPersonId=p.id||null; state.selectedPersonProfile=p.id?p:null;
+    $('personName').readOnly=true; $('identityLabel').readOnly=true;
+    if(p.id){
+      const status=$('personProfileStatus');status.className='profile-selected';status.innerHTML=`<div><strong>✓ Kişi profili sabit</strong><div style="font-size:11px;margin-top:2px">${esc(profileName(p))} · Randevu düzenlemede yanlış kişiye bağlanmayı önlemek için profil değiştirilmez.</div></div>`;status.classList.remove('hidden');
+      await loadPersonAlerts(p,editId);
+    }
     $('apptDate').value=x.appointment_date;
     $('notes').value=x.notes||'';
     $('emergencyCheck').checked=!!(x.is_emergency||x.slot_override);
@@ -2098,7 +2878,7 @@ async function openNew(time='', editId=null, forceEmergency=false){
   }else{
     $('appointmentTitle').textContent=forceEmergency?'🚨 Acil Randevu':'Yeni Randevu';
     $('saveAppointmentBtn').textContent=forceEmergency?'Acil Randevuyu Kaydet':'Randevuyu Kaydet';
-    const requestedDate=state.selectedDate;
+    const requestedDate=requestedDateOverride||state.selectedDate;
     const formDate=hasWorkPlan(requestedDate)?requestedDate:workdayFrom(requestedDate,1,false);
     $('apptDate').value=formDate;
     await refreshSlotSelect(formDate,time);
@@ -2115,8 +2895,11 @@ async function saveAppointment(e){
   e.preventDefault();
   hideMsg($('formMsg'));
   const name=$('personName').value.trim();
+  const identityLabel=$('identityLabel').value.trim();
   const date=$('apptDate').value, start=$('slotSelect').value;
   if(name.length<3||name.length>100||!date) return msg($('formMsg'),'Ad Soyad ve tarih bilgisini kontrol et.','error');
+  if(identityLabel.length>30) return msg($('formMsg'),'Ayırt Etme bilgisi en fazla 30 karakter olabilir.','error');
+  if(!state.editAppointmentId && !state.selectedPersonId && state.personCandidates.length && !identityLabel) return msg($('formMsg'),'Bu Ad Soyad ile mevcut kişi profili var. Aynı kişiyse profili seç; farklı kişiyse Ayırt Etme bilgisi gir (örn. 2015).','error');
   if(!hasWorkPlan(date)) return msg($('formMsg'),'Bu tarihte çalışma planı yok. Lütfen bir çalışma günü seç.','error');
   if(!start) return msg($('formMsg'),'Uygun bir randevu saati seç.','error');
   if(state.manualBlocks.some(b=>b.block_date===date&&time5(b.start_time)===start)) return msg($('formMsg'),'Bu saat manuel olarak DOLU işaretlenmiş. Önce dolu işaretini kaldır.','error');
@@ -2137,7 +2920,9 @@ async function saveAppointment(e){
 
   const payload={
     appointment_id:state.editAppointmentId||null,
+    person_id:state.selectedPersonId||null,
     full_name:name,
+    identity_label:identityLabel||null,
     appointment_date:date,
     start_time:start,
     is_emergency:!!$('emergencyCheck').checked,
@@ -2150,7 +2935,7 @@ async function saveAppointment(e){
   const oldText=btn?.textContent||'Randevuyu Kaydet';
   if(btn){btn.disabled=true;btn.textContent='Kaydediliyor…';}
   try{
-    const q=await db.rpc('save_barber_appointment_v4715',{payload});
+    const q=await db.rpc('save_barber_appointment_v4716',{payload});
     if(q.error){
       const raw=q.error.message||'Randevu kaydedilemedi.';
       const friendly=/dolu|duplicate|unique/i.test(raw)?'Bu saat dolu. Başka bir saat seç.':raw;
@@ -2199,14 +2984,15 @@ async function openDetail(id){
   const canComplete=!isFuture&&['scheduled','arrived','in_service'].includes(x.status);
   const canNoShow=!isFuture&&['scheduled','arrived'].includes(x.status);
   const canCancel=['scheduled','arrived','in_service'].includes(x.status);
-  let alerts={no_show_count:0,debt:0};
+  let alerts={no_show_count:0,debt:0,history_count:0,completed_count:0};
+  try{const pr=await db.rpc('get_person_profile_summary_v4716',{p_person_id:p.id,p_before_appointment_id:id});if(!pr.error&&pr.data)alerts=pr.data;}catch(e){console.warn('Detay kişi geçmişi yüklenemedi',e);}
 
   $('detailBody').innerHTML=`<div class="grid">
     <div class="card">
-      <div class="big" style="font-size:22px">${esc(p.full_name)}</div>
-      <div class="muted" style="margin-top:6px">Gizlilik modu · yalnız Ad Soyad</div>
+      <div class="big" style="font-size:22px">${esc(profileName(p))}</div>
+      <div class="muted" style="margin-top:6px">Kişi profili · Ad Soyad${p.identity_label?' + Ayırt Etme':''}</div>
     </div>
-    ${false?`<div class="person-alert"><div class="alert-title">⚠️ Geçmiş Uyarısı</div>${Number(alerts.no_show_count||0)>0?`<div>Daha önce <b>${Number(alerts.no_show_count)} kez gelmedi</b>${alerts.last_no_show?` · Son: ${esc(alerts.last_no_show)}`:''}.</div>`:''}${Number(alerts.debt||0)>0?`<div>Önceki borç: <b>${trMoney(alerts.debt)}</b></div>`:''}</div>`:''}
+    ${(Number(alerts.history_count||0)>0||Number(alerts.debt||0)>0||Number(alerts.no_show_count||0)>0)?`<div class="${Number(alerts.debt||0)>0?'person-alert debt-alert':Number(alerts.no_show_count||0)>0?'person-alert':'person-alert safe'}"><div class="alert-title">${Number(alerts.debt||0)>0?'⚠️ ÖNCEKİ BORÇ VAR':Number(alerts.no_show_count||0)>0?'⚠️ GELMEDİ GEÇMİŞİ VAR':'✓ KİŞİ GEÇMİŞİ'}</div>${Number(alerts.debt||0)>0?`<div class="debt-warning-amount">${trMoney(alerts.debt)}</div>`:''}${Number(alerts.no_show_count||0)>0?`<div>Daha önce <b>${Number(alerts.no_show_count)} kez gelmedi</b>${alerts.last_no_show?` · Son: ${esc(alerts.last_no_show)}`:''}.</div>`:''}<div class="profile-history-grid"><div><b>${Number(alerts.history_count||0)}</b><span>GEÇMİŞ</span></div><div><b>${Number(alerts.completed_count||0)}</b><span>TAMAMLANAN</span></div><div><b>${alerts.last_completed_date?esc(alerts.last_completed_date):'—'}</b><span>SON İŞLEM</span></div></div></div>`:''}
     <div><b>${x.appointment_date} · ${time5(x.start_time)}–${time5(x.end_time)}</b></div>
     ${appointmentIsOverdue(x)?'<div class="overdue-warning"><span>⚠️ Randevu saati geçti</span><span>Durumu güncelle</span></div>':''}
     ${emergency?`<div class="override-info"><b>🚨 Acil / İstisnai Randevu</b>${x.slot_override?`<div>${['break','cleaning'].includes(x.override_slot_type)?'Dinlenme ve Temizlik':'İstisna'} saati kullanıldı.</div>`:''}${x.override_reason?`<div>${esc(x.override_reason)}</div>`:''}</div>`:''}
@@ -2343,7 +3129,7 @@ async function loadWeek(){
 
 async function loadRecords(){
   const q=await db.from('appointments')
-    .select('*,people(id,full_name),appointment_services(service_id,service_items(name))')
+    .select('*,people(id,full_name,identity_label),appointment_services(service_id,service_items(name))')
     .is('deleted_at',null).order('appointment_date',{ascending:false}).order('start_time',{ascending:false}).limit(500);
   if(q.error){
     console.error('Kayıtlar yüklenemedi',q.error);
@@ -2357,7 +3143,7 @@ function renderRecords(){
   const term=$('recordSearch').value.trim().toLocaleLowerCase('tr-TR');
   const arr=state.records.filter(x=>{
     const p=x.people||{};
-    const textOk=!term || `${p.full_name||''}`.toLocaleLowerCase('tr-TR').includes(term);
+    const textOk=!term || `${p.full_name||''} ${p.identity_label||''}`.toLocaleLowerCase('tr-TR').includes(term);
     const paid=x.payment_status==='paid', free=x.payment_status==='free';
     let filterOk=true;
     if(state.recordFilter==='paid') filterOk=paid;
@@ -2376,7 +3162,7 @@ function renderRecords(){
         ? '<span class="payment-badge free">ÜCRETSİZ</span>'
         : '<span class="payment-badge unpaid">₺ ÖDENMEDİ</span>';
     return `<button class="person ${emergency?'emergency-card':''} ${paid?'payment-paid':unpaid?'payment-unpaid':''}" data-recordid="${x.id}" style="text-align:left;width:100%">
-      <div class="row between"><b>${esc(p.full_name)}</b><span class="row" style="gap:5px">${x.booking_source==='qr'?'<span class="badge" style="background:#eef4ff;color:#175cd3">QR</span>':''}<span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 Acil':esc(statusName(x.status))}</span></span></div>
+      <div class="row between"><b>${esc(profileName(p))}</b><span class="row" style="gap:5px">${x.booking_source==='qr'?'<span class="badge" style="background:#eef4ff;color:#175cd3">QR</span>':''}<span class="badge ${emergency?'emergency-badge':x.status}">${emergency?'🚨 Acil':esc(statusName(x.status))}</span></span></div>
       <div class="muted">${esc(x.appointment_date)} · ${time5(x.start_time)}</div>
       <div class="row between" style="margin-top:6px"><span>${(x.appointment_services||[]).map(s=>esc(s.service_items?.name||'')).join(', ')}</span><b>${trMoney(x.total_amount)}</b></div>
       ${paymentBadge?`<div class="payment-strip"><span class="muted" style="font-size:11px">Ödeme</span>${paymentBadge}</div>`:''}
@@ -2533,7 +3319,7 @@ function renderBackupCenter(){
 async function backupJson(){
   const status=$('backupCenterStatus'); hideMsg(status); msg(status,'Tam yedek hazırlanıyor ve Yedek Merkezi’ne kaydediliyor…','');
   try{
-    const c=await db.rpc('create_backup_snapshot_v4715',{p_label:'Manuel Tam Yedek'});
+    const c=await db.rpc('create_backup_snapshot_v4717',{p_label:'Manuel Tam Yedek'});
     if(c.error) throw c.error;
     const g=await db.rpc('get_backup_snapshot_v4712',{p_id:c.data?.id});
     if(g.error) throw g.error;
@@ -2591,7 +3377,7 @@ async function importBackupFile(file){
   const status=$('backupCenterStatus'); hideMsg(status);
   try{
     const payload=await parseBackupFile(file);
-    const r=await db.rpc('store_backup_snapshot_v4715',{p_payload:payload,p_label:`İçe Aktarılan · ${file.name}`,p_source:'imported'});
+    const r=await db.rpc('store_backup_snapshot_v4716',{p_payload:payload,p_label:`İçe Aktarılan · ${file.name}`,p_source:'imported'});
     if(r.error) throw r.error;
     await loadBackupCenter(); msg(status,`v${payload.version||'?'} yedeği doğrulandı ve Yedek Merkezi’ne eklendi. Veri geri yüklenmedi.`,'success');
   }catch(e){msg(status,'Yedek içe aktarılamadı: '+e.message,'error');}
@@ -2599,7 +3385,7 @@ async function importBackupFile(file){
 }
 
 async function verifyBackupSnapshot(id){
-  try{const r=await db.rpc('verify_backup_snapshot_v4715',{p_id:id});if(r.error)throw r.error;if(!r.data?.ok)throw new Error('SHA-256 / içerik bütünlüğü doğrulanamadı.');await loadBackupCenter();alert('Yedek SHA-256 ve içerik bütünlüğü doğrulandı.');}
+  try{const r=await db.rpc('verify_backup_snapshot_v4717',{p_id:id});if(r.error)throw r.error;if(!r.data?.ok)throw new Error('SHA-256 / içerik bütünlüğü doğrulanamadı.');await loadBackupCenter();alert('Yedek SHA-256 ve içerik bütünlüğü doğrulandı.');}
   catch(e){alert('Yedek doğrulanamadı: '+e.message);}
 }
 
@@ -2625,10 +3411,10 @@ async function restoreBackup(){
       return;
     }
     $('confirmRestoreBtn').textContent='Ön yedek alınıyor…';
-    const pre=await db.rpc('create_backup_snapshot_v4715',{p_label:'GERİ YÜKLEME ÖNCESİ GÜVENLİK YEDEĞİ'});
+    const pre=await db.rpc('create_backup_snapshot_v4717',{p_label:'GERİ YÜKLEME ÖNCESİ GÜVENLİK YEDEĞİ'});
     if(pre.error) throw new Error('Geri yükleme öncesi güvenlik yedeği alınamadı: '+pre.error.message);
     $('confirmRestoreBtn').textContent='Geri yükleniyor…';
-    const r=await db.rpc('restore_app_backup_v4715',{payload:state.restorePayload});
+    const r=await db.rpc('restore_app_backup_v4717',{payload:state.restorePayload});
     if(r.error) throw r.error;
     state.restorePayload=null; $('restoreDialog').close();
     await loadBase(); await Promise.all([loadDay(),loadWeek(),loadRecords(),loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData()]); renderSettings();
@@ -2636,27 +3422,6 @@ async function restoreBackup(){
   }catch(e){msg($('restoreMsg'),'Geri yükleme iptal edildi: '+e.message,'error');}
   finally{$('confirmRestoreBtn').textContent='Güvenli Geri Yüklemeyi Başlat';$('confirmRestoreBtn').disabled=$('restoreConfirmText').value.trim().toLocaleUpperCase('tr-TR')!=='GERİ YÜKLE';}
 }
-
-async function loadQrBookingState(){
-  state.qrBooking={enabled:false};
-  return true;
-}
-function renderQrBookingSettings(){
-  const box=$('qrBookingSettings');if(!box)return;
-  $('qrDailyPin').textContent='----';
-  $('qrPinDate').textContent='Public QR randevu sistemi geçici olarak devre dışı';
-  $('qrEnabledBadge').textContent='QR RANDEVU PASİF';
-  $('qrEnabledBadge').className='backup-chip bad';
-  $('qrToggleBtn').textContent='QR Randevu Pasif';
-  $('qrRandomPinBtn').disabled=true;
-  $('qrSetPinBtn').disabled=true;
-  $('qrToggleBtn').disabled=true;
-  hideMsg($('qrBookingMsg'));
-}
-async function refreshQrBookingSettings(){state.qrBooking={enabled:false};renderQrBookingSettings();}
-async function setQrPin(){alert('Public QR randevu sistemi şu anda pasif.');}
-async function randomQrPin(){alert('Public QR randevu sistemi şu anda pasif.');}
-async function toggleQrBooking(){alert('Public QR randevu sistemi şu anda pasif.');}
 
 function renderSettings(){
   const lastSignIn=state.user?.last_sign_in_at?new Date(state.user.last_sign_in_at).toLocaleString('tr-TR'):'—';
@@ -2671,10 +3436,13 @@ function renderSettings(){
     <div style="margin-top:4px">Kurulum kodu: <strong>DEVRE DIŞI</strong></div>
     <div style="margin-top:4px">Otomatik oturum kilidi: <strong>24 saat hareketsizlik</strong></div>
     <div style="margin-top:4px">Aktif oturum: <strong>TEK CİHAZ / TARAYICI</strong></div>
+    <div style="margin-top:4px">Açılış/veritabanı bağlantısı: <strong>KADEMELİ YÜKLEME + OTOMATİK TEKRAR</strong></div>
+    <div style="margin-top:4px">Geçici bağlantı hatası: <strong>OTURUM KORUNUR · MFA TETİKLENMEZ</strong></div>
     <div style="margin-top:4px">Başka cihazda giriş: <strong>MEVCUT OTURUM OTOMATİK KAPANIR</strong></div>
     <div style="margin-top:4px">Son giriş: <strong>${lastSignIn}</strong></div>
     <div style="margin-top:4px">Uygulama sürümü: <strong>${APP_VERSION} FINAL</strong></div>
-    <div style="margin-top:7px;font-size:11px;opacity:.88">Authenticator 2FA zorunludur. Aynı doğrulanmış oturum için 24 saatlik güven penceresi uygulanır; farklı cihaz/oturum bu güveni kullanamaz.</div>`;
+    <div style="margin-top:4px">Kararlılık paketi: <strong>${esc(BUILD_LABEL)}</strong></div>
+    <div style="margin-top:7px;font-size:11px;opacity:.88">Authenticator 2FA zorunludur. Aynı doğrulanmış oturum için 24 saatlik güven penceresi uygulanır; farklı cihaz/oturum bu güveni kullanamaz. Geçici bağlantı hataları oturumu düşürmez ve gereksiz 2FA ekranı açmaz.</div>`;
 
   renderMfaSettings();
   renderBackupHealth();
@@ -2856,9 +3624,9 @@ Bekleyen: ${trMoney(r.unpaid)}`;
 }
 
 function exportCsv(){
-  const rows=[['Tarih','Saat','Ad Soyad','Durum','Ödeme','Acil/İstisna','Tutar']];
+  const rows=[['Tarih','Saat','Ad Soyad','Ayırt Etme','Durum','Ödeme','Acil/İstisna','Tutar']];
   state.records.forEach(x=>rows.push([
-    x.appointment_date,time5(x.start_time),x.people?.full_name||'',
+    x.appointment_date,time5(x.start_time),x.people?.full_name||'',x.people?.identity_label||'',
     statusName(x.status),
     x.payment_status==='paid'?'Ödendi':x.payment_status==='free'?'Ücretsiz':'Ödenmedi',
     (x.is_emergency||x.slot_override)?'Evet':'Hayır',
@@ -2877,18 +3645,98 @@ async function setReportPreset(type){
   $('repStart').value=isoDate(start);$('repEnd').value=isoDate(end);await runReport();
 }
 
+
+async function copyDocumentation(id,label){
+  const el=$(id); if(!el) return;
+  const text=el.innerText.trim();
+  try{
+    await navigator.clipboard.writeText(text);
+    msg($('docsMsg'),`${label} panoya kopyalandı.`,'success');
+  }catch(e){
+    msg($('docsMsg'),`${label} kopyalanamadı. Tarayıcı pano iznini kontrol et.`,'error');
+  }
+}
+
+
+// ===== v4.7.17 PWA / Availability / Secure External Modules =====
+const V4717_STANDALONE=window.matchMedia?.('(display-mode: standalone)')?.matches||window.navigator.standalone===true;
+const V4717_SPLASH_MIN=V4717_STANDALONE?1600:80;
+const v4717SplashStarted=Date.now();
+state.availabilityRange=1; state.availabilityDays=[]; state.qrIdentityPending=[]; state.qrReviewAppointmentId=null;
+if(V4717_STANDALONE)document.body.classList.add('pwa-standalone');
+function showPwaSplash(){const el=$('pwaSplash');if(!el)return;if(V4717_STANDALONE){el.classList.remove('hidden-splash');el.setAttribute('aria-hidden','false');}}
+async function hidePwaSplash(){const el=$('pwaSplash');if(!el)return;const waitMs=Math.max(0,V4717_SPLASH_MIN-(Date.now()-v4717SplashStarted));if(waitMs)await wait(waitMs);el.classList.add('hidden-splash');el.setAttribute('aria-hidden','true');}
+function updatePwaOfflineShield(){const sh=$('offlineShield');if(!sh)return;sh.classList.toggle('hidden',navigator.onLine!==false);}
+async function retryPwaConnection(){updatePwaOfflineShield();if(navigator.onLine===false)return;const b=$('offlineRetryBtn');if(b){b.disabled=true;b.textContent='Bağlanıyor…';}try{if(state.user&&!appReady)await retryConnectionGate();else if(state.user){await loadDay();if(state.currentPage==='availabilityPage')await loadAvailability(state.availabilityRange||1);}$('offlineShield').classList.add('hidden');}catch(e){console.warn(e);}finally{if(b){b.disabled=false;b.textContent='Bağlantıyı Yeniden Dene';}}}
+function setupPwaRuntime(){showPwaSplash();updatePwaOfflineShield();window.addEventListener('offline',updatePwaOfflineShield);window.addEventListener('online',()=>void retryPwaConnection());if('serviceWorker'in navigator){navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(e=>console.warn('PWA cache kaydı başarısız',e));}}
+
+const _v4717ShowAuth=showAuth;showAuth=function(){const r=_v4717ShowAuth.apply(this,arguments);void hidePwaSplash();return r;};
+const _v4717ShowConnectionGate=showConnectionGate;showConnectionGate=function(){const r=_v4717ShowConnectionGate.apply(this,arguments);void hidePwaSplash();return r;};
+const _v4717ShowMfaSetupGate=showMfaSetupGate;showMfaSetupGate=function(){const r=_v4717ShowMfaSetupGate.apply(this,arguments);void hidePwaSplash();return r;};
+const _v4717ShowMfaChallengeGate=showMfaChallengeGate;showMfaChallengeGate=function(){const r=_v4717ShowMfaChallengeGate.apply(this,arguments);void hidePwaSplash();return r;};
+const _v4717OpenTrustedApp=openTrustedApp;openTrustedApp=async function(){const r=await _v4717OpenTrustedApp.apply(this,arguments);if(r)await hidePwaSplash();return r;};
+
+function dateAddIso(base,days){const d=new Date(base+'T12:00:00');d.setDate(d.getDate()+days);return isoDate(d);}
+function slotOverlap(aStart,aEnd,bStart,bEnd){return aStart<bEnd&&aEnd>bStart;}
+function currentHm(){return new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',hour12:false}).slice(0,5);}
+async function loadAvailability(rangeDays=1){
+  const box=$('availabilityList');if(!box)return;rangeDays=[1,3,7,14].includes(Number(rangeDays))?Number(rangeDays):1;state.availabilityRange=rangeDays;box.innerHTML='<div class="card muted">Boş saatler canlı takvimden kontrol ediliyor…</div>';
+  try{
+    if(navigator.onLine===false)throw new Error('İnternet bağlantısı yok');
+    const start=today(),end=dateAddIso(start,Math.max(0,rangeDays-1));
+    const [aq,cq]=await Promise.all([
+      db.from('appointments').select('id,appointment_date,start_time,end_time,status,deleted_at').gte('appointment_date',start).lte('appointment_date',end).is('deleted_at',null),
+      db.from('daily_closures').select('work_date').gte('work_date',start).lte('work_date',end)
+    ]);
+    if(aq.error)throw aq.error;if(cq.error)throw cq.error;
+    const appts=aq.data||[],closed=new Set((cq.data||[]).map(x=>x.work_date)),days=[];const hm=currentHm();
+    for(let i=0;i<rangeDays;i++){
+      const date=dateAddIso(start,i),dow=dayOfWeek(date);const slots=state.slots.filter(s=>Number(s.day_of_week)===dow&&s.slot_type==='appointment');if(!slots.length)continue;
+      if(closed.has(date)){days.push({date,closed:true,times:[]});continue;}
+      const times=[];
+      for(const slot of slots){const st=time5(slot.start_time),en=time5(slot.end_time);if(date===start&&st<=hm)continue;
+        const busy=appts.some(a=>a.appointment_date===date&&!['cancelled','no_show'].includes(a.status)&&slotOverlap(st,en,time5(a.start_time),time5(a.end_time)));
+        const blocked=state.manualBlocks.some(b=>b.block_date===date&&slotOverlap(st,en,time5(b.start_time),time5(b.end_time)));
+        if(!busy&&!blocked)times.push({time:st,end:en});
+      }
+      days.push({date,closed:false,times});
+    }
+    state.availabilityDays=days;renderAvailability();return true;
+  }catch(e){box.innerHTML=`<div class="notice error"><b>Boş saatler yüklenemedi.</b><br>${esc(e?.message||'Bağlantıyı kontrol et.')}</div>`;return false;}
+}
+function renderAvailability(){const box=$('availabilityList');if(!box)return;const show=document.body.classList.contains('availability-show-mode');if(!state.availabilityDays.length){box.innerHTML='<div class="card muted">Bu aralıkta çalışma planı bulunmuyor.</div>';return;}box.innerHTML=state.availabilityDays.map(d=>{const label=new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long'}).format(new Date(d.date+'T12:00:00'));const count=d.times.length;return `<div class="availability-day"><div class="availability-day-head"><div><div class="availability-day-title">${esc(label)}</div><div class="muted" style="font-size:11px;margin-top:2px">${esc(d.date)}</div></div><span class="availability-count ${count?'':'full'}">${d.closed?'KAPALI':count?`${count} BOŞ SAAT`:'DOLU'}</span></div>${d.closed?'<div class="muted" style="margin-top:11px">Bu çalışma günü kapalı.</div>':count?`<div class="free-slots">${d.times.map(t=>show?`<span class="free-slot">${esc(t.time)}</span>`:`<button type="button" class="free-slot" data-free-date="${d.date}" data-free-time="${t.time}">${esc(t.time)}</button>`).join('')}</div>`:'<div class="muted" style="margin-top:11px">Uygun boş randevu saati kalmadı.</div>'}</div>`}).join('');box.querySelectorAll('[data-free-time]').forEach(b=>b.onclick=()=>openNew(b.dataset.freeTime,null,false,b.dataset.freeDate));}
+function toggleAvailabilityShowMode(){const active=!document.body.classList.contains('availability-show-mode');document.body.classList.toggle('availability-show-mode',active);$('availabilityModeNote').classList.toggle('hidden',!active);$('availabilityShowModeBtn').textContent=active?'← Yönetici Moduna Dön':'👁 Göster Modu';renderAvailability();}
+
+async function loadQrBookingState(){try{const r=await db.rpc('get_qr_booking_admin_state_v4713');if(r.error)throw r.error;state.qrBooking=r.data||{enabled:false};return true;}catch(e){console.warn('QR yönetim durumu alınamadı',e);state.qrBooking={enabled:false,error:e};return false;}}
+function renderQrBookingSettings(){const box=$('qrBookingSettings');if(!box)return;const q=state.qrBooking||{};const enabled=!!q.enabled;$('qrDailyPin').textContent=enabled?(q.pin||'----'):'----';$('qrPinDate').textContent=q.pin_date?`Şifre tarihi: ${q.pin_date}`:'Günlük şifre henüz hazırlanmadı';$('qrEnabledBadge').textContent=enabled?'QR RANDEVU AKTİF':'QR RANDEVU PASİF';$('qrEnabledBadge').className='backup-chip '+(enabled?'ok':'bad');$('qrToggleBtn').textContent=enabled?'QR Randevuyu Kapat':'QR Randevuyu Aç';$('qrRandomPinBtn').disabled=false;$('qrSetPinBtn').disabled=false;$('qrToggleBtn').disabled=false;}
+async function refreshQrBookingSettings(){await loadQrBookingState();renderQrBookingSettings();}
+async function setQrPin(){const pin=(prompt('Yeni 4 haneli QR randevu şifresini gir:')||'').replace(/\D/g,'');if(!/^\d{4}$/.test(pin))return alert('4 haneli şifre gir.');const r=await db.rpc('set_qr_booking_pin_v4713',{p_pin:pin});if(r.error)return alert(r.error.message);state.qrBooking=r.data;renderQrBookingSettings();}
+async function randomQrPin(){const r=await db.rpc('generate_qr_booking_pin_v4713');if(r.error)return alert(r.error.message);state.qrBooking=r.data;renderQrBookingSettings();}
+async function toggleQrBooking(){const enabled=!!state.qrBooking?.enabled;if(!confirm(`QR randevu ${enabled?'kapatılsın':'açılsın'} mı?`))return;const r=await db.rpc('set_qr_booking_enabled_v4713',{p_enabled:!enabled});if(r.error)return alert(r.error.message);state.qrBooking=r.data;renderQrBookingSettings();}
+async function loadQrIdentityPending(){try{const r=await db.rpc('list_qr_identity_pending_v4717');if(r.error)throw r.error;state.qrIdentityPending=r.data||[];renderQrIdentityPending();return true;}catch(e){console.warn(e);state.qrIdentityPending=[];renderQrIdentityPending();return false;}}
+function renderQrIdentityPending(){const el=$('qrIdentityPending');if(!el)return;const rows=state.qrIdentityPending||[];el.innerHTML=rows.length?`<div class="qr-review"><b>⚠ ${rows.length} QR kişi profili doğrulama bekliyor</b><div style="font-size:11px">Ödeme/tahsilat öncesi doğru kişi profilini seç.</div></div>${rows.map(x=>`<div class="qr-pending-item"><span><b>${esc(x.full_name)}</b><span class="muted" style="display:block;font-size:11px">${esc(x.appointment_date)} · ${esc(x.start_time)}</span></span><button class="btn small" type="button" data-open-qr-review="${x.appointment_id}">Doğrula</button></div>`).join('')}`:'<div class="muted" style="font-size:11px">QR kişi doğrulama kuyruğu temiz.</div>';el.querySelectorAll('[data-open-qr-review]').forEach(b=>b.onclick=()=>openQrIdentityReview(b.dataset.openQrReview));}
+async function openQrIdentityReview(appointmentId){const x=state.appointments.find(a=>a.id===appointmentId)||state.records.find(a=>a.id===appointmentId);if(!x)return alert('Randevuyu yeniden yükleyip deneyin.');state.qrReviewAppointmentId=appointmentId;hideMsg($('qrIdentityMsg'));$('qrIdentityLabel').value='';const p=x.people||{};$('qrIdentityInfo').innerHTML=`<b>QR'dan gelen kişi: ${esc(p.full_name||'')}</b><div>Bu kayıt başka bir kişiyle otomatik birleştirilmedi. Doğru profili sen seç.</div>`;const candidates=state.people.filter(y=>y.id!==p.id&&normalizeName(y.full_name)===normalizeName(p.full_name));$('qrIdentityCandidates').innerHTML=candidates.length?`<div class="muted" style="font-size:12px">Aynı isimli mevcut profiller:</div>${candidates.map(c=>`<button class="btn" type="button" data-match-person="${c.id}">${esc(profileName(c))} · Mevcut profile eşleştir</button>`).join('')}`:'<div class="notice">Aynı isimli mevcut aktif profil bulunmadı. Yeni kişi olarak onaylayabilirsin.</div>';$('qrIdentityCandidates').querySelectorAll('[data-match-person]').forEach(b=>b.onclick=()=>reconcileQrIdentity(b.dataset.matchPerson,false));$('qrIdentityDialog').showModal();}
+async function reconcileQrIdentity(targetId=null,confirmNew=false){const id=state.qrReviewAppointmentId;if(!id)return;const label=$('qrIdentityLabel').value.trim();hideMsg($('qrIdentityMsg'));try{const r=await db.rpc('reconcile_qr_identity_v4717',{p_appointment_id:id,p_target_person_id:targetId||null,p_identity_label:confirmNew?(label||null):null,p_confirm_new:!!confirmNew});if(r.error)throw r.error;$('qrIdentityDialog').close();await loadBase();await Promise.all([loadDay(),loadRecords(),loadQrIdentityPending()]);if(state.currentPage==='availabilityPage')await loadAvailability(state.availabilityRange||1);alert(targetId?'QR randevusu mevcut kişi profiliyle eşleştirildi.':'QR randevusu yeni kişi olarak doğrulandı.');}catch(e){msg($('qrIdentityMsg'),e.message||'Kişi doğrulanamadı.','error');}}
+async function confirmQrIdentityAsNew(){await reconcileQrIdentity(null,true);}
+
+const _v4717OpenDetail=openDetail;openDetail=async function(id){await _v4717OpenDetail(id);const x=state.appointments.find(a=>a.id===id)||state.records.find(a=>a.id===id);if(!x||x.booking_source!=='qr')return;try{const r=await db.rpc('get_qr_identity_review_v4717',{p_appointment_id:id});if(r.error)throw r.error;if(r.data?.status==='pending'){const body=$('detailBody');body.insertAdjacentHTML('afterbegin',`<div class="qr-review" id="detailQrReview"><b>⚠ QR kişi profili doğrulama bekliyor</b><div>Ödeme veya geçmiş kişi işlemlerinden önce doğru profili seç.</div><button id="detailQrReviewBtn" class="btn warn" type="button" style="margin-top:9px">Kişiyi Doğrula</button></div>`);body.querySelectorAll('[data-act="paid"],[data-act="prior_debt"]').forEach(b=>{b.disabled=true;b.title='Önce QR kişi profilini doğrula';});$('detailQrReviewBtn').onclick=()=>{$('detailDialog').close();openQrIdentityReview(id);};}}catch(e){console.warn('QR kişi doğrulama durumu okunamadı',e);}}
+
+setupPwaRuntime();
+
 function switchPage(id){
   state.currentPage=id;
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
-  const titles={weekPage:'Haftalık Plan',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar',backupsPage:'Yedekler'};
+  const titles={weekPage:'Haftalık Plan',availabilityPage:'Boş Randevular',recordsPage:'Tıraş Kayıtları',reportPage:'Raporlar',settingsPage:'Ayarlar',backupsPage:'Yedekler',docsPage:'Kılavuz ve Devir Notu'};
   $('pageTitle').textContent=id==='homePage'?selectedDayLabel(state.selectedDate):(titles[id]||SHORT_NAME);
   $('fab').classList.toggle('hidden',id!=='homePage');
   if(id==='weekPage')loadWeek();
+  if(id==='availabilityPage')loadAvailability(state.availabilityRange||1);
   if(id==='recordsPage')loadRecords();
   if(id==='reportPage'){if(!state.lastReport)runReport();loadExtensionData();}
-  if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData(),getMfaState().then(x=>state.mfa=x)]).then(()=>{renderSettings();loadStockMonthReport();});}
+  if(id==='settingsPage'){Promise.all([loadTrash(),loadAudit(),loadBackupCenter(),loadExtensionData(),loadQrBookingState(),loadQrIdentityPending(),getMfaState().then(x=>state.mfa=x)]).then(()=>{renderSettings();loadStockMonthReport();});}
   if(id==='backupsPage'){loadBackupCenter();}
+  if(id==='docsPage'){hideMsg($('docsMsg'));window.scrollTo({top:0,behavior:'smooth'});}
 }
 
 function bind(){
@@ -2902,6 +3750,7 @@ function bind(){
     try{
       const r=await db.auth.signInWithPassword({email,password});
       if(r.error) msg($('authMsg'),'Giriş başarısız. E-posta veya şifre hatalı.','error');
+      else if(r.data?.user) await enter(r.data.user);
     }finally{
       if(btn){btn.disabled=false;btn.textContent='Giriş Yap';}
       $('loginPassword').value='';
@@ -2909,6 +3758,7 @@ function bind(){
   };
 
   $('mfaChallengeForm').onsubmit=verifyMfaChallenge;
+  $('mfaRetryBtn').onclick=retryConnectionGate;
   $('mfaFactorSelect').onchange=e=>{state.mfaChallengeFactorId=e.target.value;};
   $('mfaLogoutBtn').onclick=()=>db.auth.signOut();
   $('mfaGateEnrollBtn').onclick=startMfaEnrollment;
@@ -2918,20 +3768,24 @@ function bind(){
   $('logoutBtn').onclick=()=>db.auth.signOut();
   $('fab').onclick=()=>openNew();
   $('mobileNewAppointment').onclick=()=>openNew();
-  $('closeDialog').onclick=()=>{state.editAppointmentId=null;$('appointmentDialog').close();};
+  $('closeDialog').onclick=()=>{state.editAppointmentId=null;state.selectedPersonId=null;state.selectedPersonProfile=null;state.personCandidates=[];$('appointmentDialog').close();};
   $('closeDetail').onclick=()=>$('detailDialog').close();
-  if(!PRIVACY_MODE){$('qrRandomPinBtn').onclick=randomQrPin;$('qrSetPinBtn').onclick=setQrPin;$('qrToggleBtn').onclick=toggleQrBooking;}
+  $('qrRandomPinBtn').onclick=randomQrPin;$('qrSetPinBtn').onclick=setQrPin;$('qrToggleBtn').onclick=toggleQrBooking;
 $('appointmentForm').onsubmit=saveAppointment;
   $('apptDate').onchange=async()=>refreshSlotSelect($('apptDate').value,$('slotSelect').value);
   $('emergencyCheck').onchange=()=>{
     $('overrideReasonWrap').classList.toggle('hidden',!$('emergencyCheck').checked);
     refreshSlotSelect($('apptDate').value,$('slotSelect').value);
   };
+  let personLookupTimer=null;
+  $('personName').addEventListener('input',()=>{
+    if(state.editAppointmentId)return;
+    if(state.selectedPersonId)resetPersonProfileSelection(false);
+    clearTimeout(personLookupTimer);personLookupTimer=setTimeout(()=>applyKnownPerson(),220);
+  });
+  $('personName').addEventListener('change',()=>{if(!state.editAppointmentId&&!state.selectedPersonId)void applyKnownPerson();});
+  $('identityLabel').addEventListener('input',()=>{if(!state.editAppointmentId&&!state.selectedPersonId)renderPersonCandidates();});
   if(!PRIVACY_MODE){
-    let personLookupTimer=null;
-    $('personName').addEventListener('input',()=>{clearTimeout(personLookupTimer);personLookupTimer=setTimeout(()=>applyKnownPerson(),140);});
-    $('personName').addEventListener('change',applyKnownPerson);
-    $('personName').addEventListener('blur',applyKnownPerson);
     $('phoneNumber').addEventListener('input',updateCallButton);
     $('phoneNumber').addEventListener('blur',()=>{const n=normalizePhoneClient($('phoneNumber').value);if(n)$('phoneNumber').value=formatPhone(n);updateCallButton();});
     $('callPersonBtn').onclick=()=>{const n=normalizePhoneClient($('phoneNumber').value);if(n)location.href=`tel:${n}`;};
@@ -2940,6 +3794,12 @@ $('appointmentForm').onsubmit=saveAppointment;
   $('dayPicker').onchange=async e=>{if(!e.target.value)return;state.selectedDate=e.target.value;await loadDay();};
   $('prevDay').onclick=async()=>{state.selectedDate=workdayFrom(state.selectedDate,-1,false);await loadDay();};
   $('nextDay').onclick=async()=>{state.selectedDate=workdayFrom(state.selectedDate,1,false);await loadDay();};
+
+  document.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{state.availabilityRange=Number(b.dataset.range||1);document.querySelectorAll('[data-range]').forEach(x=>x.classList.toggle('active',x===b));void loadAvailability(state.availabilityRange);});
+  $('availabilityShowModeBtn').onclick=toggleAvailabilityShowMode;
+  $('offlineRetryBtn').onclick=retryPwaConnection;
+  $('closeQrIdentity').onclick=()=>$('qrIdentityDialog').close();
+  $('confirmQrNewPerson').onclick=confirmQrIdentityAsNew;
 
   $('weekPicker').onchange=loadWeek;
   $('recordSearch').oninput=renderRecords;
@@ -2977,6 +3837,11 @@ $('appointmentForm').onsubmit=saveAppointment;
   $('archiveReportBtn').onclick=archiveCurrentReport;
   $('openBackupsBtn').onclick=()=>switchPage('backupsPage');
   $('backFromBackups').onclick=()=>switchPage('settingsPage');
+  $('openDocsBtn').onclick=()=>switchPage('docsPage');
+  $('backFromDocs').onclick=()=>switchPage('settingsPage');
+  $('copyUsageGuideBtn').onclick=()=>copyDocumentation('usageGuideContent','Kullanım kılavuzu');
+  $('copyHandoverBtn').onclick=()=>copyDocumentation('handoverContent','Büyük devir notu');
+  $('printDocsBtn').onclick=()=>startPrint('print-docs','MEBS Berber Sistemi - Kullanım Kılavuzu ve Devir Notu');
   $('receivePackageBtn').onclick=openPackageReceipt;
   $('stockCountBtn').onclick=openStockCount;
   $('saveStockRatesBtn').onclick=saveStockRates;

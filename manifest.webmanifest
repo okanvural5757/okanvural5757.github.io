@@ -1,14 +1,16 @@
 {
-  "name": "MEBS Subay Temel Berber Randevu Sistemi",
+  "name": "MEBS Berber Randevu Sistemi",
   "short_name": "MEBS Berber",
+  "description": "MEBS Subay Temel Berber Randevu Sistemi",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f7fa",
-  "theme_color": "#0b1220",
+  "orientation": "portrait-primary",
+  "background_color": "#08170f",
+  "theme_color": "#16351f",
   "icons": [
-    {"src":"./icon-192.png","sizes":"192x192","type":"image/png"},
-    {"src":"./icon-512.png","sizes":"512x512","type":"image/png"},
+    {"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
     {"src":"./maskable-icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
   ]
 }

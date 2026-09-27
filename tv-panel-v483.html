@@ -1,1 +1,118 @@
-<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>MEBS Berber TV - Pasif</title><style>html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;background:#071e31;color:#fff}body{display:grid;place-items:center}.box{text-align:center;padding:36px}.title{font-size:32px;font-weight:900}.msg{margin-top:14px;font-size:20px;opacity:.8}</style></head><body><main class="box"><div class="title">MEBS SUBAY TEMEL BERBER</div><div class="msg">TV bilgilendirme özelliği gizlilik nedeniyle şu anda pasiftir.</div></main></body></html>
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b2716"><meta name="robots" content="noindex,nofollow"><title>MEBS Berber · TV Yönetimi</title>
+<style>
+:root{--army:#173b22;--bg:#f3f6f3;--ink:#142119;--muted:#6b776f;--line:#dce5de}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}body{padding:14px}.wrap{width:min(1200px,100%);margin:auto}.head{background:linear-gradient(145deg,#0b2515,#22502c);color:#fff;border-radius:22px;padding:18px;display:flex;justify-content:space-between;align-items:center;gap:12px}.head b{font-size:20px}.btn{border:0;border-radius:11px;padding:10px 12px;font-weight:900;background:#e7ede9;color:#173b22;cursor:pointer}.btn.good,.btn.primary{background:#226d39;color:#fff}.btn.danger{background:#fff0ee;color:#91291f}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;margin-top:12px;box-shadow:0 7px 20px rgba(20,50,30,.04)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row{display:flex;gap:12px;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eef2ef}.row:last-child{border:0}small,.meta{display:block;color:var(--muted);font-size:11px;margin-top:3px}input,select{border:1px solid #d4dfd7;border-radius:10px;padding:9px;max-width:210px}input[type=checkbox]{width:22px;height:22px}.note{border-radius:12px;padding:10px;margin-top:10px;font-size:12px;background:#eef8f1;color:#1e6033}.note.bad{background:#fff0ee;color:#8d2c22}.note.warn{background:#fff8e8;color:#77500f}.actions{display:flex;flex-wrap:wrap;gap:7px}.pair,.device{border:1px solid #e0e8e2;border-radius:13px;padding:11px;margin-top:8px}.pair-head,.device-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.code{font-family:ui-monospace,monospace;font-size:21px;font-weight:950;letter-spacing:.1em}.badge{background:#edf8f0;color:#236036;padding:7px 9px;border-radius:999px;font-size:10px;font-weight:900}.empty{color:var(--muted);font-size:12px;padding:8px 0}#app{display:none}#app.show{display:block}iframe{width:100%;height:520px;border:1px solid #dbe3de;border-radius:16px;background:#07160d}label{display:grid;gap:5px;font-size:12px;font-weight:850}.login-grid{display:grid;gap:10px;max-width:420px}.security{background:#eef8f1;color:#19592e;border:1px solid #c6e2cc;border-radius:12px;padding:10px;font-size:12px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}iframe{height:390px}}
+</style></head><body><div class="wrap"><header class="head"><div><b>MEBS Berber · Güvenli TV Yönetimi</b><small style="color:#c9d8cd">v4.7.17 · TV kişisel veri göstermez</small></div><button id="signOutBtn" class="btn" style="display:none">Çıkış</button></header>
+<div id="authNotice" class="note warn">TV paneli hazırlanıyor…</div>
+<section id="loginCard" class="card"><div id="passwordStep" class="login-grid"><b>Yetkili Yönetici Girişi</b><label>E-posta<input id="loginEmail" type="email" autocomplete="email"></label><label>Şifre<input id="loginPassword" type="password" autocomplete="current-password"></label><button id="loginBtn" class="btn primary">Giriş Yap</button></div><div id="mfaStep" class="login-grid" style="display:none"><b>Authenticator Doğrulaması</b><label>6 haneli kod<input id="mfaCode" inputmode="numeric" maxlength="6" placeholder="000000"></label><div class="actions"><button id="mfaBtn" class="btn primary">Doğrula</button><button id="cancelLogin" class="btn">Vazgeç</button></div></div></section>
+<section id="app"><div class="grid2"><div><div class="card"><div class="security"><b>🔒 Gizlilik zorlaması:</b> Tam isim, kişi kimliği, borç ve ödeme TV payload’ına gönderilmez. Ayarlar kaydedilirken bu alanlar zorla kapalı tutulur.</div><div id="form"></div><div class="actions" style="margin-top:10px"><button id="save" class="btn primary">Ayarları Kaydet</button><button id="reload" class="btn">Yenile</button><button id="resetPreview" class="btn">Önizleme Varsayılanı</button><button id="openPreview" class="btn">Önizlemeyi Aç</button></div></div><div class="card"><b>TV Cihaz Eşleştirme</b><div id="pairingStatus" class="meta" style="margin:5px 0 10px">Eşleştirme durumu yükleniyor…</div><div class="actions"><button id="openPair" class="btn primary">Eşleştirmeyi 10 Dakika Aç</button><button id="closePair" class="btn">Eşleştirmeyi Kapat</button></div><div id="pairings"></div><div style="margin-top:12px"><b>Onaylı cihazlar</b><div id="devices"></div></div></div></div><div class="card"><b>TV Önizleme</b><iframe id="preview" src="./tv-screen-v483.html?demo=1&scene=today" title="TV Önizleme"></iframe></div></div></section>
+</div><script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm';
+const SUPABASE_URL='https://styxdbndyzkbawwrthzw.supabase.co';
+const SUPABASE_KEY='sb_publishable_l2qxOCeQoVcSDFhY6tBkrg_nxNBqkWM';
+const ADMIN_EDGE=SUPABASE_URL+'/functions/v1/tv-admin-v4717';
+const DEMO_KEY='okan_tv_settings_v48_demo';
+const db=createClient(SUPABASE_URL,SUPABASE_KEY);
+const defaults={enabled:true,auto_rotate:true,queue_seconds:12,today_seconds:16,days_seconds:30,refresh_seconds:15,show_current_full_name:false,next_name_format:'time_only',show_service:true,show_stats:false,show_next_free:false,show_today:true,show_days:true,show_busy_slots:false,footer_message:'Randevu saatlerine riayet edilmesi önemle rica olunur.',hide_names_after_seconds:60};
+const fields=[['enabled','TV ekranı aktif','checkbox','Kapalıysa eşleşmiş TV yalnız “TV ekranı kapalı” mesajı görür.'],['auto_rotate','Otomatik ekran döngüsü','checkbox','Sıra → bugün → 3 gün.'],['queue_seconds','Sıra ekranı süresi (sn)','number','Kurumsal TV döngüsü: 12 sn.'],['today_seconds','Bugünkü uygun saatler süresi (sn)','number','Kurumsal TV döngüsü: 16 sn.'],['days_seconds','3 çalışma günü ekranı süresi (sn)','number','Kurumsal TV döngüsü: 30 sn.'],['refresh_seconds','Veri yenileme aralığı (sn)','number','10–120 sn; önerilen 15.'],['show_service','Hizmet adını göster','checkbox','Saç tıraşı / saç yıkama.'],['show_today','Bugünkü boşluk ekranı','checkbox','Döngüye dahil et.'],['show_days','3 çalışma günü ekranı','checkbox','Döngüye dahil et.'],['show_busy_slots','Dolu saatleri göster','checkbox','Kapalıysa yalnız boş saatler öne çıkar.'],['footer_message','Alt bilgi mesajı','text','En fazla 160 karakter.']];
+let state=null,settings={...defaults},busy=false;
+const $=id=>document.getElementById(id);
+function clamp(v,min,max,fallback){const n=Number(v);return Number.isFinite(n)?Math.min(max,Math.max(min,Math.trunc(n))):fallback}
+function normalize(s={}){return {...defaults,...s,show_current_full_name:false,next_name_format:'time_only',show_stats:false,show_next_free:false,queue_seconds:12,today_seconds:16,days_seconds:30,refresh_seconds:clamp(s.refresh_seconds,10,120,15),hide_names_after_seconds:60,footer_message:String(s.footer_message??defaults.footer_message).slice(0,160)}}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function setNotice(text,type='ok'){const n=$('authNotice');n.className='note '+type;n.textContent=text}
+async function getSession(){const {data,error}=await db.auth.getSession();if(error)throw error;return data.session}
+async function callAdmin(action,body={}){const session=await getSession();if(!session?.access_token)throw new Error('Önce ana randevu sistemine giriş yapın.');const r=await fetch(ADMIN_EDGE,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+session.access_token,'apikey':SUPABASE_KEY},body:JSON.stringify({action,...body}),cache:'no-store'});let j={};try{j=await r.json()}catch{}if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j}
+function renderForm(){const box=$('form');box.innerHTML=fields.map(([k,l,t,h])=>{let c='';if(t==='checkbox')c=`<input type="checkbox" data-k="${k}" ${settings[k]?'checked':''}>`;else if(t==='select')c=`<select data-k="${k}"><option value="first_last_initial" ${settings[k]==='first_last_initial'?'selected':''}>Ahmet K.</option><option value="initial_surname" ${settings[k]==='initial_surname'?'selected':''}>A. Karaca</option><option value="time_only" ${settings[k]==='time_only'?'selected':''}>Sadece saat</option></select>`;else if(t==='number')c=`<input type="number" data-k="${k}" value="${Number(settings[k])}" ${['queue_seconds','today_seconds','days_seconds'].includes(k)?'readonly aria-readonly="true"':''}>`;else c=`<input type="text" maxlength="160" data-k="${k}" value="${esc(settings[k])}">`;return `<div class="row"><div><b>${esc(l)}</b><small>${esc(h)}</small></div>${c}</div>`}).join('')}
+function gather(){const s={...settings};document.querySelectorAll('[data-k]').forEach(x=>{const k=x.dataset.k;if(x.type==='checkbox')s[k]=x.checked;else if(x.type==='number')s[k]=Number(x.value);else s[k]=x.value});return normalize(s)}
+function updatePreview(){localStorage.setItem(DEMO_KEY,JSON.stringify(settings));$('preview').contentWindow.location.reload()}
+function fmtDate(v){if(!v)return '—';const d=new Date(v);return Number.isNaN(d.getTime())?'—':d.toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'})}
+function renderPairing(){const openUntil=state?.pairing_open_until?new Date(state.pairing_open_until):null;const open=openUntil&&openUntil>Date.now();$('pairingStatus').textContent=open?'Eşleştirme AÇIK — '+fmtDate(openUntil):'Eşleştirme KAPALI';const pairs=Array.isArray(state?.pairing_requests)?state.pairing_requests:[];$('pairings').innerHTML=pairs.length?pairs.map(p=>{const approved=!!p.approved_at;const actions=approved?`<span class="badge">ONAYLANDI • TV BAĞLANTISI BEKLENİYOR</span>`:`<div class="actions"><button class="btn good" data-approve="${esc(p.id)}">Onayla</button><button class="btn danger" data-reject="${esc(p.id)}">Reddet</button></div>`;return `<div class="pair"><div class="pair-head"><div><div class="code">${esc(p.code)}</div><div class="meta">${esc(p.name_hint||'TV Ekranı')} • Son: ${esc(fmtDate(p.expires_at))}</div></div>${actions}</div></div>`}).join(''):'<div class="empty">Bekleyen eşleştirme yok.</div>';const dev=Array.isArray(state?.devices)?state.devices:[];$('devices').innerHTML=dev.length?dev.map(d=>`<div class="device"><div class="device-head"><div><b>${esc(d.name)}</b><div class="meta">${d.active?'Aktif':'İptal'} • Son görülme: ${esc(fmtDate(d.last_seen_at))}</div></div>${d.active?`<button class="btn danger" data-revoke="${esc(d.id)}">Cihazı İptal Et</button>`:''}</div></div>`).join(''):'<div class="empty">Onaylı TV cihazı yok.</div>';document.querySelectorAll('[data-approve]').forEach(b=>b.onclick=()=>approve(b.dataset.approve));document.querySelectorAll('[data-reject]').forEach(b=>b.onclick=()=>rejectPair(b.dataset.reject));document.querySelectorAll('[data-revoke]').forEach(b=>b.onclick=()=>revoke(b.dataset.revoke))}
+async function loadState(){if(busy)return;busy=true;try{state=await callAdmin('state');settings=normalize(state.settings||{});renderForm();renderPairing();updatePreview();setNotice('TV yönetim oturumu doğrulandı. Ana sistemle güvenli bağlantı kullanılıyor.','ok');$('app').classList.add('show')}catch(e){$('app').classList.remove('show');setNotice(e.message||'TV paneli açılamadı.','bad')}finally{busy=false}}
+async function save(){try{settings=gather();const r=await callAdmin('settings-update',{settings});settings=normalize(r.settings||settings);renderForm();updatePreview();setNotice('TV ayarları kaydedildi.','ok')}catch(e){setNotice(e.message,'bad')}}
+async function openPair(){try{await callAdmin('pairing-open',{minutes:10});await loadState()}catch(e){setNotice(e.message,'bad')}}
+async function closePair(){try{await callAdmin('pairing-close');await loadState()}catch(e){setNotice(e.message,'bad')}}
+async function approve(id){const name=prompt('TV cihaz adı','MEBS Berber TV Ekranı');if(name===null)return;try{await callAdmin('pairing-approve',{request_id:id,device_name:name});await loadState();setTimeout(loadState,2500);setTimeout(loadState,6000)}catch(e){setNotice(e.message,'bad')}}
+async function rejectPair(id){if(!confirm('Bu eşleştirme isteği reddedilsin mi?'))return;try{await callAdmin('pairing-reject',{request_id:id});await loadState()}catch(e){setNotice(e.message,'bad')}}
+async function revoke(id){if(!confirm('Bu TV cihazının erişimi iptal edilsin mi?'))return;try{await callAdmin('device-revoke',{device_id:id});await loadState()}catch(e){setNotice(e.message,'bad')}}
+let pendingFactorId=null;
+function showLogin(msg='TV paneli için giriş yapın.'){
+  $('app').classList.remove('show');
+  $('loginCard').style.display='block';
+  $('passwordStep').style.display='block';
+  $('mfaStep').style.display='none';
+  $('signOutBtn').style.display='none';
+  setNotice(msg,'warn');
+}
+async function ensureAal2(){
+  const {data:aalData,error:aalErr}=await db.auth.mfa.getAuthenticatorAssuranceLevel();
+  if(aalErr)throw aalErr;
+  if(aalData?.currentLevel==='aal2')return true;
+  const {data:factors,error:fErr}=await db.auth.mfa.listFactors();
+  if(fErr)throw fErr;
+  const verified=(factors?.totp||[]).find(x=>x.status==='verified');
+  if(!verified)throw new Error('Doğrulanmış 2FA faktörü bulunamadı.');
+  pendingFactorId=verified.id;
+  $('passwordStep').style.display='none';
+  $('mfaStep').style.display='block';
+  setNotice('Şifre doğrulandı. 2FA kodunu girin.','warn');
+  setTimeout(()=>$('mfaCode').focus(),50);
+  return false;
+}
+async function bootstrap(){
+  try{
+    const session=await getSession();
+    if(!session){showLogin();return}
+    const ok=await ensureAal2();
+    if(!ok){$('loginCard').style.display='block';return}
+    $('loginCard').style.display='none';
+    $('signOutBtn').style.display='inline-block';
+    await loadState();
+  }catch(e){showLogin(e.message||'Giriş gerekli.')}
+}
+async function signIn(){
+  const email=$('loginEmail').value.trim(),password=$('loginPassword').value;
+  if(!email||!password){setNotice('E-posta ve şifreyi girin.','bad');return}
+  $('loginBtn').disabled=true;
+  try{
+    const {error}=await db.auth.signInWithPassword({email,password});
+    if(error)throw error;
+    const ok=await ensureAal2();
+    if(ok){
+      $('loginCard').style.display='none';
+      $('signOutBtn').style.display='inline-block';
+      await loadState();
+    }else $('loginCard').style.display='block';
+  }catch(e){setNotice('Giriş doğrulanamadı.','bad')}
+  finally{$('loginBtn').disabled=false}
+}
+async function verifyMfa(){
+  const code=$('mfaCode').value.replace(/\D/g,'').slice(0,6);
+  if(!pendingFactorId||code.length!==6){setNotice('6 haneli 2FA kodunu girin.','bad');return}
+  $('mfaBtn').disabled=true;
+  try{
+    const {error}=await db.auth.mfa.challengeAndVerify({factorId:pendingFactorId,code});
+    if(error)throw error;
+    pendingFactorId=null;
+    $('mfaCode').value='';
+    $('loginCard').style.display='none';
+    $('signOutBtn').style.display='inline-block';
+    await loadState();
+  }catch(e){setNotice('2FA kodu doğrulanamadı.','bad')}
+  finally{$('mfaBtn').disabled=false}
+}
+async function signOutTv(){
+  try{await db.auth.signOut({scope:'local'})}catch{}
+  state=null;
+  showLogin('TV paneli oturumu kapatıldı.');
+}
+$('loginBtn').onclick=signIn;
+$('mfaBtn').onclick=verifyMfa;
+$('cancelLogin').onclick=signOutTv;
+$('signOutBtn').onclick=signOutTv;
+$('mfaCode').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,6)});
+$('mfaCode').addEventListener('keydown',e=>{if(e.key==='Enter')verifyMfa()});
+$('loginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')signIn()});
+$('save').onclick=save;$('reload').onclick=loadState;$('openPair').onclick=openPair;$('closePair').onclick=closePair;$('openPreview').onclick=()=>window.open('?page=ekran&demo=1','_blank');$('resetPreview').onclick=()=>{settings={...defaults};renderForm();updatePreview()};
+bootstrap();setInterval(()=>{if($('app').classList.contains('show'))loadState()},10000);
+</script></body></html>
