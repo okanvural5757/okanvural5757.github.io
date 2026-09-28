@@ -1336,6 +1336,108 @@ body.v4718-ui:not(.availability-show-mode) .wrap{
 }
 /* END v4.7.18 RC7 */
 
+
+/* ===== v4.7.18 RC8 — SURGICAL iPHONE HOME FIX =====
+   Yalnız Bugün ekranındaki tarih gezgini ve alt navigasyonun iPhone yerleşimi.
+   Göster Modu, randevu/ödeme/stok/QR/TV iş mantığı değişmez. */
+
+/* Tarih gezgini: büyük dış kartı kaldır, üç kontrolü ince tek satırda tut. */
+body.v4718-ui:not(.availability-show-mode) #homePage>.row.between.no-print{
+  display:grid!important;
+  grid-template-columns:88px minmax(0,1fr) 88px!important;
+  align-items:center!important;
+  min-height:38px!important;
+  height:auto!important;
+  padding:0!important;
+  gap:6px!important;
+  margin:6px 0 8px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+body.v4718-ui:not(.availability-show-mode) #homePage #prevDay,
+body.v4718-ui:not(.availability-show-mode) #homePage #nextDay,
+body.v4718-ui:not(.availability-show-mode) #homePage #dayPicker{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  min-height:38px!important;
+  height:38px!important;
+  margin:0!important;
+  padding:6px 8px!important;
+  border:1px solid #e1e8e2!important;
+  border-radius:12px!important;
+  background:#f1f5f2!important;
+  color:#173622!important;
+  box-shadow:0 2px 7px rgba(13,49,27,.035)!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:900!important;
+}
+body.v4718-ui:not(.availability-show-mode) #homePage #dayPicker{
+  text-align:center!important;
+  background:#f6f8f6!important;
+}
+@media(max-width:370px){
+  body.v4718-ui:not(.availability-show-mode) #homePage>.row.between.no-print{
+    grid-template-columns:78px minmax(0,1fr) 78px!important;
+    gap:5px!important;
+  }
+  body.v4718-ui:not(.availability-show-mode) #homePage #prevDay,
+  body.v4718-ui:not(.availability-show-mode) #homePage #nextDay,
+  body.v4718-ui:not(.availability-show-mode) #homePage #dayPicker{
+    font-size:11px!important;
+    padding-inline:5px!important;
+  }
+}
+
+/* Alt navigasyon: güvenli alan paneli büyütmesin.
+   Nav kutusu safe-area'yı ayırır; görünen koyu panel yalnız 58px'tir. */
+body.v4718-ui:not(.availability-show-mode) .nav{
+  width:min(calc(100% - 20px),720px)!important;
+  bottom:0!important;
+  padding:0 6px calc(4px + env(safe-area-inset-bottom))!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  isolation:isolate!important;
+}
+body.v4718-ui:not(.availability-show-mode) .nav::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  left:0!important;
+  right:0!important;
+  top:0!important;
+  height:58px!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  border-radius:17px!important;
+  background:rgba(5,27,15,.97)!important;
+  box-shadow:0 8px 24px rgba(5,24,13,.20)!important;
+  pointer-events:none!important;
+}
+body.v4718-ui:not(.availability-show-mode) .nav button{
+  position:relative!important;
+  z-index:1!important;
+  min-height:58px!important;
+  height:58px!important;
+  padding:5px 2px 4px!important;
+  border-radius:12px!important;
+  font-size:10px!important;
+  gap:1px!important;
+}
+body.v4718-ui:not(.availability-show-mode) .nav .nav-ico{
+  font-size:17px!important;
+  line-height:1!important;
+}
+body.v4718-ui:not(.availability-show-mode) .wrap{
+  padding-bottom:calc(76px + env(safe-area-inset-bottom))!important;
+}
+/* END v4.7.18 RC8 */
+
 </style>
 </head>
 <body class="v4718-ui">
