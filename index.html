@@ -1100,6 +1100,192 @@ body.v4718-ui #appointmentDialog #saveAppointmentBtn{min-height:50px!important;b
 @media(max-width:340px){body.v4718-ui:has(#availabilityPage.active):not(.availability-show-mode) .free-slots{grid-template-columns:repeat(3,minmax(0,1fr))!important}body.v4718-ui.availability-show-mode .free-slots{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 /* END v4.7.18 RC5 */
 
+/* ===== v4.7.18 RC6 — SHOW MODE FULLSCREEN FIT =====
+   Yalnız Göster Modu yerleşimi. Yönetici modu ve iş mantığı değişmez. */
+body.v4718-ui.availability-show-mode{
+  background:#06180e!important;
+}
+body.v4718-ui.availability-show-mode .wrap{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  padding:12px 16px max(16px,env(safe-area-inset-bottom))!important;
+}
+body.v4718-ui.availability-show-mode #availabilityPage{
+  width:100%!important;
+  max-width:none!important;
+}
+body.v4718-ui.availability-show-mode .availability-hero{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:max(18px,env(safe-area-inset-top)) 18px 17px!important;
+  border-radius:24px!important;
+  min-height:0!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.18)!important;
+}
+body.v4718-ui.availability-show-mode .availability-hero>.row.between{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 112px!important;
+  align-items:start!important;
+  gap:12px!important;
+}
+body.v4718-ui.availability-show-mode .availability-hero>.row.between>div{
+  min-width:0!important;
+}
+body.v4718-ui.availability-show-mode .availability-hero h2{
+  font-size:clamp(24px,7vw,29px)!important;
+  line-height:1.02!important;
+  margin:7px 0 0!important;
+  letter-spacing:-.035em!important;
+}
+body.v4718-ui.availability-show-mode .availability-hero .muted{
+  font-size:clamp(12px,3.7vw,14px)!important;
+  line-height:1.42!important;
+  margin-top:7px!important;
+  max-width:220px!important;
+}
+body.v4718-ui.availability-show-mode .availability-hero .pwa-tag{
+  font-size:10.5px!important;
+  padding:6px 9px!important;
+  white-space:nowrap!important;
+}
+body.v4718-ui.availability-show-mode .show-mode-btn{
+  margin:0!important;
+  width:112px!important;
+  max-width:112px!important;
+  min-width:112px!important;
+  min-height:48px!important;
+  padding:9px 8px!important;
+  border-radius:15px!important;
+  font-size:13.5px!important;
+  line-height:1.18!important;
+  white-space:normal!important;
+  text-align:center!important;
+  justify-self:end!important;
+}
+body.v4718-ui.availability-show-mode .availability-toolbar{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;
+  width:100%!important;
+  margin-top:16px!important;
+}
+body.v4718-ui.availability-show-mode .range-chip{
+  width:100%!important;
+  min-width:0!important;
+  min-height:41px!important;
+  padding:7px 3px!important;
+  border-radius:999px!important;
+  font-size:13.5px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+body.v4718-ui.availability-show-mode #availabilityModeNote{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin:12px 0 0!important;
+  padding:12px 14px!important;
+  border-radius:16px!important;
+  font-size:13px!important;
+  line-height:1.38!important;
+  box-shadow:none!important;
+}
+body.v4718-ui.availability-show-mode .availability-days{
+  width:100%!important;
+  max-width:none!important;
+  gap:12px!important;
+  margin-top:13px!important;
+}
+body.v4718-ui.availability-show-mode .availability-day{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:15px 15px 14px!important;
+  border-radius:20px!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.12)!important;
+}
+body.v4718-ui.availability-show-mode .availability-day-head{
+  align-items:flex-start!important;
+  gap:8px!important;
+}
+body.v4718-ui.availability-show-mode .availability-day-title{
+  font-size:18px!important;
+  line-height:1.1!important;
+  letter-spacing:-.025em!important;
+}
+body.v4718-ui.availability-show-mode .availability-day-head .muted{
+  display:block!important;
+  font-size:10.5px!important;
+  line-height:1.15!important;
+  margin-top:3px!important;
+  color:#748096!important;
+}
+body.v4718-ui.availability-show-mode .availability-count{
+  flex:0 0 auto!important;
+  font-size:10px!important;
+  line-height:1!important;
+  padding:6px 8px!important;
+  white-space:nowrap!important;
+}
+body.v4718-ui.availability-show-mode .free-slots{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin-top:11px!important;
+}
+body.v4718-ui.availability-show-mode .free-slot{
+  width:100%!important;
+  min-width:0!important;
+  min-height:40px!important;
+  padding:6px 3px!important;
+  border-radius:12px!important;
+  font-size:15px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+}
+/* Dar iPhone: 4 filtre ve 4 saat sütunu yine tek satır düzenini korur. */
+@media(max-width:360px){
+  body.v4718-ui.availability-show-mode .wrap{padding-left:11px!important;padding-right:11px!important}
+  body.v4718-ui.availability-show-mode .availability-hero{padding-left:14px!important;padding-right:14px!important}
+  body.v4718-ui.availability-show-mode .availability-hero>.row.between{grid-template-columns:minmax(0,1fr) 102px!important;gap:8px!important}
+  body.v4718-ui.availability-show-mode .show-mode-btn{width:102px!important;max-width:102px!important;min-width:102px!important;font-size:12.5px!important}
+  body.v4718-ui.availability-show-mode .availability-toolbar{gap:5px!important}
+  body.v4718-ui.availability-show-mode .range-chip{font-size:12.5px!important;padding-inline:1px!important}
+  body.v4718-ui.availability-show-mode .availability-day{padding:13px!important}
+  body.v4718-ui.availability-show-mode .free-slots{gap:6px!important}
+  body.v4718-ui.availability-show-mode .free-slot{font-size:14px!important;min-height:38px!important}
+}
+/* Çok kısa ekranlarda dikey alanı akıllı sıkıştır; genişlik ve okunabilirlik korunur. */
+@media(max-height:700px) and (orientation:portrait){
+  body.v4718-ui.availability-show-mode .availability-hero{padding-bottom:13px!important}
+  body.v4718-ui.availability-show-mode .availability-toolbar{margin-top:11px!important}
+  body.v4718-ui.availability-show-mode #availabilityModeNote{margin-top:9px!important;padding-top:9px!important;padding-bottom:9px!important}
+  body.v4718-ui.availability-show-mode .availability-days{margin-top:10px!important;gap:9px!important}
+  body.v4718-ui.availability-show-mode .availability-day{padding-top:12px!important;padding-bottom:11px!important}
+  body.v4718-ui.availability-show-mode .free-slots{margin-top:8px!important}
+}
+
+/* RC6 iPhone headline fit: başlık tek satır, hero gereksiz uzamaz. */
+@media(max-width:430px){
+  body.v4718-ui.availability-show-mode .availability-hero>.row.between{grid-template-columns:minmax(0,1fr) 104px!important;gap:10px!important}
+  body.v4718-ui.availability-show-mode .availability-hero h2{font-size:22.5px!important;white-space:nowrap!important;letter-spacing:-.04em!important}
+  body.v4718-ui.availability-show-mode .availability-hero .muted{font-size:12.25px!important;line-height:1.36!important;max-width:205px!important}
+  body.v4718-ui.availability-show-mode .show-mode-btn{width:104px!important;min-width:104px!important;max-width:104px!important;font-size:12.5px!important;padding-inline:6px!important}
+}
+@media(max-width:360px){
+  body.v4718-ui.availability-show-mode .availability-hero>.row.between{grid-template-columns:minmax(0,1fr) 92px!important;gap:7px!important}
+  body.v4718-ui.availability-show-mode .availability-hero h2{font-size:20.5px!important}
+  body.v4718-ui.availability-show-mode .availability-hero .muted{font-size:11.5px!important;max-width:184px!important}
+  body.v4718-ui.availability-show-mode .show-mode-btn{width:92px!important;min-width:92px!important;max-width:92px!important;font-size:11.5px!important}
+}
+
+/* END v4.7.18 RC6 */
+
+
 </style>
 </head>
 <body class="v4718-ui">
