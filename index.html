@@ -1560,6 +1560,62 @@ body.v4718-ui:not(.availability-show-mode) #homePage #dayPicker{
 
 /* END v4.7.18 RC9 CANDIDATE */
 
+
+/* ===== v4.7.18 RC10 FINAL — iPHONE MICRO ALIGNMENT + STABILITY =====
+   Scope: yalnız iOS tarih input taşması/çakışması ve mobil hizalama.
+   İş mantığı, tahsilat, stok, QR/TV, rapor hesapları ve Göster Modu değişmez. */
+@media(max-width:560px){
+  /* Safari date input intrinsic width nedeniyle komşu kontrollere taşmayı engelle. */
+  body.v4718-ui:not(.availability-show-mode) #homePage>.row.between.no-print{
+    grid-template-columns:76px minmax(0,1fr) 76px!important;
+    column-gap:8px!important;
+  }
+  body.v4718-ui:not(.availability-show-mode) #homePage #dayPicker{
+    -webkit-appearance:none!important;
+    appearance:none!important;
+    display:block!important;
+    inline-size:100%!important;
+    min-inline-size:0!important;
+    max-inline-size:100%!important;
+    overflow:hidden!important;
+  }
+
+  body.v4718-ui #reportPage>.card.grid.no-print>.grid.grid2{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    column-gap:12px!important;
+  }
+  body.v4718-ui #reportPage>.card.grid.no-print>.grid.grid2>label{
+    min-inline-size:0!important;
+    overflow:hidden!important;
+  }
+  body.v4718-ui #reportPage #repStart,
+  body.v4718-ui #reportPage #repEnd{
+    -webkit-appearance:none!important;
+    appearance:none!important;
+    display:block!important;
+    inline-size:100%!important;
+    min-inline-size:0!important;
+    max-inline-size:100%!important;
+    overflow:hidden!important;
+    padding-inline:6px!important;
+  }
+}
+@media(max-width:390px){
+  body.v4718-ui:not(.availability-show-mode) #homePage>.row.between.no-print{
+    grid-template-columns:72px minmax(0,1fr) 72px!important;
+    column-gap:6px!important;
+  }
+  body.v4718-ui #reportPage>.card.grid.no-print>.grid.grid2{
+    column-gap:10px!important;
+  }
+  body.v4718-ui #reportPage #repStart,
+  body.v4718-ui #reportPage #repEnd{
+    font-size:11.5px!important;
+    padding-inline:4px!important;
+  }
+}
+/* END v4.7.18 RC10 FINAL */
+
 </style>
 </head>
 <body class="v4718-ui">

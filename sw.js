@@ -1,4 +1,4 @@
-const CACHE='mebs-v4718-ui-20260928-rc9-candidate';
+const CACHE='mebs-v4718-ui-20260928-rc10-final';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./maskable-icon-512.png','./apple-touch-icon.png','./kkk-logo.png','./mebs-logo.png','./randevu.html','./randevu-qr.svg','./tv-v48.html','./tv-screen-v483.html','./tv-panel-v483.html'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('mebs-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
