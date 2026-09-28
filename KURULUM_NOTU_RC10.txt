@@ -1,9 +1,0 @@
-MEBS v4.7.18 RC10 FINAL - GITHUB YÜKLEME NOTU
-
-1) Bu paketten yalnız index.html ve sw.js dosyalarını GitHub kök dizinindeki aynı dosyaların üzerine yükleyin.
-2) Diğer dosyaları silmeyin veya değiştirmeyin.
-3) GitHub Pages deployment sonucu success olmalıdır.
-4) iPhone PWA'yı tamamen kapatıp yeniden açın.
-5) Bugün ve Raporlar ekranlarında tarih alanlarının birbirine girmediğini doğrulayın.
-6) Tahsilat, stok, QR ve TV iş mantığı bu pakette değiştirilmemiştir.
-7) Sorun olursa RC9 rollback paketindeki index.html + sw.js ile geri dönün.
