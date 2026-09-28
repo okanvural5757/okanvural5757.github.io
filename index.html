@@ -1286,6 +1286,56 @@ body.v4718-ui.availability-show-mode .free-slot{
 /* END v4.7.18 RC6 */
 
 
+
+/* ===== v4.7.18 RC7 — SURGICAL HOME CONTROLS =====
+   Yalnız yönetici ana ekranındaki tarih gezgini ve alt navigasyon inceltilir.
+   Göster Modu, randevu motoru ve diğer ekranların iş mantığı değişmez. */
+body.v4718-ui:not(.availability-show-mode) #homePage>.row.between.no-print{
+  min-height:0!important;
+  padding:4px!important;
+  gap:4px!important;
+  margin:6px 0 8px!important;
+  border-radius:14px!important;
+  box-shadow:0 2px 9px rgba(13,49,27,.035)!important;
+}
+body.v4718-ui:not(.availability-show-mode) #homePage #prevDay,
+body.v4718-ui:not(.availability-show-mode) #homePage #nextDay,
+body.v4718-ui:not(.availability-show-mode) #homePage #dayPicker{
+  min-height:36px!important;
+  height:36px!important;
+  padding:6px 9px!important;
+  border-radius:10px!important;
+  font-size:12px!important;
+  line-height:1!important;
+}
+body.v4718-ui:not(.availability-show-mode) #homePage #dayPicker{
+  background:#f4f7f4!important;
+  font-weight:900!important;
+}
+body.v4718-ui:not(.availability-show-mode) .nav{
+  width:min(calc(100% - 22px),720px)!important;
+  bottom:4px!important;
+  padding:3px 6px max(4px,calc(env(safe-area-inset-bottom) - 8px))!important;
+  border-radius:16px!important;
+  box-shadow:0 8px 24px rgba(5,24,13,.20)!important;
+}
+body.v4718-ui:not(.availability-show-mode) .nav button{
+  min-height:44px!important;
+  padding:4px 2px!important;
+  border-radius:11px!important;
+  font-size:9.5px!important;
+  gap:1px!important;
+}
+body.v4718-ui:not(.availability-show-mode) .nav .nav-ico{
+  font-size:16px!important;
+  line-height:1!important;
+}
+/* İçeriğin son satırı ince tab barın altında kalmaz. */
+body.v4718-ui:not(.availability-show-mode) .wrap{
+  padding-bottom:calc(84px + env(safe-area-inset-bottom))!important;
+}
+/* END v4.7.18 RC7 */
+
 </style>
 </head>
 <body class="v4718-ui">
